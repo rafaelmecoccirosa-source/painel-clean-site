@@ -11,10 +11,10 @@ export default function Faq() {
   }
 
   return (
-    <section className="bg-pc-mid/30 py-16 md:py-24">
+    <section className="bg-pc-darker py-16 md:py-20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="font-display font-bold text-3xl md:text-4xl text-white">
+          <h2 className="font-display font-semibold text-3xl md:text-4xl text-white">
             Perguntas frequentes
           </h2>
         </div>

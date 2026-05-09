@@ -2,7 +2,7 @@ import { products, whatsappNumber } from '@/lib/content'
 
 function ProductImagePlaceholder() {
   return (
-    <div className="w-full aspect-square flex flex-col items-center justify-center bg-pc-mid/80 rounded-t-xl border-b border-white/10">
+    <div className="w-full h-48 flex flex-col items-center justify-center bg-pc-mid/60 rounded-t-xl border-b border-white/10">
       <svg
         className="w-12 h-12 text-white/20 mb-2"
         fill="none"
@@ -31,15 +31,15 @@ function WhatsAppIcon() {
 
 export default function Products() {
   return (
-    <section id="produtos" className="bg-pc-dark py-16 md:py-24">
+    <section id="produtos" className="bg-pc-dark py-16 md:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div className="flex items-center justify-between mb-10">
           <div>
-            <h2 className="font-display font-bold text-3xl md:text-4xl text-white">
+            <h2 className="font-display font-semibold text-3xl md:text-4xl text-white">
               Equipamentos
             </h2>
-            <p className="text-white/50 font-sans mt-1">
+            <p className="text-white/60 font-sans mt-1">
               Tecnologia brushless para limpeza solar profissional
             </p>
           </div>
@@ -60,10 +60,10 @@ export default function Products() {
             return (
               <div
                 key={product.sku}
-                className={`relative flex flex-col rounded-xl overflow-hidden bg-pc-mid/30 ${
+                className={`relative flex flex-col rounded-xl overflow-hidden bg-pc-mid ${
                   product.featured
-                    ? 'border-2 border-pc-green'
-                    : 'border border-white/10'
+                    ? 'border-2 border-pc-green shadow-[0_0_20px_rgba(58,213,128,0.15)]'
+                    : 'border border-[rgba(58,213,128,0.15)]'
                 }`}
               >
                 {/* Featured badge */}
@@ -91,10 +91,10 @@ export default function Products() {
                 {/* Card body */}
                 <div className="flex flex-col flex-1 p-5 gap-4">
                   <div>
-                    <p className="text-white/30 text-xs font-sans uppercase tracking-wider mb-1">
+                    <p className="text-pc-green/60 text-xs font-sans uppercase tracking-widest mb-1">
                       {product.sku}
                     </p>
-                    <h3 className="font-display font-bold text-xl text-white">
+                    <h3 className="font-display font-semibold text-lg text-white">
                       {product.name}
                     </h3>
                   </div>

@@ -1,6 +1,6 @@
 export default function Training() {
   return (
-    <section id="treinamento" className="bg-pc-mid/30 py-16 md:py-24">
+    <section id="treinamento" className="bg-pc-darker py-16 md:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="rounded-2xl border border-pc-green/20 bg-pc-dark p-8 md:p-12">
           <div className="grid md:grid-cols-2 gap-10 items-center">
@@ -9,7 +9,7 @@ export default function Training() {
               <span className="inline-flex items-center self-start px-3 py-1 rounded-full text-xs font-semibold font-sans uppercase tracking-wider bg-pc-green/15 text-pc-green border border-pc-green/25">
                 Treinamento online
               </span>
-              <h2 className="font-display font-bold text-3xl md:text-4xl text-white leading-tight">
+              <h2 className="font-display font-semibold text-3xl text-white leading-tight">
                 Ganhe mais por hora que um motorista de app.
               </h2>
               <p className="text-white/60 font-sans text-base leading-relaxed">
@@ -45,7 +45,7 @@ export default function Training() {
               <div className="flex flex-col gap-1">
                 <span className="line-through text-white/30 font-sans text-lg">De R$ 197</span>
                 <div className="flex items-baseline gap-2">
-                  <span className="font-display font-bold text-5xl text-pc-green">R$ 39,90</span>
+                  <span className="font-display font-semibold text-4xl text-pc-green">R$ 39,90</span>
                 </div>
                 <span className="text-white/40 font-sans text-sm">acesso vitalício</span>
               </div>

@@ -25,11 +25,11 @@ const cards = [
 
 export default function Platform() {
   return (
-    <section id="plataforma" className="bg-pc-dark py-16 md:py-24">
+    <section id="plataforma" className="bg-pc-mid py-16 md:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="font-display font-bold text-3xl md:text-4xl text-white">
+          <h2 className="font-display font-semibold text-3xl md:text-4xl text-white">
             Plataforma de serviços
           </h2>
           <p className="text-white/50 font-sans mt-3 max-w-xl mx-auto text-base leading-relaxed">

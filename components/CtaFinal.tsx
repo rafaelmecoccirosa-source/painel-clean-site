@@ -4,9 +4,9 @@ export default function CtaFinal() {
   const waHref = `https://wa.me/${whatsappNumber}?text=Olá! Gostaria de saber mais sobre os equipamentos Painel Clean.`
 
   return (
-    <section className="bg-pc-mid py-16 md:py-24">
+    <section className="bg-pc-mid py-16 md:py-20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center gap-6">
-        <h2 className="font-display font-bold text-3xl md:text-4xl text-white leading-tight">
+        <h2 className="font-display font-semibold text-3xl md:text-4xl text-white leading-tight">
           Pronto para limpar mais e ganhar mais?
         </h2>
         <p className="text-white/55 font-sans text-base leading-relaxed max-w-lg">

@@ -14,6 +14,7 @@ const config: Config = {
           dark: '#0F382B',
           darker: '#0C281F',
           mid: '#1B3A2D',
+          deepest: '#0A1F17',
           cream: '#FFFBEC',
         },
       },

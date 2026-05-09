@@ -83,19 +83,19 @@ export default function Hero() {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
         <div className="grid md:grid-cols-2 gap-10 items-center min-h-[420px]">
           {/* Text content */}
           <div className="flex flex-col gap-5 animate-fade-in" key={current}>
             {/* Badge */}
             <span
-              className={`inline-flex items-center self-start px-3 py-1 rounded-full text-xs font-semibold font-sans uppercase tracking-wider ${badgeStyle(slide.type)}`}
+              className={`inline-flex items-center self-start px-3 py-1 rounded-full text-xs font-semibold font-sans uppercase tracking-widest ${badgeStyle(slide.type)}`}
             >
               {slide.badge}
             </span>
 
             {/* Title */}
-            <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-white leading-tight">
+            <h1 className="font-display font-semibold text-4xl md:text-5xl text-white leading-tight">
               {slide.title}{' '}
               <span className="text-pc-green">{slide.titleHighlight}</span>
             </h1>
