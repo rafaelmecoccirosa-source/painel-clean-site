@@ -21,7 +21,7 @@ function ProductCard({ p }) {
         transition: "transform 280ms var(--ease-out), box-shadow 280ms var(--ease-out)",
         transform: hover ? "translateY(-6px)" : "translateY(0)",
         boxShadow: hover ? "var(--shadow-lift)" : (featured ? "var(--shadow-glow)" : "var(--shadow-card)") }}>
-      <div style={{ position: "relative", height: 280, background: "linear-gradient(180deg, #FBF8E9 0%, #F4ECD3 100%)", overflow: "hidden" }}>
+      <div className="product-image" style={{ position: "relative", height: 280, background: "linear-gradient(180deg, #FBF8E9 0%, #F4ECD3 100%)", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 18, left: 18, zIndex: 2, display: "inline-flex", alignItems: "center", gap: 6, padding: "6px 12px", background: featured ? "var(--pc-green)" : "rgba(15,56,43,0.92)", color: featured ? "var(--pc-dark)" : "white", borderRadius: "var(--radius-pill)", font: "var(--label-sm)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
           {featured && <span style={{ width: 5, height: 5, borderRadius: "50%", background: "var(--pc-dark)" }} />}
           {p.tag}
@@ -65,9 +65,16 @@ function Products() {
           </div>
           <a href="#" className="btn-outline-dark">Ver catálogo completo<Icon name="arrowUpRight" size={14} /></a>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 28 }}>
+        <div className="products-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 28 }}>
           {products.map(p => <ProductCard key={p.sku} p={p} />)}
         </div>
+        <style>{`
+          @media (max-width: 900px) { .products-grid { grid-template-columns: repeat(2, 1fr) !important; } }
+          @media (max-width: 580px) {
+            .products-grid { grid-template-columns: 1fr !important; }
+            .product-image { height: 220px !important; }
+          }
+        `}</style>
         <div style={{ marginTop: 56, padding: "26px 32px", background: "white", border: "1px solid var(--border-on-cream)", borderRadius: "var(--radius-lg)", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24, flexWrap: "wrap" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
             <div style={{ width: 44, height: 44, borderRadius: "var(--radius-md)", background: "var(--accent-fill)", color: "var(--pc-green-2)", display: "flex", alignItems: "center", justifyContent: "center" }}>

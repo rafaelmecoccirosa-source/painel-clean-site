@@ -62,7 +62,7 @@ function Hero() {
   const s = heroSlides[idx];
 
   return (
-    <section style={{ position: "relative", background: "var(--pc-darker)", color: "white", minHeight: "100vh", display: "flex", flexDirection: "column", overflow: "hidden", paddingTop: 76 }}>
+    <section className="hero-section" style={{ position: "relative", background: "var(--pc-darker)", color: "white", minHeight: "100vh", display: "flex", flexDirection: "column", overflow: "hidden", paddingTop: 76 }}>
       <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 60% at 0% 30%, rgba(58,213,128,.10), transparent 60%), radial-gradient(ellipse 60% 50% at 100% 100%, rgba(58,213,128,.06), transparent 60%)", pointerEvents: "none" }} />
 
       <div className="hero-grid" style={{ flex: 1, display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1.05fr)", alignItems: "stretch", minHeight: "calc(100vh - 76px)" }}>
@@ -141,13 +141,29 @@ function Hero() {
 
       <style>{`
         @media (max-width: 960px) {
-          .hero-grid { grid-template-columns: 1fr !important; }
-          .hero-text { padding: 48px 24px 140px !important; min-height: calc(100vh - 76px); }
-          .hero-image-wrap { position: absolute !important; inset: 0 !important; z-index: 0; min-height: 0 !important; }
-          .hero-overlay { background: linear-gradient(180deg, rgba(12,40,31,0.55) 0%, rgba(12,40,31,0.85) 60%, var(--pc-darker) 100%) !important; }
-          .hero-text > div { position: relative; z-index: 2; }
-          .hero-controls { padding: 0 24px !important; }
-          .hero-counter { right: 24px !important; top: 96px !important; }
+          .hero-section { min-height: 0 !important; }
+          .hero-grid {
+            grid-template-columns: 1fr !important;
+            min-height: 0 !important;
+            align-items: start !important;
+          }
+          .hero-image-wrap {
+            order: -1;
+            position: relative !important;
+            inset: auto !important;
+            height: 280px !important;
+            min-height: 0 !important;
+            width: 100%;
+          }
+          .hero-overlay {
+            background: linear-gradient(180deg, rgba(12,40,31,0.08) 0%, rgba(12,40,31,0.28) 100%) !important;
+          }
+          .hero-text { padding: 36px 20px 96px !important; min-height: 0 !important; }
+          .hero-controls { padding: 0 20px !important; bottom: 20px !important; }
+          .hero-counter { display: none !important; }
+        }
+        @media (max-width: 520px) {
+          .hero-image-wrap { height: 220px !important; }
         }
       `}</style>
     </section>

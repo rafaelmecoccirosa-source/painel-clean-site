@@ -10,9 +10,9 @@ function ROI() {
   const annualRecovered = recovered * 12;
 
   return (
-    <section id="roi" style={{ background: "var(--pc-cream)", padding: "120px 0", borderTop: "1px solid var(--border-on-cream)" }}>
+    <section id="roi" style={{ background: "var(--pc-cream)", padding: "80px 0", borderTop: "1px solid var(--border-on-cream)" }}>
       <div className="container">
-        <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1.1fr)", gap: 64, alignItems: "center" }} className="roi-grid">
+        <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1.1fr)", gap: 48, alignItems: "center" }} className="roi-grid">
           <div>
             <div className="eyebrow" style={{ color: "var(--pc-green-2)", marginBottom: 18 }}>Calculadora de ROI</div>
             <h2 className="display" style={{ fontSize: "clamp(36px, 4.4vw, 56px)", lineHeight: 1.05, color: "var(--fg-on-cream-1)", margin: "0 0 20px" }}>
@@ -34,7 +34,7 @@ function ROI() {
             </div>
           </div>
 
-          <div style={{ background: "linear-gradient(155deg, var(--pc-dark) 0%, var(--pc-darker) 100%)", color: "white", borderRadius: "var(--radius-2xl)", padding: "48px 44px", position: "relative", overflow: "hidden", border: "1px solid var(--border-accent)" }}>
+          <div style={{ background: "linear-gradient(155deg, var(--pc-dark) 0%, var(--pc-darker) 100%)", color: "white", borderRadius: "var(--radius-2xl)", padding: "36px 32px", position: "relative", overflow: "hidden", border: "1px solid var(--border-accent)" }}>
             <div style={{ position: "absolute", top: -100, right: -100, width: 280, height: 280, background: "radial-gradient(circle, rgba(58,213,128,0.18) 0%, transparent 70%)", pointerEvents: "none" }} />
             <div style={{ position: "relative" }}>
               <div className="eyebrow no-rule" style={{ color: "var(--pc-green)", marginBottom: 24 }}>Sua recuperação estimada</div>
@@ -48,7 +48,7 @@ function ROI() {
               </div>
               <div style={{ marginBottom: 32 }}>
                 <div style={{ font: "var(--body-sm)", color: "var(--fg-3)", marginBottom: 6 }}>Recuperação anual com limpeza</div>
-                <div className="display" key={annualRecovered} style={{ fontSize: 56, fontWeight: 600, color: "var(--pc-green)", letterSpacing: "-0.03em", lineHeight: 1, animation: "countUp 320ms var(--ease-out)" }}>R$ {Math.round(annualRecovered).toLocaleString("pt-BR")}</div>
+                <div className="display" key={annualRecovered} style={{ fontSize: 44, fontWeight: 600, color: "var(--pc-green)", letterSpacing: "-0.03em", lineHeight: 1, animation: "countUp 320ms var(--ease-out)" }}>R$ {Math.round(annualRecovered).toLocaleString("pt-BR")}</div>
               </div>
               <a href={wa(`Olá! Tenho uma usina de ${kwp} kWp e quero saber mais sobre limpeza profissional.`)} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ width: "100%", justifyContent: "center" }}>
                 Quero recuperar essa receita<Icon name="arrowRight" size={16} />
@@ -60,7 +60,11 @@ function ROI() {
           </div>
         </div>
       </div>
-      <style>{`@media (max-width: 960px) { .roi-grid { grid-template-columns: 1fr !important; gap: 40px !important; } }`}</style>
+      <style>{`
+        @media (max-width: 960px) {
+          .roi-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+        }
+      `}</style>
     </section>
   );
 }

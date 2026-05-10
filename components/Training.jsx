@@ -44,6 +44,9 @@ function Training() {
                 ))}
               </div>
             )}
+            <div style={{ marginBottom: 16, paddingTop: 24, borderTop: "1px solid var(--border-on-dark)" }}>
+              <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--fg-4)" }}>Incluso no treinamento</span>
+            </div>
             <div className="training-features" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 14 }}>
               {features.map((f, i) => (
                 <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: "14px 16px", background: "rgba(255,255,255,0.03)", border: "1px solid var(--border-on-dark)", borderRadius: "var(--radius-md)" }}>
@@ -57,7 +60,7 @@ function Training() {
             </div>
           </div>
 
-          <div style={{ background: "linear-gradient(155deg, var(--pc-mid) 0%, var(--pc-dark) 100%)", border: "1px solid var(--border-accent)", borderRadius: "var(--radius-2xl)", padding: 40, position: "relative", overflow: "hidden" }}>
+          <div style={{ background: "linear-gradient(155deg, var(--pc-mid) 0%, var(--pc-dark) 100%)", border: "1px solid var(--border-accent)", borderRadius: "var(--radius-2xl)", padding: 40, position: "relative", overflow: "hidden", boxShadow: "0 0 40px rgba(58,213,128,0.12)" }}>
             <div style={{ position: "absolute", top: -100, right: -100, width: 280, height: 280, background: "radial-gradient(circle, rgba(58,213,128,0.18) 0%, transparent 70%)" }} />
             <div style={{ position: "relative" }}>
               <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 12px", borderRadius: "var(--radius-pill)", background: "var(--accent-fill)", border: "1px solid var(--border-accent)", color: "var(--pc-green)", font: "var(--label-sm)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 28 }}>

@@ -21,6 +21,20 @@ function Footer() {
                 CEP 89254-193 · CNPJ 32.852.325/0001-99
               </div>
             </div>
+            <div style={{ marginTop: 24, display: "flex", gap: 10 }}>
+              {[
+                { name: "facebook", href: "https://www.facebook.com/painelclean", label: "Facebook" },
+                { name: "instagram", href: "https://www.instagram.com/painelclean/", label: "Instagram" },
+                { name: "linkedin", href: "https://www.linkedin.com/company/painel-clean/", label: "LinkedIn" },
+              ].map(s => (
+                <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
+                  style={{ width: 36, height: 36, borderRadius: "var(--radius-md)", background: "rgba(255,255,255,0.06)", border: "1px solid var(--border-on-dark)", color: "var(--fg-3)", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 200ms" }}
+                  onMouseEnter={e => { e.currentTarget.style.background = "var(--accent-fill)"; e.currentTarget.style.color = "var(--pc-green)"; e.currentTarget.style.borderColor = "var(--border-accent)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.06)"; e.currentTarget.style.color = "var(--fg-3)"; e.currentTarget.style.borderColor = "var(--border-on-dark)"; }}>
+                  <Icon name={s.name} size={16} />
+                </a>
+              ))}
+            </div>
           </div>
           {cols.map((c, i) => (
             <div key={i}>
@@ -40,11 +54,11 @@ function Footer() {
 
         <div style={{ paddingTop: 28, borderTop: "1px solid var(--border-on-dark)", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, flexWrap: "wrap", fontSize: 13, color: "var(--fg-4)" }}>
           <span>© 2026 Painel Clean. Todos os direitos reservados.</span>
-          <span style={{ display: "flex", gap: 24 }}>
+          <span style={{ display: "flex", gap: 24, flexWrap: "wrap", justifyContent: "flex-end" }}>
             <a href="#" style={{ color: "inherit" }}>Termos</a>
             <a href="#" style={{ color: "inherit" }}>Privacidade</a>
-            <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--pc-green)", animation: "pulseDot 2s infinite" }} />
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 8, whiteSpace: "nowrap" }}>
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--pc-green)", animation: "pulseDot 2s infinite", flexShrink: 0 }} />
               Atendimento · Seg–Sex 8h–18h
             </span>
           </span>
