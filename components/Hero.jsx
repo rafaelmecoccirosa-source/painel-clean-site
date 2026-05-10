@@ -6,7 +6,7 @@ const heroSlides = [
     description: "Motor brushless, sem produtos químicos, até 260 painéis por hora. Tecnologia profissional para quem vive de solar.",
     primary: { label: "Ver equipamentos", href: "#equipamentos" },
     secondary: { label: "Plataforma de serviços", href: "https://painel-clean-v2.vercel.app" },
-    image: "public/images/hero-1.jpg",
+    image: "public/painel_clean_-_limpando_telhado.png",
     meta: [{ k: "260", v: "painéis/h" }, { k: "+30%", v: "geração" }, { k: "0", v: "químicos" }],
   },
   {
