@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório — painelclean.com.br vs. redesign 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pc-dark: #0F382B;
+    --pc-darker: #0A2620;
+    --pc-green: #3AD580;
+    --pc-cream: #FFFBEC;
+    --pc-cream-2: #F6F1DE;
+    --pc-line: rgba(15, 56, 43, 0.10);
+    --pc-muted: rgba(15, 56, 43, 0.62);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--pc-cream);
+    color: var(--pc-dark);
+    font-family: "Satoshi", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 980px; margin: 0 auto; padding: 0 32px; }
+  .display { font-family: "IBM Plex Sans", sans-serif; letter-spacing: -0.025em; }
+
+  /* Header */
+  header {
+    background: var(--pc-darker);
+    color: white;
+    padding: 88px 0 72px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 0% 100%, rgba(58,213,128,0.12), transparent 60%),
+      radial-gradient(ellipse 50% 40% at 100% 0%, rgba(58,213,128,0.06), transparent 60%);
+  }
+  header .container { position: relative; }
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--pc-green);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 28px; height: 1px;
+    background: var(--pc-green);
+  }
+  h1.display {
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 600;
+    line-height: 1.04;
+    margin: 0 0 20px;
+    max-width: 720px;
+  }
+  header p {
+    font-size: 18px;
+    color: rgba(255,255,255,0.65);
+    max-width: 620px;
+    margin: 0;
+  }
+
+  /* TOC */
+  nav.toc {
+    background: var(--pc-cream-2);
+    border-top: 1px solid var(--pc-line);
+    border-bottom: 1px solid var(--pc-line);
+    padding: 22px 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(8px);
+  }
+  nav.toc ol {
+    margin: 0; padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    font-size: 13.5px;
+    counter-reset: toc;
+  }
+  nav.toc a {
+    color: var(--pc-muted);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 200ms;
+  }
+  nav.toc a::before {
+    counter-increment: toc;
+    content: counter(toc, decimal-leading-zero) " ";
+    color: var(--pc-green);
+    font-weight: 700;
+    margin-right: 6px;
+  }
+  nav.toc a:hover { color: var(--pc-dark); }
+
+  /* Section */
+  section.block {
+    padding: 80px 0;
+    border-bottom: 1px solid var(--pc-line);
+  }
+  section.block:nth-child(even) { background: var(--pc-cream-2); }
+  h2.display {
+    font-size: clamp(28px, 3.4vw, 40px);
+    font-weight: 600;
+    line-height: 1.1;
+    margin: 0 0 8px;
+  }
+  .section-meta {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--pc-green);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 14px;
+  }
+  .section-lead {
+    font-size: 17px;
+    color: var(--pc-muted);
+    max-width: 640px;
+    margin: 0 0 36px;
+  }
+
+  /* Cards */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: white;
+    border: 1px solid var(--pc-line);
+    border-radius: 18px;
+    padding: 26px 28px;
+  }
+  .card.bad { border-left: 3px solid #D9534F; }
+  .card.good { border-left: 3px solid var(--pc-green); }
+  .card.todo { border-left: 3px solid #E0A93D; background: #FFFCF0; }
+  .card h3 {
+    font-family: "IBM Plex Sans";
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 10px;
+  }
+  .card p {
+    font-size: 14.5px;
+    color: var(--pc-muted);
+    margin: 0;
+    line-height: 1.55;
+  }
+  .card .tag {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 4px 9px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .tag.crit { background: #FCE8E6; color: #B23A36; }
+  .tag.med { background: #FFF3D6; color: #8A6810; }
+  .tag.low { background: var(--pc-cream-2); color: var(--pc-muted); }
+  .tag.done { background: rgba(58,213,128,0.18); color: #1F7A45; }
+
+  /* Compare table */
+  .compare {
+    background: white;
+    border: 1px solid var(--pc-line);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 12px;
+  }
+  .compare .row {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    border-top: 1px solid var(--pc-line);
+  }
+  .compare .row:first-child { border-top: 0; }
+  .compare .row > div {
+    padding: 18px 22px;
+    font-size: 14.5px;
+  }
+  .compare .row > div + div { border-left: 1px solid var(--pc-line); }
+  .compare .head > div {
+    background: var(--pc-cream-2);
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--pc-muted);
+  }
+  .compare .head .pc { color: var(--pc-dark); }
+  .compare .row .label { font-weight: 600; color: var(--pc-dark); }
+  .compare .row .old { color: #B23A36; }
+  .compare .row .new { color: #1F7A45; }
+  @media (max-width: 720px) {
+    .compare .row { grid-template-columns: 1fr; }
+    .compare .row > div + div { border-left: 0; border-top: 1px solid var(--pc-line); }
+  }
+
+  /* Roadmap */
+  .roadmap {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 12px;
+  }
+  @media (max-width: 720px) { .roadmap { grid-template-columns: 1fr; } }
+  .phase {
+    background: white;
+    border: 1px solid var(--pc-line);
+    border-radius: 18px;
+    padding: 26px 26px 22px;
+    position: relative;
+  }
+  .phase .num {
+    font-family: "IBM Plex Sans";
+    font-size: 56px;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--pc-green);
+    letter-spacing: -0.03em;
+    margin-bottom: 14px;
+  }
+  .phase h3 {
+    font-family: "IBM Plex Sans";
+    font-size: 18px;
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+  .phase ul {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0;
+    font-size: 13.5px;
+    color: var(--pc-muted);
+  }
+  .phase li {
+    padding: 7px 0;
+    border-top: 1px dashed var(--pc-line);
+  }
+  .phase li:first-child { border-top: 0; }
+
+  /* Footer */
+  footer {
+    background: var(--pc-darker);
+    color: rgba(255,255,255,0.6);
+    padding: 48px 0;
+    font-size: 13.5px;
+    text-align: center;
+  }
+  footer strong { color: white; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="eyebrow">Relatório · 09 mai 2026</div>
+    <h1 class="display">painelclean.com.br <span style="color: var(--pc-green);">→</span> redesign 2026</h1>
+    <p>Análise do site atual em produção, comparação com a versão que estamos construindo, e o que ainda precisa entrar pra fechar a entrega.</p>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="container">
+    <ol>
+      <li><a href="#diag">Diagnóstico do site atual</a></li>
+      <li><a href="#done">O que já melhoramos</a></li>
+      <li><a href="#gaps">Gaps no nosso redesign</a></li>
+      <li><a href="#compare">Comparativo</a></li>
+      <li><a href="#roadmap">Roadmap proposto</a></li>
+    </ol>
+  </div>
+</nav>
+
+<!-- 1. DIAGNÓSTICO -->
+<section class="block" id="diag">
+  <div class="container">
+    <div class="section-meta">01 — Diagnóstico</div>
+    <h2 class="display">Onde o site atual perde o cliente</h2>
+    <p class="section-lead">O painelclean.com.br é um WordPress + Elementor genérico. Funciona, mas trabalha contra o produto — visual de template, hierarquia confusa e copy abstrata.</p>
+
+    <div class="grid">
+      <div class="card bad">
+        <span class="tag crit">Crítico</span>
+        <h3>Hero sem foco</h3>
+        <p>3 carrosséis com mensagens diferentes ("escova mais completa", "ecossistema", "eficiência") competindo entre si. O visitante não sabe se está num e-commerce, num marketplace ou num institucional.</p>
+      </div>
+      <div class="card bad">
+        <span class="tag crit">Crítico</span>
+        <h3>Copy genérica de catálogo</h3>
+        <p>Frases tipo "soluções inteligentes e práticas" e "transformar trabalho em resultados reais" se repetem em 4 cards de blog. Nada concreto sobre dor, preço, ou diferencial.</p>
+      </div>
+      <div class="card bad">
+        <span class="tag med">Médio</span>
+        <h3>Imagens IA mistas com fotos reais</h3>
+        <p>Vários blocos usam ilustrações estilo MidJourney ("iamind_overhead_shot…") junto de fotos reais do produto. Quebra confiança técnica que o produto exige.</p>
+      </div>
+      <div class="card bad">
+        <span class="tag med">Médio</span>
+        <h3>Tabela comparativa quebrada</h3>
+        <p>A seção "Recurso / Outras soluções / Painel Clean" está sem dados — só listas de features sem indicar quem tem o quê. Era o mais persuasivo da página e não cumpre.</p>
+      </div>
+      <div class="card bad">
+        <span class="tag med">Médio</span>
+        <h3>Nomes de produto longos demais</h3>
+        <p>"Escova Dupla, Semiautomática, com Motobomba, Controle Remoto e Cabo Extensível até 7,5m." Vira manchete; deveria ser o subtítulo. O nome curto (D5/G5/S5) sumiu.</p>
+      </div>
+      <div class="card bad">
+        <span class="tag low">Menor</span>
+        <h3>CTAs duplicados</h3>
+        <p>"Entrar em contato" + "Ver produtos" repetidos em cada um dos 3 hero slides. Sem hierarquia: ambos pesam igual e não levam à ação principal (orçamento por produto).</p>
+      </div>
+      <div class="card bad">
+        <span class="tag low">Menor</span>
+        <h3>Treinamento e plataforma escondidos</h3>
+        <p>O treinamento online aparece como "Em breve" num card secundário. O ecossistema/plataforma é mencionado mas não tem CTA pra cadastro nem prova social.</p>
+      </div>
+      <div class="card bad">
+        <span class="tag low">Menor</span>
+        <h3>Footer denso, info importante perdida</h3>
+        <p>Endereço completo, CNPJ e e-mail enterrados no rodapé. WhatsApp (que é o canal real) repete em vários lugares mas sem destaque consistente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. JÁ MELHORAMOS -->
+<section class="block" id="done">
+  <div class="container">
+    <div class="section-meta">02 — Já entregue</div>
+    <h2 class="display">O que o redesign já resolve</h2>
+    <p class="section-lead">Comparado ao site em produção, a v2 que estamos construindo já corrige a maior parte dos problemas estruturais.</p>
+
+    <div class="grid">
+      <div class="card good">
+        <span class="tag done">Feito</span>
+        <h3>Hero com narrativa única</h3>
+        <p>Um único arco: "Limpe mais, ganhe mais, em menos tempo" com foto fullbleed à direita. Os 3 slides agora trabalham juntos — produto, promoção, conteúdo — não competem.</p>
+      </div>
+      <div class="card good">
+        <span class="tag done">Feito</span>
+        <h3>Identidade visual consistente</h3>
+        <p>Verde escuro <code>#0F382B</code>, vibrante <code>#3AD580</code> e creme <code>#FFFBEC</code> aplicados sistemicamente. IBM Plex Sans + Satoshi substituem o Elementor genérico.</p>
+      </div>
+      <div class="card good">
+        <span class="tag done">Feito</span>
+        <h3>Cards de produto legíveis</h3>
+        <p>Nome curto em destaque (G5 / D5 / S5), tag + SKU na imagem, specs em tabela enxuta, preço/CTA claros. "Mais vendido" diferencia o D5.</p>
+      </div>
+      <div class="card good">
+        <span class="tag done">Feito</span>
+        <h3>Treinamento como produto, não rodapé</h3>
+        <p>Bloco dedicado com card de preço (R$ 39,90 vitalício), 4 features e CTA primário. Sai do "em breve" e vira oferta concreta.</p>
+      </div>
+      <div class="card good">
+        <span class="tag done">Feito</span>
+        <h3>Plataforma com tabs cliente/técnico</h3>
+        <p>Marketplace explicado com switcher dual-audience, stats por persona, painel dark à direita. Fica claro que existe um SaaS por trás.</p>
+      </div>
+      <div class="card good">
+        <span class="tag done">Feito</span>
+        <h3>Logo de verdade na nav</h3>
+        <p>Mark de pontos em sol + wordmark IBM Plex Sans semibold. 32px, legível, fica branco em dark e dark em light.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. GAPS -->
+<section class="block" id="gaps">
+  <div class="container">
+    <div class="section-meta">03 — Gaps abertos</div>
+    <h2 class="display">O que o redesign ainda não tem</h2>
+    <p class="section-lead">Honestidade técnica: a v2 atual cobre estrutura e visual, mas tem buracos de conteúdo, prova social e detalhe que o site em produção tinha (mesmo mal-resolvidos) e nós ainda não.</p>
+
+    <div class="grid">
+      <div class="card todo">
+        <span class="tag med">Prioridade alta</span>
+        <h3>Tabela comparativa Painel Clean × concorrentes</h3>
+        <p>Era o argumento mais forte do site original (mesmo quebrado). Precisamos rebuildar: 8–10 features × 3 colunas (concorrente / Painel Clean / vantagem). É o que justifica o ticket.</p>
+      </div>
+      <div class="card todo">
+        <span class="tag med">Prioridade alta</span>
+        <h3>Prova social real</h3>
+        <p>Sem depoimentos de técnicos, sem logos de usinas atendidas, sem números do tipo "+200 técnicos credenciados". A confiança hoje depende só do design — frágil pra B2B técnico.</p>
+      </div>
+      <div class="card todo">
+        <span class="tag med">Prioridade alta</span>
+        <h3>Página de produto individual</h3>
+        <p>Hoje o card só tem botão de orçamento. Falta detalhe completo: galeria multi-foto (G5 tem 2 imagens disponíveis), specs técnicas extensas, vídeo em ação, downloads (manual, ficha técnica).</p>
+      </div>
+      <div class="card todo">
+        <span class="tag med">Prioridade média</span>
+        <h3>Calculadora de ROI</h3>
+        <p>"+30% mais geração" precisa virar simulador: usuário insere kWp da usina, sai retorno mensal estimado. É o equivalente da CalculadoraEconomia da v2 do app — alinha com o resto do ecossistema.</p>
+      </div>
+      <div class="card todo">
+        <span class="tag med">Prioridade média</span>
+        <h3>Conteúdo / blog técnico</h3>
+        <p>O site atual tem 4 cards de "artigos recentes" (mesmo com copy duplicada). Precisamos de blog real — SEO traz lead frio que o WhatsApp não cobre.</p>
+      </div>
+      <div class="card todo">
+        <span class="tag low">Detalhe</span>
+        <h3>Página de acessórios e refis</h3>
+        <p>Card no fim da seção produtos manda pro WhatsApp. Devia ter listagem própria — refil de cerdas, mangueiras, kits engate, plugs NBR 14136. É receita recorrente.</p>
+      </div>
+      <div class="card todo">
+        <span class="tag low">Detalhe</span>
+        <h3>Formulário "Contato exclusivo"</h3>
+        <p>O site atual tem form com nome/telefone/e-mail/mensagem. Hoje só temos WhatsApp — alguns leads B2B preferem formulário formal. CTA secundário.</p>
+      </div>
+      <div class="card todo">
+        <span class="tag low">Detalhe</span>
+        <h3>Endereço físico + CNPJ no footer</h3>
+        <p>Jaraguá do Sul, CNPJ, telefone fixo. Confiança institucional baixa custo. Footer atual está leve demais nesse aspecto.</p>
+      </div>
+      <div class="card todo">
+        <span class="tag low">Detalhe</span>
+        <h3>Mobile do hero</h3>
+        <p>Já temos fallback (foto como background fullscreen), mas o título 84px desktop fica grande demais em telas médias. Vale uma escala intermediária 720–960px e revisar legibilidade da meta-row.</p>
+      </div>
+      <div class="card todo">
+        <span class="tag low">Detalhe</span>
+        <h3>SEO e Open Graph</h3>
+        <p>Falta meta-description, og:image, schema.org Product nos equipamentos, sitemap. O site atual tem (Elementor faz por default); estamos zerados.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. COMPARATIVO -->
+<section class="block" id="compare">
+  <div class="container">
+    <div class="section-meta">04 — Comparativo direto</div>
+    <h2 class="display">Lado a lado: produção × redesign</h2>
+    <p class="section-lead">Linha por linha, o que mudou e o que ainda não.</p>
+
+    <div class="compare">
+      <div class="row head">
+        <div>Aspecto</div>
+        <div>painelclean.com.br</div>
+        <div class="pc">Redesign 2026</div>
+      </div>
+      <div class="row">
+        <div class="label">Hero</div>
+        <div class="old">3 carrosséis com mensagens divergentes</div>
+        <div class="new">Split fullbleed, narrativa única, slideshow com progresso</div>
+      </div>
+      <div class="row">
+        <div class="label">Identidade</div>
+        <div class="old">Template Elementor genérico</div>
+        <div class="new">Sistema próprio: paleta, tipografia, ritmo</div>
+      </div>
+      <div class="row">
+        <div class="label">Nome dos produtos</div>
+        <div class="old">Frase técnica de 14 palavras</div>
+        <div class="new">G5 / D5 / S5 + descrição curta</div>
+      </div>
+      <div class="row">
+        <div class="label">Treinamento</div>
+        <div class="old">"Em breve" num card lateral</div>
+        <div class="new">Bloco com preço R$ 39,90 e CTA dedicado</div>
+      </div>
+      <div class="row">
+        <div class="label">Plataforma/marketplace</div>
+        <div class="old">Mencionada em copy abstrata</div>
+        <div class="new">Tabs cliente/técnico + stats + link pro app</div>
+      </div>
+      <div class="row">
+        <div class="label">FAQ</div>
+        <div class="old">Não existe</div>
+        <div class="new">5 perguntas, acordeão sticky</div>
+      </div>
+      <div class="row">
+        <div class="label">Tabela comparativa</div>
+        <div class="old">Existe estrutura, sem dados</div>
+        <div class="new old">Pendente — alta prioridade</div>
+      </div>
+      <div class="row">
+        <div class="label">Prova social</div>
+        <div class="old">Nenhuma</div>
+        <div class="new old">Pendente — alta prioridade</div>
+      </div>
+      <div class="row">
+        <div class="label">Calculadora ROI</div>
+        <div class="old">Não existe</div>
+        <div class="new old">Pendente — média</div>
+      </div>
+      <div class="row">
+        <div class="label">Página individual de produto</div>
+        <div class="old">Existe (WooCommerce)</div>
+        <div class="new old">Pendente — alta</div>
+      </div>
+      <div class="row">
+        <div class="label">Blog/conteúdo</div>
+        <div class="old">4 cards repetitivos</div>
+        <div class="new old">Pendente — média</div>
+      </div>
+      <div class="row">
+        <div class="label">Form de contato</div>
+        <div class="old">Existe</div>
+        <div class="new old">Pendente — baixa</div>
+      </div>
+      <div class="row">
+        <div class="label">Endereço físico + CNPJ</div>
+        <div class="old">No footer</div>
+        <div class="new old">Pendente — baixa</div>
+      </div>
+      <div class="row">
+        <div class="label">SEO / Open Graph</div>
+        <div class="old">Padrão Elementor</div>
+        <div class="new old">Pendente — média</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. ROADMAP -->
+<section class="block" id="roadmap">
+  <div class="container">
+    <div class="section-meta">05 — Próximos passos</div>
+    <h2 class="display">Roadmap proposto</h2>
+    <p class="section-lead">Ordem sugerida pra fechar o redesign sem perder o ritmo.</p>
+
+    <div class="roadmap">
+      <div class="phase">
+        <div class="num">01</div>
+        <h3>Fundamentais que faltam</h3>
+        <p style="margin:0;font-size:13.5px;color:var(--pc-muted);">O que justifica o ticket e construa confiança. 1–2 sprints.</p>
+        <ul>
+          <li>Tabela comparativa Painel Clean × concorrentes</li>
+          <li>Bloco de prova social (depoimentos + logos)</li>
+          <li>Página individual de produto (G5, D5, S5)</li>
+          <li>SEO básico + og:image</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="num">02</div>
+        <h3>Conversão e retenção</h3>
+        <p style="margin:0;font-size:13.5px;color:var(--pc-muted);">Camadas de conversão e canais alternativos.</p>
+        <ul>
+          <li>Calculadora de ROI ("+30% em R$/mês")</li>
+          <li>Página de acessórios e refis</li>
+          <li>Form de contato exclusivo</li>
+          <li>Endereço + CNPJ no footer</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="num">03</div>
+        <h3>Crescimento de longo prazo</h3>
+        <p style="margin:0;font-size:13.5px;color:var(--pc-muted);">Conteúdo orgânico e refinamento.</p>
+        <ul>
+          <li>Blog técnico com 5–10 posts iniciais</li>
+          <li>Vídeos em ação dos equipamentos</li>
+          <li>Página institucional (sobre, ecossistema)</li>
+          <li>Refino mobile + microanimações</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <strong>Painel Clean — Redesign 2026.</strong> &nbsp;Relatório baseado em análise do site em produção (painelclean.com.br) e auditoria do trabalho em andamento.
+  </div>
+</footer>
+
+</body>
+</html>

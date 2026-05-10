@@ -1,0 +1,155 @@
+/* =========================================================
+   Painel Clean — Colors & Type Tokens
+   Source of truth for the brand. Import this file in any
+   prototype, slide deck or HTML artifact:
+
+     <link rel="stylesheet" href="colors_and_type.css">
+
+   Fonts: IBM Plex Sans (display) + Satoshi (body).
+   ========================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap");
+
+:root {
+  /* ---------- Brand colors ---------- */
+  --pc-green:    #3AD580;  /* Primary accent / CTA / highlights */
+  --pc-green-2:  #2BB46A;  /* Pressed / darker accent */
+  --pc-dark:     #0F382B;  /* Primary deep-green background */
+  --pc-darker:   #0C281F;  /* Nav, footer-adjacent surfaces */
+  --pc-deepest:  #0A1F17;  /* Footer / max-depth surface */
+  --pc-mid:      #1B3A2D;  /* Hero gradient stop, mid-depth panel */
+  --pc-cream:    #FFFBEC;  /* Light section background */
+  --pc-promo:    #FF6B35;  /* Promo / urgency accent */
+
+  /* Pure neutrals */
+  --pc-white:    #FFFFFF;
+  --pc-black:    #000000;
+
+  /* ---------- Semantic foreground (on dark) ---------- */
+  --fg-1:        #FFFFFF;            /* Primary headings, key text */
+  --fg-2:        rgba(255,255,255,.70); /* Body copy on dark */
+  --fg-3:        rgba(255,255,255,.55); /* Secondary copy */
+  --fg-4:        rgba(255,255,255,.40); /* Captions, muted */
+  --fg-5:        rgba(255,255,255,.25); /* Disabled / micro */
+
+  /* ---------- Semantic foreground (on cream) ---------- */
+  --fg-on-cream-1: #0F382B;            /* H1–H3 on cream */
+  --fg-on-cream-2: rgba(15,56,43,.70);
+  --fg-on-cream-3: rgba(15,56,43,.50);
+  --fg-on-cream-4: rgba(15,56,43,.30);
+
+  /* ---------- Surfaces ---------- */
+  --surface-base:      var(--pc-dark);
+  --surface-nav:       var(--pc-darker);
+  --surface-deep:      var(--pc-deepest);
+  --surface-mid:       var(--pc-mid);
+  --surface-cream:     var(--pc-cream);
+  --surface-card:      #FFFFFF;
+  --surface-card-dark: var(--pc-dark);
+
+  /* ---------- Borders ---------- */
+  --border-on-dark-soft:   rgba(255,255,255,.05);
+  --border-on-dark:        rgba(255,255,255,.10);
+  --border-on-dark-strong: rgba(255,255,255,.20);
+  --border-on-cream:       rgba(15,56,43,.10);
+  --border-on-cream-strong:rgba(15,56,43,.30);
+  --border-accent:         rgba(58,213,128,.25);
+  --border-accent-strong:  #3AD580;
+
+  /* ---------- Accent fills ---------- */
+  --accent-fill-soft:  rgba(58,213,128,.10);
+  --accent-fill:       rgba(58,213,128,.15);
+  --accent-fill-mid:   rgba(58,213,128,.20);
+  --accent-glow:       0 0 20px rgba(58,213,128,.15);
+  --promo-fill:        rgba(255,107,53,.20);
+  --promo-border:      rgba(255,107,53,.30);
+
+  /* ---------- Type families ---------- */
+  --font-display: "IBM Plex Sans", system-ui, sans-serif;
+  --font-sans:    "Satoshi", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* ---------- Type scale (display = IBM Plex 500/600) ---------- */
+  --display-1: 600 56px/1.05 var(--font-display);  /* hero on big screens */
+  --display-2: 600 48px/1.10 var(--font-display);  /* h1 */
+  --display-3: 600 36px/1.15 var(--font-display);  /* h2 */
+  --display-4: 600 24px/1.25 var(--font-display);  /* h3 / card titles */
+  --display-5: 600 18px/1.35 var(--font-display);  /* h4 */
+
+  /* Body (Satoshi 400/500/700) */
+  --body-lg:   400 18px/1.55 var(--font-sans);
+  --body:      400 16px/1.55 var(--font-sans);
+  --body-sm:   400 14px/1.55 var(--font-sans);
+  --body-xs:   400 12px/1.45 var(--font-sans);
+
+  --label:        500 14px/1.4  var(--font-sans);
+  --label-sm:     600 12px/1.4  var(--font-sans);
+  --eyebrow:      600 12px/1.2  var(--font-sans);    /* uppercase + tracking */
+  --button:       700 14px/1    var(--font-sans);
+
+  --tracking-eyebrow: .12em;
+  --tracking-tight:   -.01em;
+
+  /* ---------- Spacing scale ---------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* ---------- Radii ---------- */
+  --radius-sm:  6px;
+  --radius:     8px;       /* default — buttons, small cards */
+  --radius-md:  12px;      /* cards */
+  --radius-lg:  16px;      /* hero image, modals */
+  --radius-xl:  20px;      /* prominent cards */
+  --radius-2xl: 24px;      /* hero panels */
+  --radius-pill: 999px;
+
+  /* ---------- Shadows ---------- */
+  --shadow-sm:    0 1px 2px rgba(15,56,43,.06);
+  --shadow-card:  0 1px 3px rgba(15,56,43,.08), 0 4px 12px rgba(15,56,43,.04);
+  --shadow-lift:  0 8px 28px rgba(10,31,23,.18);
+  --shadow-glow:  0 0 24px rgba(58,213,128,.18);
+
+  /* ---------- Motion ---------- */
+  --ease-out:  cubic-bezier(.2,.7,.2,1);
+  --dur-fast:  150ms;
+  --dur-base:  200ms;
+  --dur-slow:  320ms;
+
+  /* ---------- Layout ---------- */
+  --container: 1280px;
+  --gutter:    24px;
+  --section-y: 80px;
+}
+
+/* =========================================================
+   Element-level defaults — opt in by adding these classes
+   or use the CSS vars directly.
+   ========================================================= */
+
+.pc-bg-dark   { background: var(--surface-base); color: var(--fg-1); }
+.pc-bg-darker { background: var(--surface-nav);  color: var(--fg-1); }
+.pc-bg-cream  { background: var(--surface-cream);color: var(--fg-on-cream-1); }
+.pc-bg-mid    { background: var(--surface-mid);  color: var(--fg-1); }
+
+.pc-h1, h1.pc { font: var(--display-2); letter-spacing: var(--tracking-tight); }
+.pc-h2, h2.pc { font: var(--display-3); letter-spacing: var(--tracking-tight); }
+.pc-h3, h3.pc { font: var(--display-4); }
+.pc-h4, h4.pc { font: var(--display-5); }
+.pc-body      { font: var(--body); }
+.pc-body-sm   { font: var(--body-sm); }
+.pc-eyebrow   {
+  font: var(--eyebrow);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--pc-green);
+}
+
+.pc-accent { color: var(--pc-green); }

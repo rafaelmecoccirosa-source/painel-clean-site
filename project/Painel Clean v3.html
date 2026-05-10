@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel Clean — Equipamentos profissionais para limpeza solar</title>
+<meta name="description" content="Equipamentos brushless, sem químicos, até 260 painéis por hora. Treinamento e plataforma de serviços para técnicos solares.">
+<link rel="stylesheet" href="public/tokens.css">
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--pc-cream); color: var(--fg-on-cream-1); font: var(--body); -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--pc-green); color: var(--pc-dark); }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: 0; background: none; }
+
+  .container { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+  @media (min-width: 768px) { .container { padding: 0 40px; } }
+  @media (min-width: 1280px) { .container { padding: 0 56px; } }
+
+  .display { font-family: var(--font-display); letter-spacing: var(--tracking-tight); font-weight: 600; }
+  .eyebrow {
+    font: var(--eyebrow);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-eyebrow);
+    color: var(--pc-green);
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .eyebrow::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+  .eyebrow.center::before, .eyebrow.no-rule::before { display: none; }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--pc-green); color: var(--pc-dark);
+    font: var(--button); font-size: 15px;
+    padding: 16px 26px; border-radius: var(--radius-md);
+    transition: background var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+    box-shadow: 0 8px 24px rgba(58,213,128,.20);
+  }
+  .btn-primary:hover { background: #4FE090; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(58,213,128,.32); }
+
+  .btn-ghost-dark {
+    display: inline-flex; align-items: center; gap: 10px;
+    border: 1px solid var(--border-on-dark-strong); color: var(--fg-1);
+    font: var(--button); font-size: 15px;
+    padding: 16px 24px; border-radius: var(--radius-md);
+    transition: background var(--dur-base), border-color var(--dur-base);
+  }
+  .btn-ghost-dark:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.32); }
+
+  .btn-outline-dark {
+    display: inline-flex; align-items: center; gap: 10px;
+    border: 1px solid var(--fg-on-cream-1); color: var(--fg-on-cream-1);
+    font-weight: 600; font-size: 14px; padding: 13px 22px;
+    border-radius: var(--radius-pill);
+    transition: background var(--dur-base), color var(--dur-base);
+  }
+  .btn-outline-dark:hover { background: var(--fg-on-cream-1); color: white; }
+
+  /* Animations */
+  @keyframes fadeUp { from { opacity:0; transform: translateY(24px);} to { opacity:1; transform:translateY(0);} }
+  @keyframes kenburns { 0% { transform: scale(1.02); } 100% { transform: scale(1.12); } }
+  @keyframes pulseDot { 0%,100% { opacity:.5; } 50% { opacity:1; } }
+  @keyframes marquee { 0% { transform: translateX(0);} 100% { transform: translateX(-50%);} }
+  @keyframes countUp { from { opacity:0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect, useRef, useMemo, createContext, useContext } = React;
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "heroTreatment": "gradient",
+  "heroAccent": "#3AD580",
+  "trainingDetail": "compact",
+  "compareDensity": "full",
+  "marqueeSpeed": 60,
+  "showMarquee": true,
+  "showSocial": true,
+  "showCompare": true,
+  "showROI": true,
+  "productCardStyle": "lifted"
+}/*EDITMODE-END*/;
+
+const TweaksCtx = createContext(TWEAK_DEFAULTS);
+const useT = () => useContext(TweaksCtx);
+
+const WHATSAPP = "5547996785953";
+const wa = (m="Olá! Gostaria de mais informações sobre os equipamentos Painel Clean.") => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(m)}`;
+
+// === Heroicons (outline, stroke 1.5/2) ===
+const Icon = ({ name, size=20, stroke=1.8 }) => {
+  const paths = {
+    arrowRight: <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />,
+    arrowLeft: <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />,
+    arrowUpRight: <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5 19.5 4.5m0 0H8.25m11.25 0v11.25" />,
+    plus: <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />,
+    check: <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />,
+    minus: <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />,
+    bolt: <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5 13.5 3l-1.5 7.5h6L9 22.5l1.5-9h-6.75z" />,
+    shield: <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" />,
+    headset: <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9.75v3.75A8.25 8.25 0 0 0 12 21.75h.75a3 3 0 0 0 3-3v-2.25a3 3 0 0 0-3-3h-.75v.75a3.75 3.75 0 0 0 3.75 3.75M20.25 13.5V9.75A8.25 8.25 0 0 0 3.75 9.75" />,
+    refresh: <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992V4.356M2.985 19.644v-4.992h4.992m0 0a8.25 8.25 0 0 0 13.803-3.7M7.977 14.652 3.34 19.29m17.66-12.582-4.638 4.638M3.34 4.7l4.638 4.648a8.25 8.25 0 0 1 13.21 3.715" />,
+    wrench: <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03A6 6 0 0 1 18.75 4.5l-2.625 2.625-1.06 4.243-4.243 1.06zm0 0L4.243 22.347a1.5 1.5 0 1 1-2.121-2.121L9.298 13.05" />,
+    home: <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12 12 2.25 21.75 12M4.5 9.75v10.5h15V9.75M9 21V13.5h6V21" />,
+    package: <path strokeLinecap="round" strokeLinejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25M21 7.5v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />,
+    calculator: <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 15.75v-1.5a.75.75 0 0 0-.75-.75H9a.75.75 0 0 0-.75.75v1.5M15.75 15.75A1.5 1.5 0 0 0 17.25 14.25v-9A1.5 1.5 0 0 0 15.75 3.75h-7.5A1.5 1.5 0 0 0 6.75 5.25v9A1.5 1.5 0 0 0 8.25 15.75M9 9h6m-6 3h6" />,
+    chat: <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25-1.13 0-2.21-.19-3.21-.54l-3.4 1.13a.75.75 0 0 1-.95-.95l1.13-3.4A8.21 8.21 0 0 1 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" />,
+    play: <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653z" />,
+    star: <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5z" />,
+    location: <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />,
+    sun: <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />,
+  };
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} aria-hidden="true">
+      {paths[name]}
+    </svg>
+  );
+};
+
+const WhatsBrand = ({ size=16 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+  </svg>
+);
+
+// === LOGO — real brandbook dot-pattern + wordmark ===
+const Logo = ({ textColor="white" }) => (
+  <a href="#" style={{display:"inline-flex", alignItems:"center", gap:10, textDecoration:"none"}}>
+    <img src="public/images/logo-real.jpg" alt="Painel Clean"
+      style={{width:36, height:36, borderRadius:8, display:"block"}} />
+    <span className="display" style={{fontSize:18, fontWeight:600, color:textColor, letterSpacing:"-0.01em", whiteSpace:"nowrap"}}>
+      Painel Clean
+    </span>
+  </a>
+);
+
+// === NAV ===
+function Nav() {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(()=>{
+    const f=()=>setScrolled(window.scrollY>12);
+    window.addEventListener("scroll", f);
+    return ()=>window.removeEventListener("scroll", f);
+  },[]);
+  const links = [
+    {label:"Equipamentos", href:"#equipamentos"},
+    {label:"Comparativo", href:"#comparativo"},
+    {label:"Treinamento", href:"#treinamento"},
+    {label:"Plataforma", href:"#plataforma"},
+    {label:"Calculadora", href:"#roi"},
+  ];
+  return (
+    <header style={{
+      position:"fixed", top:0, left:0, right:0, zIndex:60,
+      background: scrolled ? "rgba(12,40,31,0.88)" : "transparent",
+      backdropFilter: scrolled ? "blur(14px)" : "none",
+      WebkitBackdropFilter: scrolled ? "blur(14px)" : "none",
+      borderBottom: scrolled ? "1px solid var(--border-on-dark)" : "1px solid transparent",
+      transition: "all 240ms var(--ease-out)",
+    }}>
+      <div className="container" style={{height:76, display:"flex", alignItems:"center", justifyContent:"space-between"}}>
+        <Logo />
+        <nav className="nav-links" style={{display:"flex", alignItems:"center", gap:32}}>
+          {links.map(l=>(
+            <a key={l.href} href={l.href} style={{
+              color:"var(--fg-2)", fontSize:14, fontWeight:500, transition:"color 200ms"
+            }} onMouseEnter={e=>e.currentTarget.style.color="white"}
+               onMouseLeave={e=>e.currentTarget.style.color="var(--fg-2)"}>{l.label}</a>
+          ))}
+        </nav>
+        <a href={wa()} target="_blank" rel="noopener noreferrer"
+          style={{display:"inline-flex", alignItems:"center", gap:8, background:"var(--pc-green)", color:"var(--pc-dark)", fontWeight:700, fontSize:14, padding:"11px 18px", borderRadius:"var(--radius-pill)", transition:"all 180ms"}}
+          onMouseEnter={e=>{e.currentTarget.style.background="#4FE090"; e.currentTarget.style.transform="translateY(-1px)";}}
+          onMouseLeave={e=>{e.currentTarget.style.background="var(--pc-green)"; e.currentTarget.style.transform="translateY(0)";}}>
+          <WhatsBrand size={14} /> WhatsApp
+        </a>
+      </div>
+      <style>{`@media (max-width: 980px) { .nav-links { display:none !important; } }`}</style>
+    </header>
+  );
+}
+
+// === HERO ===
+const heroSlides = [
+  {
+    eyebrow: "Linha profissional",
+    title: ["Limpe mais.", "Ganhe mais.", "Em menos tempo."],
+    accentLine: 2,
+    description: "Motor brushless, sem produtos químicos, até 260 painéis por hora. Tecnologia profissional para quem vive de solar.",
+    primary: { label: "Ver equipamentos", href: "#equipamentos" },
+    secondary: { label: "Plataforma de serviços", href: "https://painel-clean-v2.vercel.app" },
+    image: "public/images/hero-1.jpg",
+    meta: [{k:"260", v:"painéis/h"},{k:"+30%", v:"geração"},{k:"0", v:"químicos"}],
+  },
+  {
+    eyebrow: "Promoção — tempo limitado",
+    title: ["Refil de cerdas.", "20% off.", "Estoque limitado."],
+    accentLine: 1,
+    description: "Cerdas profissionais para vidro fotovoltaico. Substituição rápida, mesmo desempenho do dia 1.",
+    primary: { label: "Aproveitar oferta", href: wa("Olá! Quero aproveitar o desconto no Refil de Cerdas.") },
+    secondary: { label: "Ver todos os produtos", href: "#equipamentos" },
+    image: "public/images/hero-promo.jpg",
+    meta: [{k:"R$ 290", v:"de"},{k:"R$ 232", v:"por", highlight:true},{k:"20%", v:"off"}],
+  },
+  {
+    eyebrow: "Novo no YouTube",
+    title: ["Como limpar", "500 painéis", "em 3 horas."],
+    accentLine: 1,
+    description: "Rotina completa de um técnico profissional Painel Clean. Do setup ao relatório final, sem cortes.",
+    primary: { label: "Assistir agora", href: "#" },
+    secondary: { label: "Ver mais conteúdos", href: "#" },
+    image: "public/images/hero-video.jpg",
+    meta: [{k:"13min", v:"de vídeo"},{k:"Cap. 1", v:"rotina pro"},{k:"Grátis", v:"no YouTube"}],
+  },
+];
+
+function Hero() {
+  const t = useT();
+  const [idx, setIdx] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const total = heroSlides.length;
+  const SLIDE_MS = 7000;
+  const TR = t.heroTreatment;
+  const accent = t.heroAccent;
+  const overlayBg = {
+    gradient: "linear-gradient(90deg, var(--pc-darker) 0%, rgba(12,40,31,0.50) 18%, rgba(12,40,31,0) 40%), linear-gradient(180deg, rgba(12,40,31,0.30) 0%, rgba(12,40,31,0) 30%, rgba(12,40,31,0.55) 100%)",
+    split: "linear-gradient(90deg, var(--pc-darker) 0%, var(--pc-darker) 8%, rgba(12,40,31,0) 9%)",
+    duotone: "linear-gradient(135deg, rgba(15,56,43,0.78) 0%, rgba(58,213,128,0.32) 100%)",
+    minimal: "linear-gradient(90deg, rgba(12,40,31,0.85) 0%, rgba(12,40,31,0.25) 30%, rgba(12,40,31,0) 60%)",
+    dotted: "linear-gradient(90deg, var(--pc-darker) 0%, rgba(12,40,31,0.55) 25%, rgba(12,40,31,0.25) 60%)",
+  }[TR] || "var(--pc-darker)";
+  useEffect(()=>{
+    setProgress(0);
+    const start = Date.now();
+    const t = setInterval(()=>{
+      const p = Math.min(1, (Date.now()-start)/SLIDE_MS);
+      setProgress(p);
+      if (p>=1) setIdx(i=>(i+1)%total);
+    }, 40);
+    return ()=>clearInterval(t);
+  }, [idx]);
+
+  const s = heroSlides[idx];
+
+  return (
+    <section style={{position:"relative", background:"var(--pc-darker)", color:"white", minHeight:"100vh", display:"flex", flexDirection:"column", overflow:"hidden", paddingTop:76}}>
+      <div style={{position:"absolute", inset:0, background:"radial-gradient(ellipse 80% 60% at 0% 30%, rgba(58,213,128,.10), transparent 60%), radial-gradient(ellipse 60% 50% at 100% 100%, rgba(58,213,128,.06), transparent 60%)", pointerEvents:"none"}} />
+      <div className="hero-grid" style={{flex:1, display:"grid", gridTemplateColumns:"minmax(0,1fr) minmax(0,1.05fr)", alignItems:"stretch", minHeight:"calc(100vh - 76px)"}}>
+        <div className="hero-text" style={{display:"flex", flexDirection:"column", justifyContent:"center", padding:"64px 56px 96px", position:"relative", zIndex:2}}>
+          <div style={{maxWidth:640}} key={idx}>
+            <div style={{display:"inline-flex", alignItems:"center", gap:10, padding:"8px 14px", borderRadius:"var(--radius-pill)", background:"var(--accent-fill-soft)", border:"1px solid var(--border-accent)", color:"var(--pc-green)", font:"var(--eyebrow)", textTransform:"uppercase", letterSpacing:"var(--tracking-eyebrow)", marginBottom:32, animation:"fadeUp 600ms ease both"}}>
+              <span style={{width:6, height:6, borderRadius:"50%", background:"var(--pc-green)", animation:"pulseDot 1.6s infinite"}} />
+              {s.eyebrow}
+            </div>
+            <h1 className="display" style={{fontSize:"clamp(44px, 6.2vw, 84px)", fontWeight:600, lineHeight:1.02, letterSpacing:"-0.035em", margin:"0 0 28px"}}>
+              {s.title.map((line,i)=>(
+                <span key={i} style={{display:"block", color: i===s.accentLine?accent:"white", animation:`fadeUp 700ms ${i*90}ms ease both`}}>{line}</span>
+              ))}
+            </h1>
+            <p style={{font:"var(--body-lg)", color:"var(--fg-3)", maxWidth:520, margin:"0 0 40px", animation:"fadeUp 800ms 280ms ease both"}}>{s.description}</p>
+            <div style={{display:"flex", gap:14, flexWrap:"wrap", marginBottom:56, animation:"fadeUp 800ms 380ms ease both"}}>
+              <a href={s.primary.href} className="btn-primary">{s.primary.label}<Icon name="arrowRight" size={16} /></a>
+              <a href={s.secondary.href} target={s.secondary.href.startsWith("http")?"_blank":undefined} rel="noopener noreferrer" className="btn-ghost-dark">{s.secondary.label}</a>
+            </div>
+            <div style={{display:"flex", gap:36, flexWrap:"wrap", paddingTop:28, borderTop:"1px solid var(--border-on-dark)", animation:"fadeUp 900ms 480ms ease both"}}>
+              {s.meta.map((m,i)=>(
+                <div key={i}>
+                  <div className="display" style={{fontSize:24, fontWeight:600, letterSpacing:"-0.02em", color:m.highlight?"var(--pc-green)":"white", lineHeight:1, marginBottom:6}}>{m.k}</div>
+                  <div style={{font:"var(--body-xs)", color:"var(--fg-4)", textTransform:"uppercase", letterSpacing:"0.1em"}}>{m.v}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="hero-image-wrap" style={{position:"relative", overflow:"hidden", minHeight:440}}>
+          {heroSlides.map((sl, i)=>(
+            <div key={i} style={{position:"absolute", inset:0, opacity:i===idx?1:0, transition:"opacity 900ms ease"}}>
+              <div style={{position:"absolute", inset:0, backgroundImage:`url('${sl.image}')`, backgroundSize:"cover", backgroundPosition:"center", animation:i===idx?"kenburns 14s ease-out forwards":"none"}} />
+            </div>
+          ))}
+          <div className="hero-overlay" style={{position:"absolute", inset:0, background:overlayBg, pointerEvents:"none"}} />
+          {TR==="dotted" && (
+            <svg style={{position:"absolute", inset:0, width:"100%", height:"100%", pointerEvents:"none", mixBlendMode:"multiply", opacity:0.55}} aria-hidden="true">
+              <defs><pattern id="hero-dots" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#0A1F17" /></pattern></defs>
+              <rect width="100%" height="100%" fill="url(#hero-dots)" />
+            </svg>
+          )}
+          {TR==="duotone" && (
+            <div style={{position:"absolute", inset:0, background:`linear-gradient(135deg, var(--pc-darker) 0%, ${accent} 100%)`, mixBlendMode:"color", opacity:0.85, pointerEvents:"none"}} />
+          )}
+          <div className="hero-counter" style={{position:"absolute", top:32, right:40, display:"flex", alignItems:"center", gap:8, padding:"8px 14px", background:"rgba(12,40,31,0.55)", backdropFilter:"blur(10px)", border:"1px solid var(--border-on-dark)", borderRadius:"var(--radius-pill)", fontSize:12, fontWeight:600, color:"white", letterSpacing:"0.08em"}}>
+            <span style={{color:"var(--pc-green)"}}>0{idx+1}</span>
+            <span style={{color:"var(--fg-5)"}}>/</span>
+            <span style={{color:"var(--fg-3)"}}>0{total}</span>
+          </div>
+        </div>
+      </div>
+      <div className="hero-controls" style={{position:"absolute", left:0, right:0, bottom:32, display:"flex", alignItems:"center", justifyContent:"space-between", padding:"0 56px", zIndex:3, pointerEvents:"none"}}>
+        <div style={{display:"flex", alignItems:"center", gap:14, pointerEvents:"auto"}}>
+          {heroSlides.map((_,i)=>(
+            <button key={i} onClick={()=>setIdx(i)} aria-label={`Slide ${i+1}`} style={{position:"relative", width:i===idx?56:28, height:3, background:"rgba(255,255,255,0.18)", borderRadius:999, overflow:"hidden", transition:"width 400ms ease", padding:0}}>
+              {i===idx && <span style={{position:"absolute", inset:0, width:`${progress*100}%`, background:"var(--pc-green)", borderRadius:999}} />}
+              {i<idx && <span style={{position:"absolute", inset:0, background:"rgba(255,255,255,0.5)", borderRadius:999}} />}
+            </button>
+          ))}
+        </div>
+        <div style={{display:"flex", gap:10, pointerEvents:"auto"}}>
+          {[{n:"arrowLeft", d:-1},{n:"arrowRight", d:1}].map(b=>(
+            <button key={b.n} onClick={()=>setIdx((idx+b.d+total)%total)} style={{width:44, height:44, borderRadius:"50%", border:"1px solid var(--border-on-dark-strong)", color:"white", display:"flex", alignItems:"center", justifyContent:"center", transition:"all 200ms"}}
+              onMouseEnter={e=>{e.currentTarget.style.background="rgba(255,255,255,0.08)"; e.currentTarget.style.borderColor="rgba(255,255,255,0.32)";}}
+              onMouseLeave={e=>{e.currentTarget.style.background="transparent"; e.currentTarget.style.borderColor="var(--border-on-dark-strong)";}}>
+              <Icon name={b.n} size={16} />
+            </button>
+          ))}
+        </div>
+      </div>
+      <style>{`
+        @media (max-width: 960px) {
+          .hero-grid { grid-template-columns: 1fr !important; }
+          .hero-text { padding: 48px 24px 140px !important; min-height: calc(100vh - 76px); }
+          .hero-image-wrap { position: absolute !important; inset: 0 !important; z-index: 0; min-height: 0 !important; }
+          .hero-overlay { background: linear-gradient(180deg, rgba(12,40,31,0.55) 0%, rgba(12,40,31,0.85) 60%, var(--pc-darker) 100%) !important; }
+          .hero-text > div { position: relative; z-index: 2; }
+          .hero-controls { padding: 0 24px !important; }
+          .hero-counter { right: 24px !important; top: 96px !important; }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+// === MARQUEE ===
+function Marquee() {
+  const t = useT();
+  const items = ["Motor brushless 350 RPM","Sem produtos químicos","260 painéis por hora","+30% mais geração","Cabo até 7,5m","Garantia de 1 ano","Suporte via WhatsApp","Made in Brasil"];
+  const all = [...items, ...items];
+  return (
+    <div style={{background:"var(--pc-dark)", borderTop:"1px solid var(--border-on-dark-soft)", borderBottom:"1px solid var(--border-on-dark-soft)", padding:"22px 0", overflow:"hidden"}}>
+      <div style={{display:"flex", gap:56, whiteSpace:"nowrap", animation:`marquee ${t.marqueeSpeed}s linear infinite`, width:"max-content"}}>
+        {all.map((it,i)=>(
+          <div key={i} style={{display:"flex", alignItems:"center", gap:18, color:"var(--fg-2)", font:"var(--body)", fontWeight:500}}>
+            <span style={{width:6, height:6, borderRadius:"50%", background:"var(--pc-green)"}} />
+            {it}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// === SOCIAL PROOF (NEW) ===
+function SocialProof() {
+  const stats = [
+    {k:"+200", v:"técnicos credenciados"},
+    {k:"13", v:"cidades atendidas"},
+    {k:"94%", v:"renovação anual"},
+    {k:"4,9", v:"avaliação média"},
+  ];
+  const quotes = [
+    {who:"Marcos Vieira", role:"Técnico solar · Joinville/SC", text:"Em 2 meses paguei o investimento na D5. Hoje atendo 4 usinas fixas e tenho lista de espera. O ticket subiu 40%."},
+    {who:"Paulo Andrade", role:"Dono de usina · Indaial/SC", text:"Antes limpava com pano e mangueira, perdia o dia inteiro. Com técnico Painel Clean a usina volta a 100% em 2h."},
+    {who:"Camila Reis", role:"Instaladora · Curitiba/PR", text:"O treinamento entrega o que promete. Em uma semana eu já estava precificando e fechando contratos."},
+  ];
+  return (
+    <section style={{background:"var(--pc-darker)", color:"white", padding:"100px 0", position:"relative", overflow:"hidden"}}>
+      <div className="container">
+        <div style={{textAlign:"center", maxWidth:680, margin:"0 auto 56px"}}>
+          <div className="eyebrow center" style={{justifyContent:"center", marginBottom:18}}>
+            <span style={{width:28, height:1, background:"var(--pc-green)"}} />
+            Quem já vive disso
+            <span style={{width:28, height:1, background:"var(--pc-green)"}} />
+          </div>
+          <h2 className="display" style={{fontSize:"clamp(32px, 4vw, 48px)", margin:0, lineHeight:1.1}}>
+            Painel Clean é a escolha de <span style={{color:"var(--pc-green)"}}>quem trabalha sério.</span>
+          </h2>
+        </div>
+        <div style={{display:"grid", gridTemplateColumns:"repeat(4, 1fr)", gap:24, marginBottom:56}} className="stats-grid">
+          {stats.map((s,i)=>(
+            <div key={i} style={{padding:"32px 28px", background:"var(--pc-dark)", border:"1px solid var(--border-accent)", borderRadius:"var(--radius-lg)", textAlign:"center"}}>
+              <div className="display" style={{fontSize:48, fontWeight:600, color:"var(--pc-green)", letterSpacing:"-0.03em", lineHeight:1, marginBottom:8}}>{s.k}</div>
+              <div style={{fontSize:13, color:"var(--fg-3)"}}>{s.v}</div>
+            </div>
+          ))}
+        </div>
+        <div style={{display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:24}} className="quotes-grid">
+          {quotes.map((q,i)=>(
+            <figure key={i} style={{margin:0, padding:"32px 28px", background:"var(--pc-dark)", border:"1px solid var(--border-on-dark)", borderRadius:"var(--radius-lg)", display:"flex", flexDirection:"column"}}>
+              <div style={{display:"flex", gap:4, marginBottom:18, color:"var(--pc-green)"}}>
+                {[1,2,3,4,5].map(n=><Icon key={n} name="star" size={14} />)}
+              </div>
+              <blockquote className="display" style={{fontSize:18, fontWeight:500, lineHeight:1.45, color:"white", margin:"0 0 24px", flex:1}}>"{q.text}"</blockquote>
+              <figcaption style={{paddingTop:18, borderTop:"1px solid var(--border-on-dark)"}}>
+                <div style={{fontWeight:600, fontSize:14, color:"white", marginBottom:2}}>{q.who}</div>
+                <div style={{fontSize:13, color:"var(--fg-4)"}}>{q.role}</div>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+      <style>{`
+        @media (max-width: 880px) { .stats-grid, .quotes-grid { grid-template-columns: 1fr 1fr !important; } }
+        @media (max-width: 560px) { .stats-grid, .quotes-grid { grid-template-columns: 1fr !important; } }
+      `}</style>
+    </section>
+  );
+}
+
+// === PRODUCTS ===
+const products = [
+  {sku:"ZCP-0175-G5", name:"Escova Rotativa G5", tag:"Mais rápida", image:"public/images/product-g5-1.jpg",
+    specs:[{k:"Velocidade", v:"260 painéis/h"},{k:"Motor", v:"Brushless 350 RPM"},{k:"Cabo", v:"até 7,5m"}],
+    desc:"A mais rápida da linha. Operação contínua para grandes usinas."},
+  {sku:"ZCP-0275-D5", name:"Escova Dupla D5", tag:"Mais vendido", featured:true, image:"public/images/product-d5-1.jpg",
+    specs:[{k:"Velocidade", v:"200 painéis/h"},{k:"Motor", v:"Brushless 350 RPM"},{k:"Cabo", v:"até 7,5m"},{k:"Inclui", v:"Bomba + controle"}],
+    desc:"Kit completo com bomba e controle remoto. Padrão do mercado."},
+  {sku:"ZCP-0175-S5", name:"Escova Solo S5", tag:"Acesso difícil", image:"public/images/product-s5-1.jpg",
+    specs:[{k:"Velocidade", v:"160 painéis/h"},{k:"Ideal para", v:"Difícil acesso"},{k:"Cabo", v:"até 7,5m"}],
+    desc:"Compacta para telhados complexos e acessos difíceis."},
+];
+
+function ProductCard({p}) {
+  const [hover, setHover] = useState(false);
+  const featured = p.featured;
+  return (
+    <div onMouseEnter={()=>setHover(true)} onMouseLeave={()=>setHover(false)}
+      style={{position:"relative", background:"var(--surface-card)", borderRadius:"var(--radius-xl)",
+      border: featured ? "2px solid var(--pc-green)" : "1px solid var(--border-on-cream)",
+      overflow:"hidden", display:"flex", flexDirection:"column",
+      transition:"transform 280ms var(--ease-out), box-shadow 280ms var(--ease-out)",
+      transform: hover ? "translateY(-6px)" : "translateY(0)",
+      boxShadow: hover ? "var(--shadow-lift)" : (featured ? "var(--shadow-glow)" : "var(--shadow-card)")}}>
+      <div style={{position:"relative", height:280, background:"linear-gradient(180deg, #FBF8E9 0%, #F4ECD3 100%)", overflow:"hidden"}}>
+        <div style={{position:"absolute", top:18, left:18, zIndex:2, display:"inline-flex", alignItems:"center", gap:6, padding:"6px 12px", background: featured?"var(--pc-green)":"rgba(15,56,43,0.92)", color: featured?"var(--pc-dark)":"white", borderRadius:"var(--radius-pill)", font:"var(--label-sm)", letterSpacing:"0.08em", textTransform:"uppercase"}}>
+          {featured && <span style={{width:5, height:5, borderRadius:"50%", background:"var(--pc-dark)"}} />}
+          {p.tag}
+        </div>
+        <div style={{position:"absolute", top:22, right:22, fontSize:10, fontWeight:600, letterSpacing:"0.12em", color:"var(--fg-on-cream-3)"}}>{p.sku}</div>
+        <img src={p.image} alt={p.name} style={{width:"100%", height:"100%", objectFit:"contain", padding:32, transition:"transform 600ms ease", transform:hover?"scale(1.05)":"scale(1)"}} />
+      </div>
+      <div style={{padding:"28px 28px 32px", display:"flex", flexDirection:"column", flex:1}}>
+        <h3 className="display" style={{fontSize:26, margin:"0 0 8px", color:"var(--fg-on-cream-1)"}}>{p.name}</h3>
+        <p style={{font:"var(--body-sm)", color:"var(--fg-on-cream-2)", margin:"0 0 22px"}}>{p.desc}</p>
+        <div style={{marginBottom:24}}>
+          {p.specs.map((s,i)=>(
+            <div key={i} style={{display:"flex", justifyContent:"space-between", padding:"12px 0", borderTop:"1px solid var(--border-on-cream)", fontSize:13.5}}>
+              <span style={{color:"var(--fg-on-cream-3)"}}>{s.k}</span>
+              <span style={{color:"var(--fg-on-cream-1)", fontWeight:600}}>{s.v}</span>
+            </div>
+          ))}
+        </div>
+        <a href={wa(`Olá! Tenho interesse no(a) ${p.name} (${p.sku}).`)} target="_blank" rel="noopener noreferrer"
+          style={{marginTop:"auto", display:"inline-flex", alignItems:"center", justifyContent:"space-between", background: featured?"var(--pc-green)":"var(--pc-dark)", color: featured?"var(--pc-dark)":"white", fontWeight:600, fontSize:14.5, padding:"16px 22px", borderRadius:"var(--radius-md)", transition:"background 200ms"}}
+          onMouseEnter={e=>e.currentTarget.style.background = featured?"#4FE090":"#14513C"}
+          onMouseLeave={e=>e.currentTarget.style.background = featured?"var(--pc-green)":"var(--pc-dark)"}>
+          <span>Pedir orçamento</span><Icon name="arrowRight" size={16} />
+        </a>
+      </div>
+    </div>
+  );
+}
+
+function Products() {
+  return (
+    <section id="equipamentos" style={{background:"var(--pc-cream)", padding:"120px 0 100px"}}>
+      <div className="container">
+        <div style={{display:"flex", alignItems:"flex-end", justifyContent:"space-between", gap:32, marginBottom:56, flexWrap:"wrap"}}>
+          <div style={{maxWidth:640}}>
+            <div className="eyebrow" style={{color:"var(--pc-green-2)", marginBottom:18}}>Linha profissional</div>
+            <h2 className="display" style={{fontSize:"clamp(36px, 4.4vw, 56px)", lineHeight:1.05, color:"var(--fg-on-cream-1)", margin:0}}>
+              Equipamentos brushless,<br />
+              <span style={{color:"var(--fg-on-cream-3)"}}>feitos para escala.</span>
+            </h2>
+          </div>
+          <a href="#" className="btn-outline-dark">Ver catálogo completo<Icon name="arrowUpRight" size={14} /></a>
+        </div>
+        <div style={{display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(300px, 1fr))", gap:28}}>
+          {products.map(p=><ProductCard key={p.sku} p={p} />)}
+        </div>
+        <div style={{marginTop:56, padding:"26px 32px", background:"white", border:"1px solid var(--border-on-cream)", borderRadius:"var(--radius-lg)", display:"flex", alignItems:"center", justifyContent:"space-between", gap:24, flexWrap:"wrap"}}>
+          <div style={{display:"flex", alignItems:"center", gap:16}}>
+            <div style={{width:44, height:44, borderRadius:"var(--radius-md)", background:"var(--accent-fill)", color:"var(--pc-green-2)", display:"flex", alignItems:"center", justifyContent:"center"}}>
+              <Icon name="package" size={22} />
+            </div>
+            <div>
+              <div style={{fontWeight:600, color:"var(--fg-on-cream-1)", fontSize:15.5}}>Refis, cabos e acessórios sob medida</div>
+              <div style={{fontSize:13.5, color:"var(--fg-on-cream-3)"}}>Pronta entrega para todo o Brasil.</div>
+            </div>
+          </div>
+          <a href={wa("Olá! Gostaria de ver os acessórios disponíveis.")} target="_blank" rel="noopener noreferrer" style={{color:"var(--pc-green-2)", fontWeight:600, fontSize:14.5, display:"inline-flex", alignItems:"center", gap:8}}>
+            Ver acessórios<Icon name="arrowRight" size={14} />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// === COMPARE TABLE (NEW) ===
+const compareRows = [
+  {f:"Motor brushless (10× mais durável)", o:false, p:true, n:"Eficiência sem perda no motor"},
+  {f:"Sem produtos químicos — só água", o:false, p:true, n:"Não degrada os selantes do painel"},
+  {f:"Motobomba com controle remoto", o:false, p:true, n:"Controle do fluxo durante a operação"},
+  {f:"Proteção contra falta d'água", o:false, p:true, n:"Não queima a bomba"},
+  {f:"Mangueira reforçada de 35m", o:false, p:true, n:"Não dobra, não vinca"},
+  {f:"Engate rápido NBR 14136", o:false, p:true, n:"Sem adaptadores improvisados"},
+  {f:"Peças de reposição no Brasil", o:false, p:true, n:"Não fica parado esperando importação"},
+  {f:"Treinamento online vitalício", o:false, p:true, n:"R$ 39,90 — operação, segurança, vendas"},
+  {f:"Cabos 3,5 / 5,5 / 7,5m", o:false, p:true, n:"Adapta a qualquer telhado"},
+  {f:"Garantia + assistência no Brasil", o:false, p:true, n:"1 ano + suporte WhatsApp"},
+  {f:"Acesso ao Ecossistema Painel Clean", o:false, p:true, n:"Plataforma de serviços conecta clientes"},
+];
+
+function Compare() {
+  return (
+    <section id="comparativo" style={{background:"var(--pc-cream)", padding:"120px 0", borderTop:"1px solid var(--border-on-cream)"}}>
+      <div className="container">
+        <div style={{textAlign:"center", maxWidth:760, margin:"0 auto 56px"}}>
+          <div className="eyebrow no-rule" style={{color:"var(--pc-green-2)", justifyContent:"center", marginBottom:18}}>Comparativo</div>
+          <h2 className="display" style={{fontSize:"clamp(36px, 4.4vw, 56px)", lineHeight:1.05, color:"var(--fg-on-cream-1)", margin:"0 0 18px"}}>
+            Por que somos a escolha <span style={{color:"var(--fg-on-cream-3)"}}>do mercado profissional.</span>
+          </h2>
+          <p style={{font:"var(--body-lg)", color:"var(--fg-on-cream-2)", margin:0}}>
+            Onze recursos que separam um equipamento profissional de uma improvisação.
+          </p>
+        </div>
+        <div style={{background:"white", border:"1px solid var(--border-on-cream)", borderRadius:"var(--radius-2xl)", overflow:"hidden", boxShadow:"var(--shadow-card)"}}>
+          <div className="cmp-row cmp-head" style={{display:"grid", gridTemplateColumns:"2.2fr 1fr 1.4fr", background:"var(--pc-dark)", color:"white"}}>
+            <div style={{padding:"22px 28px", fontSize:12, fontWeight:700, letterSpacing:"0.12em", textTransform:"uppercase", color:"var(--fg-3)"}}>Recurso</div>
+            <div style={{padding:"22px 22px", fontSize:12, fontWeight:700, letterSpacing:"0.12em", textTransform:"uppercase", color:"var(--fg-3)", textAlign:"center", borderLeft:"1px solid var(--border-on-dark)"}}>Outras soluções</div>
+            <div style={{padding:"22px 28px", fontSize:12, fontWeight:700, letterSpacing:"0.12em", textTransform:"uppercase", color:"var(--pc-green)", textAlign:"left", borderLeft:"1px solid var(--border-on-dark)", display:"flex", alignItems:"center", gap:10}}>
+              <img src="public/images/logo-real.jpg" style={{width:20, height:20, borderRadius:4}} />
+              Painel Clean
+            </div>
+          </div>
+          {compareRows.map((r,i)=>(
+            <div key={i} className="cmp-row" style={{display:"grid", gridTemplateColumns:"2.2fr 1fr 1.4fr", borderTop:"1px solid var(--border-on-cream)", background:i%2?"transparent":"rgba(255,251,236,0.5)"}}>
+              <div style={{padding:"20px 28px", fontSize:14.5, color:"var(--fg-on-cream-1)", fontWeight:500}}>{r.f}</div>
+              <div style={{padding:"20px 22px", borderLeft:"1px solid var(--border-on-cream)", display:"flex", alignItems:"center", justifyContent:"center", color:"var(--fg-on-cream-4)"}}><Icon name="minus" size={20} /></div>
+              <div style={{padding:"20px 28px", borderLeft:"1px solid var(--border-on-cream)", display:"flex", alignItems:"center", gap:14}}>
+                <span style={{flexShrink:0, width:28, height:28, borderRadius:"50%", background:"var(--accent-fill)", color:"var(--pc-green-2)", display:"inline-flex", alignItems:"center", justifyContent:"center"}}><Icon name="check" size={16} stroke={2.5} /></span>
+                <span style={{fontSize:13.5, color:"var(--fg-on-cream-2)"}}>{r.n}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div style={{textAlign:"center", marginTop:48}}>
+          <a href={wa()} target="_blank" rel="noopener noreferrer" className="btn-primary">
+            <WhatsBrand size={16} />Quero falar com um especialista
+          </a>
+        </div>
+      </div>
+      <style>{`
+        @media (max-width: 720px) {
+          .cmp-row { grid-template-columns: 1fr !important; }
+          .cmp-row > div { border-left: 0 !important; }
+          .cmp-row > div + div { border-top: 1px solid var(--border-on-cream) !important; }
+          .cmp-head { display: none !important; }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+// === ROI CALCULATOR (NEW) ===
+function ROI() {
+  const [kwp, setKwp] = useState(50);
+  const TARIFF = 0.95; // R$/kWh — média BR
+  const HOURS_SUN = 4.5; // h/dia
+  const DAYS = 30;
+  const monthlyGen = kwp * HOURS_SUN * DAYS; // kWh/mês
+  const monthlyRevenue = monthlyGen * TARIFF;
+  const lossDirty = 0.30; // até 30%
+  const recovered = monthlyRevenue * lossDirty;
+  const annualRecovered = recovered * 12;
+  return (
+    <section id="roi" style={{background:"var(--pc-cream)", padding:"120px 0", borderTop:"1px solid var(--border-on-cream)"}}>
+      <div className="container">
+        <div style={{display:"grid", gridTemplateColumns:"minmax(0, 1fr) minmax(0, 1.1fr)", gap:64, alignItems:"center"}} className="roi-grid">
+          <div>
+            <div className="eyebrow" style={{color:"var(--pc-green-2)", marginBottom:18}}>Calculadora de ROI</div>
+            <h2 className="display" style={{fontSize:"clamp(36px, 4.4vw, 56px)", lineHeight:1.05, color:"var(--fg-on-cream-1)", margin:"0 0 20px"}}>
+              Quanto a sujeira <span style={{color:"var(--fg-on-cream-3)"}}>está te custando?</span>
+            </h2>
+            <p style={{font:"var(--body-lg)", color:"var(--fg-on-cream-2)", margin:"0 0 32px", maxWidth:480}}>
+              Painéis sujos podem perder até 30% de geração. Mova o slider e veja o quanto você recupera com limpeza profissional regular.
+            </p>
+            <div style={{padding:"28px 28px", background:"white", border:"1px solid var(--border-on-cream)", borderRadius:"var(--radius-xl)"}}>
+              <div style={{display:"flex", justifyContent:"space-between", alignItems:"baseline", marginBottom:18}}>
+                <label htmlFor="kwp" style={{fontSize:13, fontWeight:600, color:"var(--fg-on-cream-2)", textTransform:"uppercase", letterSpacing:"0.08em"}}>Potência da usina</label>
+                <span className="display" style={{fontSize:32, fontWeight:600, color:"var(--pc-dark)", letterSpacing:"-0.02em"}}>{kwp} <span style={{fontSize:14, color:"var(--fg-on-cream-3)"}}>kWp</span></span>
+              </div>
+              <input id="kwp" type="range" min="5" max="500" step="5" value={kwp} onChange={e=>setKwp(+e.target.value)}
+                style={{width:"100%", accentColor:"var(--pc-green-2)"}} />
+              <div style={{display:"flex", justifyContent:"space-between", fontSize:11, color:"var(--fg-on-cream-3)", marginTop:6}}>
+                <span>5 kWp</span><span>residencial · comercial · usina</span><span>500 kWp</span>
+              </div>
+            </div>
+          </div>
+          <div style={{background:"linear-gradient(155deg, var(--pc-dark) 0%, var(--pc-darker) 100%)", color:"white", borderRadius:"var(--radius-2xl)", padding:"48px 44px", position:"relative", overflow:"hidden", border:"1px solid var(--border-accent)"}}>
+            <div style={{position:"absolute", top:-100, right:-100, width:280, height:280, background:"radial-gradient(circle, rgba(58,213,128,0.18) 0%, transparent 70%)", pointerEvents:"none"}} />
+            <div style={{position:"relative"}}>
+              <div className="eyebrow no-rule" style={{color:"var(--pc-green)", marginBottom:24}}>Sua recuperação estimada</div>
+              <div style={{paddingBottom:20, marginBottom:20, borderBottom:"1px solid var(--border-on-dark)"}}>
+                <div style={{font:"var(--body-sm)", color:"var(--fg-3)", marginBottom:6}}>Geração mensal estimada</div>
+                <div className="display" style={{fontSize:28, fontWeight:600, color:"white", letterSpacing:"-0.02em"}}>{Math.round(monthlyGen).toLocaleString("pt-BR")} kWh</div>
+              </div>
+              <div style={{paddingBottom:20, marginBottom:20, borderBottom:"1px solid var(--border-on-dark)"}}>
+                <div style={{font:"var(--body-sm)", color:"var(--fg-3)", marginBottom:6}}>Perda mensal por sujeira (até 30%)</div>
+                <div className="display" style={{fontSize:28, fontWeight:600, color:"#FF8C5A", letterSpacing:"-0.02em"}}>– R$ {Math.round(recovered).toLocaleString("pt-BR")}</div>
+              </div>
+              <div style={{marginBottom:32}}>
+                <div style={{font:"var(--body-sm)", color:"var(--fg-3)", marginBottom:6}}>Recuperação anual com limpeza</div>
+                <div className="display" key={annualRecovered} style={{fontSize:56, fontWeight:600, color:"var(--pc-green)", letterSpacing:"-0.03em", lineHeight:1, animation:"countUp 320ms var(--ease-out)"}}>R$ {Math.round(annualRecovered).toLocaleString("pt-BR")}</div>
+              </div>
+              <a href={wa(`Olá! Tenho uma usina de ${kwp} kWp e quero saber mais sobre limpeza profissional.`)} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{width:"100%", justifyContent:"center"}}>
+                Quero recuperar essa receita<Icon name="arrowRight" size={16} />
+              </a>
+              <div style={{marginTop:18, fontSize:12, color:"var(--fg-4)", textAlign:"center"}}>
+                Estimativa baseada em 4,5h sol/dia, tarifa R$ 0,95/kWh, perda média 30%.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <style>{`@media (max-width: 960px) { .roi-grid { grid-template-columns: 1fr !important; gap: 40px !important; } }`}</style>
+    </section>
+  );
+}
+
+// === TRAINING ===
+const trainingModules = [
+  {n:"01", t:"Operação do equipamento", d:"Setup, montagem e manutenção das escovas G5/D5/S5. Boas práticas para preservar o motor brushless.", h:"42min"},
+  {n:"02", t:"Segurança em altura (NR-35)", d:"EPIs, ancoragem e procedimentos para trabalho seguro em telhados residenciais e usinas.", h:"56min"},
+  {n:"03", t:"Precificação e propostas", d:"Como precificar por painel, por kWp e por usina. Templates de proposta e contrato.", h:"38min"},
+  {n:"04", t:"Captação de clientes", d:"Prospecção via Instagram, WhatsApp e parcerias com integradores. Scripts de abordagem prontos.", h:"45min"},
+  {n:"05", t:"Relatórios e fidelização", d:"Como entregar laudos profissionais e converter o cliente em contrato anual recorrente.", h:"31min"},
+];
+
+function Training() {
+  const t = useT();
+  const detailed = t.trainingDetail === "expanded";
+  const features = [
+    {icon:"shield", t:"Acesso vitalício", d:"Estude no seu ritmo, sem prazo."},
+    {icon:"check", t:"Certificado", d:"Conclusão reconhecida por usinas."},
+    {icon:"headset", t:"Suporte WhatsApp", d:"Tire dúvidas com técnicos sêniores."},
+    {icon:"refresh", t:"Sempre atualizado", d:"Material renovado a cada novo módulo."},
+  ];
+  return (
+    <section id="treinamento" style={{background:"var(--pc-darker)", padding: detailed ? "120px 0" : "100px 0", position:"relative", overflow:"hidden"}}>
+      <div style={{position:"absolute", top:-200, right:-200, width:600, height:600, background:"radial-gradient(circle, rgba(58,213,128,0.10) 0%, transparent 70%)", pointerEvents:"none"}} />
+      <div className="container" style={{position:"relative"}}>
+        <div className="training-grid" style={{display:"grid", gridTemplateColumns: detailed ? "minmax(0,1.1fr) minmax(0,1fr)" : "minmax(0,1fr) minmax(0,0.9fr)", gap: detailed ? 80 : 60, alignItems:"center"}}>
+          <div>
+            <div className="eyebrow" style={{marginBottom:18}}>Treinamento online</div>
+            <h2 className="display" style={{fontSize: detailed ? "clamp(36px, 4.6vw, 60px)" : "clamp(30px, 3.6vw, 44px)", lineHeight:1.05, color:"white", margin:"0 0 24px"}}>
+              Ganhe mais por hora<br />
+              <span style={{color:"var(--pc-green)"}}>que um motorista de app.</span>
+            </h2>
+            <p style={{font:"var(--body-lg)", color:"var(--fg-3)", maxWidth:520, margin:"0 0 32px"}}>
+              Do zero ao primeiro cliente em menos de uma semana. <strong style={{color:"white"}}>5 módulos · 3h28min</strong> de conteúdo prático, atualizado mensalmente.
+            </p>
+            {detailed && (
+              <div style={{marginBottom:36, borderTop:"1px solid var(--border-on-dark)"}}>
+                {trainingModules.map((m,i)=>(
+                  <details key={i} style={{borderBottom:"1px solid var(--border-on-dark)"}}>
+                    <summary style={{listStyle:"none", padding:"18px 0", display:"flex", alignItems:"center", gap:18, cursor:"pointer", color:"white"}}>
+                      <span style={{flexShrink:0, fontFamily:"var(--font-mono, ui-monospace)", fontSize:11, letterSpacing:"0.1em", color:"var(--pc-green)", fontWeight:600}}>{m.n}</span>
+                      <span className="display" style={{flex:1, fontSize:17, fontWeight:500, letterSpacing:"-0.01em"}}>{m.t}</span>
+                      <span style={{flexShrink:0, fontSize:12, color:"var(--fg-4)", fontWeight:500}}>{m.h}</span>
+                      <span style={{flexShrink:0, color:"var(--fg-3)"}}><Icon name="plus" size={14} /></span>
+                    </summary>
+                    <div style={{padding:"0 0 18px 36px", color:"var(--fg-3)", fontSize:13.5, lineHeight:1.55, maxWidth:480}}>{m.d}</div>
+                  </details>
+                ))}
+              </div>
+            )}
+            <div className="training-features" style={{display:"grid", gridTemplateColumns:"repeat(2,1fr)", gap:14}}>
+              {features.map((f,i)=>(
+                <div key={i} style={{display:"flex", alignItems:"flex-start", gap:12, padding:"14px 16px", background:"rgba(255,255,255,0.03)", border:"1px solid var(--border-on-dark)", borderRadius:"var(--radius-md)"}}>
+                  <div style={{flexShrink:0, width:32, height:32, borderRadius:"var(--radius)", background:"var(--accent-fill)", color:"var(--pc-green)", display:"flex", alignItems:"center", justifyContent:"center"}}><Icon name={f.icon} size={16} /></div>
+                  <div>
+                    <div style={{color:"white", fontWeight:600, fontSize:13.5, marginBottom:2}}>{f.t}</div>
+                    <div style={{color:"var(--fg-3)", fontSize:12.5}}>{f.d}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div style={{background:"linear-gradient(155deg, var(--pc-mid) 0%, var(--pc-dark) 100%)", border:"1px solid var(--border-accent)", borderRadius:"var(--radius-2xl)", padding:40, position:"relative", overflow:"hidden"}}>
+            <div style={{position:"absolute", top:-100, right:-100, width:280, height:280, background:"radial-gradient(circle, rgba(58,213,128,0.18) 0%, transparent 70%)"}} />
+            <div style={{position:"relative"}}>
+              <div style={{display:"inline-flex", alignItems:"center", gap:8, padding:"6px 12px", borderRadius:"var(--radius-pill)", background:"var(--accent-fill)", border:"1px solid var(--border-accent)", color:"var(--pc-green)", font:"var(--label-sm)", textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:28}}>
+                <Icon name="bolt" size={12} stroke={2} />Acesso imediato
+              </div>
+              <div style={{color:"var(--fg-3)", fontSize:14, marginBottom:4}}>de <span style={{textDecoration:"line-through"}}>R$ 197</span></div>
+              <div className="display" style={{fontSize:64, fontWeight:600, color:"var(--pc-green)", lineHeight:1, letterSpacing:"-0.04em", marginBottom:8}}>R$ 39,90</div>
+              <div style={{color:"var(--fg-3)", fontSize:13, marginBottom:32}}>pagamento único · acesso vitalício</div>
+              <a href={wa("Olá! Quero começar o treinamento Painel Clean.")} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{width:"100%", justifyContent:"center", marginBottom:16}}>
+                Quero começar agora<Icon name="arrowRight" size={16} />
+              </a>
+              <div style={{display:"flex", alignItems:"center", justifyContent:"center", gap:12, fontSize:12.5, color:"var(--fg-4)"}}>
+                <span>Pagamento seguro</span><span>·</span><span>Reembolso em 7 dias</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <style>{`
+        @media (max-width: 960px) { .training-grid { grid-template-columns: 1fr !important; gap: 48px !important; } }
+        @media (max-width: 520px) { .training-features { grid-template-columns: 1fr !important; } }
+      `}</style>
+    </section>
+  );
+}
+
+// === PLATFORM ===
+function Platform() {
+  const [tab, setTab] = useState(0);
+  const tabs = [
+    {label:"Para donos de usina", icon:"home", eyebrow:"Cliente", title:"Sua usina monitorada todo mês.", desc:"Publique sua usina e receba orçamentos de técnicos credenciados na sua região. Histórico de limpezas e laudos de desempenho.", cta:"Cadastrar usina",
+      stats:[{k:"13", v:"cidades atendidas"},{k:"+30%", v:"ganho médio"},{k:"24h", v:"resposta média"}]},
+    {label:"Para técnicos", icon:"wrench", eyebrow:"Técnico", title:"Carteira recorrente, sem prospecção.", desc:"Receba chamados na sua área, gerencie agenda e emita relatórios profissionais. Foque na operação enquanto a plataforma traz clientes.", cta:"Quero ser credenciado",
+      stats:[{k:"R$ 280", v:"ticket médio"},{k:"92%", v:"retenção"},{k:"Pix", v:"repasse rápido"}]},
+  ];
+  const t = tabs[tab];
+  return (
+    <section id="plataforma" style={{background:"var(--pc-cream)", padding:"120px 0"}}>
+      <div className="container">
+        <div style={{textAlign:"center", maxWidth:680, margin:"0 auto 56px"}}>
+          <div className="eyebrow no-rule" style={{color:"var(--pc-green-2)", justifyContent:"center", marginBottom:18}}>Ecossistema Painel Clean</div>
+          <h2 className="display" style={{fontSize:"clamp(36px, 4.6vw, 60px)", lineHeight:1.05, color:"var(--fg-on-cream-1)", margin:"0 0 18px"}}>Plataforma de serviços</h2>
+          <p style={{font:"var(--body-lg)", color:"var(--fg-on-cream-2)", margin:0}}>Conectamos donos de usinas a técnicos qualificados em todo o Brasil. Marketplace verificado, com pagamento protegido.</p>
+        </div>
+        <div style={{display:"flex", justifyContent:"center", marginBottom:40}}>
+          <div style={{display:"inline-flex", padding:4, background:"white", border:"1px solid var(--border-on-cream)", borderRadius:"var(--radius-pill)", gap:4}}>
+            {tabs.map((x,i)=>(
+              <button key={i} onClick={()=>setTab(i)} style={{display:"inline-flex", alignItems:"center", gap:8, padding:"12px 22px", borderRadius:"var(--radius-pill)", background: tab===i?"var(--pc-dark)":"transparent", color: tab===i?"white":"var(--fg-on-cream-3)", fontWeight:600, fontSize:14, transition:"all 200ms"}}>
+                <Icon name={x.icon} size={14} stroke={2} />{x.label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div key={tab} className="platform-card" style={{background:"white", border:"1px solid var(--border-on-cream)", borderRadius:"var(--radius-2xl)", overflow:"hidden", display:"grid", gridTemplateColumns:"minmax(0,1fr) minmax(0,0.85fr)", animation:"fadeUp 500ms ease both"}}>
+          <div className="platform-content" style={{padding:"56px 52px"}}>
+            <div style={{font:"var(--label-sm)", letterSpacing:"0.14em", textTransform:"uppercase", color:"var(--pc-green-2)", marginBottom:16}}>{t.eyebrow}</div>
+            <h3 className="display" style={{fontSize:"clamp(28px, 3vw, 38px)", lineHeight:1.15, color:"var(--fg-on-cream-1)", margin:"0 0 20px"}}>{t.title}</h3>
+            <p style={{font:"var(--body)", color:"var(--fg-on-cream-2)", margin:"0 0 36px"}}>{t.desc}</p>
+            <a href="https://painel-clean-v2.vercel.app" target="_blank" rel="noopener noreferrer" className="btn-primary">{t.cta}<Icon name="arrowRight" size={16} /></a>
+          </div>
+          <div style={{background:"linear-gradient(155deg, var(--pc-dark) 0%, var(--pc-darker) 100%)", padding:"56px 52px", color:"white", display:"flex", flexDirection:"column", justifyContent:"center", position:"relative", overflow:"hidden"}}>
+            <svg style={{position:"absolute", inset:0, width:"100%", height:"100%", opacity:0.06}} aria-hidden="true">
+              <defs><pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="white" /></pattern></defs>
+              <rect width="100%" height="100%" fill="url(#dots)" />
+            </svg>
+            <div style={{position:"relative"}}>
+              {t.stats.map((s,i)=>(
+                <div key={i} style={{paddingBottom:24, marginBottom:24, borderBottom: i<t.stats.length-1 ? "1px solid var(--border-on-dark)" : "none"}}>
+                  <div className="display" style={{fontSize:44, fontWeight:600, color:"var(--pc-green)", letterSpacing:"-0.03em", lineHeight:1, marginBottom:6}}>{s.k}</div>
+                  <div style={{fontSize:13.5, color:"var(--fg-3)"}}>{s.v}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+      <style>{`@media (max-width: 880px) { .platform-card { grid-template-columns: 1fr !important; } .platform-content { padding: 40px 32px !important; } }`}</style>
+    </section>
+  );
+}
+
+// === FAQ ===
+const faqs = [
+  {q:"As escovas danificam as placas?", a:"Não. As cerdas são macias e desenvolvidas especificamente para vidro fotovoltaico. O sistema usa apenas água, sem produtos químicos que possam degradar a superfície ou os selantes."},
+  {q:"Quanto de água é consumido por limpeza?", a:"O sistema consome até 80% menos água que métodos tradicionais. A motobomba controla o fluxo com precisão."},
+  {q:"Preciso de experiência prévia para usar?", a:"Não. O treinamento Painel Clean cobre tudo do zero — operação, segurança em altura, precificação, captação de clientes e relatórios. Acesso vitalício por R$ 39,90."},
+  {q:"Como funciona o suporte pós-venda?", a:"Atendimento via WhatsApp em horário comercial. Garantia de 1 ano no equipamento, peças de reposição em pronta entrega e suporte técnico contínuo."},
+  {q:"Vocês entregam para todo o Brasil?", a:"Sim. Trabalhamos com transportadoras parceiras para entrega em todo território nacional. Prazo médio de 5 a 10 dias úteis."},
+];
+
+function Faq() {
+  const [open, setOpen] = useState(0);
+  return (
+    <section id="faq" style={{background:"#F6F1DE", padding:"120px 0"}}>
+      <div className="container">
+        <div className="faq-grid" style={{display:"grid", gridTemplateColumns:"minmax(0,0.8fr) minmax(0,1.2fr)", gap:80, alignItems:"flex-start"}}>
+          <div className="faq-side" style={{position:"sticky", top:100}}>
+            <div className="eyebrow" style={{color:"var(--pc-green-2)", marginBottom:18}}>Perguntas frequentes</div>
+            <h2 className="display" style={{fontSize:"clamp(36px, 4.4vw, 56px)", lineHeight:1.05, color:"var(--fg-on-cream-1)", margin:"0 0 24px"}}>O essencial,<br /><span style={{color:"var(--fg-on-cream-3)"}}>antes de comprar.</span></h2>
+            <p style={{color:"var(--fg-on-cream-2)", font:"var(--body)", margin:"0 0 28px"}}>Não achou o que procurava? Fale direto com a gente pelo WhatsApp.</p>
+            <a href={wa()} target="_blank" rel="noopener noreferrer" style={{display:"inline-flex", alignItems:"center", gap:10, color:"var(--pc-green-2)", fontWeight:600, fontSize:14.5}}>Falar com nosso time<Icon name="arrowRight" size={14} /></a>
+          </div>
+          <div>
+            {faqs.map((f,i)=>(
+              <div key={i} style={{borderBottom:"1px solid var(--border-on-cream)"}}>
+                <button onClick={()=>setOpen(open===i?-1:i)} style={{width:"100%", padding:"26px 0", display:"flex", alignItems:"center", justifyContent:"space-between", gap:24, textAlign:"left", color:"var(--fg-on-cream-1)"}}>
+                  <span className="display" style={{fontSize:"clamp(18px, 2vw, 22px)", fontWeight:500, letterSpacing:"-0.01em"}}>{f.q}</span>
+                  <span style={{flexShrink:0, width:36, height:36, borderRadius:"50%", background: open===i?"var(--pc-green)":"transparent", border: open===i?"1px solid var(--pc-green)":"1px solid var(--border-on-cream)", color:"var(--fg-on-cream-1)", display:"flex", alignItems:"center", justifyContent:"center", transition:"all 240ms", transform: open===i?"rotate(45deg)":"rotate(0)"}}>
+                    <Icon name="plus" size={16} />
+                  </span>
+                </button>
+                <div style={{maxHeight:open===i?240:0, overflow:"hidden", transition:"max-height 360ms ease, padding 360ms ease, opacity 240ms ease", opacity:open===i?1:0, paddingBottom:open===i?28:0}}>
+                  <p style={{margin:0, paddingRight:60, font:"var(--body)", color:"var(--fg-on-cream-2)", maxWidth:720}}>{f.a}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <style>{`@media (max-width: 880px) { .faq-grid { grid-template-columns: 1fr !important; gap: 40px !important; } .faq-side { position: static !important; } }`}</style>
+    </section>
+  );
+}
+
+// === CTA FINAL ===
+function CtaFinal() {
+  return (
+    <section style={{background:"var(--pc-deepest)", padding:"120px 0", position:"relative", overflow:"hidden"}}>
+      <div style={{position:"absolute", inset:0, backgroundImage:"url('public/images/field-1.jpg')", backgroundSize:"cover", backgroundPosition:"center", opacity:0.22}} />
+      <div style={{position:"absolute", inset:0, background:"linear-gradient(180deg, var(--pc-deepest) 0%, rgba(10,31,23,0.7) 30%, rgba(10,31,23,0.7) 70%, var(--pc-deepest) 100%)"}} />
+      <div className="container" style={{position:"relative", textAlign:"center"}}>
+        <div className="eyebrow no-rule" style={{justifyContent:"center", marginBottom:22}}>Vamos conversar?</div>
+        <h2 className="display" style={{fontSize:"clamp(40px, 5.6vw, 76px)", lineHeight:1.02, color:"white", margin:"0 auto 24px", maxWidth:880}}>
+          Pronto para limpar mais<br /><span style={{color:"var(--pc-green)"}}>e ganhar mais?</span>
+        </h2>
+        <p style={{font:"var(--body-lg)", color:"var(--fg-3)", margin:"0 auto 44px", maxWidth:580}}>Fale agora pelo WhatsApp. Respondemos em minutos e ajudamos a escolher o equipamento certo.</p>
+        <div style={{display:"inline-flex", gap:14, flexWrap:"wrap", justifyContent:"center"}}>
+          <a href={wa()} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{padding:"18px 30px", fontSize:16}}><WhatsBrand size={16} />Falar pelo WhatsApp</a>
+          <a href="#equipamentos" className="btn-ghost-dark" style={{padding:"18px 30px", fontSize:16}}>Ver equipamentos</a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// === FOOTER ===
+function Footer() {
+  const cols = [
+    {title:"Produtos", links:[{l:"Escova Rotativa G5", h:"#equipamentos"},{l:"Escova Dupla D5", h:"#equipamentos"},{l:"Escova Solo S5", h:"#equipamentos"},{l:"Acessórios e refis", h:"#"}]},
+    {title:"Aprenda", links:[{l:"Treinamento online", h:"#treinamento"},{l:"Plataforma de serviços", h:"#plataforma"},{l:"Canal no YouTube", h:"#"},{l:"Calculadora de ROI", h:"#roi"}]},
+    {title:"Contato", links:[{l:"WhatsApp · (47) 99678-5953", h:wa()},{l:"contato@painelclean.com.br", h:"mailto:contato@painelclean.com.br"},{l:"Instagram @painelclean", h:"https://www.instagram.com/painelclean/"},{l:"LinkedIn", h:"https://www.linkedin.com/company/painel-clean/"}]},
+  ];
+  return (
+    <footer style={{background:"var(--pc-deepest)", color:"white", padding:"80px 0 36px", borderTop:"1px solid var(--border-on-dark-soft)"}}>
+      <div className="container">
+        <div className="footer-grid" style={{display:"grid", gridTemplateColumns:"minmax(0,1.4fr) repeat(3, minmax(0,1fr))", gap:56, marginBottom:64}}>
+          <div>
+            <Logo />
+            <p style={{marginTop:22, font:"var(--body-sm)", color:"var(--fg-3)", maxWidth:320}}>
+              Equipamentos profissionais para limpeza de painéis fotovoltaicos. Motor brushless, sem químicos, máxima eficiência.
+            </p>
+            <div style={{marginTop:24, display:"flex", alignItems:"flex-start", gap:10, color:"var(--fg-4)", fontSize:13, lineHeight:1.55}}>
+              <span style={{flexShrink:0, marginTop:2}}><Icon name="location" size={14} /></span>
+              <div>
+                Rua Cesare Valentini, 265, sala 17<br />
+                Novale Ind, Jaraguá do Sul/SC<br />
+                CEP 89254-193 · CNPJ 32.852.325/0001-99
+              </div>
+            </div>
+          </div>
+          {cols.map((c,i)=>(
+            <div key={i}>
+              <div style={{font:"var(--eyebrow)", letterSpacing:"0.14em", textTransform:"uppercase", color:"var(--pc-green)", marginBottom:22}}>{c.title}</div>
+              <ul style={{listStyle:"none", margin:0, padding:0, display:"flex", flexDirection:"column", gap:14}}>
+                {c.links.map((l,j)=>(
+                  <li key={j}>
+                    <a href={l.h} style={{color:"var(--fg-2)", fontSize:14.5, transition:"color 200ms"}}
+                      onMouseEnter={e=>e.currentTarget.style.color="white"}
+                      onMouseLeave={e=>e.currentTarget.style.color="var(--fg-2)"}>{l.l}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div style={{paddingTop:28, borderTop:"1px solid var(--border-on-dark)", display:"flex", justifyContent:"space-between", alignItems:"center", gap:16, flexWrap:"wrap", fontSize:13, color:"var(--fg-4)"}}>
+          <span>© 2026 Painel Clean. Todos os direitos reservados.</span>
+          <span style={{display:"flex", gap:24}}>
+            <a href="#" style={{color:"inherit"}}>Termos</a>
+            <a href="#" style={{color:"inherit"}}>Privacidade</a>
+            <span style={{display:"inline-flex", alignItems:"center", gap:8}}>
+              <span style={{width:6, height:6, borderRadius:"50%", background:"var(--pc-green)", animation:"pulseDot 2s infinite"}} />
+              Atendimento · Seg–Sex 8h–18h
+            </span>
+          </span>
+        </div>
+      </div>
+      <style>{`
+        @media (max-width: 880px) { .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 40px !important; } }
+        @media (max-width: 520px) { .footer-grid { grid-template-columns: 1fr !important; } }
+      `}</style>
+    </footer>
+  );
+}
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  return (
+    <TweaksCtx.Provider value={t}>
+      <Nav />
+      <Hero />
+      {t.showMarquee && <Marquee />}
+      {t.showSocial && <SocialProof />}
+      <Products />
+      {t.showCompare && <Compare />}
+      {t.showROI && <ROI />}
+      <Training />
+      <Platform />
+      <Faq />
+      <CtaFinal />
+      <Footer />
+      <TweaksPanel title="Tweaks · Painel Clean">
+        <TweakSection label="Hero">
+          <TweakSelect label="Estilo do hero" value={t.heroTreatment}
+            onChange={v=>setTweak('heroTreatment', v)}
+            options={[
+              {value:"gradient", label:"Gradiente padrão"},
+              {value:"split", label:"Split sólido (sem véu)"},
+              {value:"minimal", label:"Mínimo (mais foto)"},
+              {value:"duotone", label:"Duotone verde"},
+              {value:"dotted", label:"Tela pontilhada"},
+            ]} />
+          <TweakColor label="Cor de destaque" value={t.heroAccent}
+            onChange={v=>setTweak('heroAccent', v)}
+            options={["#3AD580","#F4B83A","#FF8C5A","#5BA8FF","#C56BFF"]} />
+        </TweakSection>
+        <TweakSection label="Treinamento">
+          <TweakRadio label="Detalhamento" value={t.trainingDetail}
+            onChange={v=>setTweak('trainingDetail', v)}
+            options={[{value:"compact", label:"Compacto"},{value:"expanded", label:"Módulos"}]} />
+        </TweakSection>
+        <TweakSection label="Seções visíveis">
+          <TweakToggle label="Marquee" value={t.showMarquee} onChange={v=>setTweak('showMarquee', v)} />
+          <TweakToggle label="Prova social" value={t.showSocial} onChange={v=>setTweak('showSocial', v)} />
+          <TweakToggle label="Comparativo" value={t.showCompare} onChange={v=>setTweak('showCompare', v)} />
+          <TweakToggle label="Calc. de ROI" value={t.showROI} onChange={v=>setTweak('showROI', v)} />
+        </TweakSection>
+        <TweakSection label="Movimento">
+          <TweakSlider label="Marquee (s)" value={t.marqueeSpeed} min={15} max={80} step={1}
+            onChange={v=>setTweak('marqueeSpeed', v)} />
+        </TweakSection>
+      </TweaksPanel>
+    </TweaksCtx.Provider>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel Clean — Equipamentos profissionais para limpeza solar</title>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --pc-dark: #0F382B;
+    --pc-darker: #0A2620;
+    --pc-mid: #14513C;
+    --pc-green: #3AD580;
+    --pc-green-soft: #2FB86E;
+    --pc-cream: #FFFBEC;
+    --pc-cream-2: #F6F1DE;
+    --pc-line: rgba(15, 56, 43, 0.08);
+    --pc-line-dark: rgba(255, 255, 255, 0.10);
+
+    --font-display: "IBM Plex Sans", system-ui, sans-serif;
+    --font-body: "Satoshi", "Inter", system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--pc-cream);
+    color: var(--pc-dark);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection { background: var(--pc-green); color: var(--pc-dark); }
+
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+  .font-display { font-family: var(--font-display); letter-spacing: -0.02em; }
+  .font-body { font-family: var(--font-body); }
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  @media (min-width: 768px) { .container { padding: 0 40px; } }
+  @media (min-width: 1280px) { .container { padding: 0 56px; } }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes kenburns {
+    0% { transform: scale(1.02); }
+    100% { transform: scale(1.12); }
+  }
+  @keyframes slideInRight {
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes pulseDot {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+  .scrollbar-none { scrollbar-width: none; }
+</style>
+
+<!-- Lucide icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<!-- React + Babel -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel" src="components/_config.jsx"></script>
+  <script type="text/babel" src="components/Logo.jsx"></script>
+  <script type="text/babel" src="components/Nav.jsx"></script>
+  <script type="text/babel" src="components/Hero.jsx"></script>
+  <script type="text/babel" src="components/Marquee.jsx"></script>
+  <script type="text/babel" src="components/Products.jsx"></script>
+  <script type="text/babel" src="components/Training.jsx"></script>
+  <script type="text/babel" src="components/Platform.jsx"></script>
+  <script type="text/babel" src="components/Faq.jsx"></script>
+  <script type="text/babel" src="components/CtaFinal.jsx"></script>
+  <script type="text/babel" src="components/Footer.jsx"></script>
+  <script type="text/babel" src="app.jsx"></script>
+</body>
+</html>
