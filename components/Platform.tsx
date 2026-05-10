@@ -25,14 +25,17 @@ const cards = [
 
 export default function Platform() {
   return (
-    <section id="plataforma" className="bg-pc-mid py-16 md:py-20">
+    <section id="plataforma" className="bg-pc-cream py-16 md:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="font-display font-semibold text-3xl md:text-4xl text-white">
+          <p className="text-xs uppercase tracking-widest font-semibold font-sans text-pc-green mb-2">
+            Ecossistema Painel Clean
+          </p>
+          <h2 className="font-display font-semibold text-3xl md:text-4xl text-[#0F382B]">
             Plataforma de serviços
           </h2>
-          <p className="text-white/50 font-sans mt-3 max-w-xl mx-auto text-base leading-relaxed">
+          <p className="text-[#0F382B]/60 font-sans mt-3 max-w-xl mx-auto text-sm leading-relaxed">
             Conectamos donos de usinas fotovoltaicas a técnicos de limpeza qualificados em todo o Brasil.
           </p>
         </div>
@@ -42,13 +45,13 @@ export default function Platform() {
           {cards.map((card) => (
             <div
               key={card.title}
-              className="rounded-2xl border border-white/10 bg-pc-mid/30 p-8 flex flex-col gap-4"
+              className="rounded-2xl border border-[#0F382B]/10 bg-white p-8 flex flex-col gap-4 shadow-sm"
             >
               <div className="w-12 h-12 rounded-xl bg-pc-green/10 border border-pc-green/20 flex items-center justify-center text-pc-green">
                 {card.icon}
               </div>
-              <h3 className="font-display font-semibold text-xl text-white">{card.title}</h3>
-              <p className="text-white/55 font-sans text-sm leading-relaxed">{card.description}</p>
+              <h3 className="font-display font-semibold text-xl text-[#0F382B]">{card.title}</h3>
+              <p className="text-[#0F382B]/60 font-sans text-sm leading-relaxed">{card.description}</p>
             </div>
           ))}
         </div>
@@ -59,7 +62,7 @@ export default function Platform() {
             href={platformUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center bg-pc-green text-pc-darker font-semibold font-sans px-8 py-3 rounded-lg hover:bg-pc-green/90 transition-colors"
+            className="flex items-center justify-center bg-pc-green text-[#0F382B] font-semibold font-sans px-8 py-3 rounded-lg hover:bg-pc-green/90 transition-colors"
           >
             Sou dono de usina
           </a>
@@ -67,7 +70,7 @@ export default function Platform() {
             href={platformUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center border border-pc-green/40 text-pc-green font-semibold font-sans px-8 py-3 rounded-lg hover:bg-pc-green/10 transition-colors"
+            className="flex items-center justify-center border border-[#0F382B]/30 text-[#0F382B] font-semibold font-sans px-8 py-3 rounded-lg hover:bg-[#0F382B]/5 transition-colors"
           >
             Sou técnico
           </a>

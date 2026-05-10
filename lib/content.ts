@@ -45,17 +45,28 @@ export const stats = [
   { value: 'Sem químicos', label: 'só água limpa' },
 ]
 
+// Ordem: G5 (mais rápida), D5 (mais vendida/featured), S5
 export const products = [
+  {
+    sku: 'ZCP-0175-G5',
+    name: 'Escova Rotativa G5',
+    featured: false,
+    featuredLabel: '',
+    images: ['/images/product-g5-1.jpg', '/images/field-1.jpg'],
+    specs: [
+      { key: 'Velocidade', value: '260 painéis/h' },
+      { key: 'Motor', value: 'Brushless 350 RPM' },
+      { key: 'Cabo', value: 'até 7,5m' },
+    ],
+    whatsappMessage:
+      'Olá! Tenho interesse na Escova Rotativa G5 (ZCP-0175-G5).\nQuantidade desejada: 1\nPoderia me enviar um orçamento?',
+  },
   {
     sku: 'ZCP-0275-D5',
     name: 'Escova Dupla D5',
     featured: true,
     featuredLabel: 'Mais vendido',
-    images: [
-      '/images/products/d5-estudio-1.jpg',
-      '/images/products/d5-estudio-2.jpg',
-      '/images/products/d5-campo.jpg',
-    ],
+    images: ['/images/product-d5-1.jpg', '/images/field-1.jpg'],
     specs: [
       { key: 'Velocidade', value: '200 painéis/h' },
       { key: 'Motor', value: 'Brushless 350 RPM' },
@@ -66,33 +77,11 @@ export const products = [
       'Olá! Tenho interesse na Escova Dupla D5 (ZCP-0275-D5).\nQuantidade desejada: 1\nPoderia me enviar um orçamento?',
   },
   {
-    sku: 'ZCP-0175-G5',
-    name: 'Escova Rotativa G5',
-    featured: false,
-    featuredLabel: '',
-    images: [
-      '/images/products/g5-estudio-1.jpg',
-      '/images/products/g5-estudio-2.jpg',
-      '/images/products/g5-campo.jpg',
-    ],
-    specs: [
-      { key: 'Velocidade', value: '260 painéis/h' },
-      { key: 'Motor', value: 'Brushless 350 RPM' },
-      { key: 'Cabo', value: 'até 7,5m' },
-    ],
-    whatsappMessage:
-      'Olá! Tenho interesse na Escova Rotativa G5 (ZCP-0175-G5).\nQuantidade desejada: 1\nPoderia me enviar um orçamento?',
-  },
-  {
     sku: 'ZCP-0175-S5',
     name: 'Escova Solo S5',
     featured: false,
     featuredLabel: '',
-    images: [
-      '/images/products/s5-estudio-1.jpg',
-      '/images/products/s5-estudio-2.jpg',
-      '/images/products/s5-campo.jpg',
-    ],
+    images: ['/images/product-s5-1.jpg', '/images/field-1.jpg'],
     specs: [
       { key: 'Velocidade', value: '160 painéis/h' },
       { key: 'Ideal para', value: 'Difícil acesso' },

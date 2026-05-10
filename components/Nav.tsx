@@ -15,16 +15,16 @@ export default function Nav() {
     <header className="sticky top-0 z-50 bg-pc-darker/90 backdrop-blur-md border-b border-white/5">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Logo */}
-        <a href="/" className="flex items-center gap-2 shrink-0">
+        <a href="/" className="flex items-center gap-2.5 shrink-0">
           <svg
-            className="w-7 h-7 text-pc-green"
+            className="w-8 h-8 text-pc-green"
             viewBox="0 0 24 24"
             fill="currentColor"
             aria-hidden="true"
           >
             <path d="M12 2a1 1 0 0 1 1 1v1.07A8.001 8.001 0 0 1 20.93 11H22a1 1 0 1 1 0 2h-1.07A8.001 8.001 0 0 1 13 20.93V22a1 1 0 1 1-2 0v-1.07A8.001 8.001 0 0 1 3.07 13H2a1 1 0 1 1 0-2h1.07A8.001 8.001 0 0 1 11 3.07V2a1 1 0 0 1 1-1zm0 4a6 6 0 1 0 0 12A6 6 0 0 0 12 6zm0 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
           </svg>
-          <span className="font-display font-bold text-white text-lg tracking-tight">
+          <span className="font-display font-semibold text-white text-lg tracking-tight">
             Painel Clean
           </span>
         </a>
