@@ -1,25 +1,6 @@
+import Image from 'next/image'
 import { products, whatsappNumber } from '@/lib/content'
 
-function ProductImagePlaceholder() {
-  return (
-    <div className="w-full h-48 flex flex-col items-center justify-center bg-pc-mid/60 rounded-t-xl border-b border-white/10">
-      <svg
-        className="w-12 h-12 text-white/20 mb-2"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={1}
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3 20.25h18A1.75 1.75 0 0022.75 18.5V5.5A1.75 1.75 0 0021 3.75H3A1.75 1.75 0 001.25 5.5v13A1.75 1.75 0 003 20.25z"
-        />
-      </svg>
-      <span className="text-white/25 text-xs font-sans">foto do produto</span>
-    </div>
-  )
-}
 
 function WhatsAppIcon() {
   return (
@@ -73,19 +54,14 @@ export default function Products() {
                   </div>
                 )}
 
-                {/* Image + carousel dots */}
-                <div className="relative">
-                  <ProductImagePlaceholder />
-                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
-                    {product.images.map((_, i) => (
-                      <span
-                        key={i}
-                        className={`rounded-full ${
-                          i === 0 ? 'bg-white w-4 h-1.5' : 'bg-white/40 w-1.5 h-1.5'
-                        }`}
-                      />
-                    ))}
-                  </div>
+                {/* Product image */}
+                <div className="relative w-full h-48 overflow-hidden">
+                  <Image
+                    src={product.images[0]}
+                    alt={product.name}
+                    fill
+                    className="object-contain p-4 bg-[#0F382B]"
+                  />
                 </div>
 
                 {/* Card body */}

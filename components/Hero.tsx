@@ -1,28 +1,8 @@
 'use client'
 
+import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import { heroSlides } from '@/lib/content'
-
-function ImagePlaceholder({ label }: { label: string }) {
-  return (
-    <div className="w-full h-full flex flex-col items-center justify-center bg-pc-mid/60 rounded-2xl border border-white/10">
-      <svg
-        className="w-16 h-16 text-white/20 mb-3"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={1}
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3 20.25h18A1.75 1.75 0 0022.75 18.5V5.5A1.75 1.75 0 0021 3.75H3A1.75 1.75 0 001.25 5.5v13A1.75 1.75 0 003 20.25z"
-        />
-      </svg>
-      <span className="text-white/30 text-sm font-sans">{label}</span>
-    </div>
-  )
-}
 
 function badgeStyle(type: string) {
   if (type === 'promo')
@@ -86,7 +66,7 @@ export default function Hero() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
         <div className="grid md:grid-cols-2 gap-10 items-center min-h-[420px]">
           {/* Text content */}
-          <div className="flex flex-col gap-5 animate-fade-in" key={current}>
+          <div className="flex flex-col gap-5" key={current}>
             {/* Badge */}
             <span
               className={`inline-flex items-center self-start px-3 py-1 rounded-full text-xs font-semibold font-sans uppercase tracking-widest ${badgeStyle(slide.type)}`}
@@ -111,7 +91,7 @@ export default function Hero() {
                 <span className="line-through text-white/40 text-lg font-sans">
                   {slide.priceOld}
                 </span>
-                <span className="text-pc-green font-display font-bold text-4xl">
+                <span className="text-pc-green font-display font-semibold text-4xl">
                   {slide.priceNew}
                 </span>
               </div>
@@ -141,8 +121,15 @@ export default function Hero() {
           </div>
 
           {/* Image area */}
-          <div className="relative h-64 md:h-96 w-full">
-            <ImagePlaceholder label="foto do produto" />
+          <div className="relative w-full md:w-[380px] h-[220px] md:h-[300px] rounded-xl overflow-hidden flex-shrink-0 mx-auto">
+            <Image
+              src={slide.image}
+              alt={slide.title}
+              fill
+              className="object-cover"
+              priority={current === 0}
+            />
+            <div className="absolute inset-0 bg-gradient-to-l from-transparent to-[#1B3A2D]/40" />
           </div>
         </div>
 
