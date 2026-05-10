@@ -120,14 +120,18 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Image area */}
-          <div className="relative w-full md:w-[380px] h-[220px] md:h-[300px] rounded-xl overflow-hidden flex-shrink-0 mx-auto">
+          {/* Image area — key forces remount on slide change so next/image reloads */}
+          <div
+            key={slide.image}
+            className="relative w-full md:w-[380px] h-[220px] md:h-[300px] rounded-xl overflow-hidden flex-shrink-0 mx-auto"
+          >
             <Image
               src={slide.image}
               alt={slide.title}
               fill
+              sizes="(max-width: 768px) 100vw, 380px"
               className="object-cover"
-              priority={current === 0}
+              priority
             />
             <div className="absolute inset-0 bg-gradient-to-l from-transparent to-[#1B3A2D]/40" />
           </div>

@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import { products, whatsappNumber } from '@/lib/content'
 
-
 function WhatsAppIcon() {
   return (
     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -12,15 +11,18 @@ function WhatsAppIcon() {
 
 export default function Products() {
   return (
-    <section id="produtos" className="bg-pc-dark py-16 md:py-20">
+    <section id="produtos" className="bg-pc-cream py-16 md:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div className="flex items-center justify-between mb-10">
           <div>
-            <h2 className="font-display font-semibold text-3xl md:text-4xl text-white">
+            <p className="text-xs uppercase tracking-widest font-semibold font-sans text-pc-green mb-2">
+              Linha profissional
+            </p>
+            <h2 className="font-display font-semibold text-3xl md:text-4xl text-[#0F382B]">
               Equipamentos
             </h2>
-            <p className="text-white/60 font-sans mt-1">
+            <p className="text-[#0F382B]/60 font-sans mt-1 text-sm">
               Tecnologia brushless para limpeza solar profissional
             </p>
           </div>
@@ -28,7 +30,7 @@ export default function Products() {
             href={`https://wa.me/${whatsappNumber}?text=Olá! Gostaria de ver todos os equipamentos disponíveis.`}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:inline-flex text-pc-green font-semibold font-sans text-sm border border-pc-green/30 px-4 py-2 rounded-lg hover:bg-pc-green/10 transition-colors"
+            className="hidden md:inline-flex text-pc-green font-semibold font-sans text-sm border border-pc-green/40 px-4 py-2 rounded-lg hover:bg-pc-green/10 transition-colors"
           >
             Ver todos →
           </a>
@@ -41,36 +43,37 @@ export default function Products() {
             return (
               <div
                 key={product.sku}
-                className={`relative flex flex-col rounded-xl overflow-hidden bg-pc-mid ${
+                className={`relative flex flex-col rounded-xl overflow-hidden bg-white ${
                   product.featured
                     ? 'border-2 border-pc-green shadow-[0_0_20px_rgba(58,213,128,0.15)]'
-                    : 'border border-[rgba(58,213,128,0.15)]'
+                    : 'border border-[#0F382B]/10 shadow-sm'
                 }`}
               >
                 {/* Featured badge */}
                 {product.featured && (
-                  <div className="absolute top-3 left-3 z-10 bg-pc-green text-pc-darker text-xs font-bold font-sans px-2 py-1 rounded-md">
+                  <div className="absolute top-3 left-3 z-10 bg-pc-green text-[#0F382B] text-xs font-bold font-sans px-2 py-1 rounded-md">
                     {product.featuredLabel}
                   </div>
                 )}
 
                 {/* Product image */}
-                <div className="relative w-full h-48 overflow-hidden">
+                <div className="relative w-full h-52 bg-white overflow-hidden rounded-t-xl">
                   <Image
                     src={product.images[0]}
                     alt={product.name}
                     fill
-                    className="object-contain p-4 bg-[#0F382B]"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-contain p-4"
                   />
                 </div>
 
                 {/* Card body */}
                 <div className="flex flex-col flex-1 p-5 gap-4">
                   <div>
-                    <p className="text-pc-green/60 text-xs font-sans uppercase tracking-widest mb-1">
+                    <p className="text-pc-green text-xs font-sans uppercase tracking-widest font-semibold mb-1">
                       {product.sku}
                     </p>
-                    <h3 className="font-display font-semibold text-lg text-white">
+                    <h3 className="font-display font-semibold text-lg text-[#0F382B]">
                       {product.name}
                     </h3>
                   </div>
@@ -79,9 +82,9 @@ export default function Products() {
                   <table className="w-full text-sm font-sans">
                     <tbody>
                       {product.specs.map((spec) => (
-                        <tr key={spec.key} className="border-b border-white/5 last:border-0">
-                          <td className="py-1.5 text-white/40 pr-4">{spec.key}</td>
-                          <td className="py-1.5 text-white/80 font-medium">{spec.value}</td>
+                        <tr key={spec.key} className="border-b border-[#0F382B]/10 last:border-0">
+                          <td className="py-1.5 text-[#0F382B]/50 pr-4">{spec.key}</td>
+                          <td className="py-1.5 text-[#0F382B] font-medium">{spec.value}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -92,7 +95,7 @@ export default function Products() {
                     href={waHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-auto flex items-center justify-center gap-2 bg-pc-green text-pc-darker font-semibold font-sans py-3 px-4 rounded-lg hover:bg-pc-green/90 transition-colors w-full"
+                    className="mt-auto flex items-center justify-center gap-2 bg-pc-green text-[#0F382B] font-semibold font-sans py-3 px-4 rounded-lg hover:bg-pc-green/90 transition-colors w-full"
                   >
                     <WhatsAppIcon />
                     Pedir orçamento
@@ -104,13 +107,13 @@ export default function Products() {
         </div>
 
         {/* Accessories footer */}
-        <div className="mt-8 text-center text-white/40 font-sans text-sm">
+        <div className="mt-8 text-center text-[#0F382B]/50 font-sans text-sm">
           Precisa de refis, cabos ou acessórios?{' '}
           <a
             href={`https://wa.me/${whatsappNumber}?text=Olá! Gostaria de ver os acessórios disponíveis.`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-pc-green hover:underline"
+            className="text-pc-green hover:underline font-semibold"
           >
             Ver acessórios →
           </a>
