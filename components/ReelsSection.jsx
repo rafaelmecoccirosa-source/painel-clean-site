@@ -17,7 +17,7 @@ function ReelsSection() {
   }, []);
 
   return (
-    <section id="conteudo" style={{ background: "var(--pc-darker)", padding: "100px 0 80px", position: "relative", overflow: "hidden" }}>
+    <section id="conteudo" style={{ background: "var(--pc-darker)", padding: "72px 0 64px", position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", bottom: -200, left: -200, width: 600, height: 600, background: "radial-gradient(circle, rgba(58,213,128,0.08) 0%, transparent 70%)", pointerEvents: "none" }} />
       <div className="container" style={{ position: "relative" }}>
 
@@ -43,7 +43,6 @@ function ReelsSection() {
                 className="instagram-media"
                 data-instgrm-permalink={r.href}
                 data-instgrm-version="14"
-                data-instgrm-captioned
                 style={{ margin: "0 auto", maxWidth: "100%", width: "100%", minWidth: 0, background: "var(--pc-dark)", border: "1px solid var(--border-on-dark)", borderRadius: "var(--radius-xl)" }}
               />
             </div>
@@ -52,7 +51,8 @@ function ReelsSection() {
 
       </div>
       <style>{`
-        .reels-grid .instagram-media { width: 100% !important; min-width: 0 !important; }
+        .reels-grid .instagram-media { width: 100% !important; min-width: 0 !important; max-height: 480px !important; overflow: hidden !important; }
+        .reels-grid iframe { max-height: 480px !important; }
         @media (max-width: 900px) { .reels-grid { grid-template-columns: repeat(2, 1fr) !important; } }
         @media (max-width: 560px) { .reels-grid { grid-template-columns: 1fr !important; gap: 14px !important; } }
       `}</style>
