@@ -1,8 +1,8 @@
 // Substituir REEL_ID_N pelos IDs reais dos Reels do Instagram @painelclean
 const reels = [
-  { href: "https://instagram.com/p/REEL_ID_1", title: "Como limpar 500 painéis em 3 horas — rotina completa de um técnico pro" },
-  { href: "https://instagram.com/p/REEL_ID_2", title: "Setup do dia 1 com a Escova D5 — do zero ao primeiro cliente" },
-  { href: "https://instagram.com/p/REEL_ID_3", title: "Quanto cobrar por limpeza de painel solar? Precificação na prática" },
+  { href: "https://www.instagram.com/reel/DYNwi11xuWd/", title: "Como limpar 500 painéis em 3 horas — rotina completa de um técnico pro" },
+  { href: "https://www.instagram.com/reel/DYM5cpkxlPM/", title: "Setup do dia 1 com a Escova D5 — do zero ao primeiro cliente" },
+  { href: "https://www.instagram.com/reel/DYDbgI4DP3A/", title: "Quanto cobrar por limpeza de painel solar? Precificação na prática" },
 ];
 
 function ReelsSection() {
