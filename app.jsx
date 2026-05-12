@@ -5,11 +5,13 @@ function App() {
       <Nav />
       <Hero />
       {t.showMarquee && <Marquee />}
+      <About />
       {t.showSocial && <SocialProof />}
       <Products />
       {t.showCompare && <Compare />}
       {t.showROI && <ROI />}
       <Training />
+      <YouTubeSection />
       <Platform />
       <Faq />
       <CtaFinal />

@@ -25,6 +25,7 @@ function Footer() {
               {[
                 { name: "facebook", href: "https://www.facebook.com/painelclean", label: "Facebook" },
                 { name: "instagram", href: "https://www.instagram.com/painelclean/", label: "Instagram" },
+                { name: "youtube", href: "https://www.youtube.com/@painelclean", label: "YouTube" },
                 { name: "linkedin", href: "https://www.linkedin.com/company/painel-clean/", label: "LinkedIn" },
               ].map(s => (
                 <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}

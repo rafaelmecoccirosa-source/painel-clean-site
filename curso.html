@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Painel Clean — Equipamentos profissionais para limpeza solar</title>
-<meta name="description" content="Equipamentos brushless, sem químicos, até 260 painéis por hora. Treinamento e plataforma de serviços para técnicos solares.">
+<title>Treinamento Painel Clean — Do zero ao primeiro cliente em menos de uma semana</title>
+<meta name="description" content="Aprenda a operar, precificar e captar clientes para limpeza profissional de painéis solares. 5 módulos, acesso vitalício, R$ 39,90.">
 
 <link rel="stylesheet" href="public/tokens.css">
 <style>
@@ -58,10 +58,9 @@
   .btn-outline-dark:hover { background: var(--fg-on-cream-1); color: white; }
 
   @keyframes fadeUp { from { opacity:0; transform: translateY(24px);} to { opacity:1; transform:translateY(0);} }
-  @keyframes kenburns { 0% { transform: scale(1.02); } 100% { transform: scale(1.12); } }
   @keyframes pulseDot { 0%,100% { opacity:.5; } 50% { opacity:1; } }
-  @keyframes marquee { 0% { transform: translateX(0);} 100% { transform: translateX(-50%);} }
   @keyframes countUp { from { opacity:0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 </style>
 
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
@@ -74,19 +73,7 @@
 
   <script type="text/babel" src="components/_config.jsx"></script>
   <script type="text/babel" src="components/Nav.jsx"></script>
-  <script type="text/babel" src="components/Hero.jsx"></script>
-  <script type="text/babel" src="components/Marquee.jsx"></script>
-  <script type="text/babel" src="components/About.jsx"></script>
-  <script type="text/babel" src="components/SocialProof.jsx"></script>
-  <script type="text/babel" src="components/Products.jsx"></script>
-  <script type="text/babel" src="components/Compare.jsx"></script>
-  <script type="text/babel" src="components/ROI.jsx"></script>
-  <script type="text/babel" src="components/Training.jsx"></script>
-  <script type="text/babel" src="components/YouTubeSection.jsx"></script>
-  <script type="text/babel" src="components/Platform.jsx"></script>
-  <script type="text/babel" src="components/Faq.jsx"></script>
-  <script type="text/babel" src="components/CtaFinal.jsx"></script>
   <script type="text/babel" src="components/Footer.jsx"></script>
-  <script type="text/babel" src="app.jsx"></script>
+  <script type="text/babel" src="curso-app.jsx"></script>
 </body>
 </html>
