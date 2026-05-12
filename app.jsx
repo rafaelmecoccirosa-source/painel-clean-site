@@ -11,7 +11,7 @@ function App() {
       {t.showCompare && <Compare />}
       {t.showROI && <ROI />}
       <Training />
-      <YouTubeSection />
+      <ReelsSection />
       <Platform />
       <Faq />
       <CtaFinal />
