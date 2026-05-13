@@ -20,24 +20,36 @@ Site institucional da **Painel Clean** — fabricante de escovas semiautomática
 
 ```
 /
-├── index.html              # Ponto de entrada — carrega React, Babel e os componentes
-├── app.jsx                 # Root do app — TweaksCtx.Provider + ordem das seções
-├── tweaks-panel.jsx        # Painel de tweaks (dev only) — useTweaks, TweaksPanel
-├── vercel.json             # Config Vercel — serving estático, sem build
+├── index.html                    # Página inicial
+├── app.jsx                       # Root da home — TweaksCtx.Provider + ordem das seções
+├── curso.html                    # Página /curso (landing do treinamento)
+├── curso-app.jsx                 # Root de /curso
+├── produtos.html                 # Página /produtos (catálogo completo)
+├── produtos-app.jsx              # Root de /produtos
+├── escova-rotativa-g5.html       # Página /escova-rotativa-g5
+├── escova-rotativa-g5-app.jsx    # Root de /escova-rotativa-g5
+├── escova-dupla-d5.html          # Página /escova-dupla-d5
+├── escova-dupla-d5-app.jsx       # Root de /escova-dupla-d5
+├── escova-solo-s5.html           # Página /escova-solo-s5
+├── escova-solo-s5-app.jsx        # Root de /escova-solo-s5
+├── tweaks-panel.jsx              # Painel de tweaks (dev only)
+├── vercel.json                   # Config Vercel — serving estático, sem build
 ├── public/
-│   ├── tokens.css          # Design tokens (cores, tipografia, espaçamentos)
-│   └── [imagens]           # Fotos dos produtos, técnicos, hero
+│   ├── tokens.css                # Design tokens (cores, tipografia, espaçamentos)
+│   └── images/                   # Fotos dos produtos, técnicos, hero, logo
 └── components/
-    ├── _config.jsx         # Globals compartilhados: TweaksCtx, Icon, Logo, wa()
+    ├── _config.jsx               # Globals: TweaksCtx, Icon, Logo, wa()
     ├── Nav.jsx
     ├── Hero.jsx
     ├── Marquee.jsx
-    ├── SocialProof.jsx     # Stats + depoimentos
+    ├── About.jsx
+    ├── SocialProof.jsx           # Stats + depoimentos
     ├── Products.jsx
-    ├── Compare.jsx         # Tabela comparativa 11 linhas
-    ├── ROI.jsx             # Calculadora interativa de ROI
-    ├── Training.jsx        # Seção de treinamento/curso
-    ├── Platform.jsx        # Seção da plataforma de serviços
+    ├── Compare.jsx               # Tabela comparativa 11 linhas
+    ├── ROI.jsx                   # Calculadora interativa de ROI
+    ├── Training.jsx              # Seção de treinamento/curso
+    ├── ReelsSection.jsx          # Instagram Reels (3 reels via embed.js)
+    ├── Platform.jsx              # Seção da plataforma de serviços
     ├── Faq.jsx
     ├── CtaFinal.jsx
     └── Footer.jsx
@@ -45,81 +57,137 @@ Site institucional da **Painel Clean** — fabricante de escovas semiautomática
 
 ---
 
+## Páginas e URLs
+
+| URL | Arquivo HTML | App JSX |
+|-----|-------------|---------|
+| `/` | `index.html` | `app.jsx` |
+| `/curso` | `curso.html` | `curso-app.jsx` |
+| `/produtos` | `produtos.html` | `produtos-app.jsx` |
+| `/escova-rotativa-g5` | `escova-rotativa-g5.html` | `escova-rotativa-g5-app.jsx` |
+| `/escova-dupla-d5` | `escova-dupla-d5.html` | `escova-dupla-d5-app.jsx` |
+| `/escova-solo-s5` | `escova-solo-s5.html` | `escova-solo-s5-app.jsx` |
+
+`cleanUrls: true` no `vercel.json` remove a extensão `.html` das URLs automaticamente.
+
+---
+
+## Catálogo de produtos
+
+### Escovas
+| Nome | SKU | Velocidade |
+|------|-----|-----------|
+| Escova Rotativa G5 | ZCP-0175-G5 | 260 painéis/h |
+| Escova Dupla D5 | ZCP-0275-D5 | 200 painéis/h |
+| Escova Solo S5 | ZCP-0175-S5 | 160 painéis/h |
+
+### Acessórios
+| Nome | SKU |
+|------|-----|
+| Refil de Cerdas G5 | ZCP-APPG51 |
+| Refil de Cerdas D5 | ZCP-APPD51 |
+| Refil de Cerdas S5 | ZCP-APPS51 |
+| Cabo Telescópico | ZCP-APPA01 |
+| (nome a confirmar) | ZCP-APPA02 |
+
+---
+
 ## Design tokens (cores principais)
 
-| Token         | Valor     | Uso                        |
-|---------------|-----------|----------------------------|
-| `--c-dark`    | `#0F382B` | Fundo escuro, hero          |
-| `--c-brand`   | `#3AD580` | Verde vibrante, CTAs        |
-| `--c-mid`     | `#1B3A2D` | Seções escuras intermediárias |
-| `--c-cream`   | `#FFFBEC` | Fundo claro                 |
-| `--c-mint`    | `#BDF1D5` | Destaque suave              |
+| Token | Valor | Uso |
+|-------|-------|-----|
+| `--pc-green` | `#3AD580` | Verde vibrante, CTAs |
+| `--pc-dark` | `#0F382B` | Fundo escuro, hero |
+| `--pc-darker` | `#0C281F` | Seções intermediárias escuras |
+| `--pc-deepest` | `#0A1F17` | Footer |
+| `--pc-mid` | `#1B3A2D` | Painéis de destaque escuros |
+| `--pc-cream` | `#FFFBEC` | Fundo claro |
 
-**Fontes:** IBM Plex Sans (títulos) + Satoshi (corpo) via CDN
+**Fontes:** IBM Plex Sans (display) + Satoshi (corpo) via CDN
 
 ---
 
 ## Arquitetura de componentes
 
-### Ordem das seções em `app.jsx`
+### Ordem das seções em `app.jsx` (home)
 1. Nav
-2. Hero (carousel com 3 slides)
+2. Hero (carousel 3 slides)
 3. Marquee (ticker de benefícios)
-4. SocialProof (stats + depoimentos)
-5. Products (3 escovas: Rotativa G5, Dupla D5, Solo S5)
-6. Compare (tabela Painel Clean vs concorrente)
-7. ROI (calculadora de perda por sujeira)
-8. Training (curso + certificação)
-9. Platform (plataforma de serviços/assinaturas)
-10. FAQ
-11. CtaFinal
-12. Footer
+4. About
+5. SocialProof (stats + depoimentos)
+6. Products (cards das 3 escovas → link para páginas individuais)
+7. Compare (tabela Painel Clean vs concorrente)
+8. ROI (calculadora de perda por sujeira)
+9. Training (CTA → /curso)
+10. ReelsSection (3 Reels do Instagram via embed.js)
+11. Platform (plataforma de serviços)
+12. FAQ
+13. CtaFinal
+14. Footer
+
+### Páginas de produto individuais (`*-app.jsx`)
+Cada página usa as mesmas seções, com dados por produto em `PRODUCT`:
+1. StickyBuyBar (aparece após scroll de 520px)
+2. ProductHero (breadcrumb, badge SKU, headlines, quick spec pills, 2 CTAs, imagem)
+3. SpecsSection (ficha técnica 6 cards)
+4. BenefitsSection (3 cards de vantagem)
+5. AccessoriesSection (acessórios compatíveis)
+6. MiniCompare (tabela 3 modelos, produto atual destacado)
+7. TestimonialSection
+8. CtaFinalSection
+9. ProductNav (← anterior / próximo →)
 
 ### `_config.jsx` — exports globais
 - `TweaksCtx` + `useT()` — contexto de tweaks
-- `TWEAK_DEFAULTS` — valores padrão dos tweaks
+- `TWEAK_DEFAULTS` — valores padrão
 - `Icon` — sistema de ícones inline SVG (substitui Lucide)
-- `Logo` — logo da marca com imagem real do brandbook
+- `Logo` — logo com link para `/`
 - `wa(msg)` — helper para link WhatsApp com mensagem pré-preenchida
+- `WhatsBrand` — ícone SVG do WhatsApp
 
 ### Sistema de tweaks (dev only)
-Painel flutuante ativado com `?tweaks=1` na URL. Permite ajustar em tempo real:
-- Estilo do hero (overlay escuro / gradiente / sem overlay)
-- Cor de acento
-- Nível de detalhe do treinamento
-- Visibilidade de seções
-- Velocidade do marquee
+Painel flutuante ativado com `?tweaks=1` na URL.
 
 ---
 
 ## Convenções
 
-- **CSS:** variáveis do `tokens.css` para cores e tipografia; inline styles com objetos JS nos componentes
-- **Ícones:** sempre usar o componente `<Icon name="..." />` — nunca importar Lucide diretamente
-- **WhatsApp:** sempre usar `wa("mensagem")` para gerar links — nunca hardcodar número
-- **Imagens:** salvar em `public/` e referenciar como `/nome-do-arquivo.jpg`
-- **Redes sociais:** `/painelclean` em todas as plataformas (Instagram, Facebook, LinkedIn)
+- **CSS:** variáveis do `tokens.css` para cores e tipografia; inline styles com objetos JS
+- **Ícones:** sempre usar `<Icon name="..." />` — nunca importar Lucide diretamente
+- **WhatsApp:** sempre usar `wa("mensagem")` — nunca hardcodar número
+- **Imagens:** salvar em `public/images/` e referenciar como `public/images/nome.jpg`
+- **Redes sociais:** `/painelclean` em todas as plataformas
 
 ---
 
 ## Deploy
 
-A Vercel detecta o `vercel.json` e serve como site estático — sem build, sem Next.js.
+A Vercel serve o repo como site estático — sem build, sem Next.js.
 
 ```json
 {
   "version": 2,
-  "builds": [{ "src": "index.html", "use": "@vercel/static" }],
-  "routes": [{ "src": "/(.*)", "dest": "/$1" }]
+  "framework": null,
+  "buildCommand": null,
+  "installCommand": null,
+  "outputDirectory": ".",
+  "cleanUrls": true,
+  "trailingSlash": false
 }
 ```
 
-**Não existe `package.json` na raiz** — qualquer arquivo `package.json` vai acionar o builder do Node.js e quebrar o deploy.
+**Nunca criar `package.json` na raiz** — vai acionar o builder Node.js e quebrar o deploy.
+
+Para commitar sem assinatura GPG (ambiente atual):
+```
+git -c commit.gpgsign=false commit -m "mensagem"
+```
 
 ---
 
 ## Histórico de decisões
 
-- **Sem Next.js:** o design foi gerado pelo Claude Design como HTML+JSX com Babel — convertido para Next.js criaria complexidade desnecessária para um site estático institucional
-- **Sem build:** Babel in-browser via CDN é suficiente para esse volume de código; simplifica o deploy
-- **Tweaks panel:** mantido apenas para facilitar iterações de design com o cliente antes do lançamento final
+- **Sem Next.js:** HTML+JSX com Babel in-browser é suficiente para site estático institucional
+- **Sem build:** simplicidade de deploy; Babel CDN cobre o volume de código atual
+- **Páginas independentes por produto:** cada `.html` carrega seu próprio `-app.jsx` — sem router, sem estado compartilhado entre páginas
+- **Tweaks panel:** mantido para iterações de design com o cliente (ativar com `?tweaks=1`)

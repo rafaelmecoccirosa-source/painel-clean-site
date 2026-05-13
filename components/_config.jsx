@@ -63,7 +63,7 @@ const WhatsBrand = ({ size = 16 }) => (
 
 // Logo — real brandbook image + wordmark
 const Logo = ({ textColor = "white" }) => (
-  <a href="#" style={{ display: "inline-flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
+  <a href="/" style={{ display: "inline-flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
     <img src="public/images/logo-real.jpg" alt="Painel Clean"
       style={{ width: 36, height: 36, borderRadius: 8, display: "block" }} />
     <span className="display" style={{ fontSize: 18, fontWeight: 600, color: textColor, letterSpacing: "-0.01em", whiteSpace: "nowrap" }}>
