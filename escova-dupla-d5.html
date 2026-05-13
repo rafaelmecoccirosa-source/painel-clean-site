@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escova Dupla D5 (ZCP-0275-D5) — Painel Clean</title>
+<meta name="description" content="Escova Dupla D5 — 200 painéis/hora, motor brushless, bomba e controle remoto inclusos. O kit completo para começar no mesmo dia.">
+<link rel="canonical" href="https://painelclean.com.br/escova-dupla-d5">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://painelclean.com.br/escova-dupla-d5">
+<meta property="og:title" content="Escova Dupla D5 — Painel Clean">
+<meta property="og:description" content="200 painéis/hora, motor brushless, bomba e controle remoto inclusos.">
+<meta property="og:image" content="https://painelclean.com.br/public/images/product-d5-1.jpg">
+<meta property="og:site_name" content="Painel Clean">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="stylesheet" href="public/tokens.css">
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--pc-cream); color: var(--fg-on-cream-1); font: var(--body); -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--pc-green); color: var(--pc-dark); }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: 0; background: none; }
+  .container { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+  @media (min-width: 768px) { .container { padding: 0 40px; } }
+  @media (min-width: 1280px) { .container { padding: 0 56px; } }
+  .display { font-family: var(--font-display); letter-spacing: var(--tracking-tight); font-weight: 600; }
+  .eyebrow { font: var(--eyebrow); text-transform: uppercase; letter-spacing: var(--tracking-eyebrow); color: var(--pc-green); display: inline-flex; align-items: center; gap: 10px; }
+  .eyebrow::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+  .eyebrow.center::before, .eyebrow.no-rule::before { display: none; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--pc-green); color: var(--pc-dark); font: var(--button); font-size: 15px; padding: 16px 26px; border-radius: var(--radius-md); transition: background var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out); box-shadow: 0 8px 24px rgba(58,213,128,.20); }
+  .btn-primary:hover { background: #4FE090; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(58,213,128,.32); }
+  .btn-ghost-dark { display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--border-on-dark-strong); color: var(--fg-1); font: var(--button); font-size: 15px; padding: 16px 24px; border-radius: var(--radius-md); transition: background var(--dur-base), border-color var(--dur-base); }
+  .btn-ghost-dark:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.32); }
+  .btn-outline-dark { display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--fg-on-cream-1); color: var(--fg-on-cream-1); font-weight: 600; font-size: 14px; padding: 13px 22px; border-radius: var(--radius-pill); transition: background var(--dur-base), color var(--dur-base); }
+  .btn-outline-dark:hover { background: var(--fg-on-cream-1); color: white; }
+  @keyframes fadeUp { from { opacity:0; transform: translateY(24px);} to { opacity:1; transform:translateY(0);} }
+  @keyframes pulseDot { 0%,100% { opacity:.5; } 50% { opacity:1; } }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel" src="components/_config.jsx"></script>
+  <script type="text/babel" src="components/Nav.jsx"></script>
+  <script type="text/babel" src="components/Footer.jsx"></script>
+  <script type="text/babel" src="escova-dupla-d5-app.jsx"></script>
+</body>
+</html>

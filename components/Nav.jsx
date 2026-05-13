@@ -6,7 +6,7 @@ function Nav() {
     return () => window.removeEventListener("scroll", f);
   }, []);
   const links = [
-    { label: "Equipamentos", href: "#equipamentos" },
+    { label: "Produtos", href: "/produtos" },
     { label: "Comparativo", href: "#comparativo" },
     { label: "Treinamento", href: "#treinamento" },
     { label: "Curso", href: "/curso" },
