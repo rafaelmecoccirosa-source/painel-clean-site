@@ -1,27 +1,21 @@
 // @ts-check
-const { test, expect } = require('playwright/test');
+const { expect } = require('playwright/test');
+const { test, waitForReact } = require('./fixtures');
 
-const PAGES = [
-  { url: '/', title: /Painel Clean/i },
-  { url: '/curso', title: /curso|treinamento/i },
-  { url: '/produtos', title: /produtos|catálogo/i },
-  { url: '/escova-rotativa-g5', title: /G5|rotativa/i },
-  { url: '/escova-dupla-d5', title: /D5|dupla/i },
-  { url: '/escova-solo-s5', title: /S5|solo/i },
-];
+const PAGES = ['/', '/curso', '/produtos', '/escova-rotativa-g5', '/escova-dupla-d5', '/escova-solo-s5'];
 
 test.describe('Navigation — todas as páginas carregam', () => {
-  for (const page of PAGES) {
-    test(`GET ${page.url} → 200`, async ({ page: pw }) => {
-      const response = await pw.goto(page.url);
+  for (const url of PAGES) {
+    test(`GET ${url} → 200`, async ({ page }) => {
+      const response = await page.goto(url);
       expect(response?.status()).toBe(200);
     });
 
-    test(`${page.url} → sem erro de console crítico`, async ({ page: pw }) => {
+    test(`${url} → sem erro de console crítico`, async ({ page }) => {
       const errors = [];
-      pw.on('pageerror', (err) => errors.push(err.message));
-      await pw.goto(page.url);
-      await pw.waitForLoadState('networkidle');
+      page.on('pageerror', (err) => errors.push(err.message));
+      await page.goto(url);
+      await waitForReact(page);
       const fatal = errors.filter(
         (e) => !e.includes('Instagram') && !e.includes('fbcdn') && !e.includes('ResizeObserver')
       );
@@ -33,20 +27,21 @@ test.describe('Navigation — todas as páginas carregam', () => {
 test.describe('Nav — links funcionam', () => {
   test('logo leva para /', async ({ page }) => {
     await page.goto('/curso');
+    await waitForReact(page);
     await page.click('a[href="/"]');
     await expect(page).toHaveURL('/');
   });
 
   test('nav tem link /curso', async ({ page }) => {
     await page.goto('/');
-    const link = page.locator('nav a[href="/curso"]');
-    await expect(link).toBeVisible();
+    await waitForReact(page);
+    await expect(page.locator('nav a[href="/curso"]').first()).toBeVisible();
   });
 
   test('nav tem link /produtos', async ({ page }) => {
     await page.goto('/');
-    const link = page.locator('nav a[href="/produtos"]');
-    await expect(link).toBeVisible();
+    await waitForReact(page);
+    await expect(page.locator('nav a[href="/produtos"]').first()).toBeVisible();
   });
 });
 
@@ -55,12 +50,11 @@ test.describe('Nav mobile — menu funciona', () => {
 
   test('hamburger abre o menu mobile', async ({ page }) => {
     await page.goto('/');
-    await page.waitForLoadState('networkidle');
-    // botão hamburger — qualquer botão dentro da nav sem href
-    const hamburger = page.locator('nav button').first();
-    await hamburger.click();
-    // algum link de nav deve ficar visível
-    const navLink = page.locator('nav a[href="/curso"], nav a[href="/produtos"]').first();
-    await expect(navLink).toBeVisible({ timeout: 3000 });
+    await waitForReact(page);
+    await page.locator('button[aria-label="Menu"]').click();
+    await page.waitForTimeout(300);
+    // mobile nav links — visible after open
+    const mobileNavLink = page.locator('nav.nav-mobile a[href="/curso"]');
+    await expect(mobileNavLink).toBeVisible({ timeout: 3000 });
   });
 });

@@ -1,10 +1,11 @@
 // @ts-check
-const { test, expect } = require('playwright/test');
+const { expect } = require('playwright/test');
+const { test, waitForReact } = require('./fixtures');
 
 test.describe('Home — seções visíveis', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
-    await page.waitForLoadState('networkidle');
+    await waitForReact(page);
   });
 
   test('hero renderiza headline principal', async ({ page }) => {
@@ -13,16 +14,11 @@ test.describe('Home — seções visíveis', () => {
   });
 
   test('seção de produtos tem 3 cards', async ({ page }) => {
-    // scroll até a seção produtos
-    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight / 3));
+    await page.evaluate(() => window.scrollTo(0, 2800));
     await page.waitForTimeout(500);
-    // links para os 3 produtos devem existir
-    const g5 = page.locator('a[href="/escova-rotativa-g5"]');
-    const d5 = page.locator('a[href="/escova-dupla-d5"]');
-    const s5 = page.locator('a[href="/escova-solo-s5"]');
-    await expect(g5.first()).toBeVisible({ timeout: 5000 });
-    await expect(d5.first()).toBeVisible({ timeout: 5000 });
-    await expect(s5.first()).toBeVisible({ timeout: 5000 });
+    await expect(page.locator('#equipamentos a[href="/escova-rotativa-g5"]').first()).toBeVisible({ timeout: 5000 });
+    await expect(page.locator('#equipamentos a[href="/escova-dupla-d5"]').first()).toBeVisible({ timeout: 5000 });
+    await expect(page.locator('#equipamentos a[href="/escova-solo-s5"]').first()).toBeVisible({ timeout: 5000 });
   });
 
   test('calculadora ROI renderiza inputs', async ({ page }) => {
@@ -35,7 +31,9 @@ test.describe('Home — seções visíveis', () => {
   test('FAQ tem ao menos um item', async ({ page }) => {
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
     await page.waitForTimeout(500);
-    const faqItems = page.locator('button, details, [role="button"]').filter({ hasText: /limpe|funciona|quanto|por que/i });
+    const faqItems = page.locator('button, details, [role="button"]').filter({
+      hasText: /limpe|funciona|quanto|por que/i,
+    });
     expect(await faqItems.count()).toBeGreaterThan(0);
   });
 
@@ -50,20 +48,20 @@ test.describe('Home — seções visíveis', () => {
 test.describe('Home mobile', () => {
   test.use({ viewport: { width: 390, height: 844 } });
 
-  test('hero visível no mobile sem overflow horizontal', async ({ page }) => {
+  test('sem overflow horizontal no mobile', async ({ page }) => {
     await page.goto('/');
-    await page.waitForLoadState('networkidle');
+    await waitForReact(page);
     const bodyWidth = await page.evaluate(() => document.body.scrollWidth);
-    const viewportWidth = 390;
-    expect(bodyWidth).toBeLessThanOrEqual(viewportWidth + 2); // tolerância 2px
+    expect(bodyWidth).toBeLessThanOrEqual(392);
   });
 
   test('links para produtos visíveis no mobile', async ({ page }) => {
     await page.goto('/');
-    await page.waitForLoadState('networkidle');
-    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight / 3));
+    await waitForReact(page);
+    // Scroll to products section (#equipamentos at ~2660px)
+    await page.evaluate(() => window.scrollTo(0, 2800));
     await page.waitForTimeout(500);
-    const g5 = page.locator('a[href="/escova-rotativa-g5"]').first();
-    await expect(g5).toBeVisible({ timeout: 5000 });
+    const g5 = page.locator('#equipamentos a[href="/escova-rotativa-g5"]');
+    await expect(g5.first()).toBeVisible({ timeout: 5000 });
   });
 });

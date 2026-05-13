@@ -127,7 +127,7 @@ function SpecsSection({ p }) {
             </div>
           ))}
         </div>
-        <style>{`@media (max-width: 720px) { .specs-grid { grid-template-columns: repeat(2, 1fr) !important; } }`}</style>
+        <style>{`@media (max-width: 720px) { .specs-grid { grid-template-columns: repeat(2, 1fr) !important; } } @media (max-width: 480px) { .specs-grid { grid-template-columns: 1fr !important; } }`}</style>
       </div>
     </section>
   );
@@ -206,8 +206,9 @@ function MiniCompare({ allProducts }) {
           <div className="eyebrow center" style={{ marginBottom: 14 }}>Linha completa</div>
           <h2 className="display" style={{ fontSize: "clamp(26px, 3.2vw, 40px)", color: "white", margin: 0 }}>Compare os modelos</h2>
         </div>
-        <div style={{ overflowX: "auto" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 500 }}>
+        <style>{`@media (max-width: 460px) { .mini-cmp { min-width: 0 !important; } .mini-cmp td, .mini-cmp th { padding: 10px 8px !important; font-size: 12px !important; } }`}</style>
+        <div style={{ overflowX: "auto", maxWidth: "100%" }}>
+          <table className="mini-cmp" style={{ width: "100%", borderCollapse: "collapse", minWidth: 500 }}>
             <thead>
               <tr>
                 <th style={{ padding: "14px 20px", textAlign: "left", fontSize: 12, fontWeight: 600, color: "var(--fg-4)", textTransform: "uppercase", letterSpacing: "0.1em", border: "none" }}></th>

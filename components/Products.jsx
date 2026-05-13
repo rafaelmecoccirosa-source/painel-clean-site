@@ -1,15 +1,15 @@
 const products = [
-  { sku: "ZCP-0175-G5", name: "Escova Rotativa G5",
+  { sku: "ZCP-0175-G5", name: "Escova Rotativa G5", href: "/escova-rotativa-g5",
     tag: "Mais rápida", tagIcon: "bolt", tagBg: "rgba(245,158,11,0.16)", tagColor: "#F59E0B", tagBorder: "rgba(245,158,11,0.30)",
     image: "public/images/product-g5-1.jpg",
     specs: [{ k: "Velocidade", v: "260 painéis/h" }, { k: "Motor", v: "Brushless 350 RPM" }, { k: "Cabo", v: "até 7,5m" }],
     desc: "Para grandes usinas: velocidade máxima, operação contínua e cabo de até 7,5m. A escolha de quem trabalha em escala." },
-  { sku: "ZCP-0275-D5", name: "Escova Dupla D5",
+  { sku: "ZCP-0275-D5", name: "Escova Dupla D5", href: "/escova-dupla-d5",
     tag: "Mais vendido", featured: true,
     image: "public/images/product-d5-1.jpg",
     specs: [{ k: "Velocidade", v: "200 painéis/h" }, { k: "Motor", v: "Brushless 350 RPM" }, { k: "Cabo", v: "até 7,5m" }, { k: "Inclui", v: "Bomba + controle" }],
     desc: "Kit completo com bomba e controle remoto inclusos. Comece a atender clientes no mesmo dia que receber. O padrão do mercado." },
-  { sku: "ZCP-0175-S5", name: "Escova Solo S5",
+  { sku: "ZCP-0175-S5", name: "Escova Solo S5", href: "/escova-solo-s5",
     tag: "Acesso difícil", tagIcon: "home", tagBg: "rgba(96,165,250,0.16)", tagColor: "#60A5FA", tagBorder: "rgba(96,165,250,0.30)",
     image: "public/images/product-s5-1.jpg",
     specs: [{ k: "Velocidade", v: "160 painéis/h" }, { k: "Ideal para", v: "Difícil acesso" }, { k: "Cabo", v: "até 7,5m" }],
@@ -51,12 +51,18 @@ function ProductCard({ p }) {
             </div>
           ))}
         </div>
-        <a href={wa(`Olá! Tenho interesse no(a) ${p.name} (${p.sku}).`)} target="_blank" rel="noopener noreferrer"
-          style={{ marginTop: "auto", display: "inline-flex", alignItems: "center", justifyContent: "space-between", background: featured ? "var(--pc-green)" : "var(--pc-dark)", color: featured ? "var(--pc-dark)" : "white", fontWeight: 600, fontSize: 14.5, padding: "16px 22px", borderRadius: "var(--radius-md)", transition: "background 200ms" }}
-          onMouseEnter={e => e.currentTarget.style.background = featured ? "#4FE090" : "#14513C"}
-          onMouseLeave={e => e.currentTarget.style.background = featured ? "var(--pc-green)" : "var(--pc-dark)"}>
-          <span>Pedir orçamento</span><Icon name="arrowRight" size={16} />
-        </a>
+        <div style={{ marginTop: "auto", display: "flex", flexDirection: "column", gap: 10 }}>
+          <a href={p.href}
+            style={{ display: "inline-flex", alignItems: "center", justifyContent: "space-between", background: featured ? "var(--pc-green)" : "var(--pc-dark)", color: featured ? "var(--pc-dark)" : "white", fontWeight: 600, fontSize: 14.5, padding: "16px 22px", borderRadius: "var(--radius-md)", transition: "background 200ms" }}
+            onMouseEnter={e => e.currentTarget.style.background = featured ? "#4FE090" : "#14513C"}
+            onMouseLeave={e => e.currentTarget.style.background = featured ? "var(--pc-green)" : "var(--pc-dark)"}>
+            <span>Ver detalhes</span><Icon name="arrowRight" size={16} />
+          </a>
+          <a href={wa(`Olá! Tenho interesse no(a) ${p.name} (${p.sku}).`)} target="_blank" rel="noopener noreferrer"
+            style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, background: "transparent", color: featured ? "var(--pc-green-2)" : "var(--fg-on-cream-2)", fontWeight: 600, fontSize: 13.5, padding: "10px 0", textDecoration: "none" }}>
+            <WhatsBrand size={15} /> Pedir orçamento
+          </a>
+        </div>
       </div>
     </div>
   );
@@ -74,7 +80,7 @@ function Products() {
               <span style={{ color: "var(--fg-on-cream-3)" }}>feitos para escala.</span>
             </h2>
           </div>
-          <a href="#" className="btn-outline-dark">Ver catálogo completo<Icon name="arrowUpRight" size={14} /></a>
+          <a href="/produtos" className="btn-outline-dark">Ver catálogo completo<Icon name="arrowUpRight" size={14} /></a>
         </div>
         <div className="products-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 28 }}>
           {products.map(p => <ProductCard key={p.sku} p={p} />)}
