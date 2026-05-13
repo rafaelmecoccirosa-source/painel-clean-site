@@ -34,7 +34,7 @@ function About() {
         </div>
       </div>
       <style>{`
-        @media (max-width: 960px) { .about-intro { grid-template-columns: 1fr !important; gap: 32px !important; } }
+        @media (max-width: 960px) { .about-intro { grid-template-columns: 1fr !important; gap: 32px !important; margin-bottom: 40px !important; } }
         @media (max-width: 720px) { .about-pillars { grid-template-columns: 1fr !important; } }
       `}</style>
     </section>

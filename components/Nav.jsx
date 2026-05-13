@@ -9,6 +9,7 @@ function Nav() {
     { label: "Equipamentos", href: "#equipamentos" },
     { label: "Comparativo", href: "#comparativo" },
     { label: "Treinamento", href: "#treinamento" },
+    { label: "Curso", href: "/curso" },
     { label: "Plataforma", href: "#plataforma" },
     { label: "Calculadora", href: "#roi" },
   ];

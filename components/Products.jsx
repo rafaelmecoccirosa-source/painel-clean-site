@@ -1,13 +1,19 @@
 const products = [
-  { sku: "ZCP-0175-G5", name: "Escova Rotativa G5", tag: "Mais rápida", image: "public/images/product-g5-1.jpg",
+  { sku: "ZCP-0175-G5", name: "Escova Rotativa G5",
+    tag: "Mais rápida", tagIcon: "bolt", tagBg: "rgba(245,158,11,0.16)", tagColor: "#F59E0B", tagBorder: "rgba(245,158,11,0.30)",
+    image: "public/images/product-g5-1.jpg",
     specs: [{ k: "Velocidade", v: "260 painéis/h" }, { k: "Motor", v: "Brushless 350 RPM" }, { k: "Cabo", v: "até 7,5m" }],
-    desc: "A mais rápida da linha. Operação contínua para grandes usinas." },
-  { sku: "ZCP-0275-D5", name: "Escova Dupla D5", tag: "Mais vendido", featured: true, image: "public/images/product-d5-1.jpg",
+    desc: "Para grandes usinas: velocidade máxima, operação contínua e cabo de até 7,5m. A escolha de quem trabalha em escala." },
+  { sku: "ZCP-0275-D5", name: "Escova Dupla D5",
+    tag: "Mais vendido", featured: true,
+    image: "public/images/product-d5-1.jpg",
     specs: [{ k: "Velocidade", v: "200 painéis/h" }, { k: "Motor", v: "Brushless 350 RPM" }, { k: "Cabo", v: "até 7,5m" }, { k: "Inclui", v: "Bomba + controle" }],
-    desc: "Kit completo com bomba e controle remoto. Padrão do mercado." },
-  { sku: "ZCP-0175-S5", name: "Escova Solo S5", tag: "Acesso difícil", image: "public/images/product-s5-1.jpg",
+    desc: "Kit completo com bomba e controle remoto inclusos. Comece a atender clientes no mesmo dia que receber. O padrão do mercado." },
+  { sku: "ZCP-0175-S5", name: "Escova Solo S5",
+    tag: "Acesso difícil", tagIcon: "home", tagBg: "rgba(96,165,250,0.16)", tagColor: "#60A5FA", tagBorder: "rgba(96,165,250,0.30)",
+    image: "public/images/product-s5-1.jpg",
     specs: [{ k: "Velocidade", v: "160 painéis/h" }, { k: "Ideal para", v: "Difícil acesso" }, { k: "Cabo", v: "até 7,5m" }],
-    desc: "Compacta para telhados complexos e acessos difíceis." },
+    desc: "Para onde outras escovas não chegam. Compacta e ágil em telhados complexos, estruturas metálicas e acessos restritos." },
 ];
 
 function ProductCard({ p }) {
@@ -22,8 +28,13 @@ function ProductCard({ p }) {
         transform: hover ? "translateY(-6px)" : "translateY(0)",
         boxShadow: hover ? "var(--shadow-lift)" : (featured ? "var(--shadow-glow)" : "var(--shadow-card)") }}>
       <div className="product-image" style={{ position: "relative", height: 280, background: "linear-gradient(180deg, #FBF8E9 0%, #F4ECD3 100%)", overflow: "hidden" }}>
-        <div style={{ position: "absolute", top: 18, left: 18, zIndex: 2, display: "inline-flex", alignItems: "center", gap: 6, padding: "6px 12px", background: featured ? "var(--pc-green)" : "rgba(15,56,43,0.92)", color: featured ? "var(--pc-dark)" : "white", borderRadius: "var(--radius-pill)", font: "var(--label-sm)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+        <div style={{ position: "absolute", top: 18, left: 18, zIndex: 2, display: "inline-flex", alignItems: "center", gap: 6, padding: "6px 12px",
+          background: featured ? "var(--pc-green)" : (p.tagBg || "rgba(15,56,43,0.92)"),
+          color: featured ? "var(--pc-dark)" : (p.tagColor || "white"),
+          border: p.tagBorder ? `1px solid ${p.tagBorder}` : "none",
+          borderRadius: "var(--radius-pill)", font: "var(--label-sm)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
           {featured && <span style={{ width: 5, height: 5, borderRadius: "50%", background: "var(--pc-dark)" }} />}
+          {p.tagIcon && <Icon name={p.tagIcon} size={11} />}
           {p.tag}
         </div>
         <div style={{ position: "absolute", top: 22, right: 22, fontSize: 10, fontWeight: 600, letterSpacing: "0.12em", color: "var(--fg-on-cream-3)" }}>{p.sku}</div>
@@ -71,6 +82,7 @@ function Products() {
         <style>{`
           @media (max-width: 900px) { .products-grid { grid-template-columns: repeat(2, 1fr) !important; } }
           @media (max-width: 580px) {
+            #equipamentos { padding: 60px 0 48px !important; }
             .products-grid { grid-template-columns: 1fr !important; }
             .product-image { height: 220px !important; }
           }

@@ -69,8 +69,12 @@ function Training() {
               <div style={{ color: "var(--fg-3)", fontSize: 14, marginBottom: 4 }}>de <span style={{ textDecoration: "line-through" }}>R$ 197</span></div>
               <div className="display" style={{ fontSize: 64, fontWeight: 600, color: "var(--pc-green)", lineHeight: 1, letterSpacing: "-0.04em", marginBottom: 8 }}>R$ 39,90</div>
               <div style={{ color: "var(--fg-3)", fontSize: 13, marginBottom: 32 }}>pagamento único · acesso vitalício</div>
-              <a href={wa("Olá! Quero começar o treinamento Painel Clean.")} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ width: "100%", justifyContent: "center", marginBottom: 16 }}>
-                Quero começar agora<Icon name="arrowRight" size={16} />
+              <a href="/curso" className="btn-primary" style={{ width: "100%", justifyContent: "center", marginBottom: 12 }}>
+                Ver detalhes do treinamento<Icon name="arrowRight" size={16} />
+              </a>
+              <a href={wa("Olá! Quero começar o treinamento Painel Clean.")} target="_blank" rel="noopener noreferrer"
+                style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, fontSize: 13, color: "var(--fg-3)", marginBottom: 16, textDecoration: "none" }}>
+                <WhatsBrand size={13} />Ou fale direto pelo WhatsApp
               </a>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12, fontSize: 12.5, color: "var(--fg-4)" }}>
                 <span>Pagamento seguro</span><span>·</span><span>Reembolso em 7 dias</span>

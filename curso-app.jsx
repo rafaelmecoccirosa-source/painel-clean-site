@@ -341,7 +341,7 @@ function CursoTestimonials() {
             <div key={i} style={{ padding: "28px", background: "white", border: "1px solid var(--border-on-cream)", borderRadius: "var(--radius-xl)", display: "flex", flexDirection: "column", gap: 16 }}>
               <div style={{ display: "flex", gap: 3 }}>
                 {Array.from({ length: t.stars }).map((_, j) => (
-                  <Icon key={j} name="star" size={16} stroke={0} style={{ fill: "#F4B83A" }} />
+                  <span key={j} style={{ color: "#F4B83A", fontSize: 16, lineHeight: 1 }}>★</span>
                 ))}
               </div>
               <p style={{ margin: 0, font: "var(--body)", color: "var(--fg-on-cream-1)", lineHeight: 1.65, flex: 1 }}>"{t.text}"</p>

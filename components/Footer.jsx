@@ -54,7 +54,10 @@ function Footer() {
         </div>
 
         <div style={{ paddingTop: 28, borderTop: "1px solid var(--border-on-dark)", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, flexWrap: "wrap", fontSize: 13, color: "var(--fg-4)" }}>
-          <span>© 2026 Painel Clean. Todos os direitos reservados.</span>
+          <div>
+            <span>© 2026 Painel Clean. Todos os direitos reservados.</span>
+            <span style={{ display: "block", marginTop: 4, fontSize: 12, color: "var(--fg-5)" }}>Desenvolvido para o setor solar brasileiro.</span>
+          </div>
           <span style={{ display: "flex", gap: 24, flexWrap: "wrap", justifyContent: "flex-end" }}>
             <a href="#" style={{ color: "inherit" }}>Termos</a>
             <a href="#" style={{ color: "inherit" }}>Privacidade</a>
