@@ -27,18 +27,21 @@ function ProductCard({ p }) {
         transition: "transform 280ms var(--ease-out), box-shadow 280ms var(--ease-out)",
         transform: hover ? "translateY(-6px)" : "translateY(0)",
         boxShadow: hover ? "var(--shadow-lift)" : (featured ? "var(--shadow-glow)" : "var(--shadow-card)") }}>
-      <div className="product-image" style={{ position: "relative", height: 280, background: "linear-gradient(180deg, #FBF8E9 0%, #F4ECD3 100%)", overflow: "hidden" }}>
-        <div style={{ position: "absolute", top: 18, left: 18, zIndex: 2, display: "inline-flex", alignItems: "center", gap: 6, padding: "6px 12px",
-          background: featured ? "var(--pc-green)" : (p.tagBg || "rgba(15,56,43,0.92)"),
-          color: featured ? "var(--pc-dark)" : (p.tagColor || "white"),
-          border: p.tagBorder ? `1px solid ${p.tagBorder}` : "none",
-          borderRadius: "var(--radius-pill)", font: "var(--label-sm)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+      <div className="product-image" style={{ position: "relative", height: 280, background: "white", overflow: "hidden" }}>
+        {/* Glow sutil atrás do produto */}
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 50% 65%, rgba(58,213,128,0.10) 0%, transparent 70%)", pointerEvents: "none" }} />
+        {/* Tag limpa — dark ou green (sem âmbar/azul off-brand) */}
+        <div style={{ position: "absolute", top: 16, left: 16, zIndex: 2, display: "inline-flex", alignItems: "center", gap: 5, padding: "5px 12px",
+          background: featured ? "var(--pc-green)" : "var(--pc-dark)",
+          color: featured ? "var(--pc-dark)" : "white",
+          borderRadius: "var(--radius-pill)", fontSize: 11, fontWeight: 700,
+          letterSpacing: "0.1em", textTransform: "uppercase",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.18)" }}>
           {featured && <span style={{ width: 5, height: 5, borderRadius: "50%", background: "var(--pc-dark)" }} />}
-          {p.tagIcon && <Icon name={p.tagIcon} size={11} />}
+          {p.tagIcon && <Icon name={p.tagIcon} size={10} />}
           {p.tag}
         </div>
-        <div style={{ position: "absolute", top: 22, right: 22, fontSize: 10, fontWeight: 600, letterSpacing: "0.12em", color: "var(--fg-on-cream-3)" }}>{p.sku}</div>
-        <img src={p.image} alt={p.name} style={{ width: "100%", height: "100%", objectFit: "contain", padding: 32, transition: "transform 600ms ease", transform: hover ? "scale(1.05)" : "scale(1)" }} />
+        <img src={p.image} alt={p.name} style={{ width: "100%", height: "100%", objectFit: "contain", padding: 32, transition: "transform 600ms ease", transform: hover ? "scale(1.05)" : "scale(1)", position: "relative", zIndex: 1 }} />
       </div>
       <div style={{ padding: "28px 28px 32px", display: "flex", flexDirection: "column", flex: 1 }}>
         <h3 className="display" style={{ fontSize: 26, margin: "0 0 8px", color: "var(--fg-on-cream-1)" }}>{p.name}</h3>
