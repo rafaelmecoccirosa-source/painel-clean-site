@@ -1,7 +1,7 @@
 # CLAUDE.md — painel-clean-site
 
 > Fonte de verdade para o site institucional da Painel Clean (painelclean.com.br).
-> Atualizado em: maio/2026
+> Atualizado em: maio/2026 (PR #4 + PR #5)
 
 ---
 
@@ -33,6 +33,13 @@ Site institucional da **Painel Clean** — fabricante de escovas semiautomática
 ├── escova-solo-s5.html           # Página /escova-solo-s5
 ├── escova-solo-s5-app.jsx        # Root de /escova-solo-s5
 ├── tweaks-panel.jsx              # Painel de tweaks (dev only)
+├── playwright.config.js          # Config Playwright (2 projects: desktop-chrome, mobile-chrome)
+├── tests/
+│   ├── fixtures.js               # CDN mock + waitForReact helper
+│   ├── home.spec.js
+│   ├── curso.spec.js
+│   ├── produtos.spec.js
+│   └── product-pages.spec.js     # G5, D5, S5
 ├── vercel.json                   # Config Vercel — serving estático, sem build
 ├── public/
 │   ├── tokens.css                # Design tokens (cores, tipografia, espaçamentos)
@@ -141,12 +148,25 @@ Cada página usa as mesmas seções, com dados por produto em `PRODUCT`:
 - `TweaksCtx` + `useT()` — contexto de tweaks
 - `TWEAK_DEFAULTS` — valores padrão
 - `Icon` — sistema de ícones inline SVG (substitui Lucide)
-- `Logo` — logo com link para `/`
+- `LogoMark` — ícone SVG inline (green bg + 9 formas geométricas escuras); substitui JPEG serrilhado
+- `Logo` — `LogoMark` + texto "Painel Clean", com link para `/`; aceita prop `textColor`
 - `wa(msg)` — helper para link WhatsApp com mensagem pré-preenchida
 - `WhatsBrand` — ícone SVG do WhatsApp
 
 ### Sistema de tweaks (dev only)
 Painel flutuante ativado com `?tweaks=1` na URL.
+
+---
+
+## Testes (Playwright)
+
+- **Runner:** Playwright v1.56.1 global em `/opt/node22/lib/node_modules/playwright`
+- **Executar:** `NODE_PATH=/opt/node22/lib/node_modules npx playwright test`
+- **Servidor local:** `npx serve . --listen 8787` (necessário para clean URLs; Python http.server não serve `/curso` corretamente)
+- **CDN mock:** `tests/fixtures.js` intercepta unpkg/babel/react-dom com cópias locais em `/tmp/react-deps/` — necessário porque CDNs externos retornam 403 no ambiente
+- **Dependências locais:** instalar uma vez com `cd /tmp && mkdir react-deps && cd react-deps && npm init -y && npm install react@18.3.1 react-dom@18.3.1 @babel/standalone@7.29.0`
+- **Projetos:** `desktop-chrome` (1280×720) e `mobile-chrome` (Pixel 5, 393×851)
+- **60 testes** cobrindo todas as 6 páginas em 2 viewports
 
 ---
 
@@ -156,6 +176,8 @@ Painel flutuante ativado com `?tweaks=1` na URL.
 - **Ícones:** sempre usar `<Icon name="..." />` — nunca importar Lucide diretamente
 - **WhatsApp:** sempre usar `wa("mensagem")` — nunca hardcodar número
 - **Imagens:** salvar em `public/images/` e referenciar como `public/images/nome.jpg`
+- **Logo:** usar `<Logo />` (SVG inline) — nunca referenciar `public/images/logo-real.jpg`
+- **Tags de produto:** usar apenas `var(--pc-dark)` ou `var(--pc-green)` — nunca cores off-brand (amber, azul)
 - **Redes sociais:** `/painelclean` em todas as plataformas
 
 ---
@@ -191,3 +213,6 @@ git -c commit.gpgsign=false commit -m "mensagem"
 - **Sem build:** simplicidade de deploy; Babel CDN cobre o volume de código atual
 - **Páginas independentes por produto:** cada `.html` carrega seu próprio `-app.jsx` — sem router, sem estado compartilhado entre páginas
 - **Tweaks panel:** mantido para iterações de design com o cliente (ativar com `?tweaks=1`)
+- **Hero layout (PR #4):** imagem `position: absolute; left: 50%; right: 0` do viewport — bleed da metade da tela até a borda direita sem cropar. Texto dentro de `.container` com `width: 50%`, alinhado à grid das outras seções
+- **Nav hamburger (PR #4):** `.nav-mobile` usa `display: open ? "flex" : "none"` como inline style, não classe CSS — necessário porque `!important` em CSS sobreescreveria o estado React
+- **Logo SVG (PR #5):** `LogoMark` é SVG inline com `viewBox="0 0 100 100"` — nenhum arquivo de imagem, nenhum artefato de compressão JPEG, escala perfeita em qualquer DPI
