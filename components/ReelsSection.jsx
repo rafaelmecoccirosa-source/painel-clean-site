@@ -25,7 +25,7 @@ function ReelsSection() {
           <div>
             <div className="eyebrow" style={{ marginBottom: 18 }}>Instagram Reels</div>
             <h2 className="display" style={{ fontSize: "clamp(30px, 3.8vw, 48px)", lineHeight: 1.06, color: "white", margin: 0 }}>
-              Aprenda com quem<br /><span style={{ color: "var(--pc-green)" }}>vive de solar.</span>
+              Aprenda com quem<br /><span style={{ color: "var(--pc-green)" }}>vive de limpeza profissional.</span>
             </h2>
           </div>
           <a href="https://www.instagram.com/painelclean/" target="_blank" rel="noopener noreferrer"

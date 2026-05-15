@@ -20,7 +20,8 @@ for (const product of PRODUCTS) {
     });
 
     test('velocidade (painéis/h) visível', async ({ page }) => {
-      await expect(page.locator(`text=${product.speed}`).first()).toBeVisible({ timeout: 5000 });
+      const specsSection = page.locator('section').filter({ hasText: 'Ficha técnica' });
+      await expect(specsSection.locator(`text=${product.speed} painéis/h`).first()).toBeVisible({ timeout: 5000 });
     });
 
     test('sticky buy bar aparece após scroll', async ({ page }) => {
@@ -39,7 +40,7 @@ for (const product of PRODUCTS) {
     });
 
     test('breadcrumb tem link para /produtos', async ({ page }) => {
-      await expect(page.locator('a[href="/produtos"]').first()).toBeVisible({ timeout: 5000 });
+      await expect(page.locator('nav:not([class]) a[href="/produtos"]').first()).toBeVisible({ timeout: 5000 });
     });
 
     test('tabela mini-compare está presente', async ({ page }) => {

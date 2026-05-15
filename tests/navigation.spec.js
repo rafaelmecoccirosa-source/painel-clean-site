@@ -25,6 +25,8 @@ test.describe('Navigation — todas as páginas carregam', () => {
 });
 
 test.describe('Nav — links funcionam', () => {
+  test.use({ viewport: { width: 1280, height: 720 } });
+
   test('logo leva para /', async ({ page }) => {
     await page.goto('/curso');
     await waitForReact(page);
