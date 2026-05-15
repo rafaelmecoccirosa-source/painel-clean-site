@@ -31,7 +31,7 @@ function Compare() {
             <div style={{ padding: "22px 28px", fontSize: 12, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--fg-3)" }}>Recurso</div>
             <div style={{ padding: "22px 22px", fontSize: 12, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--fg-3)", textAlign: "center", borderLeft: "1px solid var(--border-on-dark)" }}>Outras soluções</div>
             <div style={{ padding: "22px 28px", fontSize: 12, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--pc-green)", textAlign: "left", borderLeft: "1px solid var(--border-on-dark)", display: "flex", alignItems: "center", gap: 10 }}>
-              <img src="public/images/logo-real.jpg" style={{ width: 20, height: 20, borderRadius: 4 }} alt="" />
+              <LogoMark size={20} />
               Painel Clean
             </div>
           </div>

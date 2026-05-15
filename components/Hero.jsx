@@ -118,8 +118,9 @@ function Hero() {
         </div>
       </div>
 
-      {/* Slide controls */}
-      <div className="hero-controls" style={{ position: "absolute", left: 0, right: 0, bottom: 32, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 56px", zIndex: 3, pointerEvents: "none" }}>
+      {/* Slide controls — wrapped in .container so dots align with hero text */}
+      <div className="hero-controls" style={{ position: "absolute", left: 0, right: 0, bottom: 32, zIndex: 3, pointerEvents: "none" }}>
+        <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 14, pointerEvents: "auto" }}>
           {heroSlides.map((_, i) => (
             <button key={i} onClick={() => setIdx(i)} aria-label={`Slide ${i + 1}`}
@@ -138,6 +139,7 @@ function Hero() {
               <Icon name={b.n} size={16} />
             </button>
           ))}
+        </div>
         </div>
       </div>
 
