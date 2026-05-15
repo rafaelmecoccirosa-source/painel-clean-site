@@ -66,7 +66,7 @@ const WhatsBrand = ({ size = 16 }) => (
 // Logo mark — SVG vetorial (nítido em qualquer tamanho)
 const LogoMark = ({ size = 36 }) => (
   <svg width={size} height={size} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"
-    style={{ borderRadius: 8, display: "block", flexShrink: 0 }}>
+    style={{ borderRadius: Math.round(size * 0.18), display: "block", flexShrink: 0 }}>
     <rect width="100" height="100" fill="#3AD580"/>
     <g fill="#0F382B">
       {/* Centro */}
