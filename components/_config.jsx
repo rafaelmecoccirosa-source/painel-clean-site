@@ -72,8 +72,8 @@ const LogoMark = ({ size = 36 }) => (
   }}>
     <img
       src="public/images/painel_clean_logo_dark_transparent.png"
-      width={Math.round(size * 0.76)}
-      height={Math.round(size * 0.76)}
+      width={Math.round(size * 0.88)}
+      height={Math.round(size * 0.88)}
       alt=""
       style={{ display: "block" }}
     />
