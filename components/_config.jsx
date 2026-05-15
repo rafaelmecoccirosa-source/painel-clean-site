@@ -65,50 +65,19 @@ const WhatsBrand = ({ size = 16 }) => (
 
 // Logo mark — SVG vetorial (nítido em qualquer tamanho)
 const LogoMark = ({ size = 36 }) => (
-  <svg width={size} height={size} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"
-    style={{ borderRadius: Math.round(size * 0.18), display: "block", flexShrink: 0 }}>
-    <rect width="100" height="100" fill="#3AD580"/>
-    <g fill="#0F382B">
-      {/* Centro */}
-      <rect x="44" y="43" width="10" height="10" rx="1.5"/>
-      {/* Bowtie vertical — 11h */}
-      <g transform="translate(29,31)">
-        <path d="M0,-10 L-8,-4 L0,0 L8,-4 Z M0,0 L-8,4 L0,10 L8,4 Z"/>
-      </g>
-      {/* S-step — 1h */}
-      <g transform="translate(53,23)">
-        <rect x="1" y="-10" width="9" height="9" rx="2"/>
-        <rect x="-10" y="1" width="9" height="9" rx="2"/>
-      </g>
-      {/* Bowtie horizontal — 3h */}
-      <g transform="translate(76,38)">
-        <path d="M-10,0 L-4,-8 L0,0 L-4,8 Z M0,0 L4,-8 L10,0 L4,8 Z"/>
-      </g>
-      {/* Z-step — 5h */}
-      <g transform="translate(78,63)">
-        <rect x="-10" y="-10" width="9" height="9" rx="2"/>
-        <rect x="1" y="1" width="9" height="9" rx="2"/>
-      </g>
-      {/* Bowtie vertical — 5-6h */}
-      <g transform="translate(64,79)">
-        <path d="M0,-10 L-8,-4 L0,0 L8,-4 Z M0,0 L-8,4 L0,10 L8,4 Z"/>
-      </g>
-      {/* S-step — 7h */}
-      <g transform="translate(42,81)">
-        <rect x="1" y="-10" width="9" height="9" rx="2"/>
-        <rect x="-10" y="1" width="9" height="9" rx="2"/>
-      </g>
-      {/* Bowtie horizontal — 9h */}
-      <g transform="translate(24,63)">
-        <path d="M-10,0 L-4,-8 L0,0 L-4,8 Z M0,0 L4,-8 L10,0 L4,8 Z"/>
-      </g>
-      {/* Z-step — 10h */}
-      <g transform="translate(25,41)">
-        <rect x="-10" y="-10" width="9" height="9" rx="2"/>
-        <rect x="1" y="1" width="9" height="9" rx="2"/>
-      </g>
-    </g>
-  </svg>
+  <span style={{
+    display: "inline-flex", alignItems: "center", justifyContent: "center",
+    width: size, height: size, flexShrink: 0,
+    background: "#3AD580", borderRadius: Math.round(size * 0.18), overflow: "hidden",
+  }}>
+    <img
+      src="public/images/painel_clean_logo_dark_transparent.png"
+      width={Math.round(size * 0.76)}
+      height={Math.round(size * 0.76)}
+      alt=""
+      style={{ display: "block" }}
+    />
+  </span>
 );
 
 // Logo — marca vetorial + wordmark
