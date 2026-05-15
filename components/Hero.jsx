@@ -3,7 +3,7 @@ const heroSlides = [
     eyebrow: "Linha profissional",
     title: ["Limpe mais.", "Ganhe mais.", "Em menos tempo."],
     accentLine: 2,
-    description: "Motor brushless, sem produtos químicos, até 260 painéis por hora. Tecnologia profissional para quem vive de solar.",
+    description: "Equipamentos profissionais para limpeza de superfícies lisas — painéis solares, estufas e fachadas.",
     primary: { label: "Ver equipamentos", href: "#equipamentos" },
     secondary: { label: "Plataforma de serviços", href: "https://painel-clean-v2.vercel.app" },
     image: "public/images/painel_clean_-_limpando_telhado.png",

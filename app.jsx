@@ -6,6 +6,7 @@ function App() {
       <Hero />
       {t.showMarquee && <Marquee />}
       <About />
+      <Applications />
       {t.showSocial && <SocialProof />}
       <Products />
       {t.showCompare && <Compare />}

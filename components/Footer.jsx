@@ -11,7 +11,7 @@ function Footer() {
           <div>
             <Logo />
             <p style={{ marginTop: 22, font: "var(--body-sm)", color: "var(--fg-3)", maxWidth: 320 }}>
-              Equipamentos profissionais para limpeza de painéis fotovoltaicos. Motor brushless, sem químicos, máxima eficiência.
+              Equipamentos profissionais para limpeza de superfícies lisas.
             </p>
             <div style={{ marginTop: 24, display: "flex", alignItems: "flex-start", gap: 10, color: "var(--fg-4)", fontSize: 13, lineHeight: 1.55 }}>
               <span style={{ flexShrink: 0, marginTop: 2 }}><Icon name="location" size={14} /></span>

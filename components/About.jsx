@@ -2,7 +2,7 @@ function About() {
   const pillars = [
     { icon: "sun", title: "Tecnologia brushless", desc: "Equipamentos sem escovas de carvão, com motor de alta durabilidade e zero uso de químicos." },
     { icon: "shield", title: "Suporte técnico real", desc: "Time de engenheiros disponível via WhatsApp para dúvidas de campo, ajuste de equipamento e pós-venda." },
-    { icon: "wrench", title: "Do Sul para o Brasil", desc: "Sede em Jaraguá do Sul/SC, com entrega e atendimento para todo o território nacional." },
+    { icon: "bolt", title: "Solar, Agro e Urban", desc: "Do painel solar à estufa agrícola — a mesma tecnologia brushless serve qualquer superfície lisa." },
   ];
   return (
     <section id="sobre" style={{ background: "var(--pc-darker)", padding: "80px 0", position: "relative", overflow: "hidden" }}>
