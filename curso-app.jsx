@@ -1,5 +1,47 @@
 // ===== CURSO PAGE — Treinamento Painel Clean =====
 
+function CursoNav() {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const f = () => setScrolled(window.scrollY > 12);
+    window.addEventListener("scroll", f);
+    return () => window.removeEventListener("scroll", f);
+  }, []);
+  return (
+    <header style={{
+      position: "fixed", top: 0, left: 0, right: 0, zIndex: 60,
+      background: scrolled ? "rgba(12,40,31,0.97)" : "transparent",
+      backdropFilter: scrolled ? "blur(14px)" : "none",
+      WebkitBackdropFilter: scrolled ? "blur(14px)" : "none",
+      borderBottom: scrolled ? "1px solid var(--border-on-dark)" : "1px solid transparent",
+      transition: "all 240ms var(--ease-out)",
+    }}>
+      <div className="container" style={{ height: 76, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <Logo />
+        <nav className="curso-nav-links" style={{ display: "flex", alignItems: "center", gap: 32 }}>
+          <a href="/" style={{ color: "var(--fg-4)", fontSize: 13, fontWeight: 500, display: "flex", alignItems: "center", gap: 6, transition: "color 200ms" }}
+            onMouseEnter={e => e.currentTarget.style.color = "white"}
+            onMouseLeave={e => e.currentTarget.style.color = "var(--fg-4)"}>
+            <Icon name="arrowLeft" size={13} />Painel Clean
+          </a>
+          {[{ label: "Módulos", href: "#modulos" }, { label: "Calculadora", href: "#calculadora" }, { label: "Depoimentos", href: "#depoimentos" }].map(l => (
+            <a key={l.href} href={l.href} style={{ color: "var(--fg-2)", fontSize: 14, fontWeight: 500, transition: "color 200ms" }}
+              onMouseEnter={e => e.currentTarget.style.color = "white"}
+              onMouseLeave={e => e.currentTarget.style.color = "var(--fg-2)"}>{l.label}</a>
+          ))}
+        </nav>
+        <a href={wa("Olá! Quero começar o treinamento Painel Clean agora.")} target="_blank" rel="noopener noreferrer"
+          style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--pc-green)", color: "var(--pc-dark)", fontWeight: 700, fontSize: 14, padding: "11px 18px", borderRadius: "var(--radius-pill)", transition: "all 180ms" }}
+          onMouseEnter={e => { e.currentTarget.style.background = "#4FE090"; e.currentTarget.style.transform = "translateY(-1px)"; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "var(--pc-green)"; e.currentTarget.style.transform = "translateY(0)"; }}>
+          <WhatsBrand size={14} /> Começar agora
+        </a>
+      </div>
+      <style>{`@media (max-width: 860px) { .curso-nav-links { display: none !important; } }`}</style>
+    </header>
+  );
+}
+
 const cursoModules = [
   { n: "01", t: "Operação do equipamento", d: "Setup, montagem e manutenção das escovas G5/D5/S5. Boas práticas para preservar o motor brushless e maximizar a vida útil.", h: "42min" },
   { n: "02", t: "Segurança em altura (NR-35)", d: "EPIs obrigatórios, ancoragem e procedimentos para trabalho seguro em telhados, coberturas e fachadas de qualquer tipo.", h: "56min" },
@@ -179,17 +221,26 @@ function CursoForWho() {
 }
 
 function CursoCalculator() {
-  const [usinas, setUsinas] = useState(8);
-  const [placas, setPlacas] = useState(20);
-  const [preco, setPreco] = useState(22);
+  const mkts = {
+    solar: { label: "Solar", icon: "sun",       l0: "Clientes/usinas por mês", max0: 30, l1: "Painéis por usina",   min1: 6,   max1: 100,  step1: 2,  l2: "Preço por painel",  min2: 15, max2: 30,  d0: 8, d1: 20,  d2: 22, unit: (c,u) => `${(c*u).toLocaleString("pt-BR")} painéis` },
+    agro:  { label: "Agro",  icon: "sparkles",  l0: "Clientes por mês",        max0: 20, l1: "m² por estufa",      min1: 100, max1: 2000, step1: 50, l2: "Preço por m²",      min2: 3,  max2: 10,  d0: 5, d1: 400, d2: 5,  unit: (c,u) => `${(c*u).toLocaleString("pt-BR")} m²` },
+    urban: { label: "Urban", icon: "building",  l0: "Serviços por mês",        max0: 15, l1: "m² por serviço",     min1: 20,  max1: 500,  step1: 10, l2: "Preço por m²",      min2: 5,  max2: 15,  d0: 4, d1: 100, d2: 8,  unit: (c,u) => `${(c*u).toLocaleString("pt-BR")} m²` },
+  };
+  const [mkt, setMkt] = useState("solar");
+  const [c0, setC0] = useState(8);
+  const [c1, setC1] = useState(20);
+  const [c2, setC2] = useState(22);
+  const m = mkts[mkt];
 
-  const mensal = usinas * placas * preco;
+  const handleMkt = (key) => { setMkt(key); setC0(mkts[key].d0); setC1(mkts[key].d1); setC2(mkts[key].d2); };
+
+  const mensal = c0 * c1 * c2;
   const anual = mensal * 12;
 
   const frase = mensal < 2000
     ? "Uma boa renda extra já no primeiro mês."
     : mensal < 4000
-    ? "Você já tem base para viver de limpeza solar."
+    ? "Você já tem base para viver de limpeza profissional."
     : mensal < 8000
     ? "Uma micro-empresa nas suas mãos."
     : "Hora de montar equipe e escalar.";
@@ -197,47 +248,59 @@ function CursoCalculator() {
   return (
     <section id="calculadora" style={{ background: "var(--pc-cream)", padding: "96px 0", borderTop: "1px solid var(--border-on-cream)" }}>
       <div className="container">
+        {/* Market toggle */}
+        <div style={{ display: "flex", justifyContent: "center", marginBottom: 52 }}>
+          <div style={{ display: "inline-flex", padding: 4, background: "white", border: "1px solid var(--border-on-cream)", borderRadius: "var(--radius-pill)", gap: 4 }}>
+            {Object.entries(mkts).map(([key, v]) => (
+              <button key={key} onClick={() => handleMkt(key)}
+                style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "10px 20px", borderRadius: "var(--radius-pill)", background: mkt === key ? "var(--pc-dark)" : "transparent", color: mkt === key ? "white" : "var(--fg-on-cream-3)", fontWeight: 600, fontSize: 14, transition: "all 200ms" }}>
+                <Icon name={v.icon} size={14} stroke={2} />{v.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className="calc-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1.1fr)", gap: 56, alignItems: "center" }}>
           <div>
-            <div className="eyebrow" style={{ color: "var(--pc-green-2)", marginBottom: 18 }}>Calculadora de faturamento</div>
+            <div className="eyebrow" style={{ color: "var(--pc-green-2)", marginBottom: 18 }}>Calculadora de faturamento · {m.label}</div>
             <h2 className="display" style={{ fontSize: "clamp(32px, 4vw, 50px)", lineHeight: 1.06, color: "var(--fg-on-cream-1)", margin: "0 0 20px" }}>
               Quanto você pode<br /><span style={{ color: "var(--fg-on-cream-3)" }}>ganhar por mês?</span>
             </h2>
             <p style={{ font: "var(--body-lg)", color: "var(--fg-on-cream-2)", margin: "0 0 36px", maxWidth: 440 }}>
-              Ajuste os parâmetros e veja uma estimativa do seu faturamento mensal como técnico de limpeza profissional.
+              Ajuste os parâmetros para o mercado <strong>{m.label}</strong> e veja uma estimativa do seu faturamento mensal.
             </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: 28, padding: "28px 28px", background: "white", border: "1px solid var(--border-on-cream)", borderRadius: "var(--radius-xl)" }}>
+            <div key={mkt} style={{ display: "flex", flexDirection: "column", gap: 28, padding: "28px 28px", background: "white", border: "1px solid var(--border-on-cream)", borderRadius: "var(--radius-xl)" }}>
               <div>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 12 }}>
-                  <label style={{ fontSize: 13, fontWeight: 600, color: "var(--fg-on-cream-2)", textTransform: "uppercase", letterSpacing: "0.08em" }}>Usinas por mês</label>
-                  <span className="display" style={{ fontSize: 28, fontWeight: 600, color: "var(--pc-dark)", letterSpacing: "-0.02em" }}>{usinas}</span>
+                  <label style={{ fontSize: 13, fontWeight: 600, color: "var(--fg-on-cream-2)", textTransform: "uppercase", letterSpacing: "0.08em" }}>{m.l0}</label>
+                  <span className="display" style={{ fontSize: 28, fontWeight: 600, color: "var(--pc-dark)", letterSpacing: "-0.02em" }}>{c0}</span>
                 </div>
-                <input type="range" min="1" max="30" step="1" value={usinas} onChange={e => setUsinas(+e.target.value)}
+                <input type="range" min="1" max={m.max0} step="1" value={c0} onChange={e => setC0(+e.target.value)}
                   style={{ width: "100%", accentColor: "var(--pc-green-2)" }} />
                 <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "var(--fg-on-cream-3)", marginTop: 4 }}>
-                  <span>1</span><span>30 usinas</span>
+                  <span>1</span><span>{m.max0}</span>
                 </div>
               </div>
               <div>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 12 }}>
-                  <label style={{ fontSize: 13, fontWeight: 600, color: "var(--fg-on-cream-2)", textTransform: "uppercase", letterSpacing: "0.08em" }}>Placas por usina</label>
-                  <span className="display" style={{ fontSize: 28, fontWeight: 600, color: "var(--pc-dark)", letterSpacing: "-0.02em" }}>{placas}</span>
+                  <label style={{ fontSize: 13, fontWeight: 600, color: "var(--fg-on-cream-2)", textTransform: "uppercase", letterSpacing: "0.08em" }}>{m.l1}</label>
+                  <span className="display" style={{ fontSize: 28, fontWeight: 600, color: "var(--pc-dark)", letterSpacing: "-0.02em" }}>{c1}</span>
                 </div>
-                <input type="range" min="6" max="100" step="2" value={placas} onChange={e => setPlacas(+e.target.value)}
+                <input type="range" min={m.min1} max={m.max1} step={m.step1} value={c1} onChange={e => setC1(+e.target.value)}
                   style={{ width: "100%", accentColor: "var(--pc-green-2)" }} />
                 <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "var(--fg-on-cream-3)", marginTop: 4 }}>
-                  <span>6</span><span>residencial · comercial · usina</span><span>100</span>
+                  <span>{m.min1}</span><span>{m.max1}</span>
                 </div>
               </div>
               <div>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 12 }}>
-                  <label style={{ fontSize: 13, fontWeight: 600, color: "var(--fg-on-cream-2)", textTransform: "uppercase", letterSpacing: "0.08em" }}>Preço por placa</label>
-                  <span className="display" style={{ fontSize: 28, fontWeight: 600, color: "var(--pc-dark)", letterSpacing: "-0.02em" }}>R$ {preco}</span>
+                  <label style={{ fontSize: 13, fontWeight: 600, color: "var(--fg-on-cream-2)", textTransform: "uppercase", letterSpacing: "0.08em" }}>{m.l2}</label>
+                  <span className="display" style={{ fontSize: 28, fontWeight: 600, color: "var(--pc-dark)", letterSpacing: "-0.02em" }}>R$ {c2}</span>
                 </div>
-                <input type="range" min="15" max="30" step="1" value={preco} onChange={e => setPreco(+e.target.value)}
+                <input type="range" min={m.min2} max={m.max2} step="1" value={c2} onChange={e => setC2(+e.target.value)}
                   style={{ width: "100%", accentColor: "var(--pc-green-2)" }} />
                 <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "var(--fg-on-cream-3)", marginTop: 4 }}>
-                  <span>R$ 15</span><span>R$ 30</span>
+                  <span>R$ {m.min2}</span><span>R$ {m.max2}</span>
                 </div>
               </div>
             </div>
@@ -246,10 +309,10 @@ function CursoCalculator() {
           <div style={{ background: "linear-gradient(155deg, var(--pc-dark) 0%, var(--pc-darker) 100%)", color: "white", borderRadius: "var(--radius-2xl)", padding: "44px 40px", position: "relative", overflow: "hidden", border: "1px solid var(--border-accent)" }}>
             <div style={{ position: "absolute", top: -80, right: -80, width: 240, height: 240, background: "radial-gradient(circle, rgba(58,213,128,0.18) 0%, transparent 70%)", pointerEvents: "none" }} />
             <div style={{ position: "relative" }}>
-              <div className="eyebrow no-rule" style={{ color: "var(--pc-green)", marginBottom: 24 }}>Sua estimativa</div>
+              <div className="eyebrow no-rule" style={{ color: "var(--pc-green)", marginBottom: 24 }}>Sua estimativa · {m.label}</div>
               <div style={{ paddingBottom: 20, marginBottom: 20, borderBottom: "1px solid var(--border-on-dark)" }}>
-                <div style={{ font: "var(--body-sm)", color: "var(--fg-3)", marginBottom: 6 }}>Total de placas/mês</div>
-                <div className="display" style={{ fontSize: 28, fontWeight: 600, color: "white", letterSpacing: "-0.02em" }}>{(usinas * placas).toLocaleString("pt-BR")} placas</div>
+                <div style={{ font: "var(--body-sm)", color: "var(--fg-3)", marginBottom: 6 }}>Volume mensal</div>
+                <div className="display" style={{ fontSize: 28, fontWeight: 600, color: "white", letterSpacing: "-0.02em" }}>{m.unit(c0, c1)}</div>
               </div>
               <div style={{ paddingBottom: 20, marginBottom: 20, borderBottom: "1px solid var(--border-on-dark)" }}>
                 <div style={{ font: "var(--body-sm)", color: "var(--fg-3)", marginBottom: 6 }}>Faturamento mensal estimado</div>
@@ -262,7 +325,7 @@ function CursoCalculator() {
               <div style={{ padding: "16px 20px", background: "var(--accent-fill)", border: "1px solid var(--border-accent)", borderRadius: "var(--radius-md)", marginBottom: 28 }}>
                 <p style={{ margin: 0, color: "var(--pc-green)", fontSize: 14, fontWeight: 600, lineHeight: 1.5 }}>{frase}</p>
               </div>
-              <a href={wa(`Olá! Simulei meu faturamento: R$ ${mensal.toLocaleString("pt-BR")}/mês atendendo ${usinas} usinas. Quero começar o treinamento!`)} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ width: "100%", justifyContent: "center" }}>
+              <a href={wa(`Olá! Simulei meu faturamento: R$ ${mensal.toLocaleString("pt-BR")}/mês (mercado ${m.label}). Quero começar o treinamento!`)} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ width: "100%", justifyContent: "center" }}>
                 Quero esse faturamento<Icon name="arrowRight" size={16} />
               </a>
               <div style={{ marginTop: 16, fontSize: 11.5, color: "var(--fg-4)", textAlign: "center" }}>
@@ -328,7 +391,7 @@ function CursoIncludes() {
 
 function CursoTestimonials() {
   return (
-    <section style={{ background: "var(--pc-cream)", padding: "96px 0", borderTop: "1px solid var(--border-on-cream)" }}>
+    <section id="depoimentos" style={{ background: "var(--pc-cream)", padding: "96px 0", borderTop: "1px solid var(--border-on-cream)" }}>
       <div className="container">
         <div style={{ textAlign: "center", marginBottom: 52 }}>
           <div className="eyebrow center" style={{ color: "var(--pc-green-2)", marginBottom: 16 }}>Depoimentos</div>
@@ -387,7 +450,7 @@ function CursoCtaFinal() {
 function CursoApp() {
   return (
     <div>
-      <Nav />
+      <CursoNav />
       <CursoHero />
       <CursoModules />
       <CursoForWho />

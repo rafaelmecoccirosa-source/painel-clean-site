@@ -7,11 +7,8 @@ const escovas = [
     slug: "escova-rotativa-g5",
     tag: "Mais rápida",
     tagIcon: "bolt",
-    tagBg: "rgba(245,158,11,0.16)",
-    tagColor: "#F59E0B",
-    tagBorder: "rgba(245,158,11,0.30)",
     image: "public/images/product-g5-1.jpg",
-    headline: "Velocidade máxima para grandes usinas.",
+    headline: "Velocidade máxima para grandes áreas.",
     specs: [
       { k: "Velocidade", v: "260 painéis/h" },
       { k: "Motor", v: "Brushless 350 RPM" },
@@ -41,9 +38,6 @@ const escovas = [
     slug: "escova-solo-s5",
     tag: "Acesso difícil",
     tagIcon: "home",
-    tagBg: "rgba(96,165,250,0.16)",
-    tagColor: "#60A5FA",
-    tagBorder: "rgba(96,165,250,0.30)",
     image: "public/images/product-s5-1.jpg",
     headline: "Chega onde outras escovas não alcançam.",
     specs: [
@@ -170,7 +164,7 @@ function ProdutosApp() {
           <div style={{ maxWidth: 680 }}>
             <div className="eyebrow" style={{ marginBottom: 20 }}>Linha profissional</div>
             <h1 className="display" style={{ fontSize: "clamp(36px, 5vw, 64px)", lineHeight: 1.02, color: "white", margin: "0 0 20px", letterSpacing: "-0.03em" }}>
-              Equipamentos feitos<br /><span style={{ color: "var(--pc-green)" }}>para quem vive de solar.</span>
+              Equipamentos feitos<br /><span style={{ color: "var(--pc-green)" }}>para limpeza profissional.</span>
             </h1>
             <p style={{ font: "var(--body-lg)", color: "var(--fg-3)", maxWidth: 540, margin: 0, lineHeight: 1.7 }}>
               Motor brushless, sem químicos, operação contínua. Escolha o equipamento certo para o seu tipo de atendimento.
