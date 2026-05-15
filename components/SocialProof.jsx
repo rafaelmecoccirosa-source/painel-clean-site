@@ -6,8 +6,8 @@ function SocialProof() {
     { k: "4,9", v: "avaliação média" },
   ];
   const quotes = [
-    { who: "Marcos Vieira", role: "Técnico solar · Joinville/SC", text: "Em 2 meses paguei o investimento na D5. Hoje atendo 4 usinas fixas e tenho lista de espera. O ticket subiu 40%." },
-    { who: "Paulo Andrade", role: "Dono de usina · Indaial/SC", text: "Antes limpava com pano e mangueira, perdia o dia inteiro. Com técnico Painel Clean a usina volta a 100% em 2h." },
+    { who: "Marcos Vieira", role: "Técnico credenciado · Joinville/SC", text: "Em 2 meses paguei o investimento na D5. Hoje atendo 4 clientes fixos e tenho lista de espera. O ticket subiu 40%." },
+    { who: "Paulo Andrade", role: "Dono de usina · Indaial/SC", text: "Antes limpava com pano e mangueira, perdia o dia inteiro. Com técnico Painel Clean a instalação volta a 100% em 2h." },
     { who: "Camila Reis", role: "Instaladora · Curitiba/PR", text: "O treinamento entrega o que promete. Em uma semana eu já estava precificando e fechando contratos." },
   ];
   return (

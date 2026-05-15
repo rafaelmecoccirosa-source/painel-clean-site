@@ -12,13 +12,13 @@ function About() {
           <div>
             <div className="eyebrow" style={{ marginBottom: 18 }}>Quem somos</div>
             <h2 className="display" style={{ fontSize: "clamp(32px, 3.8vw, 52px)", lineHeight: 1.06, color: "white", margin: "0 0 20px" }}>
-              Feitos para quem<br /><span style={{ color: "var(--pc-green)" }}>vive de solar.</span>
+              Feitos para quem<br /><span style={{ color: "var(--pc-green)" }}>vive de limpeza profissional.</span>
             </h2>
           </div>
           <p style={{ font: "var(--body-lg)", color: "var(--fg-3)", lineHeight: 1.75, margin: 0 }}>
-            A Painel Clean desenvolve equipamentos e soluções para limpeza profissional de painéis fotovoltaicos.
-            Atendemos de norte a sul do Brasil — com escovas brushless, suporte técnico dedicado e uma plataforma
-            que conecta técnicos autônomos e donos de usinas. Nosso compromisso é simples: mais geração, menos trabalho manual.
+            A Painel Clean desenvolve equipamentos e soluções para limpeza profissional de superfícies lisas — painéis solares, estufas agrícolas e fachadas.
+            Atendemos de norte a sul do Brasil com escovas brushless, suporte técnico dedicado e uma plataforma que conecta técnicos e clientes.
+            Nosso compromisso é simples: superfícies limpas, operação eficiente.
           </p>
         </div>
         <div className="about-pillars" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>

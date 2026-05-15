@@ -56,7 +56,7 @@ function Footer() {
         <div style={{ paddingTop: 28, borderTop: "1px solid var(--border-on-dark)", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, flexWrap: "wrap", fontSize: 13, color: "var(--fg-4)" }}>
           <div>
             <span>© 2026 Painel Clean. Todos os direitos reservados.</span>
-            <span style={{ display: "block", marginTop: 4, fontSize: 12, color: "var(--fg-5)" }}>Desenvolvido para o setor solar brasileiro.</span>
+            <span style={{ display: "block", marginTop: 4, fontSize: 12, color: "var(--fg-5)" }}>Fabricado no Brasil para limpeza profissional de qualquer superfície.</span>
           </div>
           <span style={{ display: "flex", gap: 24, flexWrap: "wrap", justifyContent: "flex-end" }}>
             <a href="#" style={{ color: "inherit" }}>Termos</a>

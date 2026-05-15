@@ -1,7 +1,7 @@
 const trainingModules = [
   { n: "01", t: "Operação do equipamento", d: "Setup, montagem e manutenção das escovas G5/D5/S5. Boas práticas para preservar o motor brushless.", h: "42min" },
-  { n: "02", t: "Segurança em altura (NR-35)", d: "EPIs, ancoragem e procedimentos para trabalho seguro em telhados residenciais e usinas.", h: "56min" },
-  { n: "03", t: "Precificação e propostas", d: "Como precificar por painel, por kWp e por usina. Templates de proposta e contrato.", h: "38min" },
+  { n: "02", t: "Segurança em altura (NR-35)", d: "EPIs, ancoragem e procedimentos para trabalho seguro em telhados, coberturas e fachadas.", h: "56min" },
+  { n: "03", t: "Precificação e propostas", d: "Como precificar por superfície, por m² e por contrato recorrente. Templates de proposta e contrato.", h: "38min" },
   { n: "04", t: "Captação de clientes", d: "Prospecção via Instagram, WhatsApp e parcerias com integradores. Scripts de abordagem prontos.", h: "45min" },
   { n: "05", t: "Relatórios e fidelização", d: "Como entregar laudos profissionais e converter o cliente em contrato anual recorrente.", h: "31min" },
 ];
@@ -11,7 +11,7 @@ function Training() {
   const detailed = t.trainingDetail === "expanded";
   const features = [
     { icon: "shield", t: "Acesso vitalício", d: "Estude no seu ritmo, sem prazo." },
-    { icon: "check", t: "Certificado", d: "Conclusão reconhecida por usinas." },
+    { icon: "check", t: "Certificado", d: "Certificado de conclusão profissional." },
     { icon: "headset", t: "Suporte WhatsApp", d: "Tire dúvidas com técnicos sêniores." },
     { icon: "refresh", t: "Sempre atualizado", d: "Material renovado a cada novo módulo." },
   ];

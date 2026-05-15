@@ -13,7 +13,10 @@ function Platform() {
         <div style={{ textAlign: "center", maxWidth: 680, margin: "0 auto 56px" }}>
           <div className="eyebrow no-rule" style={{ color: "var(--pc-green-2)", justifyContent: "center", marginBottom: 18 }}>Ecossistema Painel Clean</div>
           <h2 className="display" style={{ fontSize: "clamp(36px, 4.6vw, 60px)", lineHeight: 1.05, color: "var(--fg-on-cream-1)", margin: "0 0 18px" }}>Plataforma de serviços</h2>
-          <p style={{ font: "var(--body-lg)", color: "var(--fg-on-cream-2)", margin: 0 }}>Conectamos donos de usinas a técnicos qualificados em todo o Brasil. Marketplace verificado, com pagamento protegido.</p>
+          <p style={{ font: "var(--body-lg)", color: "var(--fg-on-cream-2)", margin: "0 0 16px" }}>Conectamos donos de usinas a técnicos qualificados em todo o Brasil. Marketplace verificado, com pagamento protegido.</p>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "5px 12px", borderRadius: "var(--radius-pill)", background: "var(--accent-fill)", border: "1px solid var(--border-accent)", color: "var(--pc-green)", fontSize: 12, fontWeight: 600, letterSpacing: "0.04em" }}>
+            <Icon name="sun" size={12} stroke={2} />Para donos de usinas solares
+          </div>
         </div>
 
         <div style={{ display: "flex", justifyContent: "center", marginBottom: 40 }}>
