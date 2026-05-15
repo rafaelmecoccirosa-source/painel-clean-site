@@ -26,7 +26,7 @@ const heroSlides = [
     description: "A mesma tecnologia brushless dos painéis solares aplicada em coberturas agrícolas. Sem químicos, sem dano ao policarbonato.",
     primary: { label: "Falar com especialista", href: wa("Olá! Tenho interesse na limpeza de estufas agrícolas com a Painel Clean Agro.") },
     secondary: { label: "Ver aplicações", href: "/#aplicacoes" },
-    image: "public/images/hero-agro.jpg",
+    image: "public/images/hero-agro.png",
     meta: [{ k: "+25%", v: "luz transmitida" }, { k: "0", v: "químicos" }, { k: "7,5m", v: "de alcance" }],
   },
 ];
