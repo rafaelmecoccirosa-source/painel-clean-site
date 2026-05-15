@@ -12,12 +12,11 @@ function Nav() {
   }, [open]);
   const links = [
     { label: "Produtos", href: "/produtos" },
-    { label: "Aplicações", href: "#aplicacoes" },
-    { label: "Comparativo", href: "#comparativo" },
-    { label: "Treinamento", href: "#treinamento" },
+    { label: "Aplicações", href: "/#aplicacoes" },
+    { label: "Comparativo", href: "/#comparativo" },
     { label: "Curso", href: "/curso" },
-    { label: "Plataforma", href: "#plataforma" },
-    { label: "Calculadora", href: "#roi" },
+    { label: "Plataforma", href: "/#plataforma" },
+    { label: "Calculadora", href: "/#roi" },
   ];
   return (
     <header style={{

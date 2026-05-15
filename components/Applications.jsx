@@ -1,22 +1,22 @@
 function Applications() {
   const apps = [
     {
-      badge: "Mercado principal",
+      badge: "Painel Clean Solar",
       icon: "sun",
-      headline: "Painéis solares limpos geram até 30% mais energia",
-      desc: "Placas sujas perdem eficiência rapidamente. Com a escova semiautomática, um técnico limpa centenas de painéis por hora, sem produtos químicos e com mínimo consumo de água.",
+      headline: "Painéis sujos perdem até 30% de geração — todo mês",
+      desc: "Um técnico limpa 260 painéis por hora com a escova G5 — sem produtos químicos, sem risco ao vidro fotovoltaico. Mais geração, menor custo operacional, cliente fidelizado.",
     },
     {
       badge: "Painel Clean Agro",
       icon: "sparkles",
-      headline: "Estufas limpas produzem mais e melhor",
-      desc: "Coberturas de policarbonato e vidro bloqueiam luz com sujeira acumulada. A limpeza regular aumenta a produtividade das culturas — flores, frutas e hortaliças precisam de luz máxima para crescer.",
+      headline: "10% menos luz = colheita comprometida",
+      desc: "Coberturas de policarbonato e vidro bloqueiam luz com sujeira acumulada. A limpeza periódica mantém a transmitância máxima — flores, frutas e hortaliças respondem diretamente à qualidade da luz.",
     },
     {
       badge: "Painel Clean Urban",
       icon: "building",
-      headline: "Fachadas e coberturas limpas, sem andaimes",
-      desc: "Telhas translúcidas, sheds industriais e fachadas de vidro acumulam sujeira e perdem transparência. O cabo extensível até 7,5m alcança alturas sem necessidade de equipamentos especiais.",
+      headline: "7,5m de alcance — sem andaime, sem paralisação",
+      desc: "Sheds industriais, telhas translúcidas e fachadas de vidro acumulam sujeira rapidamente. O cabo telescópico chega onde escada não chega, com água filtrada que não mancha nem risca.",
     },
   ];
   return (

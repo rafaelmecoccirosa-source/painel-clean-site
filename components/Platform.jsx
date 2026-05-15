@@ -1,10 +1,10 @@
 function Platform() {
   const [tab, setTab] = useState(0);
   const tabs = [
-    { label: "Para donos de usina", icon: "home", eyebrow: "Cliente", title: "Sua usina monitorada todo mês.", desc: "Publique sua usina e receba orçamentos de técnicos credenciados na sua região. Histórico de limpezas e laudos de desempenho.", cta: "Cadastrar usina",
-      stats: [{ k: "13", v: "cidades atendidas" }, { k: "+30%", v: "ganho médio" }, { k: "24h", v: "resposta média" }] },
-    { label: "Para técnicos", icon: "wrench", eyebrow: "Técnico", title: "Carteira recorrente, sem prospecção.", desc: "Receba chamados na sua área, gerencie agenda e emita relatórios profissionais. Foque na operação enquanto a plataforma traz clientes.", cta: "Quero ser credenciado",
-      stats: [{ k: "R$ 280", v: "ticket médio" }, { k: "92%", v: "retenção" }, { k: "Pix", v: "repasse rápido" }] },
+    { label: "Para donos de usina", icon: "home", eyebrow: "Cliente", title: "Sua usina monitorada e limpa, todo mês.", desc: "Assine um plano e receba limpezas programadas, relatórios mensais de geração e alertas quando a eficiência cair. Você vê o resultado — sem esforço.", cta: "Assinar um plano",
+      stats: [{ k: "R$ 30", v: "plano básico/mês" }, { k: "+11%", v: "geração após limpeza" }, { k: "13", v: "cidades atendidas" }] },
+    { label: "Para técnicos", icon: "wrench", eyebrow: "Técnico", title: "Carteira recorrente, sem prospecção.", desc: "Receba chamados de limpeza na sua área, gerencie sua agenda e emita relatórios com fotos. Foque na operação enquanto a plataforma traz clientes.", cta: "Quero ser credenciado",
+      stats: [{ k: "75%", v: "repasse por serviço" }, { k: "R$ 280", v: "ticket médio" }, { k: "Pix", v: "repasse rápido" }] },
   ];
   const t = tabs[tab];
   return (
@@ -13,10 +13,7 @@ function Platform() {
         <div style={{ textAlign: "center", maxWidth: 680, margin: "0 auto 56px" }}>
           <div className="eyebrow no-rule" style={{ color: "var(--pc-green-2)", justifyContent: "center", marginBottom: 18 }}>Ecossistema Painel Clean</div>
           <h2 className="display" style={{ fontSize: "clamp(36px, 4.6vw, 60px)", lineHeight: 1.05, color: "var(--fg-on-cream-1)", margin: "0 0 18px" }}>Plataforma de serviços</h2>
-          <p style={{ font: "var(--body-lg)", color: "var(--fg-on-cream-2)", margin: "0 0 16px" }}>Conectamos donos de usinas a técnicos qualificados em todo o Brasil. Marketplace verificado, com pagamento protegido.</p>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "5px 12px", borderRadius: "var(--radius-pill)", background: "var(--accent-fill)", border: "1px solid var(--border-accent)", color: "var(--pc-green)", fontSize: 12, fontWeight: 600, letterSpacing: "0.04em" }}>
-            <Icon name="sun" size={12} stroke={2} />Para donos de usinas solares
-          </div>
+          <p style={{ font: "var(--body-lg)", color: "var(--fg-on-cream-2)", margin: 0 }}>Assinatura mensal com limpezas programadas e monitoramento de geração. O cliente vê o valor todo mês — sem churn, sem prospecção.</p>
         </div>
 
         <div style={{ display: "flex", justifyContent: "center", marginBottom: 40 }}>
@@ -34,7 +31,7 @@ function Platform() {
             <div style={{ font: "var(--label-sm)", letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--pc-green-2)", marginBottom: 16 }}>{t.eyebrow}</div>
             <h3 className="display" style={{ fontSize: "clamp(28px, 3vw, 38px)", lineHeight: 1.15, color: "var(--fg-on-cream-1)", margin: "0 0 20px" }}>{t.title}</h3>
             <p style={{ font: "var(--body)", color: "var(--fg-on-cream-2)", margin: "0 0 36px" }}>{t.desc}</p>
-            <a href="https://painel-clean-v2.vercel.app" target="_blank" rel="noopener noreferrer" className="btn-primary">{t.cta}<Icon name="arrowRight" size={16} /></a>
+            <a href="https://painel-clean-mrr.vercel.app" target="_blank" rel="noopener noreferrer" className="btn-primary">{t.cta}<Icon name="arrowRight" size={16} /></a>
           </div>
 
           <div style={{ background: "linear-gradient(155deg, var(--pc-dark) 0%, var(--pc-darker) 100%)", padding: "56px 52px", color: "white", display: "flex", flexDirection: "column", justifyContent: "center", position: "relative", overflow: "hidden" }}>

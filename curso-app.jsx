@@ -2,8 +2,8 @@
 
 const cursoModules = [
   { n: "01", t: "Operação do equipamento", d: "Setup, montagem e manutenção das escovas G5/D5/S5. Boas práticas para preservar o motor brushless e maximizar a vida útil.", h: "42min" },
-  { n: "02", t: "Segurança em altura (NR-35)", d: "EPIs obrigatórios, ancoragem e procedimentos para trabalho seguro em telhados residenciais e usinas de grande porte.", h: "56min" },
-  { n: "03", t: "Precificação e propostas", d: "Como precificar por painel, por kWp e por usina. Templates de proposta e contrato prontos para usar.", h: "38min" },
+  { n: "02", t: "Segurança em altura (NR-35)", d: "EPIs obrigatórios, ancoragem e procedimentos para trabalho seguro em telhados, coberturas e fachadas de qualquer tipo.", h: "56min" },
+  { n: "03", t: "Precificação e propostas", d: "Como precificar por superfície, por m² e por contrato recorrente. Templates de proposta e contrato prontos para usar.", h: "38min" },
   { n: "04", t: "Captação de clientes", d: "Prospecção via Instagram, WhatsApp e parcerias com integradores. Scripts de abordagem testados em campo.", h: "45min" },
   { n: "05", t: "Relatórios e fidelização", d: "Como entregar laudos profissionais e converter o cliente em contrato anual recorrente, gerando receita previsível.", h: "31min" },
 ];
@@ -54,7 +54,7 @@ function CursoHero() {
               <span style={{ display: "block", color: "var(--pc-green)" }}>em uma semana.</span>
             </h1>
             <p style={{ font: "var(--body-lg)", color: "var(--fg-3)", maxWidth: 540, margin: "0 0 40px", lineHeight: 1.7 }}>
-              5 módulos práticos para operar equipamentos brushless, precificar corretamente, captar clientes e criar uma renda previsível com limpeza de painéis solares.
+              5 módulos práticos para operar equipamentos brushless, precificar corretamente, captar clientes e criar uma renda previsível com limpeza de superfícies profissional.
             </p>
             <div style={{ display: "flex", gap: 14, flexWrap: "wrap", alignItems: "center", marginBottom: 44 }}>
               <a href={wa("Olá! Quero começar o treinamento Painel Clean agora.")} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ fontSize: 16, padding: "18px 30px" }}>
@@ -204,7 +204,7 @@ function CursoCalculator() {
               Quanto você pode<br /><span style={{ color: "var(--fg-on-cream-3)" }}>ganhar por mês?</span>
             </h2>
             <p style={{ font: "var(--body-lg)", color: "var(--fg-on-cream-2)", margin: "0 0 36px", maxWidth: 440 }}>
-              Ajuste os parâmetros e veja uma estimativa do seu faturamento mensal como técnico de limpeza solar.
+              Ajuste os parâmetros e veja uma estimativa do seu faturamento mensal como técnico de limpeza profissional.
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: 28, padding: "28px 28px", background: "white", border: "1px solid var(--border-on-cream)", borderRadius: "var(--radius-xl)" }}>
               <div>
