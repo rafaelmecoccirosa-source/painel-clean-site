@@ -20,14 +20,14 @@ const heroSlides = [
     meta: [{ k: "200", v: "painéis/h" }, { k: "350", v: "RPM brushless" }, { k: "7,5m", v: "de alcance" }],
   },
   {
-    eyebrow: "Linha profissional completa",
-    title: ["G5, D5 e S5.", "Uma escova para", "cada serviço."],
-    accentLine: 0,
-    description: "Da usina solar à estufa agrícola, a Painel Clean tem o equipamento certo para cada tipo de atendimento. Motor brushless, zero químicos.",
-    primary: { label: "Ver catálogo completo", href: "/produtos" },
-    secondary: { label: "Ver aplicações", href: "/#aplicacoes" },
-    image: "public/images/escovaseacessorios.png",
-    meta: [{ k: "3", v: "modelos" }, { k: "0", v: "químicos" }, { k: "12", v: "meses garantia" }],
+    eyebrow: "Painel Clean Agro",
+    title: ["Estufas mais limpas.", "Colheita mais", "produtiva."],
+    accentLine: 2,
+    description: "Coberturas de policarbonato e vidro bloqueiam até 10% da luz com sujeira acumulada. Limpeza periódica mantém a transmitância máxima — sem produtos químicos.",
+    primary: { label: "Ver aplicações", href: "/#aplicacoes" },
+    secondary: { label: "Falar com especialista", href: wa("Olá! Tenho interesse na Painel Clean para estufas agrícolas.") },
+    image: "public/images/hero-agro.png",
+    meta: [{ k: "10%", v: "mais luz" }, { k: "0", v: "químicos" }, { k: "7,5m", v: "de alcance" }],
   },
 ];
 
