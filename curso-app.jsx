@@ -118,7 +118,7 @@ function CursoHero() {
             <div style={{ position: "absolute", top: -80, right: -80, width: 240, height: 240, background: "radial-gradient(circle, rgba(58,213,128,0.18) 0%, transparent 70%)" }} />
             <div style={{ position: "relative" }}>
               <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 12px", borderRadius: "var(--radius-pill)", background: "var(--accent-fill)", border: "1px solid var(--border-accent)", color: "var(--pc-green)", font: "var(--label-sm)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 24 }}>
-                <Icon name="bolt" size={12} stroke={2} />Oferta de lançamento
+                <Icon name="bolt" size={12} stroke={2} />Acesso imediato
               </div>
               <div style={{ color: "var(--fg-3)", fontSize: 14, marginBottom: 4 }}>de <span style={{ textDecoration: "line-through" }}>R$ 197</span></div>
               <div className="display" style={{ fontSize: 64, fontWeight: 600, color: "var(--pc-green)", lineHeight: 1, letterSpacing: "-0.04em", marginBottom: 4 }}>R$ 39,90</div>
@@ -212,8 +212,8 @@ function CursoOutcomes() {
         <div className="outcomes-stats" style={{ display: "flex", gap: 0, background: "rgba(12,40,31,0.12)", borderRadius: "var(--radius-xl)", overflow: "hidden" }}>
           {[{ k: "212", v: "alunos formados" }, { k: "4,9★", v: "avaliação" }, { k: "3h28", v: "de conteúdo" }].map((s, i) => (
             <div key={i} style={{ flex: 1, padding: "24px 28px", borderLeft: i > 0 ? "1px solid rgba(12,40,31,0.15)" : "none", textAlign: "center" }}>
-              <div className="display" style={{ fontSize: 32, fontWeight: 700, color: "var(--pc-dark)", letterSpacing: "-0.02em", lineHeight: 1, marginBottom: 6 }}>{s.k}</div>
-              <div style={{ fontSize: 13, fontWeight: 500, color: "var(--pc-dark)", opacity: 0.65, textTransform: "uppercase", letterSpacing: "0.08em" }}>{s.v}</div>
+              <div className="display" style={{ fontSize: 36, fontWeight: 700, color: "var(--pc-dark)", letterSpacing: "-0.03em", lineHeight: 1, marginBottom: 6 }}>{s.k}</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "var(--pc-dark)", opacity: 0.6, textTransform: "uppercase", letterSpacing: "0.1em" }}>{s.v}</div>
             </div>
           ))}
         </div>
@@ -363,7 +363,7 @@ function CursoCalculator() {
           <div style={{ background: "linear-gradient(155deg, var(--pc-dark) 0%, var(--pc-darker) 100%)", color: "white", borderRadius: "var(--radius-2xl)", padding: "44px 40px", position: "relative", overflow: "hidden", border: "1px solid var(--border-accent)" }}>
             <div style={{ position: "absolute", top: -80, right: -80, width: 240, height: 240, background: "radial-gradient(circle, rgba(58,213,128,0.18) 0%, transparent 70%)", pointerEvents: "none" }} />
             <div style={{ position: "relative" }}>
-              <div className="eyebrow no-rule" style={{ color: "var(--pc-green)", marginBottom: 24 }}>Sua estimativa · {m.label}</div>
+              <div className="eyebrow no-rule" style={{ color: "var(--pc-green)", marginBottom: 24 }}>Seu faturamento estimado · {m.label}</div>
               <div style={{ paddingBottom: 20, marginBottom: 20, borderBottom: "1px solid var(--border-on-dark)" }}>
                 <div style={{ font: "var(--body-sm)", color: "var(--fg-3)", marginBottom: 6 }}>Volume mensal</div>
                 <div className="display" style={{ fontSize: 28, fontWeight: 600, color: "white", letterSpacing: "-0.02em" }}>{m.unit(c0, c1)}</div>
@@ -479,21 +479,25 @@ function CursoTestimonials() {
 
 function CursoCtaFinal() {
   return (
-    <section style={{ background: "var(--pc-darker)", padding: "96px 0", position: "relative", overflow: "hidden" }}>
-      <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 60% at 50% 50%, rgba(58,213,128,0.12), transparent 70%)", pointerEvents: "none" }} />
-      <div className="container" style={{ position: "relative", textAlign: "center", maxWidth: 680 }}>
-        <div className="eyebrow center" style={{ marginBottom: 20 }}>Comece hoje</div>
-        <h2 className="display" style={{ fontSize: "clamp(36px, 5vw, 64px)", lineHeight: 1.04, color: "white", margin: "0 0 20px", letterSpacing: "-0.03em" }}>
-          Seu primeiro cliente<br />pode ser essa semana.
+    <section style={{ background: "var(--pc-deepest)", padding: "120px 0", position: "relative", overflow: "hidden" }}>
+      <div style={{ position: "absolute", inset: 0, backgroundImage: "url('public/images/DNF_2612.jpg')", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.18 }} />
+      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, var(--pc-deepest) 0%, rgba(10,31,23,0.7) 30%, rgba(10,31,23,0.7) 70%, var(--pc-deepest) 100%)" }} />
+      <div className="container" style={{ position: "relative", textAlign: "center" }}>
+        <div className="eyebrow no-rule" style={{ justifyContent: "center", marginBottom: 22 }}>Comece hoje</div>
+        <h2 className="display" style={{ fontSize: "clamp(40px, 5.6vw, 72px)", lineHeight: 1.02, color: "white", margin: "0 auto 24px", maxWidth: 800, letterSpacing: "-0.03em" }}>
+          Seu primeiro cliente<br /><span style={{ color: "var(--pc-green)" }}>pode ser essa semana.</span>
         </h2>
-        <p style={{ font: "var(--body-lg)", color: "var(--fg-3)", margin: "0 0 40px", lineHeight: 1.7 }}>
-          Por R$ 39,90 você tem acesso a tudo que precisa para começar: equipamento, precificação, captação e suporte real. Sem mensalidade, sem prazo.
+        <p style={{ font: "var(--body-lg)", color: "var(--fg-3)", margin: "0 auto 44px", maxWidth: 560, lineHeight: 1.7 }}>
+          Por R$ 39,90 você tem acesso a tudo que precisa para começar: operação, precificação, captação e suporte real. Sem mensalidade, sem prazo.
         </p>
-        <a href={wa("Olá! Quero começar o treinamento Painel Clean agora.")} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ fontSize: 17, padding: "20px 40px" }}>
-          Quero começar agora por R$ 39,90<Icon name="arrowRight" size={18} />
-        </a>
+        <div style={{ display: "inline-flex", gap: 14, flexWrap: "wrap", justifyContent: "center" }}>
+          <a href={wa("Olá! Quero começar o treinamento Painel Clean agora.")} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: "18px 30px", fontSize: 16 }}>
+            <WhatsBrand size={16} />Quero começar agora — R$ 39,90
+          </a>
+          <a href="#modulos" className="btn-ghost-dark" style={{ padding: "18px 30px", fontSize: 16 }}>Ver os módulos</a>
+        </div>
         <div style={{ marginTop: 20, fontSize: 13, color: "var(--fg-4)" }}>
-          Acesso imediato · Reembolso em 7 dias · Pagamento via WhatsApp
+          Acesso imediato · Reembolso em 7 dias · Pagamento seguro
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 const trainingModules = [
   { n: "01", t: "Operação do equipamento", d: "Setup, montagem e manutenção das escovas G5/D5/S5. Boas práticas para preservar o motor brushless.", h: "42min" },
-  { n: "02", t: "Segurança em altura (NR-35)", d: "EPIs, ancoragem e procedimentos para trabalho seguro em telhados, coberturas e fachadas.", h: "56min" },
-  { n: "03", t: "Precificação e propostas", d: "Como precificar por superfície, por m² e por contrato recorrente. Templates de proposta e contrato.", h: "38min" },
+  { n: "02", t: "Segurança em altura (NR-35)", d: "EPIs, ancoragem e procedimentos para trabalho seguro em telhados residenciais e usinas.", h: "56min" },
+  { n: "03", t: "Precificação e propostas", d: "Como precificar por painel, por kWp e por usina. Templates de proposta e contrato.", h: "38min" },
   { n: "04", t: "Captação de clientes", d: "Prospecção via Instagram, WhatsApp e parcerias com integradores. Scripts de abordagem prontos.", h: "45min" },
   { n: "05", t: "Relatórios e fidelização", d: "Como entregar laudos profissionais e converter o cliente em contrato anual recorrente.", h: "31min" },
 ];
@@ -11,7 +11,7 @@ function Training() {
   const detailed = t.trainingDetail === "expanded";
   const features = [
     { icon: "shield", t: "Acesso vitalício", d: "Estude no seu ritmo, sem prazo." },
-    { icon: "check", t: "Certificado", d: "Certificado de conclusão profissional." },
+    { icon: "check", t: "Certificado", d: "Conclusão reconhecida por usinas." },
     { icon: "headset", t: "Suporte WhatsApp", d: "Tire dúvidas com técnicos sêniores." },
     { icon: "refresh", t: "Sempre atualizado", d: "Material renovado a cada novo módulo." },
   ];
@@ -44,9 +44,6 @@ function Training() {
                 ))}
               </div>
             )}
-            <div style={{ marginBottom: 16, paddingTop: 24, borderTop: "1px solid var(--border-on-dark)" }}>
-              <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--fg-4)" }}>Incluso no treinamento</span>
-            </div>
             <div className="training-features" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 14 }}>
               {features.map((f, i) => (
                 <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: "14px 16px", background: "rgba(255,255,255,0.03)", border: "1px solid var(--border-on-dark)", borderRadius: "var(--radius-md)" }}>
@@ -60,7 +57,7 @@ function Training() {
             </div>
           </div>
 
-          <div style={{ background: "linear-gradient(155deg, var(--pc-mid) 0%, var(--pc-dark) 100%)", border: "1px solid var(--border-accent)", borderRadius: "var(--radius-2xl)", padding: 40, position: "relative", overflow: "hidden", boxShadow: "0 0 40px rgba(58,213,128,0.12)" }}>
+          <div style={{ background: "linear-gradient(155deg, var(--pc-mid) 0%, var(--pc-dark) 100%)", border: "1px solid var(--border-accent)", borderRadius: "var(--radius-2xl)", padding: 40, position: "relative", overflow: "hidden" }}>
             <div style={{ position: "absolute", top: -100, right: -100, width: 280, height: 280, background: "radial-gradient(circle, rgba(58,213,128,0.18) 0%, transparent 70%)" }} />
             <div style={{ position: "relative" }}>
               <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 12px", borderRadius: "var(--radius-pill)", background: "var(--accent-fill)", border: "1px solid var(--border-accent)", color: "var(--pc-green)", font: "var(--label-sm)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 28 }}>
@@ -69,12 +66,8 @@ function Training() {
               <div style={{ color: "var(--fg-3)", fontSize: 14, marginBottom: 4 }}>de <span style={{ textDecoration: "line-through" }}>R$ 197</span></div>
               <div className="display" style={{ fontSize: 64, fontWeight: 600, color: "var(--pc-green)", lineHeight: 1, letterSpacing: "-0.04em", marginBottom: 8 }}>R$ 39,90</div>
               <div style={{ color: "var(--fg-3)", fontSize: 13, marginBottom: 32 }}>pagamento único · acesso vitalício</div>
-              <a href="/curso" className="btn-primary" style={{ width: "100%", justifyContent: "center", marginBottom: 12 }}>
-                Ver detalhes do treinamento<Icon name="arrowRight" size={16} />
-              </a>
-              <a href={wa("Olá! Quero começar o treinamento Painel Clean.")} target="_blank" rel="noopener noreferrer"
-                style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, fontSize: 13, color: "var(--fg-3)", marginBottom: 16, textDecoration: "none" }}>
-                <WhatsBrand size={13} />Ou fale direto pelo WhatsApp
+              <a href={wa("Olá! Quero começar o treinamento Painel Clean.")} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ width: "100%", justifyContent: "center", marginBottom: 16 }}>
+                Quero começar agora<Icon name="arrowRight" size={16} />
               </a>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12, fontSize: 12.5, color: "var(--fg-4)" }}>
                 <span>Pagamento seguro</span><span>·</span><span>Reembolso em 7 dias</span>

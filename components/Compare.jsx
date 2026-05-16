@@ -1,6 +1,6 @@
 const compareRows = [
   { f: "Motor brushless (10× mais durável)", o: false, p: true, n: "Eficiência sem perda no motor" },
-  { f: "Sem produtos químicos — só água", o: false, p: true, n: "Não degrada superfícies nem selantes" },
+  { f: "Sem produtos químicos — só água", o: false, p: true, n: "Não degrada os selantes do painel" },
   { f: "Motobomba com controle remoto", o: false, p: true, n: "Controle do fluxo durante a operação" },
   { f: "Proteção contra falta d'água", o: false, p: true, n: "Não queima a bomba" },
   { f: "Mangueira reforçada de 35m", o: false, p: true, n: "Não dobra, não vinca" },
