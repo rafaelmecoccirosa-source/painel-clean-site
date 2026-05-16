@@ -188,6 +188,44 @@ function CursoModules() {
   );
 }
 
+function CursoOutcomes() {
+  const outcomes = [
+    { n: "01", text: "Operar o equipamento com segurança e eficiência" },
+    { n: "02", text: "Precificar e fechar contratos recorrentes" },
+    { n: "03", text: "Captar os primeiros clientes pelo WhatsApp" },
+    { n: "04", text: "Emitir proposta e nota fiscal profissional" },
+  ];
+  return (
+    <section style={{ background: "var(--pc-green)", padding: "80px 0" }}>
+      <div className="container">
+        <h2 className="display" style={{ fontSize: "clamp(28px, 3.6vw, 48px)", lineHeight: 1.08, color: "var(--pc-dark)", margin: "0 0 52px", maxWidth: 640 }}>
+          Em 30 dias você sai daqui pronto para:
+        </h2>
+        <div className="outcomes-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20, marginBottom: 56 }}>
+          {outcomes.map((o, i) => (
+            <div key={i} style={{ background: "rgba(12,40,31,0.12)", borderRadius: "var(--radius-xl)", padding: "28px 32px", display: "flex", gap: 20, alignItems: "flex-start" }}>
+              <span style={{ fontFamily: "ui-monospace, monospace", fontSize: 11, fontWeight: 700, letterSpacing: "0.14em", color: "var(--pc-dark)", opacity: 0.6, paddingTop: 4, flexShrink: 0 }}>{o.n}</span>
+              <span className="display" style={{ fontSize: "clamp(16px, 1.6vw, 20px)", fontWeight: 600, color: "var(--pc-dark)", lineHeight: 1.25 }}>{o.text}</span>
+            </div>
+          ))}
+        </div>
+        <div className="outcomes-stats" style={{ display: "flex", gap: 0, background: "rgba(12,40,31,0.12)", borderRadius: "var(--radius-xl)", overflow: "hidden" }}>
+          {[{ k: "212", v: "alunos formados" }, { k: "4,9★", v: "avaliação" }, { k: "3h28", v: "de conteúdo" }].map((s, i) => (
+            <div key={i} style={{ flex: 1, padding: "24px 28px", borderLeft: i > 0 ? "1px solid rgba(12,40,31,0.15)" : "none", textAlign: "center" }}>
+              <div className="display" style={{ fontSize: 32, fontWeight: 700, color: "var(--pc-dark)", letterSpacing: "-0.02em", lineHeight: 1, marginBottom: 6 }}>{s.k}</div>
+              <div style={{ fontSize: 13, fontWeight: 500, color: "var(--pc-dark)", opacity: 0.65, textTransform: "uppercase", letterSpacing: "0.08em" }}>{s.v}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <style>{`
+        @media (max-width: 680px) { .outcomes-grid { grid-template-columns: 1fr !important; } }
+        @media (max-width: 560px) { .outcomes-stats { flex-direction: column !important; } .outcomes-stats > div { border-left: none !important; border-top: 1px solid rgba(12,40,31,0.15) !important; } }
+      `}</style>
+    </section>
+  );
+}
+
 function CursoForWho() {
   return (
     <section style={{ background: "var(--pc-darker)", padding: "96px 0" }}>
@@ -217,6 +255,22 @@ function CursoForWho() {
       </div>
       <style>{`@media (max-width: 800px) { .forwho-grid { grid-template-columns: 1fr !important; } }`}</style>
     </section>
+  );
+}
+
+function CursoCalcDivider() {
+  return (
+    <div style={{ background: "var(--pc-darker)", padding: "56px 0", textAlign: "center" }}>
+      <div className="container">
+        <h2 className="display" style={{ fontSize: "clamp(24px, 3vw, 40px)", fontWeight: 700, color: "white", margin: "0 0 12px", letterSpacing: "-0.02em" }}>
+          Quanto você pode faturar com a Painel Clean?
+        </h2>
+        <p style={{ font: "var(--body-lg)", color: "var(--fg-3)", margin: "0 0 24px" }}>
+          Ajuste os parâmetros para o seu mercado e veja sua estimativa.
+        </p>
+        <Icon name="arrowDown" size={24} style={{ color: "var(--pc-green)" }} />
+      </div>
+    </div>
   );
 }
 
@@ -453,7 +507,9 @@ function CursoApp() {
       <CursoNav />
       <CursoHero />
       <CursoModules />
+      <CursoOutcomes />
       <CursoForWho />
+      <CursoCalcDivider />
       <CursoCalculator />
       <CursoIncludes />
       <CursoTestimonials />
