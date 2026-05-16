@@ -7,7 +7,7 @@ const escovas = [
     slug: "escova-rotativa-g5",
     tag: "Mais rápida",
     tagIcon: "bolt",
-    image: "public/images/product-g5-1.jpg",
+    image: "public/images/DNF_2445.jpg",
     headline: "Velocidade máxima para grandes áreas.",
     specs: [
       { k: "Velocidade", v: "260 painéis/h" },
@@ -22,7 +22,7 @@ const escovas = [
     slug: "escova-dupla-d5",
     tag: "Mais vendida",
     featured: true,
-    image: "public/images/product-d5-1.jpg",
+    image: "public/images/DNF_2477.jpg",
     headline: "Kit completo para começar no mesmo dia.",
     specs: [
       { k: "Velocidade", v: "200 painéis/h" },
@@ -38,7 +38,7 @@ const escovas = [
     slug: "escova-solo-s5",
     tag: "Acesso difícil",
     tagIcon: "home",
-    image: "public/images/product-s5-1.jpg",
+    image: "public/images/DNF_2432.jpg",
     headline: "Chega onde outras escovas não alcançam.",
     specs: [
       { k: "Velocidade", v: "160 painéis/h" },

@@ -162,12 +162,14 @@ function AccessoriesSection({ p }) {
   return (
     <section style={{ background: "var(--pc-cream)", padding: "80px 0", borderTop: "1px solid var(--border-on-cream)" }}>
       <div className="container">
-        <div style={{ marginBottom: 40 }}>
-          <div className="eyebrow" style={{ color: "var(--pc-green-2)", marginBottom: 14 }}>Compatíveis</div>
-          <h2 className="display" style={{ fontSize: "clamp(28px, 3.2vw, 40px)", color: "var(--fg-on-cream-1)", margin: 0 }}>Acessórios recomendados</h2>
-        </div>
-        <div className="acc-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20, maxWidth: 760 }}>
-          {p.accessories.map((a, i) => (
+        <div className="acc-layout" style={{ display: "grid", gridTemplateColumns: p.kitImage ? "1fr 1fr" : "1fr", gap: 56, alignItems: "center" }}>
+          <div>
+            <div style={{ marginBottom: 36 }}>
+              <div className="eyebrow" style={{ color: "var(--pc-green-2)", marginBottom: 14 }}>Compatíveis</div>
+              <h2 className="display" style={{ fontSize: "clamp(28px, 3.2vw, 40px)", color: "var(--fg-on-cream-1)", margin: 0 }}>Acessórios recomendados</h2>
+            </div>
+            <div className="acc-grid" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 16 }}>
+              {p.accessories.map((a, i) => (
             <div key={i} style={{ padding: "24px", background: "white", border: "1px solid var(--border-on-cream)", borderRadius: "var(--radius-xl)", display: "flex", gap: 16, alignItems: "flex-start" }}>
               <div style={{ flexShrink: 0, width: 44, height: 44, borderRadius: "var(--radius-md)", background: "var(--accent-fill)", color: "var(--pc-green-2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <Icon name="package" size={20} />
@@ -185,8 +187,15 @@ function AccessoriesSection({ p }) {
               </div>
             </div>
           ))}
+            </div>
+          </div>
+          {p.kitImage && (
+            <div style={{ borderRadius: "var(--radius-xl)", overflow: "hidden", boxShadow: "var(--shadow-card)" }}>
+              <img src={p.kitImage} alt={`Kit ${p.name}`} style={{ width: "100%", display: "block", objectFit: "cover", aspectRatio: "4/3" }} />
+            </div>
+          )}
         </div>
-        <style>{`@media (max-width: 560px) { .acc-grid { grid-template-columns: 1fr !important; } }`}</style>
+        <style>{`@media (max-width: 760px) { .acc-layout { grid-template-columns: 1fr !important; } }`}</style>
       </div>
     </section>
   );

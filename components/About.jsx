@@ -8,18 +8,20 @@ function About() {
     <section id="sobre" style={{ background: "var(--pc-darker)", padding: "80px 0", position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", top: -150, right: -150, width: 500, height: 500, background: "radial-gradient(circle, rgba(58,213,128,0.09) 0%, transparent 70%)", pointerEvents: "none" }} />
       <div className="container" style={{ position: "relative" }}>
-        <div className="about-intro" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1.5fr)", gap: 72, alignItems: "center", marginBottom: 64 }}>
+        <div className="about-intro" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr)", gap: 64, alignItems: "center", marginBottom: 64 }}>
           <div>
             <div className="eyebrow" style={{ marginBottom: 18 }}>Quem somos</div>
-            <h2 className="display" style={{ fontSize: "clamp(32px, 3.8vw, 52px)", lineHeight: 1.06, color: "white", margin: "0 0 20px" }}>
+            <h2 className="display" style={{ fontSize: "clamp(32px, 3.8vw, 52px)", lineHeight: 1.06, color: "white", margin: "0 0 24px" }}>
               Feitos para quem<br /><span style={{ color: "var(--pc-green)" }}>vive de limpeza profissional.</span>
             </h2>
+            <p style={{ font: "var(--body-lg)", color: "var(--fg-3)", lineHeight: 1.75, margin: 0 }}>
+              A Painel Clean desenvolve equipamentos e soluções para limpeza profissional de superfícies lisas — painéis solares, estufas agrícolas e fachadas.
+              Atendemos de norte a sul do Brasil com escovas brushless, suporte técnico dedicado e uma plataforma que conecta técnicos e clientes.
+            </p>
           </div>
-          <p style={{ font: "var(--body-lg)", color: "var(--fg-3)", lineHeight: 1.75, margin: 0 }}>
-            A Painel Clean desenvolve equipamentos e soluções para limpeza profissional de superfícies lisas — painéis solares, estufas agrícolas e fachadas.
-            Atendemos de norte a sul do Brasil com escovas brushless, suporte técnico dedicado e uma plataforma que conecta técnicos e clientes.
-            Nosso compromisso é simples: superfícies limpas, operação eficiente.
-          </p>
+          <div style={{ borderRadius: "var(--radius-2xl)", overflow: "hidden", boxShadow: "0 24px 64px rgba(10,31,23,0.5)" }}>
+            <img src="public/images/DNF_2612.jpg" alt="Técnico com as três escovas Painel Clean" style={{ width: "100%", display: "block", objectFit: "cover", aspectRatio: "4/3" }} />
+          </div>
         </div>
         <div className="about-pillars" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
           {pillars.map((p, i) => (

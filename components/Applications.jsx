@@ -33,15 +33,22 @@ function Applications() {
         </div>
         <div className="apps-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 28, marginBottom: 56 }}>
           {apps.map((a, i) => (
-            <div key={i} style={{ background: "white", borderRadius: "var(--radius-xl)", padding: "36px 32px 32px", boxShadow: "var(--shadow-card)", border: "1px solid var(--border-on-cream)", borderBottom: "3px solid var(--pc-green)", display: "flex", flexDirection: "column" }}>
-              <div style={{ display: "inline-flex", alignItems: "center", padding: "5px 12px", borderRadius: "var(--radius-pill)", background: "var(--accent-fill)", border: "1px solid var(--border-accent)", color: "var(--pc-green)", fontSize: 12, fontWeight: 600, letterSpacing: "0.04em", marginBottom: 28, alignSelf: "flex-start" }}>
-                {a.badge}
+            <div key={i} style={{ background: "white", borderRadius: "var(--radius-xl)", boxShadow: "var(--shadow-card)", border: "1px solid var(--border-on-cream)", borderBottom: "3px solid var(--pc-green)", display: "flex", flexDirection: "column", overflow: "hidden" }}>
+              {i === 0 && (
+                <div style={{ height: 180, overflow: "hidden", flexShrink: 0 }}>
+                  <img src="public/images/escovaseacessorios.png" alt="Escovas e acessórios Painel Clean" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} />
+                </div>
+              )}
+              <div style={{ padding: "32px 32px 32px", display: "flex", flexDirection: "column", flex: 1 }}>
+                <div style={{ display: "inline-flex", alignItems: "center", padding: "5px 12px", borderRadius: "var(--radius-pill)", background: "var(--accent-fill)", border: "1px solid var(--border-accent)", color: "var(--pc-green)", fontSize: 12, fontWeight: 600, letterSpacing: "0.04em", marginBottom: 24, alignSelf: "flex-start" }}>
+                  {a.badge}
+                </div>
+                <div style={{ width: 56, height: 56, borderRadius: "var(--radius-lg)", background: "linear-gradient(135deg, var(--pc-dark) 0%, var(--pc-mid) 100%)", color: "var(--pc-green)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20, flexShrink: 0 }}>
+                  <Icon name={a.icon} size={28} stroke={1.6} />
+                </div>
+                <h3 className="display" style={{ fontSize: 18, fontWeight: 600, lineHeight: 1.2, color: "var(--pc-dark)", margin: "0 0 14px" }}>{a.headline}</h3>
+                <p style={{ margin: 0, font: "var(--body-sm)", color: "var(--fg-on-cream-2)", lineHeight: 1.7, flexGrow: 1 }}>{a.desc}</p>
               </div>
-              <div style={{ width: 56, height: 56, borderRadius: "var(--radius-lg)", background: "linear-gradient(135deg, var(--pc-dark) 0%, var(--pc-mid) 100%)", color: "var(--pc-green)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24, flexShrink: 0 }}>
-                <Icon name={a.icon} size={28} stroke={1.6} />
-              </div>
-              <h3 className="display" style={{ fontSize: 18, fontWeight: 600, lineHeight: 1.2, color: "var(--pc-dark)", margin: "0 0 14px" }}>{a.headline}</h3>
-              <p style={{ margin: 0, font: "var(--body-sm)", color: "var(--fg-on-cream-2)", lineHeight: 1.7, flexGrow: 1 }}>{a.desc}</p>
             </div>
           ))}
         </div>
