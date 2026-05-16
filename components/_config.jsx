@@ -1,5 +1,5 @@
 // Shared config — must load before any component
-const { useState, useEffect, useRef, useMemo, createContext, useContext } = React;
+const { useState, useEffect, useLayoutEffect, useRef, useMemo, createContext, useContext } = React;
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "heroTreatment": "gradient",
@@ -56,6 +56,55 @@ const Icon = ({ name, size = 20, stroke = 1.8 }) => {
       {paths[name]}
     </svg>
   );
+};
+
+// Scroll-reveal hook — single element fades up when it enters the viewport
+const useReveal = (delay = 0) => {
+  const ref = useRef(null);
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.style.opacity = "0";
+    el.style.transform = "translateY(24px)";
+    el.style.transition = `opacity 0.5s ease ${delay}ms, transform 0.5s ease ${delay}ms`;
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        el.style.opacity = "1";
+        el.style.transform = "translateY(0)";
+        obs.disconnect();
+      }
+    }, { threshold: 0.1 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [delay]);
+  return ref;
+};
+
+// Scroll-reveal hook — staggers direct children of a grid/list container
+const useRevealChildren = (stagger = 80) => {
+  const ref = useRef(null);
+  useLayoutEffect(() => {
+    const parent = ref.current;
+    if (!parent) return;
+    const children = Array.from(parent.children);
+    children.forEach((child, i) => {
+      child.style.opacity = "0";
+      child.style.transform = "translateY(24px)";
+      child.style.transition = `opacity 0.5s ease ${i * stagger}ms, transform 0.5s ease ${i * stagger}ms`;
+    });
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        children.forEach(child => {
+          child.style.opacity = "1";
+          child.style.transform = "translateY(0)";
+        });
+        obs.disconnect();
+      }
+    }, { threshold: 0.1 });
+    obs.observe(parent);
+    return () => obs.disconnect();
+  }, [stagger]);
+  return ref;
 };
 
 const WhatsBrand = ({ size = 16 }) => (

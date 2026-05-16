@@ -19,6 +19,23 @@ function Applications() {
       desc: "Sheds industriais, telhas translúcidas e fachadas de vidro acumulam sujeira rapidamente. O cabo telescópico chega onde escada não chega, com água filtrada que não mancha nem risca.",
     },
   ];
+
+  const solarRef = useReveal(0);
+  const agroRef  = useReveal(120);
+  const urbanRef = useReveal(220);
+
+  const AppBadge = ({ label }) => (
+    <div style={{ display: "inline-flex", alignItems: "center", padding: "5px 12px", borderRadius: "var(--radius-pill)", background: "var(--accent-fill)", border: "1px solid var(--border-accent)", color: "var(--pc-green)", fontSize: 12, fontWeight: 600, letterSpacing: "0.04em", marginBottom: 20, alignSelf: "flex-start" }}>
+      {label}
+    </div>
+  );
+
+  const AppIcon = ({ name }) => (
+    <div style={{ width: 48, height: 48, borderRadius: "var(--radius-lg)", background: "linear-gradient(135deg, var(--pc-dark) 0%, var(--pc-mid) 100%)", color: "var(--pc-green)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16, flexShrink: 0 }}>
+      <Icon name={name} size={24} stroke={1.6} />
+    </div>
+  );
+
   return (
     <section id="aplicacoes" style={{ background: "var(--pc-cream)", padding: "96px 0" }}>
       <div className="container">
@@ -31,27 +48,39 @@ function Applications() {
             A tecnologia brushless da Painel Clean foi desenvolvida para qualquer superfície lisa que precise de limpeza recorrente.
           </p>
         </div>
-        <div className="apps-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 28, marginBottom: 56 }}>
-          {apps.map((a, i) => (
-            <div key={i} style={{ background: "white", borderRadius: "var(--radius-xl)", boxShadow: "var(--shadow-card)", border: "1px solid var(--border-on-cream)", borderBottom: "3px solid var(--pc-green)", display: "flex", flexDirection: "column", overflow: "hidden" }}>
-              {i === 0 && (
-                <div style={{ height: 180, overflow: "hidden", flexShrink: 0 }}>
-                  <img src="public/images/escovaseacessorios.png" alt="Escovas e acessórios Painel Clean" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} />
-                </div>
-              )}
-              <div style={{ padding: "32px 32px 32px", display: "flex", flexDirection: "column", flex: 1 }}>
-                <div style={{ display: "inline-flex", alignItems: "center", padding: "5px 12px", borderRadius: "var(--radius-pill)", background: "var(--accent-fill)", border: "1px solid var(--border-accent)", color: "var(--pc-green)", fontSize: 12, fontWeight: 600, letterSpacing: "0.04em", marginBottom: 24, alignSelf: "flex-start" }}>
-                  {a.badge}
-                </div>
-                <div style={{ width: 56, height: 56, borderRadius: "var(--radius-lg)", background: "linear-gradient(135deg, var(--pc-dark) 0%, var(--pc-mid) 100%)", color: "var(--pc-green)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20, flexShrink: 0 }}>
-                  <Icon name={a.icon} size={28} stroke={1.6} />
-                </div>
-                <h3 className="display" style={{ fontSize: 18, fontWeight: 600, lineHeight: 1.2, color: "var(--pc-dark)", margin: "0 0 14px" }}>{a.headline}</h3>
-                <p style={{ margin: 0, font: "var(--body-sm)", color: "var(--fg-on-cream-2)", lineHeight: 1.7, flexGrow: 1 }}>{a.desc}</p>
-              </div>
+
+        <div className="apps-asymmetric" style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 24, marginBottom: 56 }}>
+
+          {/* Solar — dominant horizontal card (left 2/3) */}
+          <div ref={solarRef} className="solar-card" style={{ background: "white", borderRadius: "var(--radius-xl)", boxShadow: "var(--shadow-card)", border: "1px solid var(--border-on-cream)", borderBottom: "3px solid var(--pc-green)", display: "flex", overflow: "hidden" }}>
+            <div className="solar-photo" style={{ width: "42%", flexShrink: 0, overflow: "hidden" }}>
+              <img src="public/images/escovaseacessorios.png" alt="Escovas e acessórios Painel Clean" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} />
             </div>
-          ))}
+            <div style={{ padding: "36px 32px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+              <AppBadge label={apps[0].badge} />
+              <AppIcon name={apps[0].icon} />
+              <h3 className="display" style={{ fontSize: 22, fontWeight: 600, lineHeight: 1.2, color: "var(--pc-dark)", margin: "0 0 14px" }}>{apps[0].headline}</h3>
+              <p style={{ margin: 0, font: "var(--body-sm)", color: "var(--fg-on-cream-2)", lineHeight: 1.7 }}>{apps[0].desc}</p>
+            </div>
+          </div>
+
+          {/* Agro + Urban — stacked vertically (right 1/3) */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+            <div ref={agroRef} style={{ background: "white", borderRadius: "var(--radius-xl)", boxShadow: "var(--shadow-card)", border: "1px solid var(--border-on-cream)", borderBottom: "3px solid var(--pc-green)", padding: "28px", display: "flex", flexDirection: "column", flex: 1 }}>
+              <AppBadge label={apps[1].badge} />
+              <AppIcon name={apps[1].icon} />
+              <h3 className="display" style={{ fontSize: 16, fontWeight: 600, lineHeight: 1.25, color: "var(--pc-dark)", margin: "0 0 10px" }}>{apps[1].headline}</h3>
+              <p style={{ margin: 0, fontSize: 13, color: "var(--fg-on-cream-2)", lineHeight: 1.65 }}>{apps[1].desc}</p>
+            </div>
+            <div ref={urbanRef} style={{ background: "white", borderRadius: "var(--radius-xl)", boxShadow: "var(--shadow-card)", border: "1px solid var(--border-on-cream)", borderBottom: "3px solid var(--pc-green)", padding: "28px", display: "flex", flexDirection: "column", flex: 1 }}>
+              <AppBadge label={apps[2].badge} />
+              <AppIcon name={apps[2].icon} />
+              <h3 className="display" style={{ fontSize: 16, fontWeight: 600, lineHeight: 1.25, color: "var(--pc-dark)", margin: "0 0 10px" }}>{apps[2].headline}</h3>
+              <p style={{ margin: 0, fontSize: 13, color: "var(--fg-on-cream-2)", lineHeight: 1.65 }}>{apps[2].desc}</p>
+            </div>
+          </div>
         </div>
+
         <div style={{ textAlign: "center" }}>
           <a href={wa("Olá! Quero saber mais sobre as aplicações da Painel Clean")} target="_blank" rel="noopener noreferrer" className="btn-primary">
             Fale com um especialista <Icon name="arrowRight" size={16} />
@@ -59,7 +88,11 @@ function Applications() {
         </div>
       </div>
       <style>{`
-        @media (max-width: 860px) { .apps-grid { grid-template-columns: 1fr !important; } }
+        @media (max-width: 860px) {
+          .apps-asymmetric { grid-template-columns: 1fr !important; }
+          .solar-card { flex-direction: column !important; }
+          .solar-photo { width: 100% !important; height: 200px; }
+        }
       `}</style>
     </section>
   );

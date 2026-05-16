@@ -1,6 +1,6 @@
 const products = [
   { sku: "ZCP-0175-G5", name: "Escova Rotativa G5", href: "/escova-rotativa-g5",
-    tag: "Mais rápida", tagIcon: "bolt", tagBg: "rgba(245,158,11,0.16)", tagColor: "#F59E0B", tagBorder: "rgba(245,158,11,0.30)",
+    tag: "Mais rápida", tagIcon: "bolt",
     image: "public/images/DNF_2445.jpg",
     specs: [{ k: "Velocidade", v: "260 painéis/h" }, { k: "Motor", v: "Brushless 350 RPM" }, { k: "Cabo", v: "até 7,5m" }],
     desc: "Para grandes usinas: velocidade máxima, operação contínua e cabo de até 7,5m. A escolha de quem trabalha em escala." },
@@ -10,7 +10,7 @@ const products = [
     specs: [{ k: "Velocidade", v: "200 painéis/h" }, { k: "Motor", v: "Brushless 350 RPM" }, { k: "Cabo", v: "até 7,5m" }, { k: "Inclui", v: "Bomba + controle" }],
     desc: "Kit completo com bomba e controle remoto inclusos. Comece a atender clientes no mesmo dia que receber. O padrão do mercado." },
   { sku: "ZCP-0175-S5", name: "Escova Solo S5", href: "/escova-solo-s5",
-    tag: "Acesso difícil", tagIcon: "home", tagBg: "rgba(96,165,250,0.16)", tagColor: "#60A5FA", tagBorder: "rgba(96,165,250,0.30)",
+    tag: "Acesso difícil", tagIcon: "home",
     image: "public/images/DNF_2432.jpg",
     specs: [{ k: "Velocidade", v: "160 painéis/h" }, { k: "Ideal para", v: "Difícil acesso" }, { k: "Cabo", v: "até 7,5m" }],
     desc: "Para onde outras escovas não chegam. Compacta e ágil em telhados complexos, estruturas metálicas e acessos restritos." },
@@ -72,6 +72,7 @@ function ProductCard({ p }) {
 }
 
 function Products() {
+  const productsGridRef = useRevealChildren(80);
   return (
     <section id="equipamentos" style={{ background: "var(--pc-cream)", padding: "120px 0 100px" }}>
       <div className="container">
@@ -85,7 +86,7 @@ function Products() {
           </div>
           <a href="/produtos" className="btn-outline-dark">Ver catálogo completo<Icon name="arrowUpRight" size={14} /></a>
         </div>
-        <div className="products-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 28 }}>
+        <div ref={productsGridRef} className="products-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 28 }}>
           {products.map(p => <ProductCard key={p.sku} p={p} />)}
         </div>
         <style>{`

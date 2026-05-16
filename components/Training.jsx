@@ -9,6 +9,7 @@ const trainingModules = [
 function Training() {
   const t = useT();
   const detailed = t.trainingDetail === "expanded";
+  const featuresRef = useRevealChildren(80);
   const features = [
     { icon: "shield", t: "Acesso vitalício", d: "Estude no seu ritmo, sem prazo." },
     { icon: "check", t: "Certificado", d: "Conclusão reconhecida por usinas." },
@@ -44,7 +45,7 @@ function Training() {
                 ))}
               </div>
             )}
-            <div className="training-features" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 14 }}>
+            <div ref={featuresRef} className="training-features" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 14 }}>
               {features.map((f, i) => (
                 <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: "14px 16px", background: "rgba(255,255,255,0.03)", border: "1px solid var(--border-on-dark)", borderRadius: "var(--radius-md)" }}>
                   <div style={{ flexShrink: 0, width: 32, height: 32, borderRadius: "var(--radius)", background: "var(--accent-fill)", color: "var(--pc-green)", display: "flex", alignItems: "center", justifyContent: "center" }}><Icon name={f.icon} size={16} /></div>

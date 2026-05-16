@@ -13,6 +13,7 @@ const compareRows = [
 ];
 
 function Compare() {
+  const rowsRef = useRevealChildren(25);
   return (
     <section id="comparativo" style={{ background: "var(--pc-cream)", padding: "120px 0", borderTop: "1px solid var(--border-on-cream)" }}>
       <div className="container">
@@ -26,7 +27,7 @@ function Compare() {
           </p>
         </div>
 
-        <div style={{ background: "white", border: "1px solid var(--border-on-cream)", borderRadius: "var(--radius-2xl)", overflow: "hidden", boxShadow: "var(--shadow-card)" }}>
+        <div ref={rowsRef} style={{ background: "white", border: "1px solid var(--border-on-cream)", borderRadius: "var(--radius-2xl)", overflow: "hidden", boxShadow: "var(--shadow-card)" }}>
           <div className="cmp-row cmp-head" style={{ display: "grid", gridTemplateColumns: "2.2fr 1fr 1.4fr", background: "var(--pc-dark)", color: "white" }}>
             <div style={{ padding: "22px 28px", fontSize: 12, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--fg-3)" }}>Recurso</div>
             <div style={{ padding: "22px 22px", fontSize: 12, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--fg-3)", textAlign: "center", borderLeft: "1px solid var(--border-on-dark)" }}>Outras soluções</div>

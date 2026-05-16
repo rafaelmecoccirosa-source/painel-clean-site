@@ -32,16 +32,12 @@ function Nav() {
         {/* Desktop nav */}
         <nav className="nav-links" style={{ display: "flex", alignItems: "center", gap: 32 }}>
           {links.map(l => (
-            <a key={l.href} href={l.href} style={{ color: "var(--fg-2)", fontSize: 14, fontWeight: 500, transition: "color 200ms" }}
-              onMouseEnter={e => e.currentTarget.style.color = "white"}
-              onMouseLeave={e => e.currentTarget.style.color = "var(--fg-2)"}>{l.label}</a>
+            <a key={l.href} href={l.href} className="nav-link">{l.label}</a>
           ))}
         </nav>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <a href={wa()} target="_blank" rel="noopener noreferrer" className="nav-cta"
-            style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--pc-green)", color: "var(--pc-dark)", fontWeight: 700, fontSize: 14, padding: "11px 18px", borderRadius: "var(--radius-pill)", transition: "all 180ms" }}
-            onMouseEnter={e => { e.currentTarget.style.background = "#4FE090"; e.currentTarget.style.transform = "translateY(-1px)"; }}
-            onMouseLeave={e => { e.currentTarget.style.background = "var(--pc-green)"; e.currentTarget.style.transform = "translateY(0)"; }}>
+            style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--pc-green)", color: "var(--pc-dark)", fontWeight: 700, fontSize: 14, padding: "11px 18px", borderRadius: "var(--radius-pill)", transition: "all 180ms" }}>
             <WhatsBrand size={14} /> <span className="nav-cta-label">WhatsApp</span>
           </a>
           {/* Hamburger — mobile only */}
@@ -74,6 +70,30 @@ function Nav() {
         </div>
       </nav>
       <style>{`
+        .nav-link {
+          color: rgba(255,255,255,0.55);
+          font-size: 14px;
+          font-weight: 500;
+          position: relative;
+          transition: color 200ms;
+        }
+        .nav-link::after {
+          content: "";
+          position: absolute;
+          bottom: -3px;
+          left: 0;
+          width: 0;
+          height: 1.5px;
+          background: white;
+          transition: width 260ms cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .nav-link:hover { color: white; }
+        .nav-link:hover::after { width: 100%; }
+        .nav-cta:hover {
+          background: #4FE090 !important;
+          transform: translateY(-1px);
+          box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 4px 12px rgba(58,213,128,0.28) !important;
+        }
         @media (max-width: 980px) {
           .nav-links { display: none !important; }
           .nav-hamburger { display: flex !important; }

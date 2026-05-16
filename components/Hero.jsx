@@ -35,6 +35,7 @@ function Hero() {
   const t = useT();
   const [idx, setIdx] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [touchStart, setTouchStart] = useState(null);
   const total = heroSlides.length;
   const SLIDE_MS = 7000;
   const TR = t.heroTreatment;
@@ -62,7 +63,15 @@ function Hero() {
   const s = heroSlides[idx];
 
   return (
-    <section className="hero-section" style={{ position: "relative", background: "var(--pc-darker)", color: "white", minHeight: "100vh", overflow: "hidden", paddingTop: 76 }}>
+    <section className="hero-section"
+      onTouchStart={e => setTouchStart(e.touches[0].clientX)}
+      onTouchEnd={e => {
+        if (touchStart === null) return;
+        const delta = touchStart - e.changedTouches[0].clientX;
+        if (Math.abs(delta) > 50) setIdx(i => (i + (delta > 0 ? 1 : -1) + total) % total);
+        setTouchStart(null);
+      }}
+      style={{ position: "relative", background: "var(--pc-darker)", color: "white", minHeight: "100dvh", overflow: "hidden", paddingTop: 76 }}>
       {/* Ambient glow */}
       <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 60% at 0% 30%, rgba(58,213,128,.10), transparent 60%), radial-gradient(ellipse 60% 50% at 100% 100%, rgba(58,213,128,.06), transparent 60%)", pointerEvents: "none" }} />
 
@@ -155,7 +164,7 @@ function Hero() {
         }
 
         @media (max-width: 960px) {
-          .hero-section { min-height: 0 !important; }
+          .hero-section { min-height: unset !important; }
           /* Mobile: image stacks on top, full width */
           .hero-image-panel {
             position: relative !important;
