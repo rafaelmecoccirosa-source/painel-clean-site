@@ -20,9 +20,9 @@ function Applications() {
     },
   ];
 
-  const solarRef = useReveal(0);
-  const agroRef  = useReveal(120);
-  const urbanRef = useReveal(220);
+  const solarRef = useRef(null);
+  const agroRef  = useRef(null);
+  const urbanRef = useRef(null);
 
   const AppBadge = ({ label }) => (
     <div style={{ display: "inline-flex", alignItems: "center", padding: "5px 12px", borderRadius: "var(--radius-pill)", background: "var(--accent-fill)", border: "1px solid var(--border-accent)", color: "var(--pc-green)", fontSize: 12, fontWeight: 600, letterSpacing: "0.04em", marginBottom: 20, alignSelf: "flex-start" }}>
