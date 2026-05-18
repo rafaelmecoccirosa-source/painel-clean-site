@@ -14,13 +14,17 @@ function Platform() {
 
         <div className="cp-card" style={{ background: "linear-gradient(155deg, var(--pc-dark) 0%, #0A2018 100%)", borderRadius: "var(--radius-2xl)", overflow: "hidden", display: "grid", gridTemplateColumns: "1fr 1fr", position: "relative", border: "1px solid rgba(58,213,128,0.18)", boxShadow: "0 24px 80px rgba(10,31,23,0.32)" }}>
 
-          {/* Badge top-right */}
-          <div style={{ position: "absolute", top: 28, right: 28, zIndex: 4, padding: "5px 12px", borderRadius: "var(--radius-pill)", background: "rgba(58,213,128,0.12)", border: "1px solid rgba(58,213,128,0.30)", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--pc-green)" }}>
-            Produto independente
-          </div>
-
           {/* Left — wordmark + benefits */}
           <div style={{ padding: "56px 52px 56px", position: "relative", zIndex: 2 }}>
+            {/* Badge — inline on mobile, absolute on desktop */}
+            <div className="cp-badge-inline" style={{ display: "none", marginBottom: 20 }}>
+              <span style={{ padding: "5px 12px", borderRadius: "var(--radius-pill)", background: "rgba(58,213,128,0.12)", border: "1px solid rgba(58,213,128,0.30)", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--pc-green)" }}>
+                Produto independente
+              </span>
+            </div>
+            <div className="cp-badge-abs" style={{ position: "absolute", top: 28, right: 28, zIndex: 4, padding: "5px 12px", borderRadius: "var(--radius-pill)", background: "rgba(58,213,128,0.12)", border: "1px solid rgba(58,213,128,0.30)", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--pc-green)" }}>
+              Produto independente
+            </div>
             <div style={{ marginBottom: 28 }}>
               <div className="display" style={{ fontSize: "clamp(40px, 4.5vw, 60px)", fontWeight: 700, lineHeight: 1, letterSpacing: "-0.04em", marginBottom: 10 }}>
                 <span style={{ color: "white" }}>Clean</span><span style={{ color: "var(--pc-green)" }}>Pass</span>
@@ -114,6 +118,8 @@ function Platform() {
           .cp-card { grid-template-columns: 1fr !important; }
           .cp-card > div:first-child { padding: 40px 32px 32px !important; }
           .cp-card > div:last-child { padding: 0 32px 40px !important; }
+          .cp-badge-abs { display: none !important; }
+          .cp-badge-inline { display: block !important; }
         }
       `}</style>
     </section>
