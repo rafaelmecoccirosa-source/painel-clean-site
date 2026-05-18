@@ -150,7 +150,7 @@ function CursoHero() {
                 <img
                   src="public/images/hero-curso.png"
                   alt="Técnico Painel Clean em campo"
-                  style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
+                  style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "40% center" }}
                 />
                 <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, transparent 55%, rgba(10,31,23,0.60) 100%)" }} />
               </div>
@@ -226,7 +226,7 @@ function CursoHero() {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 60px;
-          align-items: start;
+          align-items: center;
           padding-top: 12px;
         }
         @media (max-width: 900px) {
