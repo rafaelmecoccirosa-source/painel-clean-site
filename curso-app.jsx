@@ -83,73 +83,42 @@ function CursoHero() {
   return (
     <section style={{
       background: "var(--pc-darker)", color: "white",
-      paddingTop: 76, position: "relative", overflow: "hidden",
+      padding: "76px 0 88px", position: "relative", overflow: "hidden",
     }}>
-      <div style={{
-        position: "absolute", inset: 0,
-        background: "radial-gradient(ellipse 50% 60% at 0% 30%, rgba(58,213,128,.12), transparent 60%)",
-        pointerEvents: "none",
-      }} />
-      <div className="ch2-photo" style={{
-        position: "absolute",
-        top: 76, bottom: 0, right: 0,
-        width: "58%",
-        overflow: "hidden",
-      }}>
-        <div style={{
-          position: "absolute", inset: 0,
-          backgroundImage: "url('public/images/painel_clean_-_limpando_telhado.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center 35%",
-          animation: "ch2-zoom 18s ease-out forwards",
-        }} />
-        <div style={{
-          position: "absolute", inset: 0,
-          background: "linear-gradient(135deg, rgba(15,56,43,0.25) 0%, rgba(58,213,128,0.10) 60%, rgba(12,40,31,0.45) 100%)",
-          mixBlendMode: "multiply",
-        }} />
-        <div style={{
-          position: "absolute", inset: 0,
-          background: "linear-gradient(90deg, var(--pc-darker) 0%, rgba(12,40,31,0.50) 14%, rgba(12,40,31,0) 32%)",
-        }} />
-        <div style={{
-          position: "absolute", left: 0, right: 0, bottom: 0, height: "30%",
-          background: "linear-gradient(180deg, rgba(12,40,31,0) 0%, rgba(12,40,31,0.55) 100%)",
-        }} />
-      </div>
-      <div className="container" style={{ position: "relative", padding: "80px var(--gutter)" }}>
-        <div className="ch2-grid">
-          <div style={{ animation: "fadeUp 700ms ease both", position: "relative", zIndex: 2 }}>
+      <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 55% 60% at 0% 35%, rgba(58,213,128,.10), transparent 55%)", pointerEvents: "none" }} />
+
+      <div className="container" style={{ position: "relative" }}>
+        <div className="ch3-grid">
+
+          {/* LEFT — text */}
+          <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", animation: "fadeUp 700ms ease both" }}>
             <div style={{
               display: "inline-flex", alignItems: "center", gap: 10,
               padding: "7px 14px", borderRadius: "var(--radius-pill)",
               background: "var(--accent-fill-soft)", border: "1px solid var(--border-accent)",
               color: "var(--pc-green)", fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em",
-              marginBottom: 26,
+              marginBottom: 26, width: "fit-content",
             }}>
               <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--pc-green)", animation: "pulseDot 1.6s infinite" }} />
               Treinamento online · acesso imediato
             </div>
-            <h1 className="display" style={{
-              fontSize: "clamp(36px, 5vw, 64px)", lineHeight: 1.02, letterSpacing: "-0.03em", margin: "0 0 22px",
-            }}>
-              Do zero ao<br/>
-              primeiro cliente<br/>
+
+            <h1 className="display" style={{ fontSize: "clamp(36px, 4.8vw, 62px)", lineHeight: 1.02, letterSpacing: "-0.03em", margin: "0 0 20px" }}>
+              Do zero ao<br />
+              primeiro cliente<br />
               <span style={{ color: "var(--pc-green)" }}>em uma semana.</span>
             </h1>
-            <p style={{ font: "var(--body-lg)", color: "var(--fg-3)", maxWidth: 480, margin: "0 0 32px", lineHeight: 1.7 }}>
+
+            <p style={{ font: "var(--body-lg)", color: "var(--fg-3)", maxWidth: 460, margin: "0 0 32px", lineHeight: 1.7 }}>
               5 módulos práticos para operar equipamentos brushless, precificar, captar clientes e criar uma renda previsível com limpeza profissional.
             </p>
-            <div className="ch2-offer" style={{
+
+            <div style={{
               display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap",
-              padding: "14px 18px",
-              background: "rgba(15,56,43,0.55)",
+              padding: "16px 20px", background: "rgba(15,56,43,0.55)",
               backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)",
-              border: "1px solid var(--border-accent)",
-              borderRadius: "var(--radius-lg)",
-              boxShadow: "0 0 36px rgba(58,213,128,0.10)",
-              marginBottom: 24,
-              maxWidth: 480,
+              border: "1px solid var(--border-accent)", borderRadius: "var(--radius-lg)",
+              boxShadow: "0 0 36px rgba(58,213,128,0.10)", marginBottom: 24, maxWidth: 460,
             }}>
               <div style={{ flexShrink: 0 }}>
                 <div style={{ fontSize: 11, color: "var(--fg-4)", textDecoration: "line-through", marginBottom: 2 }}>R$ 197</div>
@@ -159,65 +128,113 @@ function CursoHero() {
               <a href={wa("Olá! Quero começar o treinamento Painel Clean.")} target="_blank" rel="noopener noreferrer"
                 className="btn-primary"
                 style={{ flex: 1, justifyContent: "center", minWidth: 160, fontSize: 13.5, padding: "12px 18px" }}>
-                Garantir vaga<Icon name="arrowRight" size={14} />
+                Garantir vaga <Icon name="arrowRight" size={14} />
               </a>
             </div>
-            <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 36 }}>
-              <a href="#modulos" style={{
-                display: "inline-flex", alignItems: "center", gap: 8,
-                padding: "10px 18px", border: "1px solid var(--border-on-dark)",
-                borderRadius: "var(--radius)", color: "var(--fg-2)", fontSize: 13, fontWeight: 600,
-                transition: "all 180ms",
-              }}
-                onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.06)"; e.currentTarget.style.color = "white"; }}
-                onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "var(--fg-2)"; }}>
-                Ver os módulos
-              </a>
-            </div>
-            <div className="ch2-features" style={{
-              display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "8px 20px",
-              paddingTop: 26, borderTop: "1px solid var(--border-on-dark)",
-            }}>
+
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "8px 20px" }}>
               {["Acesso vitalício", "Certificado", "Suporte WhatsApp", "Reembolso em 7 dias"].map((it, i) => (
-                <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 13, color: "var(--fg-2)" }}>
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: "var(--fg-2)" }}>
                   <span style={{ color: "var(--pc-green)", flexShrink: 0 }}><Icon name="check" size={14} /></span>{it}
                 </div>
               ))}
             </div>
-            <div style={{ display: "flex", gap: 32, flexWrap: "wrap", paddingTop: 24, marginTop: 24, borderTop: "1px solid var(--border-on-dark)" }}>
-              {[{ k: "212", v: "alunos ativos" }, { k: "4,9★", v: "avaliação" }, { k: "3h28", v: "de conteúdo" }].map((s, i) => (
-                <div key={i}>
-                  <div className="display" style={{ fontSize: 22, color: "white", letterSpacing: "-0.02em", lineHeight: 1, marginBottom: 5 }}>{s.k}</div>
-                  <div style={{ fontSize: 11, color: "var(--fg-4)", textTransform: "uppercase", letterSpacing: "0.1em" }}>{s.v}</div>
+          </div>
+
+          {/* RIGHT — photo card + seal + stats */}
+          <div style={{ animation: "fadeUp 700ms 160ms ease both" }}>
+
+            {/* Photo frame */}
+            <div style={{ position: "relative" }}>
+              <div style={{ borderRadius: "var(--radius-2xl)", overflow: "hidden", aspectRatio: "4/5" }}>
+                <img
+                  src="public/images/hero-curso.png"
+                  alt="Técnico Painel Clean em campo"
+                  style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
+                />
+                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, transparent 55%, rgba(10,31,23,0.60) 100%)" }} />
+              </div>
+
+              {/* Stamp seal — top-right */}
+              <div style={{
+                position: "absolute", top: -14, right: -14,
+                width: 108, height: 108, borderRadius: "50%",
+                background: "var(--pc-green)", color: "var(--pc-dark)",
+                display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+                boxShadow: "0 8px 28px rgba(58,213,128,0.45)",
+                transform: "rotate(10deg)",
+                border: "3px solid var(--pc-darker)",
+                zIndex: 3,
+              }}>
+                <div style={{ fontSize: 8.5, fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.1em", opacity: 0.65, marginBottom: 1 }}>apenas</div>
+                <div className="display" style={{ fontSize: 24, fontWeight: 800, lineHeight: 1, letterSpacing: "-0.04em" }}>R$39</div>
+                <div style={{ fontSize: 8.5, fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.1em", opacity: 0.65, marginTop: 1 }}>vitalício</div>
+              </div>
+
+              {/* Bottom-of-photo floating pill */}
+              <div style={{
+                position: "absolute", bottom: 16, left: 16, right: 16,
+                background: "rgba(10,24,18,0.72)", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)",
+                border: "1px solid rgba(58,213,128,0.20)", borderRadius: "var(--radius-lg)",
+                padding: "12px 16px", display: "flex", alignItems: "center", gap: 10,
+                zIndex: 2,
+              }}>
+                <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--pc-green)", flexShrink: 0, animation: "pulseDot 1.6s infinite" }} />
+                <span style={{ fontSize: 13, color: "rgba(255,255,255,0.85)", fontWeight: 500, lineHeight: 1.4 }}>
+                  <strong style={{ color: "white" }}>212 alunos</strong> já começaram a faturar com limpeza profissional
+                </span>
+              </div>
+            </div>
+
+            {/* Stats below photo */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10, marginTop: 12 }}>
+              {[
+                { icon: "users", k: "212+", v: "alunos ativos" },
+                { icon: "star", k: "4,9 ★", v: "avaliação" },
+                { icon: "play", k: "3h28", v: "de conteúdo" },
+              ].map((s, i) => (
+                <div key={i} style={{
+                  background: "rgba(255,255,255,0.04)", border: "1px solid var(--border-on-dark)",
+                  borderRadius: "var(--radius-lg)", padding: "14px 12px", textAlign: "center",
+                }}>
+                  <div className="display" style={{ fontSize: 17, fontWeight: 700, color: "white", letterSpacing: "-0.02em", marginBottom: 4 }}>{s.k}</div>
+                  <div style={{ fontSize: 10.5, color: "var(--fg-4)", textTransform: "uppercase", letterSpacing: "0.08em" }}>{s.v}</div>
                 </div>
               ))}
             </div>
+
+            {/* See modules link */}
+            <div style={{ marginTop: 14, textAlign: "center" }}>
+              <a href="#modulos" style={{
+                display: "inline-flex", alignItems: "center", gap: 7,
+                fontSize: 13, color: "var(--fg-3)", fontWeight: 500,
+                borderBottom: "1px solid var(--border-on-dark)", paddingBottom: 2,
+                transition: "color 180ms, border-color 180ms",
+              }}
+                onMouseEnter={e => { e.currentTarget.style.color = "white"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)"; }}
+                onMouseLeave={e => { e.currentTarget.style.color = "var(--fg-3)"; e.currentTarget.style.borderColor = "var(--border-on-dark)"; }}>
+                Ver os módulos <Icon name="arrowRight" size={13} />
+              </a>
+            </div>
+
           </div>
         </div>
       </div>
+
       <style>{`
-        @keyframes ch2-zoom {
-          from { transform: scale(1.04); }
-          to   { transform: scale(1.10); }
-        }
-        .ch2-grid {
+        .ch3-grid {
           display: grid;
-          grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
-          gap: 56px;
-          align-items: center;
+          grid-template-columns: 1fr 1fr;
+          gap: 60px;
+          align-items: start;
+          padding-top: 12px;
         }
-        @media (max-width: 960px) {
-          .ch2-photo {
-            position: relative !important;
-            top: 0 !important; right: 0 !important; bottom: auto !important;
-            width: 100% !important;
-            aspect-ratio: 16/9;
-            margin-top: 24px;
-          }
-          .ch2-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
+        @media (max-width: 900px) {
+          .ch3-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
+          .ch3-grid > div:last-child { order: -1; }
         }
-        @media (max-width: 720px) {
-          .ch2-features { grid-template-columns: 1fr !important; }
+        @media (max-width: 540px) {
+          .ch3-grid > div:last-child div[style*="aspectRatio"] { aspect-ratio: 3/2 !important; }
         }
       `}</style>
     </section>
