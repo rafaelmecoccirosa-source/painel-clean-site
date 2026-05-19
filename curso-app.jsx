@@ -157,7 +157,7 @@ function CursoHero() {
 
               {/* Stamp seal — top-right */}
               <div style={{
-                position: "absolute", top: -14, right: -14,
+                position: "absolute", top: -14, left: -14,
                 width: 108, height: 108, borderRadius: "50%",
                 background: "var(--pc-green)", color: "var(--pc-dark)",
                 display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
