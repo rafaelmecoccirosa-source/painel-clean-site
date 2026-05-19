@@ -49,11 +49,11 @@ function Applications() {
           </p>
         </div>
 
-        <div className="apps-asymmetric" style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 24, marginBottom: 56 }}>
+        <div className="apps-asymmetric" style={{ display: "grid", gridTemplateColumns: "3fr 2fr", gap: 24, marginBottom: 56 }}>
 
-          {/* Solar — dominant horizontal card (left 2/3) */}
+          {/* Solar — dominant horizontal card (left 60%) */}
           <div ref={solarRef} className="solar-card" style={{ background: "white", borderRadius: "var(--radius-xl)", boxShadow: "var(--shadow-card)", border: "1px solid var(--border-on-cream)", borderBottom: "3px solid var(--pc-green)", display: "flex", overflow: "hidden" }}>
-            <div className="solar-photo" style={{ width: "42%", flexShrink: 0, overflow: "hidden" }}>
+            <div className="solar-photo" style={{ width: 380, flexShrink: 0, overflow: "hidden" }}>
               <img src="public/images/escovaseacessorios.png" alt="Escovas e acessórios Painel Clean" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} />
             </div>
             <div style={{ padding: "36px 32px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
@@ -64,8 +64,8 @@ function Applications() {
             </div>
           </div>
 
-          {/* Agro + Urban — stacked vertically (right 1/3) */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+          {/* Agro + Urban — stacked vertically (right 40%), equal height */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 24, height: "100%" }}>
             <div ref={agroRef} style={{ background: "white", borderRadius: "var(--radius-xl)", boxShadow: "var(--shadow-card)", border: "1px solid var(--border-on-cream)", borderBottom: "3px solid var(--pc-green)", padding: "28px", display: "flex", flexDirection: "column", flex: 1 }}>
               <AppBadge label={apps[1].badge} />
               <AppIcon name={apps[1].icon} />
@@ -88,10 +88,10 @@ function Applications() {
         </div>
       </div>
       <style>{`
-        @media (max-width: 860px) {
+        @media (max-width: 768px) {
           .apps-asymmetric { grid-template-columns: 1fr !important; }
           .solar-card { flex-direction: column !important; }
-          .solar-photo { width: 100% !important; height: 200px; }
+          .solar-photo { width: 100% !important; height: auto !important; aspect-ratio: 16/9; }
         }
       `}</style>
     </section>

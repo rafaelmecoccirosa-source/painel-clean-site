@@ -19,8 +19,9 @@ function About() {
               Atendemos de norte a sul do Brasil com escovas brushless, suporte técnico dedicado e uma plataforma que conecta técnicos e clientes.
             </p>
           </div>
-          <div style={{ borderRadius: "var(--radius-2xl)", overflow: "hidden", boxShadow: "0 24px 64px rgba(10,31,23,0.5)" }}>
-            <img src="public/images/DNF_2612.jpg" alt="Técnico com as três escovas Painel Clean" style={{ width: "100%", display: "block", objectFit: "cover", aspectRatio: "4/3" }} />
+          <div style={{ borderRadius: "var(--radius-2xl)", overflow: "hidden", boxShadow: "0 24px 64px rgba(10,31,23,0.5)", position: "relative" }}>
+            <img src="public/images/DNF_2612.jpg" alt="Técnico com as três escovas Painel Clean" style={{ width: "100%", display: "block", objectFit: "cover", aspectRatio: "4/3", filter: "contrast(0.92) brightness(0.98) saturate(1.1)" }} />
+            <div style={{ position: "absolute", inset: 0, background: "rgba(15,56,43,0.04)", pointerEvents: "none" }} />
           </div>
         </div>
         <div className="about-pillars" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
