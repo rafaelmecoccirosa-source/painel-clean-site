@@ -142,11 +142,11 @@ function CursoHero() {
           </div>
 
           {/* RIGHT — photo card + seal + stats */}
-          <div style={{ animation: "fadeUp 700ms 160ms ease both" }}>
+          <div style={{ animation: "fadeUp 700ms 160ms ease both", display: "flex", flexDirection: "column" }}>
 
             {/* Photo frame */}
-            <div style={{ position: "relative" }}>
-              <div style={{ borderRadius: "var(--radius-2xl)", overflow: "hidden", aspectRatio: "16/9" }}>
+            <div style={{ position: "relative", flex: 1, display: "flex", flexDirection: "column" }}>
+              <div style={{ borderRadius: "var(--radius-2xl)", overflow: "hidden", flex: 1, minHeight: 220 }}>
                 <img
                   src="public/images/hero-curso.png"
                   alt="Técnico Painel Clean em campo"
@@ -226,7 +226,7 @@ function CursoHero() {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 60px;
-          align-items: center;
+          align-items: stretch;
           padding-top: 12px;
         }
         @media (max-width: 900px) {
