@@ -52,11 +52,11 @@ function Applications() {
         <div className="apps-asymmetric" style={{ display: "grid", gridTemplateColumns: "3fr 2fr", gap: 24, marginBottom: 56 }}>
 
           {/* Solar — dominant horizontal card (left 60%) */}
-          <div ref={solarRef} className="solar-card" style={{ background: "white", borderRadius: "var(--radius-xl)", boxShadow: "var(--shadow-card)", border: "1px solid var(--border-on-cream)", borderBottom: "3px solid var(--pc-green)", display: "flex", overflow: "hidden" }}>
-            <div className="solar-photo" style={{ width: 380, flexShrink: 0, overflow: "hidden" }}>
-              <img src="public/images/escovapordosol.png" alt="Técnico Painel Clean limpando painel solar" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} />
+          <div ref={solarRef} className="solar-card" style={{ background: "white", borderRadius: "var(--radius-xl)", boxShadow: "var(--shadow-card)", border: "1px solid var(--border-on-cream)", borderBottom: "3px solid var(--pc-green)", display: "flex", overflow: "hidden", alignItems: "stretch" }}>
+            <div className="solar-photo" style={{ width: 380, flexShrink: 0, position: "relative", overflow: "hidden" }}>
+              <img src="public/images/escovaseacessorios.png" alt="Técnico Painel Clean limpando painel solar" style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} />
             </div>
-            <div style={{ padding: "36px 32px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+            <div style={{ padding: "36px 32px", display: "flex", flexDirection: "column", justifyContent: "center", flex: 1, minWidth: 0 }}>
               <AppBadge label={apps[0].badge} />
               <AppIcon name={apps[0].icon} />
               <h3 className="display" style={{ fontSize: 22, fontWeight: 600, lineHeight: 1.2, color: "var(--pc-dark)", margin: "0 0 14px" }}>{apps[0].headline}</h3>
@@ -65,7 +65,7 @@ function Applications() {
           </div>
 
           {/* Agro + Urban — stacked vertically (right 40%), equal height */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 24, height: "100%" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
             <div ref={agroRef} style={{ background: "white", borderRadius: "var(--radius-xl)", boxShadow: "var(--shadow-card)", border: "1px solid var(--border-on-cream)", borderBottom: "3px solid var(--pc-green)", padding: "28px", display: "flex", flexDirection: "column", flex: 1 }}>
               <AppBadge label={apps[1].badge} />
               <AppIcon name={apps[1].icon} />
