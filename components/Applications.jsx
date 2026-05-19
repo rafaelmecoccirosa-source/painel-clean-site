@@ -54,7 +54,7 @@ function Applications() {
           {/* Solar — dominant horizontal card (left 60%) */}
           <div ref={solarRef} className="solar-card" style={{ background: "white", borderRadius: "var(--radius-xl)", boxShadow: "var(--shadow-card)", border: "1px solid var(--border-on-cream)", borderBottom: "3px solid var(--pc-green)", display: "flex", overflow: "hidden" }}>
             <div className="solar-photo" style={{ width: 380, flexShrink: 0, overflow: "hidden" }}>
-              <img src="public/images/escovaseacessorios.png" alt="Escovas e acessórios Painel Clean" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} />
+              <img src="public/images/escovapordosol.png" alt="Técnico Painel Clean limpando painel solar" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} />
             </div>
             <div style={{ padding: "36px 32px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
               <AppBadge label={apps[0].badge} />
