@@ -146,7 +146,7 @@ function CursoHero() {
 
             {/* Photo frame */}
             <div style={{ position: "relative" }}>
-              <div style={{ borderRadius: "var(--radius-2xl)", overflow: "hidden", aspectRatio: "4/5" }}>
+              <div style={{ borderRadius: "var(--radius-2xl)", overflow: "hidden", aspectRatio: "16/9" }}>
                 <img
                   src="public/images/hero-curso.png"
                   alt="Técnico Painel Clean em campo"
@@ -234,7 +234,7 @@ function CursoHero() {
           .ch3-grid > div:last-child { order: -1; }
         }
         @media (max-width: 540px) {
-          .ch3-grid > div:last-child div[style*="aspectRatio"] { aspect-ratio: 3/2 !important; }
+          .ch3-grid > div:last-child div[style*="aspectRatio"] { aspect-ratio: 16/9 !important; }
         }
       `}</style>
     </section>
