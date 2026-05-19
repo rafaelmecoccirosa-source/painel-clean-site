@@ -148,9 +148,9 @@ function CursoHero() {
             <div style={{ position: "relative" }}>
               <div style={{ borderRadius: "var(--radius-2xl)", overflow: "hidden", aspectRatio: "4/5" }}>
                 <img
-                  src="public/images/hero-curso.png"
-                  alt="Técnico Painel Clean em campo"
-                  style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "40% center" }}
+                  src="public/images/hero-tecnico-cliente.png"
+                  alt="Técnico Painel Clean e cliente em campo"
+                  style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center" }}
                 />
                 <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, transparent 55%, rgba(10,31,23,0.60) 100%)" }} />
               </div>
