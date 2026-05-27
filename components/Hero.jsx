@@ -16,7 +16,7 @@ const heroSlides = [
     description: "Bomba, controle remoto e cabo extensível já inclusos. A D5 é o kit mais vendido da Painel Clean — tudo que você precisa para sair limpando.",
     primary: { label: "Ver Escova Dupla D5", href: "/escova-dupla-d5" },
     secondary: { label: "Pedir orçamento", href: wa("Olá! Tenho interesse na Escova Dupla D5 (ZCP-0275-D5).") },
-    image: "public/images/escovapordosol.png",
+    image: "public/images/kit painel clean.png",
     meta: [{ k: "200", v: "painéis/h" }, { k: "350", v: "RPM brushless" }, { k: "7,5m", v: "de alcance" }],
   },
   {
