@@ -2,22 +2,22 @@
 
 const PRODUCT = {
   sku: "ZCP-0275-D5",
-  name: "Escova Dupla D5",
+  name: "Escova Dupla PRO",
   slug: "escova-dupla-d5",
   tag: "Mais vendida",
-  image: "public/images/DNF_2477.jpg",
-  kitImage: "public/images/DNF_2500.jpg",
-  headline1: "Kit completo.",
-  headline2: "Comece no mesmo dia.",
-  fullDesc: "Escova Dupla, Semiautomática, com Motobomba, Controle Remoto e Cabo Extensível até 7,5m",
+  image: "public/images/escova pro 1.png",
+  kitImage: "public/images/escova pro kit.png",
+  headline1: "Duas cabeças.",
+  headline2: "O dobro de área por passada.",
+  fullDesc: "Escova Dupla PRO, Semiautomática, com Motobomba, Controle Remoto e Cabo Extensível até 7,5m",
   quickSpecs: [
     { icon: "bolt", label: "Motor brushless 350 RPM" },
     { icon: "arrowRight", label: "Cabo até 7,5m" },
-    { icon: "check", label: "Até 200 painéis/hora" },
+    { icon: "check", label: "260 painéis/hora" },
   ],
   specs: [
     { k: "Motor", v: "Brushless 350 RPM" },
-    { k: "Velocidade", v: "200 painéis/h" },
+    { k: "Velocidade", v: "260 painéis/h" },
     { k: "Cabo", v: "Extensível até 7,5m" },
     { k: "Operação", v: "Semiautomática" },
     { k: "Inclui", v: "Bomba + controle remoto" },
@@ -45,7 +45,7 @@ const PRODUCT = {
 
 const ALL_PRODUCTS = [
   { name: "G5", sku: "ZCP-0175-G5", href: "/escova-rotativa-g5", current: false },
-  { name: "D5", sku: "ZCP-0275-D5", href: "/escova-dupla-d5", current: true },
+  { name: "PRO", sku: "ZCP-0275-D5", href: "/escova-dupla-d5", current: true },
   { name: "S5", sku: "ZCP-0175-S5", href: "/escova-solo-s5", current: false },
 ];
 

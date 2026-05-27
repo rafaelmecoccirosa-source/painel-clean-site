@@ -4,7 +4,7 @@ const { test, waitForReact } = require('./fixtures');
 
 const PRODUCTS = [
   { url: '/escova-rotativa-g5', sku: 'ZCP-0175-G5', name: 'G5', speed: '260' },
-  { url: '/escova-dupla-d5',    sku: 'ZCP-0275-D5', name: 'D5', speed: '200' },
+  { url: '/escova-dupla-d5',    sku: 'ZCP-0275-D5', name: 'PRO', speed: '260' },
   { url: '/escova-solo-s5',     sku: 'ZCP-0175-S5', name: 'S5', speed: '160' },
 ];
 

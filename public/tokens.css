@@ -128,6 +128,12 @@
   --container: 1280px;
   --gutter:    24px;
   --section-y: 80px;
+
+  /* ---------- Product stage (vitrine) ---------- */
+  --t-stage:        #ECECEA;   /* neutral gray backdrop behind product photos */
+  --t-stage-warm:   #EDE7D2;   /* warm cream backdrop */
+  --t-stage-dark:   #1B201E;
+  --t-stage-radius: 28px;
 }
 
 /* =========================================================

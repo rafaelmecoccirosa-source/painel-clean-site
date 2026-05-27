@@ -1,6 +1,10 @@
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [dropOpen, setDropOpen] = useState(false);
+  const [prodMobileOpen, setProdMobileOpen] = useState(false);
+  const dropTimer = useRef(null);
+
   useEffect(() => {
     const f = () => setScrolled(window.scrollY > 12);
     window.addEventListener("scroll", f);
@@ -10,14 +14,24 @@ function Nav() {
     document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [open]);
+
+  const openDrop  = () => { clearTimeout(dropTimer.current); setDropOpen(true); };
+  const closeDrop = () => { dropTimer.current = setTimeout(() => setDropOpen(false), 120); };
+
+  const prodLinks = [
+    { label: "Escova Dupla PRO", href: "/escova-dupla-d5", eyebrow: "Mais vendida" },
+    { label: "Escovas",          href: "/produtos",        eyebrow: "Linha completa" },
+    { label: "Acessórios",       href: "/produtos#acessorios", eyebrow: "Refis e peças" },
+  ];
+
   const links = [
-    { label: "Produtos", href: "/produtos" },
     { label: "Aplicações", href: "/#aplicacoes" },
     { label: "Comparativo", href: "/#comparativo" },
     { label: "Curso", href: "/curso" },
     { label: "Plataforma", href: "/#plataforma" },
     { label: "Calculadora", href: "/#roi" },
   ];
+
   return (
     <header style={{
       position: "fixed", top: 0, left: 0, right: 0, zIndex: 60,
@@ -29,12 +43,64 @@ function Nav() {
     }}>
       <div className="container" style={{ height: 76, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <Logo />
+
         {/* Desktop nav */}
         <nav className="nav-links" style={{ display: "flex", alignItems: "center", gap: 32 }}>
+
+          {/* Produtos dropdown */}
+          <div
+            style={{ position: "relative" }}
+            onMouseEnter={openDrop}
+            onMouseLeave={closeDrop}
+          >
+            <a href="/produtos" className="nav-link nav-link-drop">
+              Produtos
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ marginLeft: 4, opacity: 0.5, transition: "transform 200ms", transform: dropOpen ? "rotate(180deg)" : "none" }}>
+                <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+
+            {/* Dropdown panel */}
+            <div style={{
+              position: "absolute",
+              top: "calc(100% + 14px)",
+              left: "50%",
+              transform: "translateX(-50%)",
+              background: "rgba(10,28,21,0.98)",
+              backdropFilter: "blur(20px)",
+              WebkitBackdropFilter: "blur(20px)",
+              border: "1px solid var(--border-on-dark)",
+              borderRadius: "var(--radius-md)",
+              padding: "8px",
+              minWidth: 240,
+              boxShadow: "0 20px 48px rgba(0,0,0,0.40)",
+              opacity: dropOpen ? 1 : 0,
+              pointerEvents: dropOpen ? "auto" : "none",
+              transform: `translateX(-50%) translateY(${dropOpen ? 0 : -6}px)`,
+              transition: "opacity 180ms var(--ease-out), transform 180ms var(--ease-out)",
+            }}>
+              {/* Arrow */}
+              <div style={{
+                position: "absolute", top: -6, left: "50%", transform: "translateX(-50%)",
+                width: 12, height: 6, overflow: "hidden",
+              }}>
+                <div style={{ width: 12, height: 12, background: "rgba(10,28,21,0.98)", border: "1px solid var(--border-on-dark)", transform: "rotate(45deg) translate(-2px, -2px)", borderRadius: 2 }} />
+              </div>
+
+              {prodLinks.map(l => (
+                <a key={l.href} href={l.href} className="nav-drop-item">
+                  <span className="nav-drop-eyebrow">{l.eyebrow}</span>
+                  <span className="nav-drop-label">{l.label}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+
           {links.map(l => (
             <a key={l.href} href={l.href} className="nav-link">{l.label}</a>
           ))}
         </nav>
+
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <a href={wa()} target="_blank" rel="noopener noreferrer" className="nav-cta"
             style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--pc-green)", color: "var(--pc-dark)", fontWeight: 700, fontSize: 14, padding: "11px 18px", borderRadius: "var(--radius-pill)", transition: "all 180ms" }}>
@@ -49,6 +115,7 @@ function Nav() {
           </button>
         </div>
       </div>
+
       {/* Mobile menu drawer */}
       <nav className="nav-mobile" style={{
         display: open ? "flex" : "none",
@@ -56,6 +123,30 @@ function Nav() {
         padding: "24px 0 32px",
         borderTop: "1px solid var(--border-on-dark)",
       }}>
+        {/* Produtos accordion */}
+        <div>
+          <button
+            onClick={() => setProdMobileOpen(v => !v)}
+            style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%", padding: "14px 24px", color: "var(--fg-2)", fontSize: 16, fontWeight: 500, background: "none", border: "none", borderBottom: "1px solid rgba(255,255,255,0.06)", cursor: "pointer" }}
+          >
+            Produtos
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ transition: "transform 200ms", transform: prodMobileOpen ? "rotate(180deg)" : "none" }}>
+              <path d="M3 5l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+          {prodMobileOpen && (
+            <div style={{ background: "rgba(0,0,0,0.2)" }}>
+              {prodLinks.map(l => (
+                <a key={l.href} href={l.href} onClick={() => setOpen(false)}
+                  style={{ display: "flex", flexDirection: "column", gap: 2, padding: "12px 32px", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
+                  <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.08em", color: "var(--pc-green)", textTransform: "uppercase" }}>{l.eyebrow}</span>
+                  <span style={{ fontSize: 15, fontWeight: 500, color: "var(--fg-1)" }}>{l.label}</span>
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+
         {links.map(l => (
           <a key={l.href} href={l.href} onClick={() => setOpen(false)}
             style={{ display: "block", padding: "14px 24px", color: "var(--fg-2)", fontSize: 16, fontWeight: 500, textDecoration: "none", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
@@ -69,6 +160,7 @@ function Nav() {
           </a>
         </div>
       </nav>
+
       <style>{`
         .nav-link {
           color: rgba(255,255,255,0.55);
@@ -76,6 +168,8 @@ function Nav() {
           font-weight: 500;
           position: relative;
           transition: color 200ms;
+          display: inline-flex;
+          align-items: center;
         }
         .nav-link::after {
           content: "";
@@ -89,6 +183,29 @@ function Nav() {
         }
         .nav-link:hover { color: white; }
         .nav-link:hover::after { width: 100%; }
+        .nav-link-drop::after { display: none; }
+        .nav-drop-item {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          padding: 10px 14px;
+          border-radius: var(--radius-sm);
+          transition: background 150ms;
+          text-decoration: none;
+        }
+        .nav-drop-item:hover { background: rgba(255,255,255,0.06); }
+        .nav-drop-eyebrow {
+          font-size: 10px;
+          font-weight: 600;
+          letter-spacing: 0.10em;
+          text-transform: uppercase;
+          color: var(--pc-green);
+        }
+        .nav-drop-label {
+          font-size: 14px;
+          font-weight: 500;
+          color: var(--fg-1);
+        }
         .nav-cta:hover {
           background: #4FE090 !important;
           transform: translateY(-1px);
