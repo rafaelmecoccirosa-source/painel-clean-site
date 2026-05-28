@@ -6,7 +6,7 @@ function Nav() {
   const dropTimer = useRef(null);
 
   // Pages that start with a light/cream hero — nav needs dark text when unscrolled
-  const lightPage = ['/produtos', '/escova-rotativa-g5', '/escova-solo-s5', '/curso'].some(
+  const lightPage = ['/produtos', '/escova-dupla-d5', '/escova-rotativa-g5', '/escova-solo-s5', '/curso'].some(
     p => window.location.pathname === p || window.location.pathname === p + '/'
   );
 
