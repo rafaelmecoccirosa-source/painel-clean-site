@@ -11,7 +11,7 @@ function Footer() {
           <div>
             <Logo />
             <p style={{ marginTop: 22, font: "var(--body-sm)", color: "var(--fg-3)", maxWidth: 320 }}>
-              Equipamentos profissionais para limpeza de painéis fotovoltaicos. Motor brushless, sem químicos, máxima eficiência.
+              Equipamentos profissionais para limpeza de superfícies lisas.
             </p>
             <div style={{ marginTop: 24, display: "flex", alignItems: "flex-start", gap: 10, color: "var(--fg-4)", fontSize: 13, lineHeight: 1.55 }}>
               <span style={{ flexShrink: 0, marginTop: 2 }}><Icon name="location" size={14} /></span>
@@ -56,7 +56,7 @@ function Footer() {
         <div style={{ paddingTop: 28, borderTop: "1px solid var(--border-on-dark)", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, flexWrap: "wrap", fontSize: 13, color: "var(--fg-4)" }}>
           <div>
             <span>© 2026 Painel Clean. Todos os direitos reservados.</span>
-            <span style={{ display: "block", marginTop: 4, fontSize: 12, color: "var(--fg-5)" }}>Desenvolvido para o setor solar brasileiro.</span>
+            <span style={{ display: "block", marginTop: 4, fontSize: 12, color: "var(--fg-5)" }}>Fabricado no Brasil para limpeza profissional de qualquer superfície.</span>
           </div>
           <span style={{ display: "flex", gap: 24, flexWrap: "wrap", justifyContent: "flex-end" }}>
             <a href="#" style={{ color: "inherit" }}>Termos</a>

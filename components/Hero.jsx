@@ -3,31 +3,31 @@ const heroSlides = [
     eyebrow: "Linha profissional",
     title: ["Limpe mais.", "Ganhe mais.", "Em menos tempo."],
     accentLine: 2,
-    description: "Motor brushless, sem produtos químicos, até 260 painéis por hora. Tecnologia profissional para quem vive de solar.",
+    description: "Equipamentos profissionais para limpeza de superfícies lisas — painéis solares, estufas e fachadas.",
     primary: { label: "Ver equipamentos", href: "#equipamentos" },
-    secondary: { label: "Plataforma de serviços", href: "https://painel-clean-v2.vercel.app" },
+    secondary: { label: "Plataforma de serviços", href: "https://painel-clean-mrr.vercel.app" },
     image: "public/images/painel_clean_-_limpando_telhado.png",
     meta: [{ k: "260", v: "painéis/h" }, { k: "+30%", v: "geração" }, { k: "0", v: "químicos" }],
   },
   {
-    eyebrow: "Promoção — tempo limitado",
-    title: ["Refil de cerdas.", "20% off.", "Estoque limitado."],
-    accentLine: 1,
-    description: "Cerdas profissionais para vidro fotovoltaico. Substituição rápida, mesmo desempenho do dia 1.",
-    primary: { label: "Aproveitar oferta", href: wa("Olá! Quero aproveitar o desconto no Refil de Cerdas.") },
-    secondary: { label: "Ver todos os produtos", href: "#equipamentos" },
-    image: "public/images/hero-promo.jpg",
-    meta: [{ k: "R$ 290", v: "de" }, { k: "R$ 232", v: "por", highlight: true }, { k: "20%", v: "off" }],
+    eyebrow: "Escova Dupla D5 — Mais vendida",
+    title: ["Kit completo.", "Comece a atender", "no mesmo dia."],
+    accentLine: 2,
+    description: "Bomba, controle remoto e cabo extensível já inclusos. A D5 é o kit mais vendido da Painel Clean — tudo que você precisa para sair limpando.",
+    primary: { label: "Ver Escova Dupla D5", href: "/escova-dupla-d5" },
+    secondary: { label: "Pedir orçamento", href: wa("Olá! Tenho interesse na Escova Dupla D5 (ZCP-0275-D5).") },
+    image: "public/images/kit painel clean.png",
+    meta: [{ k: "200", v: "painéis/h" }, { k: "350", v: "RPM brushless" }, { k: "7,5m", v: "de alcance" }],
   },
   {
-    eyebrow: "Novo no YouTube",
-    title: ["Como limpar", "500 painéis", "em 3 horas."],
-    accentLine: 1,
-    description: "Rotina completa de um técnico profissional Painel Clean. Do setup ao relatório final, sem cortes.",
-    primary: { label: "Assistir agora", href: "#" },
-    secondary: { label: "Ver mais conteúdos", href: "#" },
-    image: "public/images/hero-video.jpg",
-    meta: [{ k: "13min", v: "de vídeo" }, { k: "Cap. 1", v: "rotina pro" }, { k: "Grátis", v: "no YouTube" }],
+    eyebrow: "Painel Clean Agro",
+    title: ["Estufas mais limpas.", "Colheita mais", "produtiva."],
+    accentLine: 2,
+    description: "Coberturas de policarbonato e vidro bloqueiam até 10% da luz com sujeira acumulada. Limpeza periódica mantém a transmitância máxima — sem produtos químicos.",
+    primary: { label: "Ver aplicações", href: "/#aplicacoes" },
+    secondary: { label: "Falar com especialista", href: wa("Olá! Tenho interesse na Painel Clean para estufas agrícolas.") },
+    image: "public/images/hero-agro.png",
+    meta: [{ k: "10%", v: "mais luz" }, { k: "0", v: "químicos" }, { k: "7,5m", v: "de alcance" }],
   },
 ];
 
@@ -35,6 +35,7 @@ function Hero() {
   const t = useT();
   const [idx, setIdx] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [touchStart, setTouchStart] = useState(null);
   const total = heroSlides.length;
   const SLIDE_MS = 7000;
   const TR = t.heroTreatment;
@@ -62,7 +63,15 @@ function Hero() {
   const s = heroSlides[idx];
 
   return (
-    <section className="hero-section" style={{ position: "relative", background: "var(--pc-darker)", color: "white", minHeight: "100vh", overflow: "hidden", paddingTop: 76 }}>
+    <section className="hero-section"
+      onTouchStart={e => setTouchStart(e.touches[0].clientX)}
+      onTouchEnd={e => {
+        if (touchStart === null) return;
+        const delta = touchStart - e.changedTouches[0].clientX;
+        if (Math.abs(delta) > 50) setIdx(i => (i + (delta > 0 ? 1 : -1) + total) % total);
+        setTouchStart(null);
+      }}
+      style={{ position: "relative", background: "var(--pc-darker)", color: "white", minHeight: "100dvh", overflow: "hidden", paddingTop: 76 }}>
       {/* Ambient glow */}
       <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 60% at 0% 30%, rgba(58,213,128,.10), transparent 60%), radial-gradient(ellipse 60% 50% at 100% 100%, rgba(58,213,128,.06), transparent 60%)", pointerEvents: "none" }} />
 
@@ -118,8 +127,9 @@ function Hero() {
         </div>
       </div>
 
-      {/* Slide controls */}
-      <div className="hero-controls" style={{ position: "absolute", left: 0, right: 0, bottom: 32, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 56px", zIndex: 3, pointerEvents: "none" }}>
+      {/* Slide controls — wrapped in .container so dots align with hero text */}
+      <div className="hero-controls" style={{ position: "absolute", left: 0, right: 0, bottom: 32, zIndex: 3, pointerEvents: "none" }}>
+        <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 14, pointerEvents: "auto" }}>
           {heroSlides.map((_, i) => (
             <button key={i} onClick={() => setIdx(i)} aria-label={`Slide ${i + 1}`}
@@ -139,6 +149,7 @@ function Hero() {
             </button>
           ))}
         </div>
+        </div>
       </div>
 
       <style>{`
@@ -153,7 +164,7 @@ function Hero() {
         }
 
         @media (max-width: 960px) {
-          .hero-section { min-height: 0 !important; }
+          .hero-section { min-height: unset !important; }
           /* Mobile: image stacks on top, full width */
           .hero-image-panel {
             position: relative !important;

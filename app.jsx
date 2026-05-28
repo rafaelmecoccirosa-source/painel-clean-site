@@ -6,12 +6,13 @@ function App() {
       <Hero />
       {t.showMarquee && <Marquee />}
       <About />
+      <Applications />
       {t.showSocial && <SocialProof />}
       <Products />
+      <ReelsSection />
       {t.showCompare && <Compare />}
       {t.showROI && <ROI />}
       <Training />
-      <ReelsSection />
       <Platform />
       <Faq />
       <CtaFinal />

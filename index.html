@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Painel Clean — Equipamentos profissionais para limpeza solar</title>
-<meta name="description" content="Equipamentos brushless, sem químicos, até 260 painéis por hora. Treinamento e plataforma de serviços para técnicos solares.">
+<title>Painel Clean — Escovas semiautomáticas para limpeza de painéis solares</title>
+<meta name="description" content="Escovas semiautomáticas para limpeza profissional de painéis solares, estufas e fachadas. Linha G5, D5 e S5 — até 260 painéis/hora, sem químicos.">
 <link rel="canonical" href="https://painelclean.com.br/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://painelclean.com.br/">
-<meta property="og:title" content="Painel Clean — Equipamentos profissionais para limpeza solar">
-<meta property="og:description" content="Equipamentos brushless, sem químicos, até 260 painéis por hora. Treinamento e plataforma de serviços para técnicos solares.">
+<meta property="og:title" content="Painel Clean — Escovas semiautomáticas para limpeza de painéis solares">
+<meta property="og:description" content="Escovas semiautomáticas para limpeza profissional de painéis solares, estufas e fachadas. Linha G5, D5 e S5 — até 260 painéis/hora, sem químicos.">
 <meta property="og:image" content="https://painelclean.com.br/public/images/painel_clean_-_limpando_telhado.png">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="Painel Clean">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Painel Clean — Equipamentos profissionais para limpeza solar">
-<meta name="twitter:description" content="Equipamentos brushless, sem químicos, até 260 painéis por hora. Treinamento e plataforma de serviços para técnicos solares.">
+<meta name="twitter:title" content="Painel Clean — Escovas semiautomáticas para limpeza de painéis solares">
+<meta name="twitter:description" content="Escovas semiautomáticas para limpeza profissional de painéis solares, estufas e fachadas. Linha G5, D5 e S5 — até 260 painéis/hora, sem químicos.">
 <meta name="twitter:image" content="https://painelclean.com.br/public/images/painel_clean_-_limpando_telhado.png">
 
 <link rel="stylesheet" href="public/tokens.css">
@@ -43,13 +43,24 @@
 
   .btn-primary {
     display: inline-flex; align-items: center; gap: 10px;
-    background: var(--pc-green); color: var(--pc-dark);
+    background-color: var(--pc-green);
+    background-image: linear-gradient(to right, rgba(255,255,255,0.15), rgba(255,255,255,0.15));
+    background-size: 0% 100%;
+    background-position: left center;
+    background-repeat: no-repeat;
+    color: var(--pc-dark);
     font: var(--button); font-size: 15px;
     padding: 16px 26px; border-radius: var(--radius-md);
-    transition: background var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+    transition: background-color var(--dur-base) var(--ease-out), background-size 360ms cubic-bezier(0.16,1,0.3,1), transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
     box-shadow: 0 8px 24px rgba(58,213,128,.20);
   }
-  .btn-primary:hover { background: #4FE090; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(58,213,128,.32); }
+  .btn-primary:hover {
+    background-color: #4FE090;
+    background-size: 100% 100%;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(58,213,128,.32);
+  }
+  .btn-primary:active { transform: scale(0.97); box-shadow: 0 4px 12px rgba(58,213,128,.12); }
 
   .btn-ghost-dark {
     display: inline-flex; align-items: center; gap: 10px;
@@ -89,6 +100,7 @@
   <script type="text/babel" src="components/Hero.jsx"></script>
   <script type="text/babel" src="components/Marquee.jsx"></script>
   <script type="text/babel" src="components/About.jsx"></script>
+  <script type="text/babel" src="components/Applications.jsx"></script>
   <script type="text/babel" src="components/SocialProof.jsx"></script>
   <script type="text/babel" src="components/Products.jsx"></script>
   <script type="text/babel" src="components/Compare.jsx"></script>
