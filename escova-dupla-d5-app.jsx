@@ -155,25 +155,25 @@ function Hero() {
 // ─── Scene 2: EXPLODED VIEW ───────────────────────────────────
 const EXPLODED_STAGES = [
   {
-    img: 'public/images/pro-front.jpg',
+    img: 'public/images/escova pro 1.png',
     num: '01', title: 'Montada.',
     lead: 'A Dupla PRO completa. Duas cabeças brushless, articulação central, engates rápidos. Tudo num conjunto só.',
     pin: { label: 'Conjunto montado', detail: 'Pronta para o telhado' },
   },
   {
-    img: 'public/images/pro-exploded-bracket.jpg',
+    img: 'public/images/escova pro 4.png',
     num: '02', title: 'Articulação central.',
     lead: 'Sistema de fixação modular: barra travessa, suporte do cabo, conector de água com engate rápido. Cada peça reposta isolada.',
     pin: { label: 'Suporte + conexão', detail: 'Padrão profissional · sem adaptadores' },
   },
   {
-    img: 'public/images/pro-exploded-disk.jpg',
+    img: 'public/images/escova pro 5.png',
     num: '03', title: 'Cabeça brushless.',
     lead: 'Motor brushless 350 RPM, base de polietileno, disco de cerdas trocável. 4 parafusos e está aberto pra manutenção.',
     pin: { label: 'Disco trocável', detail: 'Cerdas de reposição · 4 parafusos' },
   },
   {
-    img: 'public/images/pro-kit-full.jpg',
+    img: 'public/images/escova pro 3.png',
     num: '04', title: 'Cada peça, no lugar certo.',
     lead: 'Kit completo: cabo, articulação, motores, discos e cerdas. Engenharia pensada pra durar — e pra ser consertada no Brasil.',
     pin: { label: 'Conjunto expandido', detail: 'Reposição peça a peça' },
@@ -184,7 +184,7 @@ function Exploded() {
   const ref    = useRef(null);
   const p      = useSectionProgress(ref, 'sticky');
   const seg    = 1 / EXPLODED_STAGES.length;
-  const fadeW  = 0.05;
+  const fadeW  = 0.03;
 
   return (
     <section className="d5-exploded" ref={ref}>
@@ -620,7 +620,7 @@ function D5App() {
           display: flex; align-items: center; gap: 14px;
           max-width: 440px; will-change: opacity, transform;
         }
-        .d5-pin-side-r { flex-direction: row-reverse; }
+        .d5-pin-side-l { flex-direction: row-reverse; }
         .d5-pin-side-r .d5-pin-text { text-align: right; }
         .d5-pin-dot {
           width: 11px; height: 11px; border-radius: 50%;
@@ -693,7 +693,7 @@ function D5App() {
 
         /* ── EXPLODED ────────────────────────── */
         .d5-exploded {
-          position: relative; height: 560vh;
+          position: relative; height: 720vh;
           background: linear-gradient(180deg, var(--pc-darker) 0%, var(--pc-dark) 50%, var(--pc-darker) 100%);
           contain: layout paint;
         }
@@ -931,7 +931,7 @@ function D5App() {
         /* ── Responsive ──────────────────────── */
         @media (max-width: 820px) {
           .d5-hero    { height: 900vh; }
-          .d5-exploded { height: 500vh; }
+          .d5-exploded { height: 640vh; }
           .d5-exp-body { grid-template-columns: 1fr; gap: 20px; }
           .d5-exp-sticky { padding: 48px var(--gutter) 32px; }
           .d5-exp-stage { aspect-ratio: unset; max-height: unset; min-height: 40vh; }
@@ -948,6 +948,7 @@ function D5App() {
           .d5-pin-bl, .d5-pin-tl, .d5-pin-tr, .d5-pin-br {
             left: var(--gutter); right: var(--gutter); bottom: 18%; top: auto; max-width: none;
           }
+          .d5-pin-side-l { flex-direction: row; }
           .d5-pin-side-r { flex-direction: row; }
           .d5-pin-side-r .d5-pin-text { text-align: left; }
           .d5-pin-line { width: 28px; }
