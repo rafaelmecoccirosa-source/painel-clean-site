@@ -5,6 +5,11 @@ function Nav() {
   const [prodMobileOpen, setProdMobileOpen] = useState(false);
   const dropTimer = useRef(null);
 
+  // Pages that start with a light/cream hero — nav needs dark text when unscrolled
+  const lightPage = ['/produtos', '/escova-rotativa-g5', '/escova-solo-s5', '/curso'].some(
+    p => window.location.pathname === p || window.location.pathname === p + '/'
+  );
+
   useEffect(() => {
     const f = () => setScrolled(window.scrollY > 12);
     window.addEventListener("scroll", f);
@@ -17,6 +22,9 @@ function Nav() {
 
   const openDrop  = () => { clearTimeout(dropTimer.current); setDropOpen(true); };
   const closeDrop = () => { dropTimer.current = setTimeout(() => setDropOpen(false), 120); };
+
+  // True when nav sits on light bg and has no dark backdrop yet
+  const textDark = lightPage && !scrolled && !open;
 
   const prodLinks = [
     { label: "Escova Dupla PRO", href: "/escova-dupla-d5", eyebrow: "Mais vendida" },
@@ -33,7 +41,7 @@ function Nav() {
   ];
 
   return (
-    <header style={{
+    <header data-text-dark={textDark ? "1" : undefined} style={{
       position: "fixed", top: 0, left: 0, right: 0, zIndex: 60,
       background: scrolled || open ? "rgba(12,40,31,0.97)" : "transparent",
       backdropFilter: scrolled || open ? "blur(14px)" : "none",
@@ -42,7 +50,7 @@ function Nav() {
       transition: "all 240ms var(--ease-out)",
     }}>
       <div className="container" style={{ height: 76, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <Logo />
+        <Logo textColor={textDark ? "var(--pc-dark)" : "white"} />
 
         {/* Desktop nav */}
         <nav className="nav-links" style={{ display: "flex", alignItems: "center", gap: 32 }}>
@@ -109,9 +117,13 @@ function Nav() {
           {/* Hamburger — mobile only */}
           <button className="nav-hamburger" onClick={() => setOpen(o => !o)} aria-label="Menu"
             style={{ display: "none", flexDirection: "column", justifyContent: "center", alignItems: "center", width: 40, height: 40, gap: 5, background: "transparent", border: "none", cursor: "pointer", padding: 0 }}>
-            <span style={{ display: "block", width: 22, height: 2, background: "white", borderRadius: 2, transition: "all 240ms", transform: open ? "rotate(45deg) translate(5px, 5px)" : "none" }}></span>
-            <span style={{ display: "block", width: 22, height: 2, background: "white", borderRadius: 2, transition: "all 240ms", opacity: open ? 0 : 1 }}></span>
-            <span style={{ display: "block", width: 22, height: 2, background: "white", borderRadius: 2, transition: "all 240ms", transform: open ? "rotate(-45deg) translate(5px, -5px)" : "none" }}></span>
+            {[
+              open ? "rotate(45deg) translate(5px, 5px)" : "none",
+              "none",
+              open ? "rotate(-45deg) translate(5px, -5px)" : "none",
+            ].map((t, i) => (
+              <span key={i} style={{ display: "block", width: 22, height: 2, background: textDark ? "var(--pc-dark)" : "white", borderRadius: 2, transition: "all 240ms", transform: t, opacity: i === 1 && open ? 0 : 1 }} />
+            ))}
           </button>
         </div>
       </div>
@@ -211,6 +223,10 @@ function Nav() {
           transform: translateY(-1px);
           box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 4px 12px rgba(58,213,128,0.28) !important;
         }
+        /* Light-hero pages: dark text when nav is transparent */
+        [data-text-dark="1"] .nav-link { color: rgba(12,40,31,0.60); }
+        [data-text-dark="1"] .nav-link:hover { color: var(--pc-dark); }
+        [data-text-dark="1"] .nav-link::after { background: var(--pc-dark); }
         @media (max-width: 980px) {
           .nav-links { display: none !important; }
           .nav-hamburger { display: flex !important; }
