@@ -155,25 +155,25 @@ function Hero() {
 // ─── Scene 2: EXPLODED VIEW ───────────────────────────────────
 const EXPLODED_STAGES = [
   {
-    img: 'public/images/escova pro 1.png',
+    img: 'public/images/pro-front.jpg',
     num: '01', title: 'Montada.',
     lead: 'A Dupla PRO completa. Duas cabeças brushless, articulação central, engates rápidos. Tudo num conjunto só.',
     pin: { label: 'Conjunto montado', detail: 'Pronta para o telhado' },
   },
   {
-    img: 'public/images/escova pro 2.png',
+    img: 'public/images/pro-exploded-bracket.jpg',
     num: '02', title: 'Articulação central.',
     lead: 'Sistema de fixação modular: barra travessa, suporte do cabo, conector de água com engate rápido. Cada peça reposta isolada.',
     pin: { label: 'Suporte + conexão', detail: 'Padrão profissional · sem adaptadores' },
   },
   {
-    img: 'public/images/escova pro 3.png',
+    img: 'public/images/pro-exploded-disk.jpg',
     num: '03', title: 'Cabeça brushless.',
     lead: 'Motor brushless 350 RPM, base de polietileno, disco de cerdas trocável. 4 parafusos e está aberto pra manutenção.',
     pin: { label: 'Disco trocável', detail: 'Cerdas de reposição · 4 parafusos' },
   },
   {
-    img: 'public/images/escova pro kit.png',
+    img: 'public/images/pro-kit-full.jpg',
     num: '04', title: 'Cada peça, no lugar certo.',
     lead: 'Kit completo: cabo, articulação, motores, discos e cerdas. Engenharia pensada pra durar — e pra ser consertada no Brasil.',
     pin: { label: 'Conjunto expandido', detail: 'Reposição peça a peça' },
@@ -693,7 +693,7 @@ function D5App() {
 
         /* ── EXPLODED ────────────────────────── */
         .d5-exploded {
-          position: relative; height: 420vh;
+          position: relative; height: 560vh;
           background: linear-gradient(180deg, var(--pc-darker) 0%, var(--pc-dark) 50%, var(--pc-darker) 100%);
           contain: layout paint;
         }
@@ -931,7 +931,7 @@ function D5App() {
         /* ── Responsive ──────────────────────── */
         @media (max-width: 820px) {
           .d5-hero    { height: 900vh; }
-          .d5-exploded { height: 380vh; }
+          .d5-exploded { height: 500vh; }
           .d5-exp-body { grid-template-columns: 1fr; gap: 20px; }
           .d5-exp-sticky { padding: 48px var(--gutter) 32px; }
           .d5-exp-stage { aspect-ratio: unset; max-height: unset; min-height: 40vh; }

@@ -285,7 +285,7 @@ function KitSection() {
         </div>
 
         <div className="vk-stage">
-          <img src="public/images/kit painel clean.png" alt="Kit completo Painel Clean: caixa, escovas, bomba, mangueira, cabos e fonte" />
+          <img src="public/images/pro-kit-16-9.jpg" alt="Kit completo Painel Clean: caixa, escovas, bomba, mangueira, cabos e fonte" />
           <div className="vk-stage-meta">
             <span>KIT COMPLETO</span>
             <span>D5 · DUPLA PRO</span>

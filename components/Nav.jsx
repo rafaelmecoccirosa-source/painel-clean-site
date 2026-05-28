@@ -5,8 +5,12 @@ function Nav() {
   const [prodMobileOpen, setProdMobileOpen] = useState(false);
   const dropTimer = useRef(null);
 
-  // Pages that start with a light/cream hero — nav needs dark text when unscrolled
-  const lightPage = ['/produtos', '/escova-dupla-d5', '/escova-rotativa-g5', '/escova-solo-s5', '/curso'].some(
+  // /produtos always shows the dark green nav bar (not transparent)
+  const alwaysDark = ['/produtos'].some(
+    p => window.location.pathname === p || window.location.pathname === p + '/'
+  );
+  // Other light/cream hero pages — nav needs dark text when unscrolled
+  const lightPage = ['/escova-dupla-d5', '/escova-rotativa-g5', '/escova-solo-s5', '/curso'].some(
     p => window.location.pathname === p || window.location.pathname === p + '/'
   );
 
@@ -43,10 +47,10 @@ function Nav() {
   return (
     <header data-text-dark={textDark ? "1" : undefined} style={{
       position: "fixed", top: 0, left: 0, right: 0, zIndex: 60,
-      background: scrolled || open ? "rgba(12,40,31,0.97)" : "transparent",
-      backdropFilter: scrolled || open ? "blur(14px)" : "none",
-      WebkitBackdropFilter: scrolled || open ? "blur(14px)" : "none",
-      borderBottom: scrolled || open ? "1px solid var(--border-on-dark)" : "1px solid transparent",
+      background: alwaysDark || scrolled || open ? "rgba(12,40,31,0.97)" : "transparent",
+      backdropFilter: alwaysDark || scrolled || open ? "blur(14px)" : "none",
+      WebkitBackdropFilter: alwaysDark || scrolled || open ? "blur(14px)" : "none",
+      borderBottom: alwaysDark || scrolled || open ? "1px solid var(--border-on-dark)" : "1px solid transparent",
       transition: "all 240ms var(--ease-out)",
     }}>
       <div className="container" style={{ height: 76, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
