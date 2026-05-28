@@ -57,8 +57,8 @@ const HERO_FRAMES = Array.from({ length: 11 }, (_, i) =>
 
 const HERO_CAPTIONS = [
   { start: 0.10, end: 0.36, pos: 'bl', side: 'l', eyebrow: '260 PAINÉIS/HORA',       title: 'Velocidade que vira faturamento.' },
-  { start: 0.36, end: 0.58, pos: 'tr', side: 'r', eyebrow: 'CERDAS PROFISSIONAIS',   title: 'Limpa. Não risca o vidro.' },
-  { start: 0.58, end: 0.80, pos: 'tl', side: 'l', eyebrow: 'ENGENHARIA MODULAR',     title: 'Cada peça reposta no Brasil.' },
+  { start: 0.36, end: 0.58, pos: 'tl', side: 'l', eyebrow: 'ENGENHARIA MODULAR',     title: 'Cada componente disponível no Brasil.' },
+  { start: 0.58, end: 0.80, pos: 'tr', side: 'r', eyebrow: 'CERDAS PROFISSIONAIS',   title: 'Limpa. Não risca o painel.' },
   { start: 0.80, end: 1.00, pos: 'br', side: 'r', eyebrow: 'DUAS CABEÇAS BRUSHLESS', title: 'Dois motores. Uma engenharia.' },
 ];
 
@@ -155,7 +155,7 @@ function Hero() {
 // ─── Scene 2: EXPLODED VIEW ───────────────────────────────────
 const EXPLODED_STAGES = [
   {
-    img: 'public/images/escova pro 1.png',
+    img: 'public/images/escova pro 6.png',
     num: '01', title: 'Montada.',
     lead: 'A Dupla PRO completa. Duas cabeças brushless, articulação central, engates rápidos. Tudo num conjunto só.',
     pin: { label: 'Conjunto montado', detail: 'Pronta para o telhado' },
@@ -655,7 +655,7 @@ function D5App() {
         .d5-pin-bl { left: 6%;  bottom: 18%; }
         .d5-pin-tl { left: 6%;  top: 18%; }
         .d5-pin-tr { right: 6%; top: 18%; }
-        .d5-pin-br { right: 6%; bottom: 18%; }
+        .d5-pin-br { right: 20%; bottom: 18%; }
 
         /* Frame counter */
         .d5-counter {
