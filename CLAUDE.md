@@ -238,6 +238,11 @@ Para commitar sem assinatura GPG (ambiente atual):
 git -c commit.gpgsign=false commit -m "mensagem"
 ```
 
+**Regra de deploy (permanente):** ao terminar qualquer mudança, sempre:
+1. Commitar na branch de trabalho
+2. Fazer cherry-pick / checkout para `main` e push: `git push -u origin main`
+3. A Vercel faz deploy automático a partir de pushes na `main` — não precisa de ação manual
+
 ---
 
 ## Histórico de decisões
