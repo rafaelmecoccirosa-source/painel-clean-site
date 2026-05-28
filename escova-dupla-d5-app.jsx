@@ -581,7 +581,7 @@ function D5App() {
         /* ── HERO ────────────────────────────── */
         .d5-hero {
           position: relative;
-          height: 1300vh;
+          height: 2000vh;
           background: var(--pc-cream);
           color: var(--fg-on-cream-1);
           contain: layout paint;
@@ -930,7 +930,7 @@ function D5App() {
 
         /* ── Responsive ──────────────────────── */
         @media (max-width: 820px) {
-          .d5-hero    { height: 900vh; }
+          .d5-hero    { height: 1400vh; }
           .d5-exploded { height: 640vh; }
           .d5-exp-body { grid-template-columns: 1fr; gap: 20px; }
           .d5-exp-sticky { padding: 48px var(--gutter) 32px; }
