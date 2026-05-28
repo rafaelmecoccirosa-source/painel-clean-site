@@ -1,7 +1,7 @@
 # CLAUDE.md — painel-clean-site
 
 > Fonte de verdade para o site institucional da Painel Clean (painelclean.com.br).
-> Atualizado em: maio/2026 (PR #4 + PR #5)
+> Atualizado em: maio/2026 (PR #4 + PR #5 + vitrine redesign + D5 cinematic)
 
 ---
 
@@ -84,9 +84,11 @@ Site institucional da **Painel Clean** — fabricante de escovas semiautomática
 ### Escovas
 | Nome | SKU | Velocidade |
 |------|-----|-----------|
-| Escova Rotativa G5 | ZCP-0175-G5 | 260 painéis/h |
-| Escova Dupla D5 | ZCP-0275-D5 | 200 painéis/h |
+| Escova Dupla PRO | ZCP-0275-D5 | 260 painéis/h |
+| Escova Rotativa G5 | ZCP-0175-G5 | 200 painéis/h |
 | Escova Solo S5 | ZCP-0175-S5 | 160 painéis/h |
+
+> **Nota:** "Escova Dupla PRO" é o nome de marketing (antes "Escova Dupla D5"). URL permanece `/escova-dupla-d5` e SKU permanece `ZCP-0275-D5`.
 
 ### Acessórios
 | Nome | SKU |
@@ -109,6 +111,10 @@ Site institucional da **Painel Clean** — fabricante de escovas semiautomática
 | `--pc-deepest` | `#0A1F17` | Footer |
 | `--pc-mid` | `#1B3A2D` | Painéis de destaque escuros |
 | `--pc-cream` | `#FFFBEC` | Fundo claro |
+| `--t-stage` | `#ECECEA` | Stage neutro (vitrine showcase) |
+| `--t-stage-warm` | `#EDE7D2` | Stage quente (vitrine showcase) |
+| `--t-stage-dark` | `#1B201E` | Stage escuro (vitrine showcase) |
+| `--t-stage-radius` | `28px` | Raio do stage (vitrine showcase) |
 
 **Fontes:** IBM Plex Sans (display) + Satoshi (corpo) via CDN
 
@@ -132,8 +138,23 @@ Site institucional da **Painel Clean** — fabricante de escovas semiautomática
 13. CtaFinal
 14. Footer
 
-### Páginas de produto individuais (`*-app.jsx`)
-Cada página usa as mesmas seções, com dados por produto em `PRODUCT`:
+### Página Escova Dupla PRO (`escova-dupla-d5-app.jsx`) — cinematic
+Página scroll-driven independente (sem `ProductPage.jsx`):
+1. `Hero` — 1300vh desktop / 900vh mobile; 11 frames crossfade + 4 captions posicionadas
+2. `Exploded` — 420vh; 4 estágios com crossfade e painéis laterais sticky
+3. `FieldStats` — 220vh; bg field-1.jpg, 4 contadores count-up
+4. `Specs` — ficha técnica 8 linhas com tally scroll-driven
+5. `Timeline` — grade 6×4 painéis com preenchimento progressivo
+6. `AccessoriesD5` — 6 cards com SVG glyphs inline
+7. `FAQSection` — accordion 6 itens
+8. `FinalCTAD5` — fullscreen, WhatsApp + Mercado Livre (`React.forwardRef`)
+9. `PurchaseBar` — sticky, auto-hide ao chegar no CTA final
+
+Hooks locais: `useScrollY()`, `useSectionProgress(ref, mode)` — não dependem de `_config.jsx`.
+`mode` aceita: `'sticky'` (seção tall), `'enter'` (entra pela base), `'through'` (passa pelo viewport).
+
+### Páginas de produto G5 e S5 (`*-app.jsx`)
+Ainda usam a estrutura anterior com `ProductPage.jsx`:
 1. StickyBuyBar (aparece após scroll de 520px)
 2. ProductHero (breadcrumb, badge SKU, headlines, quick spec pills, 2 CTAs, imagem)
 3. SpecsSection (ficha técnica 6 cards)
@@ -152,6 +173,18 @@ Cada página usa as mesmas seções, com dados por produto em `PRODUCT`:
 - `Logo` — `LogoMark` + texto "Painel Clean", com link para `/`; aceita prop `textColor`
 - `wa(msg)` — helper para link WhatsApp com mensagem pré-preenchida
 - `WhatsBrand` — ícone SVG do WhatsApp
+- `Reveal`, `useReveal`, `useRevealChildren`, `useCountUp` — hooks de animação de entrada
+
+### `Nav.jsx` — dropdown de produtos
+- `prodLinks` array: Escova Dupla PRO → `/escova-dupla-d5`, Escovas → `/produtos`, Acessórios → `/produtos#acessorios`
+- Desktop: item "Produtos" com chevron, hover abre painel dropdown
+- Mobile: "Produtos" abre accordion com `prodMobileOpen` state
+
+### `produtos-app.jsx` — nova vitrine (redesign)
+Seções: `VHero` → 3× `ShowcaseSection` (PRO, S5, G5, com `KitSection` após PRO) → `AccessoriesSection` → `VFinalCTA` + `SectionNav` flutuante
+- `PRODUCTS`: PRO (260/h), S5 (160/h), G5 (200/h)
+- `ACCESSORIES`: 6 itens com SVG glyphs
+- CSS prefixes: `vh-` (vitrine hero), `vp-` (showcase), `vk-` (kit), `vsn-` (section nav), `va-` (accessories), `vf-` (final CTA)
 
 ### Sistema de tweaks (dev only)
 Painel flutuante ativado com `?tweaks=1` na URL.
@@ -216,3 +249,6 @@ git -c commit.gpgsign=false commit -m "mensagem"
 - **Hero layout (PR #4):** imagem `position: absolute; left: 50%; right: 0` do viewport — bleed da metade da tela até a borda direita sem cropar. Texto dentro de `.container` com `width: 50%`, alinhado à grid das outras seções
 - **Nav hamburger (PR #4):** `.nav-mobile` usa `display: open ? "flex" : "none"` como inline style, não classe CSS — necessário porque `!important` em CSS sobreescreveria o estado React
 - **Logo SVG (PR #5):** `LogoMark` é SVG inline com `viewBox="0 0 100 100"` — nenhum arquivo de imagem, nenhum artefato de compressão JPEG, escala perfeita em qualquer DPI
+- **Escova Dupla PRO (vitrine + D5 cinematic):** nome de marketing mudou de "Escova Dupla D5" para "Escova Dupla PRO". URL e SKU permanecem. PRO é agora a mais rápida (260/h); G5 passou para 200/h.
+- **D5 página cinematic:** auto-contida em `escova-dupla-d5-app.jsx` — não usa `ProductPage.jsx`. Hooks de scroll declarados localmente (não em `_config.jsx`) para evitar dependência cruzada.
+- **Vitrine `/produtos`:** redesign completo em `produtos-app.jsx` — showcase por produto com stage colorido, kit interativo, acessórios com glyphs SVG e section nav flutuante.
