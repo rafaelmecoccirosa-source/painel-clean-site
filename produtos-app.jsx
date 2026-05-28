@@ -13,9 +13,9 @@ const PRODUCTS = [
     badge: 'Mais vendida',
     gallery: [
       { id: 'main',     label: 'Vista geral', img: 'public/images/DNF_2489.jpg' },
-      { id: 'detail',   label: 'Detalhe',     img: 'public/images/escova pro 1.png' },
-      { id: 'cerdas',   label: 'Cerdas',      img: 'public/images/escova pro 2.png' },
-      { id: 'conjunto', label: 'Conjunto',    img: 'public/images/escova pro 3.png' },
+      { id: 'angle',    label: 'Ângulo',      img: 'public/images/DNF_2500.jpg' },
+      { id: 'full',     label: 'Conjunto',    img: 'public/images/DNF_2481.jpg' },
+      { id: 'kit',      label: 'Kit',         img: 'public/images/DNF_2477.jpg' },
     ],
     colors: [
       { name: 'Amarela', sku: 'ZCP-0275-D5',  swatch: '#F5B600' },
@@ -33,7 +33,10 @@ const PRODUCTS = [
     speed: 160, rpm: 350, cable: '7,5 m',
     badge: null,
     gallery: [
-      { id: 'main', label: 'Conjunto', img: 'public/images/DNF_2434.jpg' },
+      { id: 'main',   label: 'Vista geral', img: 'public/images/DNF_2432.jpg' },
+      { id: 'detail', label: 'Detalhe',     img: 'public/images/DNF_2434.jpg' },
+      { id: 'cerdas', label: 'Cerdas',      img: 'public/images/DNF_2445.jpg' },
+      { id: 'kit',    label: 'Kit',         img: 'public/images/DNF_2463.jpg' },
     ],
     colors: [
       { name: 'Amarela', sku: 'ZCP-0175-S5',  swatch: '#F5B600' },
@@ -51,7 +54,10 @@ const PRODUCTS = [
     speed: 200, rpm: 350, cable: '7,5 m',
     badge: null,
     gallery: [
-      { id: 'main', label: 'Conjunto', img: 'public/images/DNF_2508.jpg' },
+      { id: 'main',   label: 'Vista geral', img: 'public/images/DNF_2507.jpg' },
+      { id: 'detail', label: 'Detalhe',     img: 'public/images/DNF_2508.jpg' },
+      { id: 'frente', label: 'Frente',      img: 'public/images/DNF_2513.jpg' },
+      { id: 'kit',    label: 'Kit',         img: 'public/images/DNF_2468.jpg' },
     ],
     colors: [
       { name: 'Linha pro', sku: 'ZCP-0175-G5', swatch: '#1a1a1a' },
@@ -139,7 +145,7 @@ function VHero() {
         </div>
         <div className="vh-stage" aria-hidden="true">
           <div className="vh-stage-tag">FEITO POR QUEM USA</div>
-          <img src="public/images/escovaseacessorios.png" alt="Escovas e acessórios Painel Clean" />
+          <img src="public/images/DNF_2612.jpg" alt="Fundador com as escovas Painel Clean" />
         </div>
       </div>
       <div className="vh-stats">
