@@ -5,7 +5,7 @@ const PRODUCT = {
   name: "Escova Solo S5",
   slug: "escova-solo-s5",
   tag: "Acesso difícil",
-  image: "public/images/DNF_2432.jpg",
+  image: "public/images/DNF_2434.jpg",
   kitImage: "public/images/DNF_2507.jpg",
   headline1: "Chega onde",
   headline2: "outras escovas não chegam.",
@@ -39,14 +39,14 @@ const PRODUCT = {
     text: "Atendo muitos condomínios com telhados complexos. A S5 é a única que consigo manobrar com segurança nessas situações — e ainda entrega ótima velocidade.",
     stars: 5,
   },
-  prev: { label: "Escova Dupla D5", href: "/escova-dupla-d5" },
+  prev: { label: "Escova Dupla PRO", href: "/escova-dupla-d5" },
   next: null,
 };
 
 const ALL_PRODUCTS = [
-  { name: "G5", sku: "ZCP-0175-G5", href: "/escova-rotativa-g5", current: false },
-  { name: "D5", sku: "ZCP-0275-D5", href: "/escova-dupla-d5", current: false },
-  { name: "S5", sku: "ZCP-0175-S5", href: "/escova-solo-s5", current: true },
+  { name: "G5",  sku: "ZCP-0175-G5", href: "/escova-rotativa-g5", current: false },
+  { name: "PRO", sku: "ZCP-0275-D5", href: "/escova-dupla-d5",   current: false },
+  { name: "S5",  sku: "ZCP-0175-S5", href: "/escova-solo-s5",   current: true },
 ];
 
 ReactDOM.createRoot(document.getElementById("root")).render(<ProductPageApp />);

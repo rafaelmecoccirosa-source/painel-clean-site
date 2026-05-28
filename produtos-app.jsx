@@ -12,10 +12,10 @@ const PRODUCTS = [
     speed: 260, rpm: 350, cable: '7,5 m',
     badge: 'Mais vendida',
     gallery: [
-      { id: 'detail',   label: 'Detalhe',  img: 'public/images/escova pro 1.png' },
-      { id: 'cerdas',   label: 'Cerdas',   img: 'public/images/escova pro 2.png' },
-      { id: 'conjunto', label: 'Conjunto', img: 'public/images/escova pro 3.png' },
-      { id: 'exploded', label: 'Exploded', img: 'public/images/escova pro 4.png' },
+      { id: 'main',     label: 'Vista geral', img: 'public/images/DNF_2489.jpg' },
+      { id: 'detail',   label: 'Detalhe',     img: 'public/images/escova pro 1.png' },
+      { id: 'cerdas',   label: 'Cerdas',      img: 'public/images/escova pro 2.png' },
+      { id: 'conjunto', label: 'Conjunto',    img: 'public/images/escova pro 3.png' },
     ],
     colors: [
       { name: 'Amarela', sku: 'ZCP-0275-D5',  swatch: '#F5B600' },
@@ -33,7 +33,7 @@ const PRODUCTS = [
     speed: 160, rpm: 350, cable: '7,5 m',
     badge: null,
     gallery: [
-      { id: 'main', label: 'Conjunto', img: 'public/images/product-s5-1.jpg' },
+      { id: 'main', label: 'Conjunto', img: 'public/images/DNF_2434.jpg' },
     ],
     colors: [
       { name: 'Amarela', sku: 'ZCP-0175-S5',  swatch: '#F5B600' },
@@ -51,7 +51,7 @@ const PRODUCTS = [
     speed: 200, rpm: 350, cable: '7,5 m',
     badge: null,
     gallery: [
-      { id: 'main', label: 'Conjunto', img: 'public/images/product-g5-1.jpg' },
+      { id: 'main', label: 'Conjunto', img: 'public/images/DNF_2508.jpg' },
     ],
     colors: [
       { name: 'Linha pro', sku: 'ZCP-0175-G5', swatch: '#1a1a1a' },
