@@ -71,7 +71,7 @@ function Hero() {
         if (Math.abs(delta) > 50) setIdx(i => (i + (delta > 0 ? 1 : -1) + total) % total);
         setTouchStart(null);
       }}
-      style={{ position: "relative", background: "var(--pc-darker)", color: "white", minHeight: "100dvh", overflow: "hidden", paddingTop: 76 }}>
+      style={{ position: "relative", background: "var(--pc-darker)", color: "white", minHeight: "88dvh", overflow: "hidden", paddingTop: 76 }}>
       {/* Ambient glow */}
       <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 60% at 0% 30%, rgba(58,213,128,.10), transparent 60%), radial-gradient(ellipse 60% 50% at 100% 100%, rgba(58,213,128,.06), transparent 60%)", pointerEvents: "none" }} />
 
@@ -100,8 +100,8 @@ function Hero() {
       </div>
 
       {/* Text — aligned to container, left half */}
-      <div className="container hero-content" style={{ position: "relative", zIndex: 2, minHeight: "calc(100vh - 76px)", display: "flex", alignItems: "center" }}>
-        <div className="hero-text" style={{ width: "50%", maxWidth: 620, paddingTop: 64, paddingBottom: 96, paddingRight: 48 }} key={idx}>
+      <div className="container hero-content" style={{ position: "relative", zIndex: 2, minHeight: "calc(88vh - 76px)", display: "flex", alignItems: "center" }}>
+        <div className="hero-text" style={{ width: "50%", maxWidth: 620, paddingTop: 48, paddingBottom: 72, paddingRight: 48 }} key={idx}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "8px 14px", borderRadius: "var(--radius-pill)", background: "var(--accent-fill-soft)", border: "1px solid var(--border-accent)", color: "var(--pc-green)", font: "var(--eyebrow)", textTransform: "uppercase", letterSpacing: "var(--tracking-eyebrow)", marginBottom: 32, animation: "fadeUp 600ms ease both" }}>
             <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--pc-green)", animation: "pulseDot 1.6s infinite" }} />
             {s.eyebrow}
@@ -112,7 +112,7 @@ function Hero() {
             ))}
           </h1>
           <p style={{ font: "var(--body-lg)", color: "var(--fg-3)", maxWidth: 480, margin: "0 0 40px", animation: "fadeUp 800ms 280ms ease both" }}>{s.description}</p>
-          <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 56, animation: "fadeUp 800ms 380ms ease both" }}>
+          <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 40, animation: "fadeUp 800ms 380ms ease both" }}>
             <a href={s.primary.href} className="btn-primary">{s.primary.label}<Icon name="arrowRight" size={16} /></a>
             <a href={s.secondary.href} target={s.secondary.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="btn-ghost-dark">{s.secondary.label}</a>
           </div>
