@@ -671,9 +671,8 @@ function ProdutosApp() {
         }
         .vp-stage > img {
           width: 100%; height: 100%;
-          object-fit: contain;
+          object-fit: cover;
           object-position: center;
-          padding: 6px;
           transition: opacity var(--dur-slow) var(--ease-out);
         }
         .vp-stage-badge {
