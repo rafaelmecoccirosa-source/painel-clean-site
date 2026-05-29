@@ -187,7 +187,7 @@ function useLenis() {
       autoRaf: true,
       lerp: 0.1,
       smoothWheel: true,
-      smoothTouch: false,
+      syncTouch: false,
     });
     return () => lenis.destroy();
   }, []);
