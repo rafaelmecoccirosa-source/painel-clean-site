@@ -22,8 +22,9 @@ const test = base.extend({
         });
       });
     }
-    // Abort Instagram embed (external, not needed for tests)
+    // Abort external embeds not needed for tests
     await page.route('**instagram.com/embed.js**', (route) => route.abort());
+    await page.route('**cdn.jsdelivr.net/npm/lenis**', (route) => route.abort());
     await use(page);
   },
 });

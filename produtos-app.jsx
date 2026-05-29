@@ -489,6 +489,7 @@ function VFinalCTA() {
 
 // ── Root ──────────────────────────────────────────────────────
 function ProdutosApp() {
+  useLenis();
   return (
     <div>
       <Nav />

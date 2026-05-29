@@ -180,6 +180,19 @@ function useCountUp(target, { duration = 1200, trigger = true, decimals = 0 } = 
   return decimals === 0 ? Math.round(val) : +val.toFixed(decimals);
 }
 
+function useLenis() {
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.Lenis === 'undefined') return;
+    const lenis = new window.Lenis({
+      autoRaf: true,
+      lerp: 0.1,
+      smoothWheel: true,
+      smoothTouch: false,
+    });
+    return () => lenis.destroy();
+  }, []);
+}
+
 function Reveal({ children, delay = 0, distance = 24, as: As = "div", style, ...rest }) {
   const [ref, visible] = useReveal();
   const reduced = usePrefersReducedMotion();

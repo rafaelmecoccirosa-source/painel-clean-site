@@ -329,6 +329,7 @@ function ProductNav({ p }) {
 }
 
 function ProductPageApp() {
+  useLenis();
   return (
     <div>
       <Nav />

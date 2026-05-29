@@ -1,4 +1,5 @@
 function App() {
+  useLenis();
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   return (
     <TweaksCtx.Provider value={t}>

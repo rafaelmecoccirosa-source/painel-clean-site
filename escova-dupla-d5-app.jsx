@@ -543,6 +543,7 @@ function PurchaseBar({ finalRef }) {
 
 // ─── Root ─────────────────────────────────────────────────────
 function D5App() {
+  useLenis();
   const finalRef = useRef(null);
 
   return (

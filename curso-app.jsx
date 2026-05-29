@@ -942,6 +942,7 @@ function CursoCtaFinal() {
 
 // ===== ROOT =====
 function CursoApp() {
+  useLenis();
   return (
     <div>
       <CursoNav />
