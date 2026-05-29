@@ -33,9 +33,9 @@ const PRODUCTS = [
     speed: 160, rpm: 350, cable: '7,5 m',
     badge: null,
     gallery: [
+      { id: 'cerdas', label: 'Cerdas',      img: 'public/images/DNF_2445.jpg' },
       { id: 'main',   label: 'Vista geral', img: 'public/images/DNF_2432.jpg' },
       { id: 'detail', label: 'Detalhe',     img: 'public/images/DNF_2434.jpg' },
-      { id: 'cerdas', label: 'Cerdas',      img: 'public/images/DNF_2445.jpg' },
       { id: 'kit',    label: 'Kit',         img: 'public/images/DNF_2463.jpg' },
     ],
     colors: [
@@ -54,9 +54,9 @@ const PRODUCTS = [
     speed: 200, rpm: 350, cable: '7,5 m',
     badge: null,
     gallery: [
+      { id: 'frente', label: 'Frente',      img: 'public/images/DNF_2513.jpg' },
       { id: 'main',   label: 'Vista geral', img: 'public/images/DNF_2507.jpg' },
       { id: 'detail', label: 'Detalhe',     img: 'public/images/DNF_2508.jpg' },
-      { id: 'frente', label: 'Frente',      img: 'public/images/DNF_2513.jpg' },
       { id: 'kit',    label: 'Kit',         img: 'public/images/DNF_2468.jpg' },
     ],
     colors: [
@@ -205,22 +205,22 @@ function ShowcaseSection({ p, index }) {
           <div className="vp-stage">
             {p.badge && <div className="vp-stage-badge">{p.badge}</div>}
             <img src={shot.img} alt={p.name} key={shot.id} />
-            {hasGallery && (
-              <div className="vp-thumbs">
-                {p.gallery.map(g => (
-                  <button
-                    key={g.id}
-                    type="button"
-                    className={`vp-thumb${shot.id === g.id ? ' is-on' : ''}`}
-                    onClick={() => setShot(g)}
-                    aria-label={g.label}
-                  >
-                    <img src={g.img} alt="" />
-                  </button>
-                ))}
-              </div>
-            )}
           </div>
+          {hasGallery && (
+            <div className="vp-thumbs">
+              {p.gallery.map(g => (
+                <button
+                  key={g.id}
+                  type="button"
+                  className={`vp-thumb${shot.id === g.id ? ' is-on' : ''}`}
+                  onClick={() => setShot(g)}
+                  aria-label={g.label}
+                >
+                  <img src={g.img} alt="" />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Text */}
@@ -673,7 +673,7 @@ function ProdutosApp() {
           width: 100%; height: 100%;
           object-fit: contain;
           object-position: center;
-          padding: 24px;
+          padding: 6px;
           transition: opacity var(--dur-slow) var(--ease-out);
         }
         .vp-stage-badge {
@@ -688,28 +688,22 @@ function ProdutosApp() {
           text-transform: uppercase;
         }
         .vp-thumbs {
-          position: absolute;
-          left: 16px; bottom: 16px; z-index: 4;
           display: flex; gap: 8px;
-          padding: 8px;
-          background: rgba(255,255,255,0.62);
-          backdrop-filter: blur(8px);
-          -webkit-backdrop-filter: blur(8px);
-          border-radius: 14px;
-          border: 1px solid rgba(15,56,43,0.06);
+          margin-top: 12px;
         }
         .vp-thumb {
-          width: 52px; height: 52px;
-          border-radius: 8px;
+          width: 60px; height: 60px;
+          border-radius: 10px;
           overflow: hidden;
           border: 2px solid transparent;
           padding: 0; cursor: pointer;
           transition: border-color var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
           background: var(--t-stage);
+          box-shadow: inset 0 0 0 1px rgba(15,56,43,0.07);
         }
         .vp-thumb img { width: 100%; height: 100%; object-fit: cover; }
         .vp-thumb:hover { transform: translateY(-2px); }
-        .vp-thumb.is-on { border-color: var(--pc-green); }
+        .vp-thumb.is-on { border-color: var(--pc-green); box-shadow: none; }
 
         /* Text side */
         .vp-section-text { display: flex; flex-direction: column; max-width: 520px; }
