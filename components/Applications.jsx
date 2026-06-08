@@ -3,24 +3,24 @@ function Applications() {
     {
       badge: "Painel Clean Solar",
       icon: "sun",
-      headline: "Painéis sujos perdem até 30% de geração — todo mês",
-      desc: "Um técnico limpa 260 painéis por hora com a escova G5 — sem produtos químicos, sem risco ao vidro fotovoltaico. Mais geração, menor custo operacional, cliente fidelizado.",
+      headline: "Usinas de solo ou telhado",
+      desc: "Um único técnico limpando qualquer tipo de usina. De solo ou telhado, de 5 a 50 mil módulos, sem risco ao operador ou ao painel fotovoltaico. Limpe até três módulos na vertical ou 07 módulos na horizontal sem sair do lugar.",
       photo: "public/images/painel clean solar.png",
       photoAlt: "Painel Clean Solar — limpeza de painéis fotovoltaicos",
     },
     {
       badge: "Painel Clean Agro",
       icon: "sparkles",
-      headline: "10% menos luz = colheita comprometida",
-      desc: "Coberturas de policarbonato e vidro bloqueiam luz com sujeira acumulada. A limpeza periódica mantém a transmitância máxima — flores, frutas e hortaliças respondem diretamente à qualidade da luz.",
+      headline: "Estufas agrícolas cobertas por lona",
+      desc: "Mil, dez mil, cem mil metros quadrados. Independente do tamanho da estufa, limpe até 540 metros quadrados por hora sem fazer esforço. Sua cultura sempre produzindo com a máxima eficiência (flores, frutas, plantas ornamentais, legumes, hortaliças, temperos).",
       photo: "public/images/painel clean agro.png",
       photoAlt: "Painel Clean Agro — limpeza de coberturas agrícolas",
     },
     {
       badge: "Painel Clean Urban",
       icon: "building",
-      headline: "7,5m de alcance — sem andaime, sem paralisação",
-      desc: "Sheds industriais, telhas translúcidas e fachadas de vidro acumulam sujeira rapidamente. O cabo telescópico chega onde escada não chega, com água filtrada que não mancha nem risca.",
+      headline: "Pergolados, fachadas, placas de comunicação",
+      desc: "Se é liso e precisa limpar? Conte com a Painel Clean. Com o cabo telescópico de 7,5 metros você limpa áreas sem se colocar em risco.",
       photo: "public/images/painel clean urban.png",
       photoAlt: "Painel Clean Urban — limpeza de telhados e fachadas urbanas",
     },
@@ -32,10 +32,10 @@ function Applications() {
         <div style={{ textAlign: "center", marginBottom: 64 }}>
           <div className="eyebrow center" style={{ marginBottom: 20, justifyContent: "center" }}>Aplicações</div>
           <h2 className="display" style={{ fontSize: "clamp(30px, 3.6vw, 52px)", lineHeight: 1.08, color: "var(--pc-dark)", margin: "0 0 20px" }}>
-            Uma escova. <span style={{ color: "var(--pc-green)" }}>Três mercados.</span>
+            Uma escova. <span style={{ color: "var(--pc-green)" }}>Várias possibilidades.</span>
           </h2>
           <p style={{ font: "var(--body-lg)", color: "var(--fg-on-cream-2)", maxWidth: 600, margin: "0 auto" }}>
-            A tecnologia brushless da Painel Clean foi desenvolvida para qualquer superfície lisa que precise de limpeza recorrente.
+            As escovas Painel Clean são desenvolvidas para limpar qualquer superfície lisa que necessite de limpeza recorrente.
           </p>
         </div>
 

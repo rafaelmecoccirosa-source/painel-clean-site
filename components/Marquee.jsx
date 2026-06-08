@@ -1,6 +1,6 @@
 function Marquee() {
   const t = useT();
-  const items = ["Motor brushless 350 RPM", "Sem produtos químicos", "260 painéis por hora", "+30% mais geração", "Cabo até 7,5m", "Garantia de 1 ano", "Suporte via WhatsApp", "Made in Brasil"];
+  const items = ["Montada no Brasil", "Motor brushless até 680 RPM", "Até 250 painéis por hora", "Cabo de 7,5 metros", "Garantia de 1 ano em todo Brasil", "Maior estoque de partes e peças", "Assistência Técnica", "Suporte via WhatsApp"];
   const all = [...items, ...items];
   return (
     <div style={{ background: "var(--pc-dark)", borderTop: "1px solid var(--border-on-dark-soft)", borderBottom: "1px solid var(--border-on-dark-soft)", padding: "22px 0", overflow: "hidden" }}>
