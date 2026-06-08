@@ -1,8 +1,8 @@
 function About() {
   const pillars = [
-    { icon: "sun", title: "Tecnologia brushless", desc: "Equipamentos sem escovas de carvão, com motor de alta durabilidade e zero uso de químicos." },
-    { icon: "shield", title: "Suporte técnico real", desc: "Time de engenheiros disponível via WhatsApp para dúvidas de campo, ajuste de equipamento e pós-venda." },
-    { icon: "bolt", title: "Solar, Agro e Urban", desc: "Do painel solar à estufa agrícola — a mesma tecnologia brushless serve qualquer superfície lisa." },
+    { icon: "sun", title: "Tecnologia brushless", desc: "Nossas escovas possuem motores de alto rendimento e eficiência, todos com tecnologia brushless que garante alta durabilidade." },
+    { icon: "shield", title: "Suporte técnico real", desc: "Time de profissionais para atendimento via WhatsApp, telefone ou até presencialmente, para tirar dúvidas e garantir a sua máquina sempre girando." },
+    { icon: "bolt", title: "Solar, Agro e Urban", desc: "Do painel solar à estufa agrícola — o mesmo equipamento para limpar qualquer superfície lisa." },
   ];
   return (
     <section id="sobre" style={{ background: "var(--pc-darker)", padding: "80px 0", position: "relative", overflow: "hidden" }}>
@@ -18,8 +18,8 @@ function About() {
                 { text: "vive de limpeza profissional.", color: "var(--pc-green)" },
               ]} />
             <p style={{ font: "var(--body-lg)", color: "var(--fg-3)", lineHeight: 1.75, margin: 0 }}>
-              A Painel Clean desenvolve equipamentos e soluções para limpeza profissional de superfícies lisas — painéis solares, estufas agrícolas e fachadas.
-              Atendemos de norte a sul do Brasil com escovas brushless, suporte técnico dedicado e uma plataforma que conecta técnicos e clientes.
+              A Painel Clean fornece equipamentos e soluções para limpeza profissional de superfícies lisas — painéis solares, estufas agrícolas, pergolados, fachadas.
+              Atendemos todo o Brasil e América do Sul com escovas com motor brushless, suporte técnico especializado e uma plataforma que conecta profissionais técnicos a clientes.
             </p>
           </div>
           <div style={{ borderRadius: "var(--radius-2xl)", overflow: "hidden", boxShadow: "0 24px 64px rgba(10,31,23,0.5)", position: "relative" }}>
