@@ -6,14 +6,14 @@ const heroSlides = [
     description: "Equipamentos profissionais para limpeza de superfícies lisas — painéis solares, estufas e fachadas.",
     primary: { label: "Ver equipamentos", href: "#equipamentos" },
     secondary: { label: "Plataforma de serviços", href: "https://painel-clean-mrr.vercel.app" },
-    image: "public/images/painel_clean_-_limpando_telhado.png",
+    image: "public/images/hero telhado shopping.png",
     meta: [{ k: "250", v: "painéis/h" }, { k: "+30%", v: "geração" }, { k: "0", v: "químicos" }],
   },
   {
     eyebrow: "A mais completa do Brasil",
     title: ["Kit completo.", "Comece a atender", "no mesmo dia."],
     accentLine: 2,
-    description: "Escova semiautomática, motobomba periférica e submersão, cabo extensível até 7,5m, caixa de armazenamento e transporte, conjunto de mangueiras e engates rápidos. Tudo o que você precisa para executar a sua limpeza tem aqui na Painel Clean.",
+    description: "Escova, motobomba, cabo de 7,5m, mangueiras, engates e caixa de transporte num só kit.",
     primary: { label: "Ver Escova Dupla D5", href: "/escova-dupla-d5" },
     secondary: { label: "Escolha o seu modelo", href: "/produtos" },
     image: "public/images/kit painel clean.png",
@@ -171,6 +171,13 @@ function Hero() {
           left: 50%;
           right: 0;
           overflow: hidden;
+        }
+
+        /* Reserve constant height for the tallest slide so the hero never
+           grows/jumps when switching slides (only one slide's text is in the
+           DOM at a time, so CSS can't auto-match sibling heights). */
+        @media (min-width: 961px) {
+          .hero-text { min-height: 836px; display: flex; flex-direction: column; justify-content: center; }
         }
 
         @media (max-width: 960px) {
