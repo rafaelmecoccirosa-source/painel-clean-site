@@ -1,6 +1,36 @@
 function App() {
   useLenis();
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+
+  // Magnetic hover on primary CTAs — the button drifts toward the cursor (max ±6px).
+  // Delegated so it also covers buttons that re-render (e.g. hero slides).
+  useEffect(() => {
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const MAX = 6;
+    const clamp = v => Math.max(-MAX, Math.min(MAX, v));
+    const onMove = e => {
+      const btn = e.target.closest && e.target.closest(".btn-primary");
+      if (!btn) return;
+      const r = btn.getBoundingClientRect();
+      const x = clamp((e.clientX - (r.left + r.width / 2)) * 0.15);
+      const y = clamp((e.clientY - (r.top + r.height / 2)) * 0.15);
+      btn.style.transition = "transform 120ms ease";
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    };
+    const onOut = e => {
+      const btn = e.target.closest && e.target.closest(".btn-primary");
+      if (!btn) return;
+      if (e.relatedTarget && btn.contains(e.relatedTarget)) return;
+      btn.style.transition = "transform 300ms ease";
+      btn.style.transform = "translate(0, 0)";
+    };
+    document.addEventListener("mousemove", onMove);
+    document.addEventListener("mouseout", onOut);
+    return () => {
+      document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseout", onOut);
+    };
+  }, []);
   return (
     <TweaksCtx.Provider value={t}>
       <Nav />

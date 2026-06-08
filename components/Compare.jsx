@@ -222,13 +222,14 @@ function Compare() {
       <div className="container">
         <div style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 56px" }}>
           <div className="eyebrow no-rule" style={{ color: "var(--pc-green-2)", justifyContent: "center", marginBottom: 18 }}>Comparativo</div>
-          <h2 className="display" style={{
+          <SplitReveal as="h2" className="display" style={{
             fontSize: "clamp(34px, 4.4vw, 56px)", lineHeight: 1.05, color: "var(--fg-on-cream-1)", margin: "0 0 18px",
-          }}>
-            <span style={{ color: "var(--fg-on-cream-1)" }}>Onze recursos.</span>{" "}
-            <span style={{ color: "var(--fg-on-cream-3)" }}>Painel Clean tem todos.</span>{" "}
-            <span style={{ color: "var(--pc-green-2)" }}>Outras soluções, nenhum.</span>
-          </h2>
+          }}
+            text={[
+              { text: "Onze recursos.", color: "var(--fg-on-cream-1)" },
+              { text: "Painel Clean tem todos.", color: "var(--fg-on-cream-3)" },
+              { text: "Outras soluções, nenhum.", color: "var(--pc-green-2)" },
+            ]} />
           <p style={{ font: "var(--body-lg)", color: "var(--fg-on-cream-2)", margin: 0 }}>
             Quatro pilares. Clique cada um para ver os detalhes.
           </p>

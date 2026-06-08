@@ -206,3 +206,45 @@ function Reveal({ children, delay = 0, distance = 24, as: As = "div", style, ...
     }} {...rest}>{children}</As>
   );
 }
+
+// SplitReveal — reveals text word-by-word with a staggered fade + slide up.
+// `text` accepts a plain string, or an array of segments [{ text, color, br }]
+// so multi-color headlines keep their styling. Triggered by IntersectionObserver.
+function SplitReveal({ text, delay = 0, as: As = "span", className, style, ...rest }) {
+  const ref = React.useRef(null);
+  const reduced = usePrefersReducedMotion();
+  const [visible, setVisible] = React.useState(false);
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (!("IntersectionObserver" in window)) { setVisible(true); return; }
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { setVisible(true); io.disconnect(); }
+    }, { threshold: 0.2, rootMargin: "0px 0px -60px 0px" });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const segments = Array.isArray(text) ? text : [{ text }];
+  let wordIdx = 0;
+  return (
+    <As ref={ref}
+      className={"split-reveal" + (visible || reduced ? " is-visible" : "") + (className ? " " + className : "")}
+      style={{ "--sr-base": delay + "ms", ...style }} {...rest}>
+      {segments.map((seg, si) => (
+        <React.Fragment key={si}>
+          {String(seg.text).split(" ").map((word, wi) => {
+            const i = wordIdx++;
+            return (
+              <React.Fragment key={wi}>
+                <span className="split-reveal-word" style={{ "--i": String(i), color: seg.color }}>{word}</span>
+                {" "}
+              </React.Fragment>
+            );
+          })}
+          {seg.br && <br />}
+        </React.Fragment>
+      ))}
+    </As>
+  );
+}

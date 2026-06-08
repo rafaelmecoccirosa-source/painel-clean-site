@@ -178,16 +178,14 @@ function Training() {
               transform: animate ? "translateY(0)" : "translateY(10px)",
               transition: "all 600ms cubic-bezier(.2,.7,.2,1)",
             }}>Treinamento online</div>
-            <h2 className="display" style={{
+            <SplitReveal as="h2" className="display" style={{
               fontSize: "clamp(28px, 3.6vw, 44px)", lineHeight: 1.05, margin: "0 0 18px",
               letterSpacing: "-0.025em", color: "white",
-              opacity: animate ? 1 : 0,
-              transform: animate ? "translateY(0)" : "translateY(16px)",
-              transition: "all 700ms 80ms cubic-bezier(.2,.7,.2,1)",
-            }}>
-              Ganhe mais por hora<br/>
-              <span style={{ color: "var(--pc-green)" }}>que um motorista de app.</span>
-            </h2>
+            }}
+              text={[
+                { text: "Ganhe mais por hora", color: "white", br: true },
+                { text: "que um motorista de app.", color: "var(--pc-green)" },
+              ]} />
             <p style={{
               font: "var(--body)", color: "var(--fg-3)", margin: "0 0 0",
               maxWidth: 460,

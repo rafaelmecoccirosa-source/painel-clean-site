@@ -41,7 +41,7 @@ function ProductCard({ p }) {
           {p.tagIcon && <Icon name={p.tagIcon} size={10} />}
           {p.tag}
         </div>
-        <img src={p.image} alt={p.name} style={{ width: "100%", height: "100%", objectFit: "contain", padding: 32, transition: "transform 600ms ease", transform: hover ? "scale(1.05)" : "scale(1)", position: "relative", zIndex: 1 }} />
+        <img src={p.image} alt={p.name} style={{ width: "100%", height: "100%", objectFit: "contain", padding: 32, transition: "transform 400ms cubic-bezier(.2,.7,.2,1)", transform: hover ? "scale(1.04)" : "scale(1)", position: "relative", zIndex: 1 }} />
       </div>
       <div style={{ padding: "28px 28px 32px", display: "flex", flexDirection: "column", flex: 1 }}>
         <h3 className="display" style={{ fontSize: 26, margin: "0 0 8px", color: "var(--fg-on-cream-1)" }}>{p.name}</h3>

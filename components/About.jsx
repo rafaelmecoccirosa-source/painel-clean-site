@@ -11,9 +11,12 @@ function About() {
         <div className="about-intro" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr)", gap: 64, alignItems: "center", marginBottom: 64 }}>
           <div>
             <div className="eyebrow" style={{ marginBottom: 18 }}>Quem somos</div>
-            <h2 className="display" style={{ fontSize: "clamp(32px, 3.8vw, 52px)", lineHeight: 1.06, color: "white", margin: "0 0 24px" }}>
-              Feitos para quem<br /><span style={{ color: "var(--pc-green)" }}>vive de limpeza profissional.</span>
-            </h2>
+            <SplitReveal as="h2" className="display"
+              style={{ fontSize: "clamp(32px, 3.8vw, 52px)", lineHeight: 1.06, color: "white", margin: "0 0 24px" }}
+              text={[
+                { text: "Feitos para quem", color: "white", br: true },
+                { text: "vive de limpeza profissional.", color: "var(--pc-green)" },
+              ]} />
             <p style={{ font: "var(--body-lg)", color: "var(--fg-3)", lineHeight: 1.75, margin: 0 }}>
               A Painel Clean desenvolve equipamentos e soluções para limpeza profissional de superfícies lisas — painéis solares, estufas agrícolas e fachadas.
               Atendemos de norte a sul do Brasil com escovas brushless, suporte técnico dedicado e uma plataforma que conecta técnicos e clientes.

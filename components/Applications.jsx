@@ -49,7 +49,7 @@ function Applications() {
               {/* Photo */}
               <div style={{ height: 200, overflow: "hidden", flexShrink: 0 }}>
                 <img src={app.photo} alt={app.photoAlt}
-                  style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} />
+                  style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block", transition: "transform 400ms cubic-bezier(.2,.7,.2,1)" }} />
               </div>
 
               {/* Content */}
@@ -74,6 +74,7 @@ function Applications() {
         </div>
       </div>
       <style>{`
+        .app-card:hover img { transform: scale(1.04); }
         @media (max-width: 640px) {
           .apps-grid { grid-template-columns: 1fr !important; }
           .app-card img { height: 180px !important; }

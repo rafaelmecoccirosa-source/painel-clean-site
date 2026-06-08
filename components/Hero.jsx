@@ -40,6 +40,18 @@ function Hero() {
   const SLIDE_MS = 7000;
   const TR = t.heroTreatment;
   const accent = t.heroAccent;
+  const [parallax, setParallax] = useState(0);
+
+  // Scroll-based parallax — only the background image moves, never the text.
+  // Disabled on mobile and when the user prefers reduced motion.
+  useEffect(() => {
+    if (typeof window === "undefined" || window.innerWidth < 768) return;
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const onScroll = () => setParallax(window.scrollY * 0.3);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const overlayBg = {
     gradient: "linear-gradient(90deg, var(--pc-darker) 0%, rgba(12,40,31,0.60) 30%, rgba(12,40,31,0.10) 70%)",
@@ -78,7 +90,7 @@ function Hero() {
       {/* Image panel — bleeds from 50vw to right edge on desktop */}
       <div className="hero-image-panel">
         {heroSlides.map((sl, i) => (
-          <div key={i} style={{ position: "absolute", inset: 0, opacity: i === idx ? 1 : 0, transition: "opacity 900ms ease" }}>
+          <div key={i} style={{ position: "absolute", inset: 0, opacity: i === idx ? 1 : 0, transition: "opacity 900ms ease", transform: `translateY(${parallax}px) scale(1.05)`, willChange: "transform" }}>
             <div style={{ position: "absolute", inset: 0, backgroundImage: `url('${sl.image}')`, backgroundSize: "cover", backgroundPosition: "center", animation: i === idx ? "kenburns 14s ease-out forwards" : "none" }} />
           </div>
         ))}
@@ -106,11 +118,9 @@ function Hero() {
             <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--pc-green)", animation: "pulseDot 1.6s infinite" }} />
             {s.eyebrow}
           </div>
-          <h1 className="display" style={{ fontSize: "clamp(44px, 5.2vw, 80px)", fontWeight: 600, lineHeight: 1.02, letterSpacing: "-0.035em", margin: "0 0 28px" }}>
-            {s.title.map((line, i) => (
-              <span key={i} style={{ display: "block", color: i === s.accentLine ? accent : "white", animation: `fadeUp 700ms ${i * 90}ms ease both` }}>{line}</span>
-            ))}
-          </h1>
+          <SplitReveal as="h1" className="display"
+            style={{ fontSize: "clamp(44px, 5.2vw, 80px)", fontWeight: 600, lineHeight: 1.02, letterSpacing: "-0.035em", margin: "0 0 28px" }}
+            text={s.title.map((line, i) => ({ text: line, color: i === s.accentLine ? accent : "white", br: i < s.title.length - 1 }))} />
           <p style={{ font: "var(--body-lg)", color: "var(--fg-3)", maxWidth: 480, margin: "0 0 40px", animation: "fadeUp 800ms 280ms ease both" }}>{s.description}</p>
           <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 40, animation: "fadeUp 800ms 380ms ease both" }}>
             <a href={s.primary.href} className="btn-primary">{s.primary.label}<Icon name="arrowRight" size={16} /></a>
