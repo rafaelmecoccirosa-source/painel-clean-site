@@ -203,6 +203,15 @@ Painel flutuante ativado com `?tweaks=1` na URL.
 
 ---
 
+## Browser automation
+
+Use `agent-browser` for visual tasks. Chrome already configured via env vars in `~/.bashrc`
+(reusa o Chromium do Playwright em `/opt/pw-browsers` — o download próprio falha pelo proxy TLS do ambiente).
+Always use `--ignore-https-errors` for external URLs.
+For local preview: `npx serve . --listen 8787`
+
+---
+
 ## Convenções
 
 - **CSS:** variáveis do `tokens.css` para cores e tipografia; inline styles com objetos JS
