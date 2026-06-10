@@ -114,7 +114,7 @@ function Hero() {
       {/* Text — aligned to container, left half */}
       <div className="container hero-content" style={{ position: "relative", zIndex: 2, minHeight: "calc(88vh - 76px)", display: "flex", alignItems: "center" }}>
         <div className="hero-text" style={{ width: "50%", maxWidth: 620, paddingTop: 48, paddingBottom: 72, paddingRight: 48 }} key={idx}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "8px 14px", borderRadius: "var(--radius-pill)", background: "var(--accent-fill-soft)", border: "1px solid var(--border-accent)", color: "var(--pc-green)", font: "var(--eyebrow)", textTransform: "uppercase", letterSpacing: "var(--tracking-eyebrow)", marginBottom: 32, animation: "fadeUp 600ms ease both" }}>
+          <div style={{ display: "inline-flex", alignSelf: "flex-start", alignItems: "center", gap: 10, padding: "8px 14px", borderRadius: "var(--radius-pill)", background: "var(--accent-fill-soft)", border: "1px solid var(--border-accent)", color: "var(--pc-green)", font: "var(--eyebrow)", textTransform: "uppercase", letterSpacing: "var(--tracking-eyebrow)", marginBottom: 32, animation: "fadeUp 600ms ease both" }}>
             <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--pc-green)", animation: "pulseDot 1.6s infinite" }} />
             {s.eyebrow}
           </div>
