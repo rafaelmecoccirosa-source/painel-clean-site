@@ -5,7 +5,7 @@ function Applications() {
       icon: "sun",
       headline: "Usinas de solo ou telhado",
       desc: "Um único técnico limpando qualquer tipo de usina. De solo ou telhado, de 5 a 50 mil módulos, sem risco ao operador ou ao painel fotovoltaico. Limpe até três módulos na vertical ou 07 módulos na horizontal sem sair do lugar.",
-      photo: "public/images/painel clean solar.png",
+      photo: "public/images/categoria solar.png",
       photoAlt: "Painel Clean Solar — limpeza de painéis fotovoltaicos",
     },
     {
@@ -13,7 +13,7 @@ function Applications() {
       icon: "sparkles",
       headline: "Estufas agrícolas cobertas por lona",
       desc: "Mil, dez mil, cem mil metros quadrados. Independente do tamanho da estufa, limpe até 540 metros quadrados por hora sem fazer esforço. Sua cultura sempre produzindo com a máxima eficiência (flores, frutas, plantas ornamentais, legumes, hortaliças, temperos).",
-      photo: "public/images/painel clean agro.png",
+      photo: "public/images/categoria agro.png",
       photoAlt: "Painel Clean Agro — limpeza de coberturas agrícolas",
     },
     {
