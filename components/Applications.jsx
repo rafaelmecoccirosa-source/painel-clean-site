@@ -21,7 +21,7 @@ function Applications() {
       icon: "building",
       headline: "Pergolados, fachadas, placas de comunicação",
       desc: "Se é liso e precisa limpar? Conte com a Painel Clean. Com o cabo telescópico de 7,5 metros você limpa áreas sem se colocar em risco.",
-      photo: "public/images/painel clean urban.png",
+      photo: "public/images/categoria urban.png",
       photoAlt: "Painel Clean Urban — limpeza de telhados e fachadas urbanas",
     },
   ];
