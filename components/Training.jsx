@@ -132,7 +132,7 @@ function ModuleTimeline({ animate }) {
 
 function Training() {
   const [ref, animate] = useReveal({ threshold: 0.10 });
-  const heroImg = "public/images/hero-tecnico-cliente.png";
+  const heroImg = "public/images/hero-tecnico-cliente.webp";
   return (
     <section id="treinamento" ref={ref} style={{
       background: "var(--pc-darker)", color: "white",

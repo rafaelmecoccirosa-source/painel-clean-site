@@ -12,10 +12,10 @@ const PRODUCTS = [
     speed: 260, rpm: 350, cable: '7,5 m',
     badge: 'Mais vendida',
     gallery: [
-      { id: 'main',     label: 'Vista geral', img: 'public/images/DNF_2489.jpg' },
-      { id: 'angle',    label: 'Ângulo',      img: 'public/images/DNF_2500.jpg' },
-      { id: 'full',     label: 'Conjunto',    img: 'public/images/DNF_2481.jpg' },
-      { id: 'kit',      label: 'Kit',         img: 'public/images/DNF_2477.jpg' },
+      { id: 'main',     label: 'Vista geral', img: 'public/images/dnf-2489.webp' },
+      { id: 'angle',    label: 'Ângulo',      img: 'public/images/dnf-2500.webp' },
+      { id: 'full',     label: 'Conjunto',    img: 'public/images/dnf-2481.webp' },
+      { id: 'kit',      label: 'Kit',         img: 'public/images/dnf-2477.webp' },
     ],
     colors: [
       { name: 'Amarela', sku: 'ZCP-0275-D5',  swatch: '#F5B600' },
@@ -33,10 +33,10 @@ const PRODUCTS = [
     speed: 160, rpm: 350, cable: '7,5 m',
     badge: null,
     gallery: [
-      { id: 'cerdas', label: 'Cerdas',      img: 'public/images/DNF_2445.jpg' },
-      { id: 'main',   label: 'Vista geral', img: 'public/images/DNF_2432.jpg' },
-      { id: 'detail', label: 'Detalhe',     img: 'public/images/DNF_2434.jpg' },
-      { id: 'kit',    label: 'Kit',         img: 'public/images/DNF_2463.jpg' },
+      { id: 'cerdas', label: 'Cerdas',      img: 'public/images/dnf-2445.webp' },
+      { id: 'main',   label: 'Vista geral', img: 'public/images/dnf-2432.webp' },
+      { id: 'detail', label: 'Detalhe',     img: 'public/images/dnf-2434.webp' },
+      { id: 'kit',    label: 'Kit',         img: 'public/images/dnf-2463.webp' },
     ],
     colors: [
       { name: 'Amarela', sku: 'ZCP-0175-S5',  swatch: '#F5B600' },
@@ -54,10 +54,10 @@ const PRODUCTS = [
     speed: 200, rpm: 350, cable: '7,5 m',
     badge: null,
     gallery: [
-      { id: 'frente', label: 'Frente',      img: 'public/images/DNF_2513.jpg' },
-      { id: 'main',   label: 'Vista geral', img: 'public/images/DNF_2507.jpg' },
-      { id: 'detail', label: 'Detalhe',     img: 'public/images/DNF_2508.jpg' },
-      { id: 'kit',    label: 'Kit',         img: 'public/images/DNF_2468.jpg' },
+      { id: 'frente', label: 'Frente',      img: 'public/images/dnf-2513.webp' },
+      { id: 'main',   label: 'Vista geral', img: 'public/images/dnf-2507.webp' },
+      { id: 'detail', label: 'Detalhe',     img: 'public/images/dnf-2508.webp' },
+      { id: 'kit',    label: 'Kit',         img: 'public/images/dnf-2468.webp' },
     ],
     colors: [
       { name: 'Linha pro', sku: 'ZCP-0175-G5', swatch: '#1a1a1a' },
@@ -74,6 +74,7 @@ const ACCESSORIES = [
     subtitle: 'Refil profissional · alta densidade',
     desc: 'Troca em minutos com 4 parafusos. Cerdas que não riscam o vidro temperado. Pacotes com 2 ou 4 unidades.',
     tag: 'Refil',
+    sku: 'ZCP-APPG51 · APPD51 · APPS51',
   },
   {
     id: 'extensor',
@@ -81,6 +82,7 @@ const ACCESSORIES = [
     subtitle: '3 tamanhos · 3,5 m · 5,5 m · 7,5 m',
     desc: 'Tubo telescópico em alumínio reforçado. Travamento em qualquer comprimento, engate rápido para acoplar na escova.',
     tag: '3 tamanhos',
+    sku: 'ZCP-APPA01',
   },
   {
     id: 'mangueira',
@@ -127,7 +129,7 @@ function VHero() {
     <section className="vh-hero">
       <div className="vh-hero-grid">
         <div className="vh-hero-text">
-          <p className="vh-eyebrow">LINHA PROFISSIONAL · 2025</p>
+          <p className="vh-eyebrow">LINHA PROFISSIONAL · 2026</p>
           <h1 className="vh-title">
             Escovas brushless<br />
             <span className="vh-accent">para painéis solares.</span>
@@ -145,7 +147,7 @@ function VHero() {
         </div>
         <div className="vh-stage" aria-hidden="true">
           <div className="vh-stage-tag">FEITO POR QUEM USA</div>
-          <img src="public/images/DNF_2612.jpg" alt="Fundador com as escovas Painel Clean" />
+          <img src="public/images/dnf-2612.webp" alt="Fundador com as escovas Painel Clean" />
         </div>
       </div>
       <div className="vh-stats">
@@ -291,7 +293,7 @@ function KitSection() {
         </div>
 
         <div className="vk-stage">
-          <img src="public/images/pro-kit-16-9.jpg" alt="Kit completo Painel Clean: caixa, escovas, bomba, mangueira, cabos e fonte" />
+          <img src="public/images/pro-kit-16-9.webp" alt="Kit completo Painel Clean: caixa, escovas, bomba, mangueira, cabos e fonte" />
           <div className="vk-stage-meta">
             <span>KIT COMPLETO</span>
             <span>D5 · DUPLA PRO</span>
@@ -452,6 +454,7 @@ function AccessoriesSection() {
                 <div className="va-name">{a.name}</div>
                 <div className="va-subtitle">{a.subtitle}</div>
                 <div className="va-desc">{a.desc}</div>
+                {a.sku && <div className="va-sku">SKU · {a.sku}</div>}
               </div>
               <div className="va-cta">Pedir orçamento →</div>
             </a>
@@ -980,6 +983,7 @@ function ProdutosApp() {
         .va-name { font: 600 18px/1.25 var(--font-display); letter-spacing: -.01em; color: var(--fg-on-cream-1); }
         .va-subtitle { font: 600 12px/1.4 var(--font-sans); color: var(--pc-green-2); letter-spacing: .02em; }
         .va-desc { font: 400 13.5px/1.55 var(--font-sans); color: var(--fg-on-cream-2); }
+        .va-sku  { font: 600 10.5px/1 var(--font-sans); color: var(--fg-on-cream-3); text-transform: uppercase; letter-spacing: .1em; margin-top: 4px; }
         .va-cta {
           font: 600 13px/1 var(--font-sans); color: var(--pc-green-2);
           margin-top: auto; padding-top: 8px; border-top: 1px solid var(--border-on-cream);

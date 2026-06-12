@@ -148,7 +148,7 @@ function CursoHero() {
             <div style={{ position: "relative", flex: 1, display: "flex", flexDirection: "column" }}>
               <div style={{ borderRadius: "var(--radius-2xl)", overflow: "hidden", flex: 1, minHeight: 220 }}>
                 <img
-                  src="public/images/hero-curso.png"
+                  src="public/images/hero-curso.webp"
                   alt="Técnico Painel Clean em campo"
                   style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center" }}
                 />
@@ -505,7 +505,7 @@ function CursoCalcDivider() {
 const markets2 = {
   solar: {
     label: "Solar", sub: "Limpeza de usinas fotovoltaicas", icon: "sun",
-    photo: "public/images/escovapordosol.png",
+    photo: "public/images/escovapordosol.webp",
     v0: { label: "Usinas/mês",        unit: "",    min: 1,  max: 30,   step: 1,  def: 8  },
     v1: { label: "Painéis por usina", unit: "",    min: 6,  max: 100,  step: 2,  def: 20 },
     v2: { label: "R$ por painel",     unit: "R$ ", min: 12, max: 35,   step: 1,  def: 22 },
@@ -513,7 +513,7 @@ const markets2 = {
   },
   agro: {
     label: "Agro", sub: "Estufas e fachadas agrícolas", icon: "leaf",
-    photo: "public/images/escovaseacessorios.png",
+    photo: "public/images/escovaseacessorios.webp",
     v0: { label: "Clientes/mês",   unit: "",    min: 1,   max: 20,   step: 1,  def: 5   },
     v1: { label: "m² por cliente", unit: "m² ", min: 100, max: 2000, step: 50, def: 400 },
     v2: { label: "R$ por m²",      unit: "R$ ", min: 3,   max: 12,   step: 1,  def: 5   },
@@ -521,7 +521,7 @@ const markets2 = {
   },
   urbano: {
     label: "Urbano", sub: "Fachadas, vidros e empresas", icon: "building",
-    photo: "public/images/painel_clean_-_limpando_telhado.png",
+    photo: "public/images/painel-clean---limpando-telhado.webp",
     v0: { label: "Serviços/mês",   unit: "",    min: 1,  max: 15,  step: 1,  def: 4   },
     v1: { label: "m² por serviço", unit: "m² ", min: 20, max: 500, step: 10, def: 100 },
     v2: { label: "R$ por m²",      unit: "R$ ", min: 5,  max: 18,  step: 1,  def: 8   },

@@ -23,7 +23,7 @@ function About() {
             </p>
           </div>
           <div style={{ borderRadius: "var(--radius-2xl)", overflow: "hidden", boxShadow: "0 24px 64px rgba(10,31,23,0.5)", position: "relative" }}>
-            <img src="public/images/DNF_2612.jpg" alt="Técnico com as três escovas Painel Clean" style={{ width: "100%", display: "block", objectFit: "cover", aspectRatio: "4/3", filter: "contrast(0.92) brightness(0.98) saturate(1.1)" }} />
+            <img src="public/images/dnf-2612.webp" alt="Técnico com as três escovas Painel Clean" style={{ width: "100%", display: "block", objectFit: "cover", aspectRatio: "4/3", filter: "contrast(0.92) brightness(0.98) saturate(1.1)" }} />
             <div style={{ position: "absolute", inset: 0, background: "rgba(15,56,43,0.04)", pointerEvents: "none" }} />
           </div>
         </div>

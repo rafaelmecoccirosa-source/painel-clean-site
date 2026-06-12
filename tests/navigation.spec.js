@@ -24,6 +24,16 @@ test.describe('Navigation — todas as páginas carregam', () => {
   }
 });
 
+test.describe('Páginas legais — estáticas, sem React', () => {
+  for (const url of ['/termos', '/privacidade']) {
+    test(`GET ${url} → 200 com h1`, async ({ page }) => {
+      const response = await page.goto(url);
+      expect(response?.status()).toBe(200);
+      await expect(page.locator('h1')).toBeVisible();
+    });
+  }
+});
+
 test.describe('Nav — links funcionam', () => {
   test('logo leva para /', async ({ page }) => {
     await page.goto('/curso');

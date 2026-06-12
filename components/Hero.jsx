@@ -6,7 +6,7 @@ const heroSlides = [
     description: "Equipamentos profissionais para limpeza de superfícies lisas — painéis solares, estufas e fachadas.",
     primary: { label: "Ver equipamentos", href: "#equipamentos" },
     secondary: { label: "Plataforma de serviços", href: "https://painel-clean-mrr.vercel.app" },
-    image: "public/images/hero telhado shopping.png",
+    image: "public/images/hero-telhado-shopping.webp",
     meta: [{ k: "260", v: "painéis/h" }, { k: "+30%", v: "geração" }, { k: "0", v: "químicos" }],
   },
   {
@@ -16,7 +16,7 @@ const heroSlides = [
     description: "Escova, motobomba, cabo de 7,5m, mangueiras, engates e caixa de transporte num só kit.",
     primary: { label: "Ver Escova Dupla PRO", href: "/escova-dupla-d5" },
     secondary: { label: "Escolha o seu modelo", href: "/produtos" },
-    image: "public/images/kit painel clean.png",
+    image: "public/images/kit-painel-clean.webp",
     meta: [{ k: "260", v: "painéis/h" }, { k: "350", v: "RPM Motor Brushless" }, { k: "14", v: "acessórios" }],
   },
   {
@@ -26,7 +26,7 @@ const heroSlides = [
     description: "Velocidade e segurança na hora de lavar as estufas cobertas com lona.",
     primary: { label: "Ver aplicações", href: "/#aplicacoes" },
     secondary: { label: "Falar com especialista", href: wa("Olá! Tenho interesse na Painel Clean para estufas agrícolas.") },
-    image: "public/images/hero-agro.png",
+    image: "public/images/hero-agro.webp",
     meta: [{ k: "540", v: "m²/h" }, { k: "0", v: "químicos" }, { k: "7,5m", v: "de alcance" }],
   },
 ];

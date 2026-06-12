@@ -103,6 +103,11 @@ function Hero() {
         const fi = i === 0 ? 1 : clamp((phaseB - (ss - dW)) / dW);
         const fo = i === FC - 1 ? 1 : clamp(1 - (phaseB - (se - dW)) / dW);
         node.style.opacity = Math.min(fi, fo).toFixed(3);
+        // Match cut: todos os frames derivam pra cima na mesma velocidade, então
+        // no dissolve o movimento continua através do corte — lê como uma câmera só.
+        // O img tem scale(1.05) estático no CSS pra cobrir a deriva de ±1.6%.
+        const segT = clamp((phaseB - ss) / segLen);
+        node.style.transform = `translateY(${lerp(1.6, -1.6, segT).toFixed(2)}%)`;
       });
 
       // Véu cream: frame 1 aparece suave atrás do título e nunca há tela vazia
@@ -333,7 +338,7 @@ function FieldStats() {
   return (
     <section className="d5-field" ref={ref}>
       <div className="d5-field-sticky">
-        <img className="d5-field-bg" src="public/images/field-1.jpg" alt="" />
+        <img className="d5-field-bg" src="public/images/field-1.webp" alt="" />
         <div className="d5-field-veil"/>
         <div className="d5-field-content">
           <p className="d5-eyebrow d5-eyebrow-dark" style={{ opacity: clamp(p * 3) }}>
@@ -663,9 +668,12 @@ function D5App() {
         .d5-frame {
           position: absolute; inset: 0;
           display: flex; align-items: center; justify-content: center;
-          will-change: opacity;
+          will-change: opacity, transform;
         }
-        .d5-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+        .d5-frame img {
+          width: 100%; height: 100%; object-fit: cover; object-position: center;
+          transform: scale(1.05); /* margem pra deriva vertical do match cut */
+        }
         .d5-veil {
           position: absolute; inset: 0; z-index: 3;
           background: var(--pc-cream); pointer-events: none;

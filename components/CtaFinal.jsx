@@ -1,7 +1,7 @@
 function CtaFinal() {
   return (
     <section style={{ background: "var(--pc-deepest)", padding: "120px 0", position: "relative", overflow: "hidden" }}>
-      <div style={{ position: "absolute", inset: 0, backgroundImage: "url('public/images/field-1.jpg')", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.22 }} />
+      <div style={{ position: "absolute", inset: 0, backgroundImage: "url('public/images/field-1.webp')", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.22 }} />
       <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, var(--pc-deepest) 0%, rgba(10,31,23,0.7) 30%, rgba(10,31,23,0.7) 70%, var(--pc-deepest) 100%)" }} />
       <div className="container" style={{ position: "relative", textAlign: "center" }}>
         <div className="eyebrow no-rule" style={{ justifyContent: "center", marginBottom: 22 }}>Vamos conversar?</div>

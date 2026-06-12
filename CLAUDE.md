@@ -32,6 +32,8 @@ Site institucional da **Painel Clean** — fabricante de escovas semiautomática
 ├── escova-dupla-d5-app.jsx       # Root de /escova-dupla-d5
 ├── escova-solo-s5.html           # Página /escova-solo-s5
 ├── escova-solo-s5-app.jsx        # Root de /escova-solo-s5
+├── termos.html                   # Página /termos — estática, sem React
+├── privacidade.html              # Página /privacidade — estática, sem React (LGPD)
 ├── tweaks-panel.jsx              # Painel de tweaks (dev only)
 ├── playwright.config.js          # Config Playwright (2 projects: desktop-chrome, mobile-chrome)
 ├── tests/
@@ -74,6 +76,8 @@ Site institucional da **Painel Clean** — fabricante de escovas semiautomática
 | `/escova-rotativa-g5` | `escova-rotativa-g5.html` | `escova-rotativa-g5-app.jsx` |
 | `/escova-dupla-d5` | `escova-dupla-d5.html` | `escova-dupla-d5-app.jsx` |
 | `/escova-solo-s5` | `escova-solo-s5.html` | `escova-solo-s5-app.jsx` |
+| `/termos` | `termos.html` | — (estática) |
+| `/privacidade` | `privacidade.html` | — (estática) |
 
 `cleanUrls: true` no `vercel.json` remove a extensão `.html` das URLs automaticamente.
 
@@ -155,6 +159,10 @@ progresso com lerp (0.18; sem suavização com `prefers-reduced-motion`) e escre
 `opacity`/`transform` direto nos nós via ref — sem `setState` por evento de scroll.
 Frames pré-carregados com `new Image()`. Dissolves curtos (30% do segmento) + um único
 zoom contínuo na pilha (scale 1 → 1.06) — nunca escala por frame (evita "pulso").
+**Match cut:** cada frame deriva verticalmente (+1.6% → −1.6% ao longo do seu segmento,
+todos na mesma velocidade) — no dissolve o movimento continua através do corte e a
+sequência lê como um único movimento de câmera. O `img` tem `scale(1.05)` estático
+no CSS pra cobrir a deriva.
 Um véu cream (`.d5-veil`, opacity 0.55 → 0) cobre o frame 1 durante a abertura
 tipográfica — nunca há tela vazia entre o título e os frames.
 
@@ -218,7 +226,11 @@ Painel flutuante ativado com `?tweaks=1` na URL.
 - **CSS:** variáveis do `tokens.css` para cores e tipografia; inline styles com objetos JS
 - **Ícones:** sempre usar `<Icon name="..." />` — nunca importar Lucide diretamente
 - **WhatsApp:** sempre usar `wa("mensagem")` — nunca hardcodar número
-- **Imagens:** salvar em `public/images/` e referenciar como `public/images/nome.jpg`
+- **Imagens:** salvar em `public/images/` e referenciar como `public/images/nome.webp`.
+  Fotos novas devem ser convertidas pra WebP (q82, máx. 1920px de largura) antes de
+  referenciar — os PNG/JPG originais ficam no repo só como fonte e para `og:image`
+  (crawlers de redes sociais preferem PNG/JPG). Nunca referenciar nos componentes um
+  raster acima de ~300 KB.
 - **Logo:** usar `<Logo />` (SVG inline) — nunca referenciar `public/images/logo-real.jpg`
 - **Tags de produto:** usar apenas `var(--pc-dark)` ou `var(--pc-green)` — nunca cores off-brand (amber, azul)
 - **Redes sociais:** `/painelclean` em todas as plataformas

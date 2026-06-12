@@ -55,11 +55,11 @@ function ProductHero({ p }) {
             </div>
           </div>
 
-          {/* Product image */}
+          {/* Product image — stage tratamento (mesmo da vitrine /produtos) */}
           <div style={{ position: "relative", animation: "fadeUp 900ms 180ms ease both" }}>
-            <div style={{ position: "absolute", inset: "10%", background: "radial-gradient(circle, rgba(58,213,128,0.22) 0%, transparent 65%)", filter: "blur(40px)", borderRadius: "50%", pointerEvents: "none" }} />
-            <div style={{ position: "relative", background: "linear-gradient(180deg, rgba(255,251,236,0.06) 0%, rgba(255,251,236,0.02) 100%)", borderRadius: "var(--radius-2xl)", border: "1px solid var(--border-on-dark)", padding: 40, overflow: "hidden" }}>
-              <img src={p.image} alt={p.name} style={{ width: "100%", display: "block", objectFit: "contain", maxHeight: 400 }} />
+            <div style={{ position: "absolute", inset: "10%", background: "radial-gradient(circle, rgba(58,213,128,0.20) 0%, transparent 65%)", filter: "blur(40px)", borderRadius: "50%", pointerEvents: "none" }} />
+            <div style={{ position: "relative", aspectRatio: "4 / 3", borderRadius: "var(--t-stage-radius)", background: "radial-gradient(120% 80% at 50% 25%, #F6F5F0 0%, var(--t-stage) 55%, #DEDDD8 100%)", overflow: "hidden", isolation: "isolate", boxShadow: "inset 0 0 0 1px rgba(15,56,43,0.06), 0 30px 80px -40px rgba(0,0,0,0.5)" }}>
+              <img src={p.image} alt={p.name} style={{ width: "100%", height: "100%", display: "block", objectFit: "cover", objectPosition: "center" }} />
             </div>
           </div>
         </div>
@@ -82,7 +82,11 @@ function StickyBuyBar({ p }) {
       background: "rgba(12,40,31,0.95)", backdropFilter: "blur(12px)",
       borderBottom: "1px solid var(--border-on-dark)",
       transform: visible ? "translateY(0)" : "translateY(-100%)",
-      transition: "transform 300ms var(--ease-out)",
+      // opacity também: com translateY(-100%) a barra ficava só 76px acima e
+      // vazava por trás da Nav (que é transparente no topo da página)
+      opacity: visible ? 1 : 0,
+      pointerEvents: visible ? "auto" : "none",
+      transition: "transform 300ms var(--ease-out), opacity 300ms var(--ease-out)",
       padding: "12px 0",
     }}>
       <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap" }}>

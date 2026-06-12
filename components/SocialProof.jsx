@@ -99,7 +99,7 @@ function SocialProof() {
           {quotes.map((q, i) => (
             <figure key={i} style={{ margin: 0, padding: "32px 28px", background: "var(--pc-dark)", border: "1px solid var(--border-on-dark)", borderRadius: "var(--radius-lg)", display: "flex", flexDirection: "column" }}>
               <div style={{ display: "flex", gap: 4, marginBottom: 18, color: "var(--pc-green)" }}>
-                {[1, 2, 3, 4, 5].map(n => <Icon key={n} name="star" size={14} />)}
+                {[1, 2, 3, 4, 5].map(n => <Icon key={n} name="star" size={14} filled />)}
               </div>
               <blockquote className="display" style={{ fontSize: 18, fontWeight: 500, lineHeight: 1.45, color: "white", margin: "0 0 24px", flex: 1 }}>"{q.text}"</blockquote>
               <figcaption style={{ paddingTop: 18, borderTop: "1px solid var(--border-on-dark)" }}>

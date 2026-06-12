@@ -22,7 +22,7 @@ const wa = (m = "Olá! Gostaria de mais informações sobre os equipamentos Pain
   `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(m)}`;
 
 // === Inline SVG icons (Heroicons outline) ===
-const Icon = ({ name, size = 20, stroke = 1.8 }) => {
+const Icon = ({ name, size = 20, stroke = 1.8, filled = false }) => {
   const paths = {
     arrowRight: <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />,
     arrowLeft:  <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />,
@@ -59,7 +59,7 @@ const Icon = ({ name, size = 20, stroke = 1.8 }) => {
     target:  <><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth={stroke} fill="none" /><circle cx="12" cy="12" r="4.5" stroke="currentColor" strokeWidth={stroke} fill="none" /><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25M12 18.75V21M3 12h2.25M18.75 12H21" /></>,
   };
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} aria-hidden="true">
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={filled ? "currentColor" : "none"} stroke="currentColor" strokeWidth={stroke} aria-hidden="true">
       {paths[name]}
     </svg>
   );

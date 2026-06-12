@@ -59,8 +59,8 @@ function Footer() {
             <span style={{ display: "block", marginTop: 4, fontSize: 12, color: "var(--fg-5)" }}>Fabricado no Brasil para limpeza profissional de qualquer superfície.</span>
           </div>
           <span style={{ display: "flex", gap: 24, flexWrap: "wrap", justifyContent: "flex-end" }}>
-            <a href="#" style={{ color: "inherit" }}>Termos</a>
-            <a href="#" style={{ color: "inherit" }}>Privacidade</a>
+            <a href="/termos" style={{ color: "inherit" }}>Termos</a>
+            <a href="/privacidade" style={{ color: "inherit" }}>Privacidade</a>
             <span style={{ display: "inline-flex", alignItems: "center", gap: 8, whiteSpace: "nowrap" }}>
               <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--pc-green)", animation: "pulseDot 2s infinite", flexShrink: 0 }} />
               Atendimento · Seg–Sex 8h–18h
