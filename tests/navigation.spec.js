@@ -35,13 +35,22 @@ test.describe('Nav — links funcionam', () => {
   test('nav tem link /curso', async ({ page }) => {
     await page.goto('/');
     await waitForReact(page);
-    await expect(page.locator('nav a[href="/curso"]').first()).toBeVisible();
+    // No mobile os links ficam no drawer — abre o hamburger antes de checar.
+    const burger = page.locator('button[aria-label="Menu"]');
+    if (await burger.isVisible()) await burger.click();
+    await expect(page.locator('nav a[href="/curso"]').filter({ visible: true }).first()).toBeVisible();
   });
 
   test('nav tem link /produtos', async ({ page }) => {
     await page.goto('/');
     await waitForReact(page);
-    await expect(page.locator('nav a[href="/produtos"]').first()).toBeVisible();
+    const burger = page.locator('button[aria-label="Menu"]');
+    if (await burger.isVisible()) {
+      // No drawer mobile o link fica dentro do accordion "Produtos"
+      await burger.click();
+      await page.locator('nav.nav-mobile button', { hasText: 'Produtos' }).click();
+    }
+    await expect(page.locator('nav a[href="/produtos"]').filter({ visible: true }).first()).toBeVisible();
   });
 });
 

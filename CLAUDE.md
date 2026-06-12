@@ -140,15 +140,23 @@ Site institucional da **Painel Clean** — fabricante de escovas semiautomática
 
 ### Página Escova Dupla PRO (`escova-dupla-d5-app.jsx`) — cinematic
 Página scroll-driven independente (sem `ProductPage.jsx`):
-1. `Hero` — 1300vh desktop / 900vh mobile; 11 frames crossfade + 4 captions posicionadas
-2. `Exploded` — 420vh; 4 estágios com crossfade e painéis laterais sticky
+1. `Hero` — 1100vh desktop / 760vh mobile; 11 frames WebP (`escova-pro-hero-N.webp`) + 4 captions posicionadas
+2. `Exploded` — 720vh; 4 estágios WebP (`escova-pro-N.webp`) com crossfade e painéis laterais sticky
 3. `FieldStats` — 220vh; bg field-1.jpg, 4 contadores count-up
 4. `Specs` — ficha técnica 8 linhas com tally scroll-driven
 5. `Timeline` — grade 6×4 painéis com preenchimento progressivo
 6. `AccessoriesD5` — 6 cards com SVG glyphs inline
 7. `FAQSection` — accordion 6 itens
 8. `FinalCTAD5` — fullscreen, WhatsApp + Mercado Livre (`React.forwardRef`)
-9. `PurchaseBar` — sticky, auto-hide ao chegar no CTA final
+9. `PurchaseBar` — sticky, aparece só depois do hero, auto-hide ao chegar no CTA final
+
+**Hero (arquitetura da animação):** um único `requestAnimationFrame` lê o scroll, suaviza o
+progresso com lerp (0.18; sem suavização com `prefers-reduced-motion`) e escreve
+`opacity`/`transform` direto nos nós via ref — sem `setState` por evento de scroll.
+Frames pré-carregados com `new Image()`. Dissolves curtos (30% do segmento) + um único
+zoom contínuo na pilha (scale 1 → 1.06) — nunca escala por frame (evita "pulso").
+Um véu cream (`.d5-veil`, opacity 0.55 → 0) cobre o frame 1 durante a abertura
+tipográfica — nunca há tela vazia entre o título e os frames.
 
 Hooks locais: `useScrollY()`, `useSectionProgress(ref, mode)` — não dependem de `_config.jsx`.
 `mode` aceita: `'sticky'` (seção tall), `'enter'` (entra pela base), `'through'` (passa pelo viewport).
@@ -199,7 +207,9 @@ Painel flutuante ativado com `?tweaks=1` na URL.
 - **CDN mock:** `tests/fixtures.js` intercepta unpkg/babel/react-dom com cópias locais em `/tmp/react-deps/` — necessário porque CDNs externos retornam 403 no ambiente
 - **Dependências locais:** instalar uma vez com `cd /tmp && mkdir react-deps && cd react-deps && npm init -y && npm install react@18.3.1 react-dom@18.3.1 @babel/standalone@7.29.0`
 - **Projetos:** `desktop-chrome` (1280×720) e `mobile-chrome` (Pixel 5, 393×851)
-- **60 testes** cobrindo todas as 6 páginas em 2 viewports
+- **120 testes** cobrindo todas as 6 páginas em 2 viewports
+- Locators: usar `.filter({ visible: true })` quando o primeiro match do DOM pode estar num
+  menu/drawer fechado (links da Nav mobile ficam no DOM com `display:none`)
 
 ---
 

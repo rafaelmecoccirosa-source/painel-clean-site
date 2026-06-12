@@ -52,97 +52,160 @@ const IconML = () => (
 
 // ─── Scene 1: HERO ────────────────────────────────────────────
 const HERO_FRAMES = Array.from({ length: 11 }, (_, i) =>
-  `public/images/escova pro hero ${i + 1}.png`
+  `public/images/escova-pro-hero-${i + 1}.webp`
 );
 
 const HERO_CAPTIONS = [
-  { start: 0.10, end: 0.36, pos: 'bl', side: 'l', eyebrow: '260 PAINÉIS/HORA',       title: 'Velocidade que vira faturamento.' },
+  { start: 0.14, end: 0.36, pos: 'bl', side: 'l', eyebrow: '260 PAINÉIS/HORA',       title: 'Velocidade que vira faturamento.' },
   { start: 0.36, end: 0.58, pos: 'tl', side: 'l', eyebrow: 'ENGENHARIA MODULAR',     title: 'Cada componente disponível no Brasil.' },
   { start: 0.58, end: 0.80, pos: 'tr', side: 'r', eyebrow: 'CERDAS PROFISSIONAIS',   title: 'Limpa. Não risca o painel.' },
   { start: 0.80, end: 1.00, pos: 'br', side: 'r', eyebrow: 'DUAS CABEÇAS BRUSHLESS', title: 'Dois motores. Uma engenharia.' },
 ];
 
-function Hero() {
-  const ref   = useRef(null);
-  const p     = useSectionProgress(ref, 'sticky');
-  const FC    = HERO_FRAMES.length;
-  const titleEnd  = 0.10;
-  const phaseB    = clamp((p - titleEnd) / (1 - titleEnd));
-  const segLen    = 1 / FC;
-  const fadeW     = 0.04;
+const TITLE_END = 0.12; // trecho do scroll reservado à abertura tipográfica
 
-  const tTitle       = easeOut(clamp(p / titleEnd));
-  const titleOpacity = clamp(1 - tTitle * 1.4);
-  const titleY       = lerp(0, -36, tTitle);
-  const introAlpha   = clamp((p - 0.04) / (titleEnd - 0.04));
-  const curFrame     = Math.min(FC - 1, Math.max(0, Math.floor(phaseB * FC)));
-  const counterOp    = clamp((p - titleEnd) / 0.04);
-  const cueOp        = clamp(1 - tTitle * 3);
+// O hero é animado fora do ciclo de render do React: um único rAF lê o scroll,
+// suaviza o progresso (lerp) e escreve opacity/transform direto nos nós via ref.
+// setState por evento de scroll re-renderizava a árvore inteira e causava jank.
+function Hero() {
+  const ref           = useRef(null);
+  const framesWrapRef = useRef(null);
+  const frameRefs     = useRef([]);
+  const veilRef       = useRef(null);
+  const textRef       = useRef(null);
+  const pinRefs       = useRef([]);
+  const counterRef    = useRef(null);
+  const counterNumRef = useRef(null);
+  const cueRef        = useRef(null);
+  const FC = HERO_FRAMES.length;
+
+  useEffect(() => {
+    // Preload: os frames chegam enquanto o usuário ainda lê o título.
+    HERO_FRAMES.forEach(src => { const im = new Image(); im.src = src; });
+
+    const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const segLen  = 1 / FC;
+    const dW      = segLen * 0.3;  // dissolve curto — corte de filme, não slideshow
+    const cfw     = 0.045;
+    let cur = -1, raf = 0, lastApplied = -1, lastFrame = -1;
+
+    const apply = (p) => {
+      const tTitle = easeOut(clamp(p / TITLE_END));
+      const phaseB = clamp((p - TITLE_END) / (1 - TITLE_END));
+
+      // Zoom contínuo único na pilha inteira (sem "pulso" por frame)
+      if (framesWrapRef.current)
+        framesWrapRef.current.style.transform = `scale(${(1 + 0.06 * phaseB).toFixed(4)})`;
+
+      frameRefs.current.forEach((node, i) => {
+        if (!node) return;
+        const ss = i * segLen, se = (i + 1) * segLen;
+        const fi = i === 0 ? 1 : clamp((phaseB - (ss - dW)) / dW);
+        const fo = i === FC - 1 ? 1 : clamp(1 - (phaseB - (se - dW)) / dW);
+        node.style.opacity = Math.min(fi, fo).toFixed(3);
+      });
+
+      // Véu cream: frame 1 aparece suave atrás do título e nunca há tela vazia
+      if (veilRef.current)
+        veilRef.current.style.opacity = (0.55 * (1 - tTitle)).toFixed(3);
+
+      if (textRef.current) {
+        const op = clamp(1 - tTitle * 1.25);
+        textRef.current.style.opacity = op.toFixed(3);
+        textRef.current.style.transform =
+          `translate(-50%,-50%) translateY(${(-44 * tTitle).toFixed(1)}px) scale(${lerp(1, 0.95, tTitle).toFixed(4)})`;
+        textRef.current.style.pointerEvents = op > 0.1 ? 'auto' : 'none';
+      }
+
+      HERO_CAPTIONS.forEach((c, i) => {
+        const node = pinRefs.current[i];
+        if (!node) return;
+        const fi = clamp((p - c.start) / cfw);
+        const fo = i === HERO_CAPTIONS.length - 1 ? 1 : clamp(1 - (p - (c.end - cfw)) / cfw);
+        const op = Math.min(fi, fo);
+        const slide = lerp(20, 0, op);
+        node.style.opacity = op.toFixed(3);
+        node.style.transform = `translateX(${(c.side === 'l' ? -slide : slide).toFixed(1)}px)`;
+        node.style.pointerEvents = op > 0.5 ? 'auto' : 'none';
+      });
+
+      if (counterRef.current)
+        counterRef.current.style.opacity = clamp((p - TITLE_END) / 0.03).toFixed(3);
+      const f = Math.min(FC - 1, Math.max(0, Math.floor(phaseB * FC)));
+      if (f !== lastFrame && counterNumRef.current) {
+        counterNumRef.current.textContent = String(f + 1).padStart(2, '0');
+        lastFrame = f;
+      }
+
+      if (cueRef.current)
+        cueRef.current.style.opacity = clamp(1 - p / (TITLE_END * 0.5)).toFixed(3);
+    };
+
+    const tick = () => {
+      const el = ref.current;
+      if (el) {
+        const vh = window.innerHeight;
+        const target = clamp(-el.getBoundingClientRect().top / Math.max(1, el.offsetHeight - vh));
+        if (cur < 0) cur = target;
+        cur += (target - cur) * (reduced ? 1 : 0.18);
+        if (Math.abs(target - cur) < 0.0005) cur = target;
+        if (cur !== lastApplied) { apply(cur); lastApplied = cur; }
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
 
   return (
     <section className="d5-hero" ref={ref}>
       <div className="d5-hero-sticky">
 
         {/* Frame stack */}
-        <div className="d5-frames" aria-hidden="true">
-          {HERO_FRAMES.map((src, i) => {
-            const ss  = i * segLen;
-            const se  = (i + 1) * segLen;
-            const fi  = i === 0 ? introAlpha : clamp((phaseB - (ss - fadeW)) / fadeW);
-            const fo  = i === FC - 1 ? 1 : clamp(1 - (phaseB - (se - fadeW)) / fadeW);
-            const op  = Math.min(fi, fo);
-            const sc  = lerp(1.03, 1.0, easeOut(clamp((phaseB - ss) / segLen)));
-            return (
-              <div key={i} className="d5-frame"
-                style={{ opacity: op, transform: `scale(${sc})`, zIndex: 1 + i }}>
-                <img src={src} alt="" />
-              </div>
-            );
-          })}
+        <div className="d5-frames" ref={framesWrapRef} aria-hidden="true">
+          {HERO_FRAMES.map((src, i) => (
+            <div key={i} className="d5-frame"
+              ref={el => { frameRefs.current[i] = el; }}
+              style={{ opacity: i === 0 ? 1 : 0, zIndex: 1 + i }}>
+              <img src={src} alt="" decoding="async" fetchpriority={i === 0 ? 'high' : undefined} />
+            </div>
+          ))}
         </div>
 
+        {/* Véu sobre os frames durante a abertura */}
+        <div className="d5-veil" ref={veilRef} style={{ opacity: 0.55 }} aria-hidden="true" />
+
         {/* Phase A: type intro */}
-        <div className="d5-hero-text" style={{
-          opacity: titleOpacity,
-          transform: `translate(-50%,-50%) translateY(${titleY}px) scale(${lerp(1, 0.94, tTitle)})`,
-          pointerEvents: titleOpacity > 0.1 ? 'auto' : 'none',
-        }}>
+        <div className="d5-hero-text" ref={textRef}>
           <p className="d5-eyebrow">LINHA PROFISSIONAL · ZCP-0275-D5</p>
           <h1 className="d5-hero-title">Escova Dupla<br/><span className="d5-accent">PRO.</span></h1>
           <p className="d5-hero-sub">Limpe mais, ganhe mais. Em menos tempo.</p>
         </div>
 
         {/* Phase B: captions pin-and-line */}
-        {HERO_CAPTIONS.map((c, i) => {
-          const cfw  = 0.06;
-          const fi   = clamp((p - c.start) / cfw);
-          const fo   = i === HERO_CAPTIONS.length - 1 ? 1 : clamp(1 - (p - (c.end - cfw)) / cfw);
-          const op   = Math.min(fi, fo);
-          const slide = lerp(20, 0, op);
-          const dx   = c.side === 'l' ? -slide : slide;
-          return (
-            <div key={i}
-              className={`d5-pin d5-pin-${c.pos} d5-pin-side-${c.side}`}
-              style={{ opacity: op, transform: `translateX(${dx}px)`, pointerEvents: op > 0.5 ? 'auto' : 'none' }}>
-              <span className="d5-pin-dot" aria-hidden="true"/>
-              <span className="d5-pin-line" aria-hidden="true"/>
-              <div className="d5-pin-text">
-                <p className="d5-pin-eyebrow">{c.eyebrow}</p>
-                <h2 className="d5-pin-title">{c.title}</h2>
-              </div>
+        {HERO_CAPTIONS.map((c, i) => (
+          <div key={i}
+            ref={el => { pinRefs.current[i] = el; }}
+            className={`d5-pin d5-pin-${c.pos} d5-pin-side-${c.side}`}
+            style={{ opacity: 0, pointerEvents: 'none' }}>
+            <span className="d5-pin-dot" aria-hidden="true"/>
+            <span className="d5-pin-line" aria-hidden="true"/>
+            <div className="d5-pin-text">
+              <p className="d5-pin-eyebrow">{c.eyebrow}</p>
+              <h2 className="d5-pin-title">{c.title}</h2>
             </div>
-          );
-        })}
+          </div>
+        ))}
 
         {/* Frame counter */}
-        <div className="d5-counter" style={{ opacity: counterOp }}>
-          <span className="d5-counter-cur">{String(curFrame + 1).padStart(2, '0')}</span>
+        <div className="d5-counter" ref={counterRef} style={{ opacity: 0 }}>
+          <span className="d5-counter-cur" ref={counterNumRef}>01</span>
           <span className="d5-counter-sep">/</span>
           <span className="d5-counter-tot">{String(FC).padStart(2, '0')}</span>
         </div>
 
         {/* Scroll cue */}
-        <div className="d5-scroll-cue" style={{ opacity: cueOp }}>
+        <div className="d5-scroll-cue" ref={cueRef}>
           <span>Role para descobrir</span>
           <div className="d5-scroll-line"><div className="d5-scroll-dot"/></div>
         </div>
@@ -155,25 +218,25 @@ function Hero() {
 // ─── Scene 2: EXPLODED VIEW ───────────────────────────────────
 const EXPLODED_STAGES = [
   {
-    img: 'public/images/escova pro 6.png',
+    img: 'public/images/escova-pro-6.webp',
     num: '01', title: 'Montada.',
     lead: 'A Dupla PRO completa. Duas cabeças brushless, articulação central, engates rápidos. Tudo num conjunto só.',
     pin: { label: 'Conjunto montado', detail: 'Pronta para o telhado' },
   },
   {
-    img: 'public/images/escova pro 4.png',
+    img: 'public/images/escova-pro-4.webp',
     num: '02', title: 'Articulação central.',
     lead: 'Sistema de fixação modular: barra travessa, suporte do cabo, conector de água com engate rápido. Cada peça reposta isolada.',
     pin: { label: 'Suporte + conexão', detail: 'Padrão profissional · sem adaptadores' },
   },
   {
-    img: 'public/images/escova pro 5.png',
+    img: 'public/images/escova-pro-5.webp',
     num: '03', title: 'Cabeça brushless.',
     lead: 'Motor brushless 350 RPM, base de polietileno, disco de cerdas trocável. 4 parafusos e está aberto pra manutenção.',
     pin: { label: 'Disco trocável', detail: 'Cerdas de reposição · 4 parafusos' },
   },
   {
-    img: 'public/images/escova pro 3.png',
+    img: 'public/images/escova-pro-3.webp',
     num: '04', title: 'Cada peça, no lugar certo.',
     lead: 'Kit completo: cabo, articulação, motores, discos e cerdas. Engenharia pensada pra durar — e pra ser consertada no Brasil.',
     pin: { label: 'Conjunto expandido', detail: 'Reposição peça a peça' },
@@ -522,8 +585,11 @@ function PurchaseBar({ finalRef }) {
     const vh     = window.innerHeight;
     const final  = finalRef.current;
     if (!final) return;
+    // Só aparece depois do hero cinemático — durante a animação o CTA fica na Nav
+    const hero    = document.querySelector('.d5-hero');
+    const heroEnd = hero ? hero.offsetTop + hero.offsetHeight - vh : vh * 0.4;
     const ft     = final.getBoundingClientRect().top + window.scrollY;
-    const hide   = scrollY < vh * 0.4 || scrollY + vh > ft + vh * 0.3;
+    const hide   = scrollY < heroEnd - vh * 0.5 || scrollY + vh > ft + vh * 0.3;
     setHidden(hide);
   }, [scrollY]);
 
@@ -582,7 +648,7 @@ function D5App() {
         /* ── HERO ────────────────────────────── */
         .d5-hero {
           position: relative;
-          height: 2000vh;
+          height: 1100vh;
           background: var(--pc-cream);
           color: var(--fg-on-cream-1);
           contain: layout paint;
@@ -593,21 +659,28 @@ function D5App() {
           overflow: hidden;
           display: flex; align-items: center; justify-content: center;
         }
-        .d5-frames { position: absolute; inset: 0; z-index: 1; }
+        .d5-frames { position: absolute; inset: 0; z-index: 1; will-change: transform; }
         .d5-frame {
           position: absolute; inset: 0;
           display: flex; align-items: center; justify-content: center;
-          will-change: opacity, transform;
+          will-change: opacity;
         }
         .d5-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+        .d5-veil {
+          position: absolute; inset: 0; z-index: 3;
+          background: var(--pc-cream); pointer-events: none;
+          will-change: opacity;
+        }
 
         /* Phase A */
         .d5-hero-text {
-          position: absolute; left: 50%; top: 50%; z-index: 5;
+          position: absolute; left: 50%; top: 46%; z-index: 5;
           text-align: center; max-width: 1100px; padding: 0 var(--gutter); width: 100%;
+          will-change: opacity, transform;
+          transform: translate(-50%,-50%);
         }
         .d5-hero-title {
-          font: 600 clamp(64px, 13vw, 180px)/0.96 var(--font-display);
+          font: 600 clamp(56px, 11.5vw, 150px)/0.96 var(--font-display);
           letter-spacing: -.035em; margin: 0 0 20px; color: var(--fg-on-cream-1);
         }
         .d5-hero-sub {
@@ -672,7 +745,7 @@ function D5App() {
 
         /* Scroll cue */
         .d5-scroll-cue {
-          position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+          position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
           z-index: 3; text-align: center;
           font: 500 11px/1 var(--font-sans); letter-spacing: .12em;
           text-transform: uppercase; color: var(--fg-on-cream-3);
@@ -931,7 +1004,7 @@ function D5App() {
 
         /* ── Responsive ──────────────────────── */
         @media (max-width: 820px) {
-          .d5-hero    { height: 1400vh; }
+          .d5-hero    { height: 760vh; }
           .d5-exploded { height: 640vh; }
           .d5-exp-body { grid-template-columns: 1fr; gap: 20px; }
           .d5-exp-sticky { padding: 48px var(--gutter) 32px; }

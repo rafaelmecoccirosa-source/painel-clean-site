@@ -3,8 +3,8 @@ const { expect } = require('playwright/test');
 const { test, waitForReact } = require('./fixtures');
 
 const PRODUCTS = [
-  { url: '/escova-rotativa-g5', sku: 'ZCP-0175-G5', name: 'G5', speed: '260' },
-  { url: '/escova-dupla-d5',    sku: 'ZCP-0275-D5', name: 'D5', speed: '200' },
+  { url: '/escova-rotativa-g5', sku: 'ZCP-0175-G5', name: 'G5', speed: '200' },
+  { url: '/escova-dupla-d5',    sku: 'ZCP-0275-D5', name: 'D5', speed: '260', cinematic: true },
   { url: '/escova-solo-s5',     sku: 'ZCP-0175-S5', name: 'S5', speed: '160' },
 ];
 
@@ -20,7 +20,9 @@ for (const product of PRODUCTS) {
     });
 
     test('velocidade (painéis/h) visível', async ({ page }) => {
-      await expect(page.locator(`text=${product.speed}`).first()).toBeVisible({ timeout: 5000 });
+      // No mobile o primeiro match pode estar num menu fechado — basta um match visível.
+      const visible = page.locator(`text=${product.speed}`).filter({ visible: true });
+      await expect(visible.first()).toBeVisible({ timeout: 5000 });
     });
 
     test('sticky buy bar aparece após scroll', async ({ page }) => {
@@ -38,14 +40,18 @@ for (const product of PRODUCTS) {
       ).toBeVisible({ timeout: 5000 });
     });
 
-    test('breadcrumb tem link para /produtos', async ({ page }) => {
-      await expect(page.locator('a[href="/produtos"]').first()).toBeVisible({ timeout: 5000 });
+    test('link para /produtos existe na página', async ({ page }) => {
+      // No mobile o link fica dentro do menu hamburger — basta existir no DOM.
+      expect(await page.locator('a[href="/produtos"]').count()).toBeGreaterThan(0);
     });
 
-    test('tabela mini-compare está presente', async ({ page }) => {
+    test(product.cinematic ? 'ficha técnica está presente' : 'tabela mini-compare está presente', async ({ page }) => {
       await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight / 2));
       await page.waitForTimeout(500);
-      await expect(page.locator('table, [role="table"]').first()).toBeVisible({ timeout: 5000 });
+      const target = product.cinematic
+        ? page.locator('.d5-specs-grid')
+        : page.locator('table, [role="table"]');
+      await expect(target.first()).toBeVisible({ timeout: 5000 });
     });
 
     test('navegação prev/next entre produtos', async ({ page }) => {

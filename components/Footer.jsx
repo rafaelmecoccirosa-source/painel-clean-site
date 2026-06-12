@@ -1,7 +1,7 @@
 function Footer() {
   const cols = [
-    { title: "Produtos", links: [{ l: "Escova Rotativa G5", h: "#equipamentos" }, { l: "Escova Dupla D5", h: "#equipamentos" }, { l: "Escova Solo S5", h: "#equipamentos" }, { l: "Acessórios e refis", h: "#" }] },
-    { title: "Aprenda", links: [{ l: "Treinamento online", h: "#treinamento" }, { l: "Plataforma de serviços", h: "#plataforma" }, { l: "Canal no YouTube", h: "#" }, { l: "Calculadora de ROI", h: "#roi" }] },
+    { title: "Produtos", links: [{ l: "Escova Dupla PRO", h: "/escova-dupla-d5" }, { l: "Escova Rotativa G5", h: "/escova-rotativa-g5" }, { l: "Escova Solo S5", h: "/escova-solo-s5" }, { l: "Acessórios e refis", h: "/produtos#acessorios" }] },
+    { title: "Aprenda", links: [{ l: "Treinamento online", h: "/curso" }, { l: "Plataforma de serviços", h: "/#plataforma" }, { l: "Canal no YouTube", h: "https://www.youtube.com/@painelclean" }, { l: "Calculadora de ROI", h: "/#roi" }] },
     { title: "Contato", links: [{ l: "WhatsApp · (47) 99678-5953", h: wa() }, { l: "contato@painelclean.com.br", h: "mailto:contato@painelclean.com.br" }, { l: "Instagram @painelclean", h: "https://www.instagram.com/painelclean/" }, { l: "LinkedIn", h: "https://www.linkedin.com/company/painel-clean/" }] },
   ];
   return (
